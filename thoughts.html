@@ -1,0 +1,1038 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts - Proximity</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes blink {
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        .project-status-dot {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        .project-card {
+            position: relative;
+            padding-top: 25px;
+        }
+
+        .gallery-page {
+            padding: 80px 0;
+            background-color: #000000;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #ffffff;
+        }
+
+        .gallery-header h1 {
+
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .gallery-header p {
+
+            font-size: 16px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 30px 20px 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .gallery-overlay p {
+
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Filter Buttons - Text Only */
+        .gallery-filters {
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            color: #999999;
+            padding: 0 12px;
+            margin: 0 3px;
+
+            font-size: 12px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            outline: none;
+            position: relative;
+        }
+
+        .filter-btn:hover {
+            color: #ffffff;
+        }
+
+        .filter-btn.active {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .filter-btn.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 12px;
+            right: 12px;
+            height: 1px;
+            background: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 0 15px;
+            }
+
+            .gallery-header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+    <style>
+        @keyframes blink {
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        .project-status-dot {
+            position: absolute;
+            top: 35px;
+            left: 10px;
+            width: 8px;
+            height: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="thoughts.html" class="active">Thoughts</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="logo">
+                <div class="language-switcher">
+                    <span class="language-switch">English</span>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="ar" dir="auto">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+                        <a href="#" data-lang="de" dir="auto">Deutsch</a>
+                        <a href="#" data-lang="en" class="active" dir="auto">English</a>
+                        <a href="#" data-lang="es" dir="auto">EspaÃ±ol</a>
+                        <a href="#" data-lang="fr" dir="auto">FranÃ§ais</a>
+                        <a href="#" data-lang="ru" dir="auto">Ð ÑƒÑÑÐºÐ¸Ð¹</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-text">PROXIMITY</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Small Hero Section with Background Image -->
+    <section class="small-hero" style="
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('https://i.pinimg.com/1200x/53/01/5a/53015a37d8a9b71ed5603430e20df4f3.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 120px 0;
+        text-align: center;
+        color: white;
+        position: relative;
+    ">
+        <div class="container">
+            <h3
+                style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                PORTFOLIO</h3>
+            <h1 class="section-title"
+                style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 10px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                My Portfolio</h1>
+            <p style="
+                 
+                font-size: 16px; 
+                opacity: 0.9; 
+                max-width: 600px; 
+                margin: 0 auto;
+                letter-spacing: 1px;
+                line-height: 1.6;
+            ">Discover my latest projects and creative works that showcase my passion for photography and design.</p>
+        </div>
+    </section>
+
+    <!-- Client Projects Table Section -->
+    <section style="background-color: #000; color: #fff; padding: 80px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <h3
+                    style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    CURRENT COLLABORATIONS</h3>
+                <h2 class="section-title"
+                    style=" font-size: 36px; font-weight: 400; color: #ffffff; margin: 0 0 20px 0; line-height: 1.2;">
+                    Active Client Projects</h2>
+                <p
+                    style=" font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto;">
+                    A comprehensive overview of our ongoing projects and collaborations with valued clients</p>
+            </div>
+
+            <div class="projects-table" style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; ">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <th
+                                style="text-align: left; padding: 15px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); font-weight: 500;">
+                                Client</th>
+                            <th
+                                style="text-align: left; padding: 15px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); font-weight: 500;">
+                                Project</th>
+                            <th
+                                style="text-align: left; padding: 15px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); font-weight: 500;">
+                                Category</th>
+                            <th
+                                style="text-align: left; padding: 15px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); font-weight: 500;">
+                                Timeline</th>
+                            <th
+                                style="text-align: left; padding: 15px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); font-weight: 500;">
+                                Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background-color 0.3s ease;">
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <img src="https://i.pinimg.com/736x/39/90/4b/39904bfc63162396df2f9ab645907b69.jpg"
+                                        alt="NaturaLuxe"
+                                        style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                                    <span>NaturaLuxe</span>
+                                </div>
+                            </td>
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">Brand
+                                Identity & Packaging</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                Branding</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                Jun 2025 - Nov 2025</td>
+                            <td style="padding: 20px; vertical-align: middle;">
+                                <span
+                                    style="display: inline-block; padding: 5px 12px; background-color: rgba(76, 175, 80, 0.15); color: #4CAF50; border-radius: 12px; font-size: 12px; font-weight: 500;">In
+                                    Progress</span>
+                            </td>
+                        </tr>
+                        <tr
+                            style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background-color 0.3s ease;">
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <img src="https://i.pinimg.com/736x/ed/56/fc/ed56fc178a578b56b0ab37225a6d5944.jpg"
+                                        alt="UrbanPulse"
+                                        style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                                    <span>UrbanPulse</span>
+                                </div>
+                            </td>
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">E-commerce
+                                Website Redesign</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                Web Design</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                Jul 2025 - Dec 2025</td>
+                            <td style="padding: 20px; vertical-align: middle;">
+                                <span
+                                    style="display: inline-block; padding: 5px 12px; background-color: rgba(76, 175, 80, 0.15); color: #4CAF50; border-radius: 12px; font-size: 12px; font-weight: 500;">In
+                                    Progress</span>
+                            </td>
+                        </tr>
+                        <tr
+                            style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background-color 0.3s ease;">
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <img src="https://i.pinimg.com/1200x/1c/70/17/1c7017d8c29ab76b75cae79d35b68af5.jpg"
+                                        alt="Zenith"
+                                        style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                                    <span>Zenith</span>
+                                </div>
+                            </td>
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">Mobile App
+                                UI/UX Design</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                App Design</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                May 2025 - Oct 2025</td>
+                            <td style="padding: 20px; vertical-align: middle;">
+                                <span
+                                    style="display: inline-block; padding: 5px 12px; background-color: rgba(33, 150, 243, 0.15); color: #2196F3; border-radius: 12px; font-size: 12px; font-weight: 500;">In
+                                    Development</span>
+                            </td>
+                        </tr>
+                        <tr
+                            style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background-color 0.3s ease;">
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <img src="https://i.pinimg.com/1200x/c7/8d/b0/c78db0825a5766fc017b9d1da484d90c.jpg"
+                                        alt="EcoHaven"
+                                        style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                                    <span>EcoHaven</span>
+                                </div>
+                            </td>
+                            <td style="padding: 20px; font-size: 14px; color: #fff; vertical-align: middle;">Sustainable
+                                Packaging Design</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                Packaging</td>
+                            <td
+                                style="padding: 20px; font-size: 14px; color: rgba(255,255,255,0.8); vertical-align: middle;">
+                                Aug 2025 - Jan 2026</td>
+                            <td style="padding: 20px; vertical-align: middle;">
+                                <span
+                                    style="display: inline-block; padding: 5px 12px; background-color: rgba(255, 193, 7, 0.15); color: #FFC107; border-radius: 12px; font-size: 12px; font-weight: 500;">Planning</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#"
+                    style="display: inline-block; padding: 12px 28px; border: 1px solid rgba(255,255,255,0.2); color: #fff; text-decoration: none;  font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease;">
+                    View All Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Projects Section -->
+    <section class="client-projects" style="background-color: #000000; padding: 100px 0; margin-top: 0;">
+        <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h3
+                    style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    CURRENT WORK</h3>
+                <h2 class="section-title"
+                    style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                    Client Projects</h2>
+                <p
+                    style=" font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto;">
+                    A selection of current projects I'm working on for clients</p>
+            </div>
+            <div class="projects-grid"
+                style="display: flex; gap: 40px; height: 600px; align-items: center; justify-content: center;">
+                <!-- Project 1 -->
+                <div
+                    style="flex: 0 1 330px; height: 77%; display: flex; flex-direction: column; position: relative; padding-top: 25px;">
+                    <div class="project-status-dot"></div>
+                    <div style="flex: 1; position: relative; overflow: hidden; margin-bottom: 20px;">
+                        <img src="https://i.pinimg.com/736x/40/27/31/4027314df8eb37b00b79dbdefab020a0.jpg"
+                            alt="Client Project 1"
+                            style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease;">
+                        <div
+                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                            <p style="color: white;  font-size: 12px; letter-spacing: 1px; margin: 0;">
+                                BRAND IDENTITY</p>
+                        </div>
+                    </div>
+                    <h3 style=" font-size: 24px; color: #fff; margin: 0 0 10px 0; font-weight: 400;">
+                        Lumina Studios</h3>
+                    <p style="color: white;  font-size: 14px; margin: 0 0 15px 0; line-height: 1.6; opacity: 0.9;">
+                        Complete brand identity development for a contemporary photography studio, including logo
+                        design, color palette, and visual language.
+                    </p>
+                    <div style="display: flex; gap: 10px; margin-top: auto;">
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px; text-transform: uppercase;">In
+                            Progress</span>
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px;">â€¢</span>
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px;">3
+                            Months</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div
+                    style="flex: 0 1 310px; height: 100%; display: flex; flex-direction: column; position: relative; padding-top: 25px;">
+                    <div class="project-status-dot"></div>
+                    <div style="flex: 1; position: relative; overflow: hidden; margin-bottom: 20px;">
+                        <img src="https://i.pinimg.com/736x/85/4d/bf/854dbf623a4ebc6d197a10645744d136.jpg"
+                            alt="Client Project 2"
+                            style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease;">
+                        <div
+                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                            <p style="color: white;  font-size: 12px; letter-spacing: 1px; margin: 0;">
+                                WEB DESIGN</p>
+                        </div>
+                    </div>
+                    <h3 style=" font-size: 24px; color: #fff; margin: 0 0 10px 0; font-weight: 400;">
+                        The Modern Writer</h3>
+                    <p style="color: white;  font-size: 14px; margin: 0 0 15px 0; line-height: 1.6; opacity: 0.9;">
+                        Responsive website design and development for an online writing platform, focusing on user
+                        experience and content readability.
+                    </p>
+                    <div style="display: flex; gap: 10px; margin-top: auto;">
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px; text-transform: uppercase;">In
+                            Progress</span>
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px;">â€¢</span>
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px;">2
+                            Months</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div
+                    style="flex: 0 1 300px; height: 82%; display: flex; flex-direction: column; align-self: flex-start; position: relative; padding-top: 25px;">
+                    <div class="project-status-dot"></div>
+                    <div style="flex: 1; position: relative; overflow: hidden; margin-bottom: 20px;">
+                        <img src="https://i.pinimg.com/736x/79/a9/aa/79a9aad90dc989f94bcd9a63b4aa3c3a.jpg"
+                            alt="Client Project 3"
+                            style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease;">
+                        <div
+                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                            <p style="color: white;  font-size: 12px; letter-spacing: 1px; margin: 0;">
+                                CONTENT STRATEGY</p>
+                        </div>
+                    </div>
+                    <h3 style=" font-size: 24px; color: #fff; margin: 0 0 10px 0; font-weight: 400;">
+                        Urbanite Magazine</h3>
+                    <p style="color: white;  font-size: 14px; margin: 0 0 15px 0; line-height: 1.6; opacity: 0.9;">
+                        Content strategy and editorial planning for a new urban lifestyle magazine, including content
+                        calendar and contributor guidelines.
+                    </p>
+                    <div style="display: flex; gap: 10px; margin-top: auto;">
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px; text-transform: uppercase;">In
+                            Progress</span>
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px;">â€¢</span>
+                        <span style=" font-size: 11px; color: #999; letter-spacing: 1px;">4
+                            Months</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <main class="content" style="background-color: #000; color: #fff;">
+        <section class="books-section" style="padding: 100px 0;">
+            <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+                <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                    <h3
+                        style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                        LITERATURE</h3>
+                    <h2 class="section-title"
+                        style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                        Books</h2>
+                    <p
+                        style=" font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto;">
+                        A curated collection of books that have influenced my perspective and creativity.
+                    </p>
+                </div>
+
+                <div class="books-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; padding: 0 20px;">
+                    <!-- Book 1 -->
+                    <div class="book-card" style="position: relative; overflow: hidden;">
+                        <div class="book-cover"
+                            style="height: 400px; overflow: hidden; margin-bottom: 20px; position: relative;">
+                            <img src="https://i.pinimg.com/736x/85/4d/bf/854dbf623a4ebc6d197a10645744d136.jpg"
+                                alt="Book Cover"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                            <div class="price-tag"
+                                style="position: absolute; top: 15px; right: 15px; background-color: rgba(0,0,0,0.8); color: #fff; padding: 5px 12px;  font-size: 14px; letter-spacing: 1px; border-radius: 3px;">
+                                $24.99
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3
+                                style=" font-size: 20px; margin: 0 0 8px 0; color: #fff; font-weight: 400; letter-spacing: 0.5px;">
+                                The Creative Act</h3>
+                            <p
+                                style=" color: #999; font-size: 14px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px;">
+                                Rick Rubin</p>
+                            <div style="margin-top: 20px; display: flex; gap: 20px;">
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    BUY NOW
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                                <span style="color: rgba(255,255,255,0.3);">/</span>
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    TAKE A LOOK
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 2 -->
+                    <div class="book-card" style="position: relative; overflow: hidden;">
+                        <div class="book-cover"
+                            style="height: 400px; overflow: hidden; margin-bottom: 20px; position: relative;">
+                            <img src="https://i.pinimg.com/736x/94/95/cc/9495cc061c79e3a8e20367684a30b935.jpg"
+                                alt="Book Cover"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                            <div class="price-tag"
+                                style="position: absolute; top: 15px; right: 15px; background-color: rgba(0,0,0,0.8); color: #fff; padding: 5px 12px;  font-size: 14px; letter-spacing: 1px; border-radius: 3px;">
+                                $19.99
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3
+                                style=" font-size: 20px; margin: 0 0 8px 0; color: #fff; font-weight: 400; letter-spacing: 0.5px;">
+                                Steal Like an Artist</h3>
+                            <p
+                                style=" color: #999; font-size: 14px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px;">
+                                Austin Kleon</p>
+                            <div style="margin-top: 20px; display: flex; gap: 20px;">
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    BUY NOW
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                                <span style="color: rgba(255,255,255,0.3);">/</span>
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    TAKE A LOOK
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 3 -->
+                    <div class="book-card" style="position: relative; overflow: hidden;">
+                        <div class="book-cover"
+                            style="height: 400px; overflow: hidden; margin-bottom: 20px; position: relative;">
+                            <img src="https://i.pinimg.com/736x/79/a9/aa/79a9aad90dc989f94bcd9a63b4aa3c3a.jpg"
+                                alt="Book Cover"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                            <div class="price-tag"
+                                style="position: absolute; top: 15px; right: 15px; background-color: rgba(0,0,0,0.8); color: #fff; padding: 5px 12px;  font-size: 14px; letter-spacing: 1px; border-radius: 3px;">
+                                $22.99
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3
+                                style=" font-size: 20px; margin: 0 0 8px 0; color: #fff; font-weight: 400; letter-spacing: 0.5px;">
+                                The Artist's Way</h3>
+                            <p
+                                style=" color: #999; font-size: 14px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px;">
+                                Julia Cameron</p>
+                            <div style="margin-top: 20px; display: flex; gap: 20px;">
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    BUY NOW
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                                <span style="color: rgba(255,255,255,0.3);">/</span>
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    TAKE A LOOK
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 4 -->
+                    <div class="book-card" style="position: relative; overflow: hidden;">
+                        <div class="book-cover"
+                            style="height: 400px; overflow: hidden; margin-bottom: 20px; position: relative;">
+                            <img src="https://i.pinimg.com/736x/40/27/31/4027314df8eb37b00b79dbdefab020a0.jpg"
+                                alt="Book Cover"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                            <div class="price-tag"
+                                style="position: absolute; top: 15px; right: 15px; background-color: rgba(0,0,0,0.8); color: #fff; padding: 5px 12px;  font-size: 14px; letter-spacing: 1px; border-radius: 3px;">
+                                $18.99
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3
+                                style=" font-size: 20px; margin: 0 0 8px 0; color: #fff; font-weight: 400; letter-spacing: 0.5px;">
+                                The War of Art</h3>
+                            <p
+                                style=" color: #999; font-size: 14px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px;">
+                                Steven Pressfield</p>
+                            <div style="margin-top: 20px; display: flex; gap: 20px;">
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    BUY NOW
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                                <span style="color: rgba(255,255,255,0.3);">/</span>
+                                <a href="#"
+                                    style=" color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 1px; position: relative; padding-bottom: 3px; display: inline-block;">
+                                    TAKE A LOOK
+                                    <span
+                                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section class="articles-section" style="padding: 0 0 100px 0; background-color: #000;">
+            <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                    <h3
+                        style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                        LATEST INSIGHTS</h3>
+                    <h2 class="section-title"
+                        style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                        Featured Articles</h2>
+                    <p
+                        style=" font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto;">
+                        Thoughts, ideas, and perspectives on design, creativity, and the creative process
+                    </p>
+                </div>
+
+                <div class="articles-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; margin-top: 60px;">
+                    <!-- Article 1 -->
+                    <article class="article-card"
+                        style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; transition: all 0.3s ease;">
+                        <div class="article-meta" style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <span
+                                style=" font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase;">August
+                                14, 2025</span>
+                            <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">â€¢</span>
+                            <span
+                                style=" font-size: 11px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px;">Design</span>
+                        </div>
+                        <h3 class="article-title"
+                            style=" font-size: 22px; font-weight: 400; color: #ffffff; margin: 0 0 15px 0; line-height: 1.4;">
+                            <a href="#" style="color: inherit; text-decoration: none; transition: color 0.3s ease;">The
+                                Intersection of Art and Technology in Modern Design</a>
+                        </h3>
+                        <p
+                            style=" font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 20px 0;">
+                            Exploring how contemporary designers are blending traditional artistic principles with
+                            cutting-edge technology to create immersive experiences.
+                        </p>
+                        <a href="./article-detail.html?id=intersection-art-technology" class="read-more"
+                            style=" font-size: 12px; color: #ffffff; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; position: relative; padding-bottom: 3px;">
+                            Read Article
+                            <span style="margin-left: 8px; transition: transform 0.3s ease;">â†’</span>
+                            <span
+                                style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: #ffffff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                        </a>
+                    </article>
+
+                    <!-- Article 2 -->
+                    <article class="article-card"
+                        style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; transition: all 0.3s ease;">
+                        <div class="article-meta" style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <span
+                                style=" font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase;">August
+                                10, 2025</span>
+                            <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">â€¢</span>
+                            <span
+                                style=" font-size: 11px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px;">Creativity</span>
+                        </div>
+                        <h3 class="article-title"
+                            style=" font-size: 22px; font-weight: 400; color: #ffffff; margin: 0 0 15px 0; line-height: 1.4;">
+                            <a href="#"
+                                style="color: inherit; text-decoration: none; transition: color 0.3s ease;">Unlocking
+                                Creative Potential: Strategies for Consistent Innovation</a>
+                        </h3>
+                        <p
+                            style=" font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 20px 0;">
+                            Practical techniques and mental frameworks to maintain creative momentum and overcome blocks
+                            in your creative practice.
+                        </p>
+                        <a href="./article-detail.html?id=intersection-art-technology" class="read-more"
+                            style=" font-size: 12px; color: #ffffff; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; position: relative; padding-bottom: 3px;">
+                            Read Article
+                            <span style="margin-left: 8px; transition: transform 0.3s ease;">â†’</span>
+                            <span
+                                style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: #ffffff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                        </a>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="article-card"
+                        style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; transition: all 0.3s ease;">
+                        <div class="article-meta" style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <span
+                                style=" font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase;">August
+                                5, 2025</span>
+                            <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">â€¢</span>
+                            <span
+                                style=" font-size: 11px; color: #ffffff; text-transform: uppercase; letter-spacing: 1px;">Inspiration</span>
+                        </div>
+                        <h3 class="article-title"
+                            style=" font-size: 22px; font-weight: 400; color: #ffffff; margin: 0 0 15px 0; line-height: 1.4;">
+                            <a href="#"
+                                style="color: inherit; text-decoration: none; transition: color 0.3s ease;">Finding
+                                Inspiration in the Everyday: A Photographer's Journey</a>
+                        </h3>
+                        <p
+                            style=" font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 20px 0;">
+                            How to train your eye to see extraordinary beauty in ordinary moments and transform them
+                            into compelling visual stories.
+                        </p>
+                        <a href="./article-detail.html?id=intersection-art-technology" class="read-more"
+                            style=" font-size: 12px; color: #ffffff; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; position: relative; padding-bottom: 3px;">
+                            Read Article
+                            <span style="margin-left: 8px; transition: transform 0.3s ease;">â†’</span>
+                            <span
+                                style="position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: #ffffff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;"></span>
+                        </a>
+                    </article>
+                </div>
+
+                <div class="view-all-articles" style="text-align: center; margin-top: 60px;">
+                    <a href="#"
+                        style=" font-size: 11px; letter-spacing: 2px; color: #ffffff; text-transform: uppercase; text-decoration: none; padding-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+                        VIEW ALL ARTICLES
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Hover Effects */
+        .instagram-post:hover .post-overlay,
+        .youtube-post:hover .post-overlay {
+            opacity: 1;
+        }
+
+        .instagram-post:hover img,
+        .youtube-post:hover img {
+            transform: scale(1.05);
+        }
+
+        .youtube-post:hover .play-button {
+            transform: scale(1.1);
+            background: #ff0000;
+        }
+
+        .twitter-post:hover {
+            background-color: #111111 !important;
+        }
+
+        /* Responsive Grid */
+        @media (max-width: 1024px) {
+            .instagram-feed {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .youtube-post {
+                grid-column: span 1 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .instagram-feed {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .instagram-feed {
+                grid-template-columns: 1fr;
+            }
+
+            .youtube-post {
+                aspect-ratio: 16/9 !important;
+            }
+        }
+    </style>
+
+    <!-- Footer -->
+    <footer class="site-footer"
+        style="background-color: #000000; color: #ffffff; padding: 100px 0 30px;  border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="footer-content"
+                style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px;">
+                <div class="footer-about" style="flex: 1; min-width: 250px;">
+                    <h3 style=" font-size: 24px; margin-bottom: 20px; color: #ffffff;">
+                        PROXIMITY</h3>
+                    <p style="color: #999; line-height: 1.7; margin-bottom: 20px;">Creating meaningful connections
+                        through design and photography.</p>
+                    <div class="social-links" style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Instagram</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Twitter</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-links" style="flex: 1; min-width: 150px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Quick Links</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="index.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Home</a></li>
+                        <li style="margin-bottom: 12px;"><a href="index.html#about"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">About</a></li>
+                        <li style="margin-bottom: 12px;"><a href="gallery.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Gallery</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#testimonials"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Testimonials</a>
+                        </li>
+                        <li><a href="#contact"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter" style="flex: 1; min-width: 250px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Newsletter</h4>
+                    <p style="color: #999; margin-bottom: 20px; line-height: 1.6;">Subscribe to our newsletter for the
+                        latest updates and exclusive content.</p>
+                    <form style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Your email address"
+                            style="flex: 1; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 1px solid #333; color: #fff;  font-size: 14px;">
+                        <button type="submit"
+                            style="padding: 0 25px; background: #fff; color: #000; border: none;  font-weight: 600; cursor: pointer; transition: all 0.3s ease;">â†’</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; color: #666; font-size: 14px;">
+                <p style="margin: 0;"> 2025 PROXIMITY. All rights reserved.</p>
+                <div class="footer-legal" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Terms of Service</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .social-card {
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-card:hover .social-image img {
+            transform: scale(1.05);
+        }
+
+        .social-card:hover .fas.fa-arrow-right {
+            transform: translateX(3px);
+        }
+
+        .social-card:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+            background-color: #ff3333;
+        }
+    </style>
+
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const filter = this.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Language switcher functionality
+            const languageSwitcher = document.querySelector('.language-switcher');
+            const dropdown = languageSwitcher.querySelector('.language-dropdown');
+            const currentLanguage = document.querySelector('.language-switch');
+            let hideTimeout;
+
+            // Show dropdown on hover
+            languageSwitcher.addEventListener('mouseenter', function () {
+                clearTimeout(hideTimeout);
+                dropdown.style.display = 'block';
+            });
+
+            // Hide dropdown after a short delay when leaving the switcher
+            languageSwitcher.addEventListener('mouseleave', function () {
+                hideTimeout = setTimeout(() => {
+                    if (!dropdown.matches(':hover')) {
+                        dropdown.style.display = 'none';
+                    }
+                }, 300);
+            });
+
+            // Keep dropdown open when hovering over it
+            dropdown.addEventListener('mouseenter', function () {
+                clearTimeout(hideTimeout);
+            });
+
+            // Hide dropdown when leaving it
+            dropdown.addEventListener('mouseleave', function () {
+                dropdown.style.display = 'none';
+            });
+
+            // Handle language selection
+            const languageLinks = dropdown.querySelectorAll('a');
+            languageLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    const langText = this.textContent;
+
+                    // Update the displayed language
+                    currentLanguage.textContent = langText;
+                    dropdown.style.display = 'none';
+
+                    // Here you would typically load the appropriate language content
+                    console.log('Language changed to:', lang);
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.language-switcher')) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

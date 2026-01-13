@@ -1,0 +1,108 @@
+Gneralbodyackudl:#000000c:#fffff/*Resetallrorsht */*{
+ famlyReoyurxisingCSSoutfot-fmlyeaions*/40x40p!mpraumadh12seti .conainr {
+    positio: relaive;
+   z-index: 2;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.hero-content Respiveadjsmetors*/@me(mx-with76){.ou{flirclum g10px    wid00%}}
+
+@media(max-width:480px){
+   /* Hero Section */hrotlont-siz6px    .hro-subttle{
+        fontsze16;
+   }
+Abutsctin5sctin}
+/*ImageGridSection/
+.image-grid{
+    width: 100%;
+    overflow: hidden;
+    ackgrnd-color: #000000;
+    padding: 40px 0;
+}
+
+.image-grid-conainer{
+    display: flx;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.image-item {
+    flex: 1 0 alc(100% / 6);
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relave;
+    cursor: piter;
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block;   transition:all0.5sease;
+}
+
+image-overlay {
+    position: abolute;
+    bottom: 0;
+    lft: 0;
+    right: 0;
+    bakground: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 30px 20px 20px;
+    transform: translateY(100%);
+    transiion: all 0.5s ease;
+    opacty: 0;
+    colr: white;
+    text-align: ceter;
+}
+
+.imageiem:hover .mage-overlay {
+    transform: ransateY(0);
+    opacity: 1;
+}
+
+.image-item:hovr img  transform:scale(1.05);
+}
+
+.image-title{
+18;
+    font-weight: 700   margin:005px;    transform: translateY(20px);  transition:transform05s ea 0.1s;
+    opaiy: 0;
+}
+
+.mage-category {
+    ft-size: 12px;
+    texttranform: ppercase;
+    leter-spacing: 1px;
+    margn: 0;
+    transform: ransateY(20px);
+    transition: transform 0.5s ease 0.2s, opacity 0.5s eas0.2s;    opacity:0;
+}
+
+.image-item:hover.image-title,
+.image-item:hover.image-category{
+transrm: traslateY(0);
+    opaciy: 1;
+}
+
+/* Responve adjustments */
+@mdia (max-width200px) {
+    .image-grid-container {
+        flex-wrap: wrap;
+    }
+
+    .image-item {
+        flex: 0 0 33.333%;
+    }
+}
+
+@media (max-width: 78x) {
+    .image-item {
+        fle: 0 0 50%}
+
+@media(max-width:480px){

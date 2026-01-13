@@ -1,0 +1,752 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Proximity</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        .about-hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .about-hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        .about-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        /* Story Section */
+        .story-section {
+            background-color: #000000;
+            padding: 100px 0;
+        }
+
+        .story-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+            align-items: start;
+        }
+
+        .story-text {
+            
+            font-size: 15px;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+        }
+
+        .story-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background-color: #000000;
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .skill-title {
+            
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .skill-description {
+            
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background-color: #000000;
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 60px auto 0;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 60px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            grid-column: 2;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-year {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .timeline-year {
+            
+            font-size: 36px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .timeline-content h3 {
+            
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .timeline-content p {
+            
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        /* Values Section */
+        .values-section {
+            background-color: #000000;
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-top: 60px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .value-item {
+            text-align: center;
+        }
+
+        .value-number {
+            
+            font-size: 64px;
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .value-title {
+            
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .value-description {
+            
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #000000;
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cta-title {
+            
+            font-size: 48px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+            text-transform: none;
+        }
+
+        .cta-text {
+            
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding-left: 50px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(odd) .timeline-content {
+                grid-column: 1;
+            }
+
+            .timeline-item:nth-child(even) .timeline-year,
+            .timeline-item:nth-child(odd) .timeline-year {
+                grid-column: 1;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+                <li><a href="gallery.html" data-i18n="nav_gallery">Gallery</a></li>
+                <li><a href="thoughts.html" data-i18n="nav_thoughts">Thoughts</a></li>
+                <li><a href="About.html" class="active" data-i18n="nav_about">About</a></li>
+                <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+            <div class="logo">
+                <div class="language-switcher"
+                    style=" font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    <span class="language-switch">English</span>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="ar" dir="auto"
+                            style=" text-transform: none;">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+                        <a href="#" data-lang="de" dir="auto">DEUTSCH</a>
+                        <a href="#" data-lang="en" class="active" dir="auto">ENGLISH</a>
+                        <a href="#" data-lang="es" dir="auto">ESPAÃ‘OL</a>
+                        <a href="#" data-lang="fr" dir="auto">FRANÃ‡AIS</a>
+                        <a href="#" data-lang="ru" dir="auto">Ð Ð£Ð¡Ð¡ÐšÐ˜Ð™</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-text"><img src="Ù„ÙˆÙ‚Ùˆ.png" alt="Logo"
+                        style="height: 40px; width: auto;"></a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-image">
+            <img src="https://i.pinimg.com/1200x/e1/22/ce/e122ced199bcc12e321dd541ede73593.jpg" alt="About Me">
+        </div>
+        <div class="about-hero-content">
+            <h3
+                style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                data-i18n="about_page_hero_subtitle">GET TO KNOW ME</h3>
+            <h1 class="section-title"
+                style=" font-size: 64px; font-weight: 400; color: #ffffff; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                About Me</h1>
+            <p
+                style=" font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto;">
+                Discover the journey, passion, and vision that drives my creative work
+            </p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-content">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h3
+                    style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    MY STORY</h3>
+                <h2 class="section-title"
+                    style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 10px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                    The Journey So Far</h2>
+            </div>
+
+            <div class="story-grid">
+                <div>
+                    <p class="story-text">
+                        My journey into the world of photography and creative direction began over a decade ago, fueled
+                        by an insatiable curiosity and a deep appreciation for visual storytelling. What started as a
+                        simple fascination with capturing moments has evolved into a lifelong passion for creating
+                        meaningful connections through imagery.
+                    </p>
+                    <p class="story-text">
+                        Throughout my career, I've had the privilege of working with diverse clients and brands, each
+                        project teaching me something new about the power of visual communication. From fashion
+                        editorials to brand campaigns, every assignment has been an opportunity to push creative
+                        boundaries and explore new perspectives.
+                    </p>
+                    <p class="story-text">
+                        Today, I continue to pursue excellence in my craft, constantly learning, evolving, and seeking
+                        new ways to tell compelling stories through the lens. My work is driven by authenticity,
+                        attention to detail, and a commitment to creating images that resonate on a deeper level.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="https://i.pinimg.com/1200x/aa/88/0b/aa880b62a6bf2c6eead96af005d4bb09.jpg" alt="Portrait">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container" style="max-width: 1200px; padding: 0 20px;">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h3
+                    style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    EXPERTISE</h3>
+                <h2 class="section-title"
+                    style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 10px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                    What I Do Best</h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">ðŸ“¸</div>
+                    <h3 class="skill-title">Photography</h3>
+                    <p class="skill-description">
+                        Capturing authentic moments and creating compelling visual narratives through fashion, portrait,
+                        and editorial photography.
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">ðŸŽ¨</div>
+                    <h3 class="skill-title">Creative Direction</h3>
+                    <p class="skill-description">
+                        Developing comprehensive visual strategies and guiding creative projects from concept to
+                        execution.
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">âœ¨</div>
+                    <h3 class="skill-title">Brand Development</h3>
+                    <p class="skill-description">
+                        Building cohesive brand identities that resonate with audiences and stand out in competitive
+                        markets.
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">ðŸŽ¬</div>
+                    <h3 class="skill-title">Content Creation</h3>
+                    <p class="skill-description">
+                        Producing engaging visual content for digital platforms, social media, and marketing campaigns.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container" style="max-width: 1200px; padding: 0 20px;">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h3
+                    style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    MILESTONES</h3>
+                <h2 class="section-title"
+                    style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 10px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                    Career Highlights</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-content">
+                        <h3>International Recognition</h3>
+                        <p>Featured in major photography publications and awarded for excellence in creative direction
+                            and visual storytelling.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-content">
+                        <h3>Studio Expansion</h3>
+                        <p>Opened a dedicated creative studio space, expanding services to include full-scale production
+                            and brand development.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-content">
+                        <h3>Major Brand Collaborations</h3>
+                        <p>Began working with leading fashion and lifestyle brands, creating campaigns that reached
+                            millions worldwide.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h3>Professional Journey Begins</h3>
+                        <p>Launched professional photography career, focusing on fashion and editorial work with
+                            emerging designers and publications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container" style="max-width: 1200px; padding: 0 20px;">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h3
+                    style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    PRINCIPLES</h3>
+                <h2 class="section-title"
+                    style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 10px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                    Core Values</h2>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-number">01</div>
+                    <h3 class="value-title">Authenticity</h3>
+                    <p class="value-description">
+                        Creating genuine, honest work that reflects true stories and real emotions, never compromising
+                        artistic integrity.
+                    </p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-number">02</div>
+                    <h3 class="value-title">Excellence</h3>
+                    <p class="value-description">
+                        Pursuing the highest standards in every project, paying meticulous attention to detail and
+                        craftsmanship.
+                    </p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-number">03</div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">
+                        Constantly exploring new techniques, perspectives, and creative approaches to push boundaries
+                        and evolve.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Let's Create Something Amazing Together</h2>
+            <p class="cta-text">
+                Whether you're looking to collaborate on a project, discuss creative ideas, or simply connect, I'd love
+                to hear from you. Let's bring your vision to life.
+            </p>
+            <div class="button-group" style="justify-content: center;">
+                <a href="contact.html" class="cta-button">GET IN TOUCH</a>
+                <a href="gallery.html" class="cta-button secondary">VIEW MY WORK</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer"
+        style="background-color: #000000; color: #ffffff; padding: 100px 0 30px;  border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="footer-content"
+                style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px;">
+                <div class="footer-about" style="flex: 1; min-width: 250px;">
+                    <img src="Ù„ÙˆÙ‚Ùˆ.png" alt="Logo" style="height: 50px; width: auto; margin-bottom: 20px;">
+                    <p style="color: #999; line-height: 1.7; margin-bottom: 20px;">Transforming lives through
+                        purpose-driven education and personal development.</p>
+                    <div class="social-links" style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Instagram</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Twitter</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-links" style="flex: 1; min-width: 150px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Quick Links</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="index.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Home</a></li>
+                        <li style="margin-bottom: 12px;"><a href="About.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">About</a></li>
+                        <li style="margin-bottom: 12px;"><a href="gallery.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Gallery</a></li>
+                        <li style="margin-bottom: 12px;"><a href="thoughts.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Thoughts</a></li>
+                        <li><a href="#contact"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter" style="flex: 1; min-width: 250px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Newsletter</h4>
+                    <p style="color: #999; margin-bottom: 20px; line-height: 1.6;">Subscribe to our newsletter for the
+                        latest updates and exclusive content.</p>
+                    <form style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Your email address"
+                            style="flex: 1; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 1px solid #333; color: #fff;  font-size: 14px;">
+                        <button type="submit"
+                            style="padding: 0 25px; background: #fff; color: #000; border: none;  font-weight: 600; cursor: pointer; transition: all 0.3s ease;">â†’</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; color: #666; font-size: 14px;">
+                <p style="margin: 0;">Â© 2025 Youssef Al-Husiny. All rights reserved.</p>
+                <div class="footer-legal" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Terms of Service</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language switcher functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const languageSwitcher = document.querySelector('.language-switcher');
+            const dropdown = languageSwitcher.querySelector('.language-dropdown');
+            const currentLanguage = document.querySelector('.language-switch');
+            let hideTimeout;
+
+            // Show dropdown on hover
+            languageSwitcher.addEventListener('mouseenter', function () {
+                clearTimeout(hideTimeout);
+                dropdown.style.display = 'block';
+            });
+
+            // Hide dropdown after a short delay when leaving the switcher
+            languageSwitcher.addEventListener('mouseleave', function () {
+                hideTimeout = setTimeout(() => {
+                    if (!dropdown.matches(':hover')) {
+                        dropdown.style.display = 'none';
+                    }
+                }, 300);
+            });
+
+            // Keep dropdown open when hovering over it
+            dropdown.addEventListener('mouseenter', function () {
+                clearTimeout(hideTimeout);
+            });
+
+            // Hide dropdown when leaving it
+            dropdown.addEventListener('mouseleave', function () {
+                dropdown.style.display = 'none';
+            });
+
+            // Handle language selection
+            const languageLinks = dropdown.querySelectorAll('a');
+            languageLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    const langText = this.textContent;
+
+                    // Update the displayed language
+                    currentLanguage.textContent = langText;
+                    dropdown.style.display = 'none';
+
+                    // Here you would typically load the appropriate language content
+                    console.log('Language changed to:', lang);
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.language-switcher')) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            // Hamburger menu functionality
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger) {
+                hamburger.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>`r`n
+<script src="translations.js"></script>
+
+</html>
