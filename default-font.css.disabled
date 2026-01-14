@@ -1,0 +1,42 @@
+/* Apply default system font to all elements */
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Remove any font-face declarations */
+@font-face {
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: none;
+    unicode-range: U+0000-FFFF;
+}
+
+/* Reset font-family for specific elements if needed */
+body, 
+html, 
+input, 
+button, 
+textarea, 
+select {
+    font-family: inherit !important;
+}
+
+/* Override any inline styles */
+[style*="font-family"] {
+    font-family: inherit !important;
+}
+
+/* For Arabic text */
+[dir="rtl"],
+[dir="rtl"] * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* For code blocks */
+code, 
+pre, 
+kbd, 
+samp {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+}

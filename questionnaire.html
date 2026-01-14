@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Project - Youssef Al-Husiny</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Questionnaire Specific Styles */
+        .questionnaire-section {
+            background-color: #000000;
+            min-height: 100vh;
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .questionnaire-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .questionnaire-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #ffffff;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .step-counter {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px;
+            margin-bottom: 30px;
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .question-card.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .question-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .question-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 15px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .text-input:focus {
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .text-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .textarea-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 16px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .textarea-input:focus {
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .option-button {
+            padding: 20px 30px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .option-button:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .option-button.selected {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-label:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .checkbox-input {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .completion-message {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .completion-icon {
+            font-size: 64px;
+            margin-bottom: 30px;
+        }
+
+        .completion-title {
+            font-size: 48px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .completion-text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .question-card {
+                padding: 40px 30px;
+            }
+
+            .question-title {
+                font-size: 24px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="thoughts.html">Thoughts</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="logo">
+                <div class="language-switcher"
+                    style=" font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    <span class="language-switch">English</span>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="ar" dir="auto" style=" text-transform: none;">العربية</a>
+                        <a href="#" data-lang="de" dir="auto">DEUTSCH</a>
+                        <a href="#" data-lang="en" class="active" dir="auto">ENGLISH</a>
+                        <a href="#" data-lang="es" dir="auto">ESPAÑOL</a>
+                        <a href="#" data-lang="fr" dir="auto">FRANÇAIS</a>
+                        <a href="#" data-lang="ru" dir="auto">РУССКИЙ</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-text"><img src="logo.png" alt="Logo"
+                        style="height: 40px; width: auto;"></a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Questionnaire Section -->
+    <section class="questionnaire-section">
+        <div class="questionnaire-container">
+            <div class="questionnaire-header">
+                <h3
+                    style=" font-size: 12px; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    PROJECT BRIEF
+                </h3>
+                <h1
+                    style=" font-size: 48px; font-weight: 400; color: #ffffff; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: 0.5px; text-transform: none;">
+                    Let's Start Your Project
+                </h1>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="step-counter" id="stepCounter">STEP 1 OF 6</div>
+            </div>
+
+            <div id="questionnaireForm">
+                <!-- Question 1: Name -->
+                <div class="question-card active" data-step="1">
+                    <h2 class="question-title">What's your name?</h2>
+                    <p class="question-description">Let's start with the basics</p>
+                    <div class="input-group">
+                        <label class="input-label">YOUR NAME</label>
+                        <input type="text" class="text-input" id="name" placeholder="John Doe" required>
+                    </div>
+                </div>
+
+                <!-- Question 2: Email -->
+                <div class="question-card" data-step="2">
+                    <h2 class="question-title">How can we reach you?</h2>
+                    <p class="question-description">We'll use this to send you updates about your project</p>
+                    <div class="input-group">
+                        <label class="input-label">EMAIL ADDRESS</label>
+                        <input type="email" class="text-input" id="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">PHONE NUMBER (OPTIONAL)</label>
+                        <input type="tel" class="text-input" id="phone" placeholder="+966 XXX XXX XXX">
+                    </div>
+                </div>
+
+                <!-- Question 3: Project Type -->
+                <div class="question-card" data-step="3">
+                    <h2 class="question-title">What type of project do you have in mind?</h2>
+                    <p class="question-description">Select the option that best describes your needs</p>
+                    <div class="options-grid">
+                        <button class="option-button" data-value="branding">Brand Identity</button>
+                        <button class="option-button" data-value="web">Web Design</button>
+                        <button class="option-button" data-value="content">Content Strategy</button>
+                        <button class="option-button" data-value="photography">Photography</button>
+                        <button class="option-button" data-value="consulting">Consulting</button>
+                        <button class="option-button" data-value="other">Other</button>
+                    </div>
+                    <input type="hidden" id="projectType">
+                </div>
+
+                <!-- Question 4: Budget -->
+                <div class="question-card" data-step="4">
+                    <h2 class="question-title">What's your budget range?</h2>
+                    <p class="question-description">This helps us tailor our approach to your needs</p>
+                    <div class="options-grid">
+                        <button class="option-button" data-value="5k-10k">$5,000 - $10,000</button>
+                        <button class="option-button" data-value="10k-25k">$10,000 - $25,000</button>
+                        <button class="option-button" data-value="25k-50k">$25,000 - $50,000</button>
+                        <button class="option-button" data-value="50k+">$50,000+</button>
+                        <button class="option-button" data-value="flexible">Flexible</button>
+                    </div>
+                    <input type="hidden" id="budget">
+                </div>
+
+                <!-- Question 5: Timeline -->
+                <div class="question-card" data-step="5">
+                    <h2 class="question-title">When do you need this completed?</h2>
+                    <p class="question-description">Understanding your timeline helps us plan accordingly</p>
+                    <div class="options-grid">
+                        <button class="option-button" data-value="urgent">ASAP (1-2 weeks)</button>
+                        <button class="option-button" data-value="soon">Soon (1 month)</button>
+                        <button class="option-button" data-value="flexible">Flexible (2-3 months)</button>
+                        <button class="option-button" data-value="planning">Just Planning</button>
+                    </div>
+                    <input type="hidden" id="timeline">
+                </div>
+
+                <!-- Question 6: Project Details -->
+                <div class="question-card" data-step="6">
+                    <h2 class="question-title">Tell us about your project</h2>
+                    <p class="question-description">Share your vision, goals, and any specific requirements</p>
+                    <div class="input-group">
+                        <label class="input-label">PROJECT DESCRIPTION</label>
+                        <textarea class="textarea-input" id="description"
+                            placeholder="Describe your project, goals, target audience, and any specific requirements..."
+                            required></textarea>
+                    </div>
+                </div>
+
+                <!-- Completion Message -->
+                <div class="question-card" data-step="7"
+                    style="background: transparent; border: none; padding: 60px 20px;">
+                    <div class="completion-message">
+                        <h2 class="completion-title">Thank You</h2>
+                        <p class="completion-text">
+                            Your project brief has been submitted successfully. We'll review your information and get
+                            back to you within 24 hours to discuss the next steps.
+                        </p>
+                        <a href="index.html" class="btn btn-primary">BACK TO HOME</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="button-group" id="navigationButtons">
+                <button class="btn btn-secondary" id="prevBtn" style="display: none;">PREVIOUS</button>
+                <button class="btn btn-primary" id="nextBtn">NEXT</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Questionnaire Logic
+        let currentStep = 1;
+        const totalSteps = 6;
+        const formData = {};
+
+        // Elements
+        const progressBar = document.getElementById('progressBar');
+        const stepCounter = document.getElementById('stepCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const navigationButtons = document.getElementById('navigationButtons');
+
+        // Initialize
+        updateProgress();
+
+        // Option buttons
+        document.querySelectorAll('.option-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const parent = this.parentElement;
+                parent.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('selected');
+
+                // Store value
+                const hiddenInput = parent.nextElementSibling;
+                if (hiddenInput && hiddenInput.type === 'hidden') {
+                    hiddenInput.value = this.dataset.value;
+                }
+            });
+        });
+
+        // Next button
+        nextBtn.addEventListener('click', () => {
+            if (validateCurrentStep()) {
+                saveCurrentStep();
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    submitForm();
+                }
+            }
+        });
+
+        // Previous button
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        function showStep(step) {
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('active');
+                if (parseInt(card.dataset.step) === step) {
+                    setTimeout(() => card.classList.add('active'), 50);
+                }
+            });
+
+            updateProgress();
+            updateButtons();
+        }
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            progressBar.style.width = progress + '%';
+
+            if (currentStep <= totalSteps) {
+                stepCounter.textContent = `STEP ${currentStep} OF ${totalSteps}`;
+            } else {
+                stepCounter.style.display = 'none';
+                progressBar.style.width = '100%';
+            }
+        }
+
+        function updateButtons() {
+            prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+            nextBtn.textContent = currentStep === totalSteps ? 'SUBMIT' : 'NEXT';
+        }
+
+        function validateCurrentStep() {
+            const currentCard = document.querySelector(`.question-card[data-step="${currentStep}"]`);
+            const requiredInputs = currentCard.querySelectorAll('[required]');
+
+            for (let input of requiredInputs) {
+                if (!input.value.trim()) {
+                    input.focus();
+                    return false;
+                }
+            }
+
+            // Validate option selections
+            const hiddenInput = currentCard.querySelector('input[type="hidden"]');
+            if (hiddenInput && !hiddenInput.value) {
+                return false;
+            }
+
+            return true;
+        }
+
+        function saveCurrentStep() {
+            const currentCard = document.querySelector(`.question-card[data-step="${currentStep}"]`);
+            const inputs = currentCard.querySelectorAll('input, textarea');
+
+            inputs.forEach(input => {
+                if (input.id) {
+                    formData[input.id] = input.value;
+                }
+            });
+        }
+
+        function submitForm() {
+            // Save final step
+            saveCurrentStep();
+
+            // Here you would typically send the data to a server
+            console.log('Form Data:', formData);
+
+            // Hide all cards first
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Show completion message
+            currentStep = 7;
+            const completionCard = document.querySelector('.question-card[data-step="7"]');
+            setTimeout(() => {
+                completionCard.classList.add('active');
+            }, 100);
+
+            navigationButtons.style.display = 'none';
+            updateProgress();
+
+            // Optional: Send to WhatsApp or Email
+            // const message = `New Project Request:\nName: ${formData.name}\nEmail: ${formData.email}\nProject: ${formData.projectType}\nBudget: ${formData.budget}\nTimeline: ${formData.timeline}\nDescription: ${formData.description}`;
+            // window.open(`https://wa.me/966577545142?text=${encodeURIComponent(message)}`);
+        }
+
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+
+            hamburger.addEventListener('click', function () {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.main-nav')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
