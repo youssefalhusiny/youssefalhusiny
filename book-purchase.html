@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Purchase - Proximity</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .book-purchase-page {
+            background-color: #000;
+            color: #fff;
+            padding: 120px 0 100px 0;
+        }
+
+        .purchase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 60px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .back-link::before {
+            content: '←';
+            font-size: 18px;
+        }
+
+        .book-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .book-image-section {
+            position: relative;
+        }
+
+        .book-cover-large {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #000;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .book-info-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .book-category {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .book-title-large {
+            font-size: 48px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+
+        .book-author {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .book-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .stars {
+            color: #FFD700;
+            font-size: 18px;
+            letter-spacing: 3px;
+        }
+
+        .rating-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .book-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .book-price {
+            font-size: 42px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .price-note {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 10px;
+        }
+
+        .purchase-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            padding: 18px 40px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            flex: 1;
+            padding: 18px 40px;
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .book-features {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-value {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .book-details-section {
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 60px;
+            border-radius: 2px;
+            margin-bottom: 80px;
+        }
+
+        .details-title {
+            font-size: 28px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .details-content {
+            font-size: 16px;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .details-content h3 {
+            font-size: 20px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 30px 0 15px 0;
+        }
+
+        .details-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .details-content li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .details-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .related-books {
+            margin-top: 80px;
+        }
+
+        .related-books-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .related-books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .related-book-card {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+
+        .related-book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-book-cover {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-radius: 2px;
+        }
+
+        .related-book-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .related-book-author {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 992px) {
+            .book-details-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .book-cover-large {
+                max-width: 100%;
+            }
+
+            .book-title-large {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .purchase-buttons {
+                flex-direction: column;
+            }
+
+            .book-details-section {
+                padding: 40px 30px;
+            }
+
+            .related-books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="thoughts.html" class="active">Thoughts</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="logo">
+                <div class="language-switcher"
+                    style=" font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    <span class="language-switch">English</span>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="ar" dir="auto" style=" text-transform: none;">العربية</a>
+                        <a href="#" data-lang="de" dir="auto">DEUTSCH</a>
+                        <a href="#" data-lang="en" class="active" dir="auto">ENGLISH</a>
+                        <a href="#" data-lang="es" dir="auto">ESPAÑOL</a>
+                        <a href="#" data-lang="fr" dir="auto">FRANÇAIS</a>
+                        <a href="#" data-lang="ru" dir="auto">РУССКИЙ</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-text"><img src="logo.png" alt="Logo"
+                        style="height: 40px; width: auto;"></a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="book-purchase-page">
+        <div class="purchase-container">
+            <a href="thoughts.html" class="back-link">Back to Books</a>
+
+            <!-- Book Details Grid -->
+            <div class="book-details-grid">
+                <!-- Book Image -->
+                <div class="book-image-section">
+                    <img src="https://i.pinimg.com/736x/85/4d/bf/854dbf623a4ebc6d197a10645744d136.jpg" alt="Book Cover"
+                        class="book-cover-large" id="bookCover">
+                    <div class="book-badge">BESTSELLER</div>
+                </div>
+
+                <!-- Book Info -->
+                <div class="book-info-section">
+                    <div class="book-category">CREATIVITY / SELF-HELP</div>
+                    <h1 class="book-title-large" id="bookTitle">The Creative Act</h1>
+                    <p class="book-author" id="bookAuthor">By Rick Rubin</p>
+
+                    <div class="book-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.8 (2,547 reviews)</span>
+                    </div>
+
+                    <p class="book-description" id="bookDescription">
+                        A beautiful and generous course of study for all those who wish to take part in the creative
+                        act. It is a way of being in the world. A timeless guide to the creative process, offering
+                        wisdom and practical advice for artists of all kinds.
+                    </p>
+
+                    <div class="book-price">
+                        <span id="bookPrice">$24.99</span>
+                        <p class="price-note">Free shipping on orders over $50</p>
+                    </div>
+
+                    <div class="purchase-buttons">
+                        <a href="checkout.html" class="btn-primary">GET IT NOW</a>
+                        <a href="book-preview.html" class="btn-secondary" id="previewBtn">PREVIEW</a>
+                    </div>
+
+                    <div class="book-features">
+                        <div class="feature-item">
+                            <span class="feature-label">Format</span>
+                            <span class="feature-value">Hardcover</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Pages</span>
+                            <span class="feature-value">432</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Publisher</span>
+                            <span class="feature-value">Penguin Press</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">Language</span>
+                            <span class="feature-value">English</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-label">ISBN</span>
+                            <span class="feature-value">978-0593652886</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Details Section -->
+            <div class="book-details-section">
+                <h2 class="details-title">About This Book</h2>
+                <div class="details-content">
+                    <p>
+                        Many famed music producers are known for a particular sound that has its day. Rick Rubin is
+                        known for something else: creating a space where artists of all different genres and traditions
+                        can home in on who they really are and what they really offer. He has made a practice of
+                        helping people transcend their self-imposed expectations in order to reconnect with a state of
+                        innocence from which the surprising becomes inevitable.
+                    </p>
+
+                    <h3>What You'll Learn</h3>
+                    <ul>
+                        <li>How to tap into your creative potential and overcome creative blocks</li>
+                        <li>The importance of being present and aware in the creative process</li>
+                        <li>Techniques for developing your unique artistic voice</li>
+                        <li>Understanding the relationship between artist and audience</li>
+                        <li>Methods for maintaining creative momentum throughout your career</li>
+                    </ul>
+
+                    <h3>Perfect For</h3>
+                    <p>
+                        This book is essential reading for anyone interested in the creative process—whether you're a
+                        musician, writer, visual artist, designer, or simply someone who wants to live a more creative
+                        life. Rick Rubin's insights transcend any particular medium and speak to the universal
+                        experience of creating.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Related Books -->
+            <div class="related-books">
+                <h2 class="related-books-title">You Might Also Like</h2>
+                <div class="related-books-grid">
+                    <a href="book-purchase.html?id=steal-like-artist" class="related-book-card">
+                        <img src="https://i.pinimg.com/736x/94/95/cc/9495cc061c79e3a8e20367684a30b935.jpg"
+                            alt="Steal Like an Artist" class="related-book-cover">
+                        <h3 class="related-book-title">Steal Like an Artist</h3>
+                        <p class="related-book-author">Austin Kleon</p>
+                    </a>
+
+                    <a href="book-purchase.html?id=artists-way" class="related-book-card">
+                        <img src="https://i.pinimg.com/736x/79/a9/aa/79a9aad90dc989f94bcd9a63b4aa3c3a.jpg"
+                            alt="The Artist's Way" class="related-book-cover">
+                        <h3 class="related-book-title">The Artist's Way</h3>
+                        <p class="related-book-author">Julia Cameron</p>
+                    </a>
+
+                    <a href="book-purchase.html?id=war-of-art" class="related-book-card">
+                        <img src="https://i.pinimg.com/736x/40/27/31/4027314df8eb37b00b79dbdefab020a0.jpg"
+                            alt="The War of Art" class="related-book-cover">
+                        <h3 class="related-book-title">The War of Art</h3>
+                        <p class="related-book-author">Steven Pressfield</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer"
+        style="background-color: #000000; color: #ffffff; padding: 100px 0 30px;  border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="footer-content"
+                style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px;">
+                <div class="footer-about" style="flex: 1; min-width: 250px;">
+                    <img src="logo.png" alt="Logo" style="height: 50px; width: auto; margin-bottom: 20px;">
+                    <p style="color: #999; line-height: 1.7; margin-bottom: 20px;">Transforming lives through
+                        purpose-driven education and personal development.</p>
+                    <div class="social-links" style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Instagram</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Twitter</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-links" style="flex: 1; min-width: 150px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Quick Links</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="index.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Home</a></li>
+                        <li style="margin-bottom: 12px;"><a href="About.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">About</a></li>
+                        <li style="margin-bottom: 12px;"><a href="thoughts.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Thoughts</a></li>
+                        <li><a href="contact.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter" style="flex: 1; min-width: 250px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Newsletter</h4>
+                    <p style="color: #999; margin-bottom: 20px; line-height: 1.6;">Subscribe to our newsletter for the
+                        latest updates and exclusive content.</p>
+                    <form style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Your email address"
+                            style="flex: 1; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 1px solid #333; color: #fff;  font-size: 14px;">
+                        <button type="submit"
+                            style="padding: 0 25px; background: #fff; color: #000; border: none;  font-weight: 600; cursor: pointer; transition: all 0.3s ease;">→</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; color: #666; font-size: 14px;">
+                <p style="margin: 0;">© 2025 Youssef Al-Husiny. All rights reserved.</p>
+                <div class="footer-legal" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Terms of
+                        Service</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Language switcher
+        const languageSwitcher = document.querySelector('.language-switcher');
+        const dropdown = languageSwitcher.querySelector('.language-dropdown');
+
+        languageSwitcher.addEventListener('mouseenter', function () {
+            dropdown.style.display = 'block';
+        });
+
+        languageSwitcher.addEventListener('mouseleave', function () {
+            setTimeout(() => {
+                if (!dropdown.matches(':hover')) {
+                    dropdown.style.display = 'none';
+                }
+            }, 300);
+        });
+
+        // Get book ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('id');
+
+        // Book data
+        const books = {
+            'creative-act': {
+                title: 'The Creative Act',
+                author: 'Rick Rubin',
+                price: '$24.99',
+                image: 'https://i.pinimg.com/736x/85/4d/bf/854dbf623a4ebc6d197a10645744d136.jpg',
+                description: 'A beautiful and generous course of study for all those who wish to take part in the creative act. It is a way of being in the world. A timeless guide to the creative process, offering wisdom and practical advice for artists of all kinds.'
+            },
+            'steal-like-artist': {
+                title: 'Steal Like an Artist',
+                author: 'Austin Kleon',
+                price: '$19.99',
+                image: 'https://i.pinimg.com/736x/94/95/cc/9495cc061c79e3a8e20367684a30b935.jpg',
+                description: '10 transformative principles that will help readers discover their artistic side and build a more creative life. A manifesto for the digital age about creativity, self-expression, and the importance of embracing influence.'
+            },
+            'artists-way': {
+                title: "The Artist's Way",
+                author: 'Julia Cameron',
+                price: '$22.99',
+                image: 'https://i.pinimg.com/736x/79/a9/aa/79a9aad90dc989f94bcd9a63b4aa3c3a.jpg',
+                description: 'A spiritual path to higher creativity. The Artist\'s Way is the seminal book on the subject of creativity. An international bestseller, millions of readers have found it to be an invaluable guide to living the artist\'s life.'
+            },
+            'war-of-art': {
+                title: 'The War of Art',
+                author: 'Steven Pressfield',
+                price: '$18.99',
+                image: 'https://i.pinimg.com/736x/40/27/31/4027314df8eb37b00b79dbdefab020a0.jpg',
+                description: 'Break through the blocks and win your inner creative battles. A succinct, engaging, and practical guide for succeeding in any creative or entrepreneurial endeavor. Identifies the enemy that every one of us must face.'
+            }
+        };
+
+        // Update page content based on book ID
+        if (bookId && books[bookId]) {
+            const book = books[bookId];
+            document.getElementById('bookTitle').textContent = book.title;
+            document.getElementById('bookAuthor').textContent = 'By ' + book.author;
+            document.getElementById('bookPrice').textContent = book.price;
+            document.getElementById('bookCover').src = book.image;
+            document.getElementById('bookDescription').textContent = book.description;
+            document.title = book.title + ' - Proximity';
+
+            // Update preview button link
+            const previewBtn = document.getElementById('previewBtn');
+            if (previewBtn) {
+                previewBtn.href = 'book-preview.html?id=' + bookId;
+            }
+        }
+    </script>
+</body>
+
+</html>

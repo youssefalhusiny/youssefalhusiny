@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Proximity</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .success-page {
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .success-container {
+            max-width: 700px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+        .success-title {
+            font-size: 48px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 20px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .success-message {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .order-details {
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 40px;
+            border-radius: 2px;
+            margin: 50px 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .order-number {
+            font-size: 20px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 35px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .email-note {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .next-steps {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .next-steps-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .step-item {
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 2px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 15px;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .success-title {
+                font-size: 36px;
+            }
+
+            .order-details {
+                padding: 30px 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="thoughts.html">Thoughts</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="logo">
+                <div class="language-switcher"
+                    style=" font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    <span class="language-switch">English</span>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="ar" dir="auto" style=" text-transform: none;">العربية</a>
+                        <a href="#" data-lang="de" dir="auto">DEUTSCH</a>
+                        <a href="#" data-lang="en" class="active" dir="auto">ENGLISH</a>
+                        <a href="#" data-lang="es" dir="auto">ESPAÑOL</a>
+                        <a href="#" data-lang="fr" dir="auto">FRANÇAIS</a>
+                        <a href="#" data-lang="ru" dir="auto">РУССКИЙ</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-text"><img src="logo.png" alt="Logo"
+                        style="height: 40px; width: auto;"></a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="success-page">
+        <div class="success-container">
+
+
+            <h1 class="success-title">Order Confirmed!</h1>
+            <p class="success-message">
+                Thank you for your purchase. Your order has been successfully placed and is being processed. You will
+                receive a confirmation email shortly with your order details and tracking information.
+            </p>
+
+            <!-- Order Details -->
+            <div class="order-details">
+                <div class="detail-row">
+                    <span class="detail-label">Order Number</span>
+                    <span class="detail-value order-number">#ORD-2025-<span id="orderNumber"></span></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Order Date</span>
+                    <span class="detail-value" id="orderDate"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Total Amount</span>
+                    <span class="detail-value">$26.99</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method</span>
+                    <span class="detail-value">Credit Card (****)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Estimated Delivery</span>
+                    <span class="detail-value" id="deliveryDate"></span>
+                </div>
+            </div>
+
+            <div class="email-note">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                A confirmation email has been sent to your email address
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="thoughts.html" class="btn btn-primary">Continue Shopping</a>
+                <a href="index.html" class="btn btn-secondary">Back to Home</a>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h2 class="next-steps-title">What Happens Next?</h2>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Order Processing</h3>
+                        <p class="step-description">Your order is being prepared for shipment</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Shipping</h3>
+                        <p class="step-description">You'll receive tracking information via email</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Delivery</h3>
+                        <p class="step-description">Your book arrives at your doorstep</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', function () {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Language switcher
+        const languageSwitcher = document.querySelector('.language-switcher');
+        if (languageSwitcher) {
+            const dropdown = languageSwitcher.querySelector('.language-dropdown');
+
+            languageSwitcher.addEventListener('mouseenter', function () {
+                dropdown.style.display = 'block';
+            });
+
+            languageSwitcher.addEventListener('mouseleave', function () {
+                setTimeout(() => {
+                    if (!dropdown.matches(':hover')) {
+                        dropdown.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+
+        // Generate random order number
+        const orderNumber = Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('orderNumber').textContent = orderNumber;
+
+        // Set order date to today
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('orderDate').textContent = today.toLocaleDateString('en-US', options);
+
+        // Set estimated delivery date (7 days from now)
+        const deliveryDate = new Date();
+        deliveryDate.setDate(deliveryDate.getDate() + 7);
+        document.getElementById('deliveryDate').textContent = deliveryDate.toLocaleDateString('en-US', options);
+    </script>
+</body>
+
+</html>

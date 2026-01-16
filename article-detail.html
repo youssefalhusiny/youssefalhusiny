@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - Proximity</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-hero {
+            background-color: #000;
+            padding: 150px 0 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .article-category {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .article-title {
+            font-size: 56px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 30px 0;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 50px;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-content {
+            background-color: #000;
+            padding: 60px 0 100px 0;
+        }
+
+        .article-body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .article-body h2 {
+            font-size: 32px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 60px 0 25px 0;
+            line-height: 1.3;
+        }
+
+        .article-body h3 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 40px 0 20px 0;
+        }
+
+        .article-body p {
+            margin-bottom: 25px;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .article-body blockquote {
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            padding-left: 30px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+
+        .article-body img {
+            width: 100%;
+            height: auto;
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 25px 0;
+            padding-left: 30px;
+        }
+
+        .article-body li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .article-footer {
+            max-width: 800px;
+            margin: 80px auto 0 auto;
+            padding: 40px 20px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .share-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .share-section h3 {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .share-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .back-link::before {
+            content: '←';
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 36px;
+            }
+
+            .article-body {
+                font-size: 16px;
+            }
+
+            .article-body h2 {
+                font-size: 28px;
+            }
+
+            .article-body h3 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="thoughts.html" class="active">Thoughts</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="logo">
+                <div class="language-switcher"
+                    style=" font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    <span class="language-switch">English</span>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="ar" dir="auto" style=" text-transform: none;">العربية</a>
+                        <a href="#" data-lang="de" dir="auto">DEUTSCH</a>
+                        <a href="#" data-lang="en" class="active" dir="auto">ENGLISH</a>
+                        <a href="#" data-lang="es" dir="auto">ESPAÑOL</a>
+                        <a href="#" data-lang="fr" dir="auto">FRANÇAIS</a>
+                        <a href="#" data-lang="ru" dir="auto">РУССКИЙ</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-text"><img src="logo.png" alt="Logo"
+                        style="height: 40px; width: auto;"></a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="container" style="max-width: 1000px;">
+            <a href="thoughts.html" class="back-link">Back to Articles</a>
+            <span class="article-category">Design</span>
+            <h1 class="article-title" id="articleTitle">The Intersection of Art and Technology in Modern Design</h1>
+            <div class="article-meta">
+                <span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    August 14, 2025
+                </span>
+                <span>•</span>
+                <span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    8 min read
+                </span>
+                <span>•</span>
+                <span>Youssef Al-Husiny</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="article-content">
+        <article class="article-body">
+            <p>In the ever-evolving landscape of modern design, we find ourselves at a fascinating crossroads where
+                traditional artistic principles meet cutting-edge technology. This intersection has given birth to a new
+                era of creative expression, one that challenges our perceptions and pushes the boundaries of what's
+                possible.</p>
+
+            <p>As designers, we're no longer confined to the limitations of physical media. Digital tools have opened up
+                infinite possibilities, allowing us to experiment, iterate, and create in ways that were unimaginable
+                just a few decades ago.</p>
+
+            <h2>The Evolution of Design Tools</h2>
+
+            <p>The journey from traditional design methods to digital workflows represents one of the most significant
+                shifts in creative history. Where once designers relied solely on pencils, brushes, and physical
+                materials, today's creative professionals have access to an unprecedented array of digital tools and
+                technologies.</p>
+
+            <blockquote>
+                "Technology is best when it brings people together. In design, it's about creating experiences that
+                resonate on a human level, regardless of the medium."
+            </blockquote>
+
+            <p>This transformation hasn't diminished the importance of fundamental design principles. Instead, it has
+                amplified their relevance. Understanding color theory, composition, typography, and visual hierarchy
+                remains as crucial as ever—perhaps even more so in a digital landscape where these elements can be
+                manipulated with unprecedented precision.</p>
+
+            <h3>Bridging the Physical and Digital</h3>
+
+            <p>One of the most exciting developments in contemporary design is the seamless integration of physical and
+                digital experiences. Augmented reality, interactive installations, and responsive environments are
+                blurring the lines between the tangible and the virtual.</p>
+
+            <p>Consider how modern exhibitions now incorporate digital elements to enhance physical artworks, or how
+                product designers use virtual reality to prototype and test their creations before they ever exist in
+                physical form. This convergence creates richer, more immersive experiences that engage audiences in
+                entirely new ways.</p>
+
+            <h2>The Human Element</h2>
+
+            <p>Despite all these technological advances, the most important element in design remains unchanged: the
+                human element. Technology is merely a tool—a powerful one, certainly—but it's the designer's vision,
+                creativity, and understanding of human needs that truly brings a project to life.</p>
+
+            <p>The best designs, whether created with traditional methods or cutting-edge technology, share a common
+                thread: they solve problems, evoke emotions, and create meaningful connections with their audience. This
+                fundamental truth transcends any particular tool or technique.</p>
+
+            <h3>Looking Forward</h3>
+
+            <p>As we look to the future, the relationship between art and technology in design will only deepen.
+                Emerging
+                technologies like artificial intelligence, machine learning, and generative design are already beginning
+                to reshape how we approach creative work.</p>
+
+            <p>The key for designers is to embrace these tools while maintaining a strong foundation in design
+                principles and a deep understanding of human needs and desires. Technology should enhance our creative
+                capabilities, not replace the thoughtful, intentional approach that defines great design.</p>
+
+            <p>In this new era, the most successful designers will be those who can fluently navigate both the artistic
+                and technological realms, using each to complement and enhance the other. The intersection of art and
+                technology isn't just a meeting point—it's a launching pad for innovation and creativity that we're only
+                beginning to explore.</p>
+
+            <!-- Article Footer -->
+            <div class="article-footer">
+                <div class="article-tags">
+                    <a href="#" class="tag">Design</a>
+                    <a href="#" class="tag">Technology</a>
+                    <a href="#" class="tag">Innovation</a>
+                    <a href="#" class="tag">Creativity</a>
+                </div>
+
+                <div class="share-section">
+                    <h3>Share This Article</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn" title="Share on Twitter">𝕏</a>
+                        <a href="#" class="share-btn" title="Share on Facebook">f</a>
+                        <a href="#" class="share-btn" title="Share on LinkedIn">in</a>
+                        <a href="#" class="share-btn" title="Copy Link">🔗</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer"
+        style="background-color: #000000; color: #ffffff; padding: 100px 0 30px;  border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="footer-content"
+                style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px;">
+                <div class="footer-about" style="flex: 1; min-width: 250px;">
+                    <img src="logo.png" alt="Logo" style="height: 50px; width: auto; margin-bottom: 20px;">
+                    <p style="color: #999; line-height: 1.7; margin-bottom: 20px;">Transforming lives through
+                        purpose-driven education and personal development.</p>
+                    <div class="social-links" style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Instagram</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Twitter</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-links" style="flex: 1; min-width: 150px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Quick Links</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="index.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Home</a></li>
+                        <li style="margin-bottom: 12px;"><a href="About.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">About</a></li>
+                        <li style="margin-bottom: 12px;"><a href="thoughts.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Thoughts</a></li>
+                        <li><a href="contact.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter" style="flex: 1; min-width: 250px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Newsletter</h4>
+                    <p style="color: #999; margin-bottom: 20px; line-height: 1.6;">Subscribe to our newsletter for the
+                        latest updates and exclusive content.</p>
+                    <form style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Your email address"
+                            style="flex: 1; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 1px solid #333; color: #fff;  font-size: 14px;">
+                        <button type="submit"
+                            style="padding: 0 25px; background: #fff; color: #000; border: none;  font-weight: 600; cursor: pointer; transition: all 0.3s ease;">→</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; color: #666; font-size: 14px;">
+                <p style="margin: 0;">© 2025 Youssef Al-Husiny. All rights reserved.</p>
+                <div class="footer-legal" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Terms of
+                        Service</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Language switcher
+        const languageSwitcher = document.querySelector('.language-switcher');
+        const dropdown = languageSwitcher.querySelector('.language-dropdown');
+
+        languageSwitcher.addEventListener('mouseenter', function () {
+            dropdown.style.display = 'block';
+        });
+
+        languageSwitcher.addEventListener('mouseleave', function () {
+            setTimeout(() => {
+                if (!dropdown.matches(':hover')) {
+                    dropdown.style.display = 'none';
+                }
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Preview - Proximity</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .preview-page {
+            background-color: #000;
+            color: #fff;
+            padding: 120px 0 100px 0;
+            min-height: 100vh;
+        }
+
+        .preview-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .back-link::before {
+            content: '←';
+            font-size: 18px;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .preview-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .preview-title {
+            font-size: 42px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .preview-author {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+
+        .preview-content {
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 60px;
+            border-radius: 2px;
+            margin-bottom: 40px;
+        }
+
+        .preview-chapter {
+            margin-bottom: 50px;
+        }
+
+        .chapter-title {
+            font-size: 24px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+        }
+
+        .preview-note {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            margin: 40px 0;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 16px 35px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .preview-info {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .preview-content {
+                padding: 40px 30px;
+            }
+
+            .preview-title {
+                font-size: 32px;
+            }
+
+            .chapter-title {
+                font-size: 20px;
+            }
+
+            .preview-text {
+                font-size: 16px;
+            }
+
+            .preview-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="thoughts.html" class="active">Thoughts</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="logo">
+                <div class="language-switcher"
+                    style=" font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; font-weight: 400;">
+                    <span class="language-switch">English</span>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="ar" dir="auto" style=" text-transform: none;">العربية</a>
+                        <a href="#" data-lang="de" dir="auto">DEUTSCH</a>
+                        <a href="#" data-lang="en" class="active" dir="auto">ENGLISH</a>
+                        <a href="#" data-lang="es" dir="auto">ESPAÑOL</a>
+                        <a href="#" data-lang="fr" dir="auto">FRANÇAIS</a>
+                        <a href="#" data-lang="ru" dir="auto">РУССКИЙ</a>
+                    </div>
+                </div>
+                <a href="index.html" class="logo-text"><img src="logo.png" alt="Logo"
+                        style="height: 40px; width: auto;"></a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="preview-page">
+        <div class="preview-container">
+            <a href="javascript:history.back()" class="back-link">Back to Book</a>
+
+            <div class="preview-header">
+                <p class="preview-label">Book Preview</p>
+                <h1 class="preview-title" id="bookTitle">The Creative Act</h1>
+                <p class="preview-author" id="bookAuthor">By Rick Rubin</p>
+            </div>
+
+            <div class="preview-content">
+                <div class="preview-chapter">
+                    <h2 class="chapter-title">Introduction</h2>
+                    <p class="preview-text">
+                        The world of creativity is vast and mysterious. It's a realm where the impossible becomes
+                        possible, where imagination takes form, and where the soul finds its truest expression. This
+                        book is an invitation to explore that world, to understand its rhythms, and to discover your
+                        own creative voice.
+                    </p>
+                    <p class="preview-text">
+                        Creativity is not a talent reserved for the chosen few. It is a fundamental aspect of being
+                        human. We are all creative beings, capable of bringing new ideas into existence, of solving
+                        problems in unique ways, and of expressing ourselves authentically.
+                    </p>
+                    <p class="preview-text">
+                        Throughout these pages, we will explore the creative process from multiple angles. We'll
+                        examine the mindset required for creative work, the habits that support it, and the obstacles
+                        that often stand in our way. Most importantly, we'll discover that creativity is not about
+                        perfection—it's about expression, exploration, and the courage to share your unique perspective
+                        with the world.
+                    </p>
+                    <p class="preview-text">
+                        The journey we're about to embark on together is both ancient and ever-new. Artists, thinkers,
+                        and makers throughout history have grappled with the same questions we face today: How do we
+                        access our creative potential? How do we overcome doubt and fear? How do we stay true to our
+                        vision while remaining open to growth and change?
+                    </p>
+                    <p class="preview-text">
+                        These questions don't have simple answers, but they do have profound ones. And the search for
+                        those answers is itself a creative act—one that will transform not just your work, but your
+                        entire way of being in the world.
+                    </p>
+                </div>
+
+                <div class="preview-note">
+                    "The creative act is not performed by the artist alone; the spectator brings the work in contact
+                    with the external world by deciphering and interpreting its inner qualifications and thus adds his
+                    contribution to the creative act."
+                </div>
+
+                <div class="preview-chapter">
+                    <h2 class="chapter-title">Chapter 1: The Source</h2>
+                    <p class="preview-text">
+                        Every creative work begins with a spark—an idea, a feeling, an observation that captures our
+                        attention and refuses to let go. This spark is the source, the origin point from which all
+                        creative work flows. Learning to recognize and honor these moments is the first step in the
+                        creative journey.
+                    </p>
+                    <p class="preview-text">
+                        The source is always present, always available. It speaks to us through our curiosity, our
+                        wonder, our questions about the world. It whispers in moments of stillness and shouts in
+                        moments of passion. Our task is not to create the source, but to listen to it, to trust it, and
+                        to follow where it leads.
+                    </p>
+                    <p class="preview-text">
+                        Many people believe they lack creativity because they haven't learned to hear the source. They
+                        wait for inspiration to strike like lightning, not realizing that inspiration is a constant
+                        companion, patiently waiting for us to pay attention. The creative life is one of heightened
+                        awareness, of being present to the world and to ourselves.
+                    </p>
+                    <p class="preview-text">
+                        Think of the source as a radio signal that's always broadcasting. Our job is not to generate
+                        the signal, but to tune in to it. Some days the reception is crystal clear. Other days, static
+                        and interference make it hard to hear. But the signal is always there, constant and unwavering,
+                        waiting for us to adjust our frequency.
+                    </p>
+                    <p class="preview-text">
+                        The practices we'll explore in this book are all designed to help you tune in more reliably,
+                        to clear away the static of self-doubt, distraction, and fear, and to receive the creative
+                        impulses that are always flowing through you.
+                    </p>
+                </div>
+
+                <div class="preview-chapter">
+                    <h2 class="chapter-title">Chapter 2: Awareness</h2>
+                    <p class="preview-text">
+                        Awareness is the foundation of all creative work. It's the practice of paying attention—to the
+                        world around us, to our inner landscape, to the subtle shifts in energy and emotion that signal
+                        something worth exploring.
+                    </p>
+                    <p class="preview-text">
+                        Most of us move through life on autopilot, our attention scattered across a thousand different
+                        concerns. We're thinking about the past or worrying about the future, rarely fully present in
+                        the moment. This scattered attention is the enemy of creativity.
+                    </p>
+                    <p class="preview-text">
+                        To create, we must learn to gather our attention, to focus it like a beam of light on whatever
+                        we're working with. This doesn't mean forcing concentration or straining to stay focused. It
+                        means cultivating a gentle, sustained awareness that allows us to notice what's actually
+                        happening, rather than what we think should be happening.
+                    </p>
+                    <p class="preview-text">
+                        When we're truly aware, we begin to see things we've never noticed before. Colors become more
+                        vivid. Sounds reveal hidden layers. Ideas connect in unexpected ways. This heightened
+                        perception is not a special gift—it's our natural state when we're not lost in thought.
+                    </p>
+                </div>
+
+                <div class="preview-chapter">
+                    <h2 class="chapter-title">Chapter 3: Beginner's Mind</h2>
+                    <p class="preview-text">
+                        In the beginner's mind there are many possibilities. In the expert's mind there are few. This
+                        ancient wisdom points to one of the great paradoxes of creative work: the more we know, the
+                        harder it can be to see clearly.
+                    </p>
+                    <p class="preview-text">
+                        Expertise is valuable, but it can also become a prison. When we think we know how things should
+                        be done, we stop looking for new approaches. We rely on familiar patterns and proven methods,
+                        missing opportunities for innovation and discovery.
+                    </p>
+                    <p class="preview-text">
+                        Beginner's mind is the practice of approaching our work with fresh eyes, as if we're seeing it
+                        for the first time. It means setting aside our assumptions and preconceptions, our judgments
+                        and expectations, and simply being present with what is.
+                    </p>
+                    <p class="preview-text">
+                        This doesn't mean abandoning our skills or knowledge. It means holding them lightly, using them
+                        as tools rather than rules. It means staying curious, asking questions, and remaining open to
+                        surprise. When we cultivate beginner's mind, every project becomes an adventure, every day
+                        brings new discoveries.
+                    </p>
+                </div>
+
+                <div class="preview-note">
+                    "In the beginner's mind there are many possibilities, but in the expert's there are few."
+                </div>
+
+                <div class="preview-chapter">
+                    <h2 class="chapter-title">Chapter 4: The Practice</h2>
+                    <p class="preview-text">
+                        Creativity is not just about having great ideas—it's about showing up consistently to do the
+                        work. The practice is where inspiration meets discipline, where vision becomes reality.
+                    </p>
+                    <p class="preview-text">
+                        Many people wait for the perfect moment to begin their creative work. They wait for inspiration,
+                        for the right conditions, for enough time or energy. But the truth is, the perfect moment never
+                        comes. The only moment we have is now.
+                    </p>
+                    <p class="preview-text">
+                        The practice is about creating a container for your creativity—a regular time and space where
+                        you show up to work, regardless of how you feel. Some days the work will flow effortlessly.
+                        Other days it will feel like pushing a boulder uphill. Both are part of the process.
+                    </p>
+                    <p class="preview-text">
+                        What matters is not the quality of any single session, but the cumulative effect of showing up
+                        day after day. This consistency builds momentum, develops skills, and creates a relationship
+                        with your work that goes deeper than mood or motivation.
+                    </p>
+                    <p class="preview-text">
+                        The practice also teaches us to work with resistance rather than against it. Resistance is not
+                        the enemy—it's a sign that we're doing something that matters. When we learn to recognize
+                        resistance and move through it with compassion, we discover reserves of strength and creativity
+                        we never knew we had.
+                    </p>
+                </div>
+            </div>
+
+            <div class="preview-info">
+                <p class="info-text">This is a preview excerpt. The full book contains 432 pages of insights and
+                    guidance.</p>
+                <div class="preview-actions">
+                    <a href="checkout.html" class="btn btn-primary">Get It Now</a>
+                    <a href="book-purchase.html" class="btn btn-secondary" id="backToDetailsBtn">Back to Details</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer"
+        style="background-color: #000000; color: #ffffff; padding: 100px 0 30px;  border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="footer-content"
+                style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px;">
+                <div class="footer-about" style="flex: 1; min-width: 250px;">
+                    <img src="logo.png" alt="Logo" style="height: 50px; width: auto; margin-bottom: 20px;">
+                    <p style="color: #999; line-height: 1.7; margin-bottom: 20px;">Transforming lives through
+                        purpose-driven education and personal development.</p>
+                    <div class="social-links" style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Instagram</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">Twitter</a>
+                        <a href="#" style="color: #fff; text-decoration: none; transition: opacity 0.3s;">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-links" style="flex: 1; min-width: 150px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Quick Links</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="index.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Home</a></li>
+                        <li style="margin-bottom: 12px;"><a href="About.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">About</a></li>
+                        <li style="margin-bottom: 12px;"><a href="thoughts.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Thoughts</a></li>
+                        <li><a href="contact.html"
+                                style="color: #999; text-decoration: none; transition: color 0.3s;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter" style="flex: 1; min-width: 250px;">
+                    <h4
+                        style=" font-size: 16px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                        Newsletter</h4>
+                    <p style="color: #999; margin-bottom: 20px; line-height: 1.6;">Subscribe to our newsletter for the
+                        latest updates and exclusive content.</p>
+                    <form style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Your email address"
+                            style="flex: 1; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 1px solid #333; color: #fff;  font-size: 14px;">
+                        <button type="submit"
+                            style="padding: 0 25px; background: #fff; color: #000; border: none;  font-weight: 600; cursor: pointer; transition: all 0.3s ease;">→</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; color: #666; font-size: 14px;">
+                <p style="margin: 0;">© 2025 Youssef Al-Husiny. All rights reserved.</p>
+                <div class="footer-legal" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Terms of
+                        Service</a>
+                    <a href="#" style="color: #666; text-decoration: none; transition: color 0.3s;">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', function () {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Language switcher
+        const languageSwitcher = document.querySelector('.language-switcher');
+        if (languageSwitcher) {
+            const dropdown = languageSwitcher.querySelector('.language-dropdown');
+
+            languageSwitcher.addEventListener('mouseenter', function () {
+                dropdown.style.display = 'block';
+            });
+
+            languageSwitcher.addEventListener('mouseleave', function () {
+                setTimeout(() => {
+                    if (!dropdown.matches(':hover')) {
+                        dropdown.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+
+        // Get book ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('id');
+
+        // Book data
+        const books = {
+            'creative-act': {
+                title: 'The Creative Act',
+                author: 'Rick Rubin'
+            },
+            'steal-like-artist': {
+                title: 'Steal Like an Artist',
+                author: 'Austin Kleon'
+            },
+            'artists-way': {
+                title: "The Artist's Way",
+                author: 'Julia Cameron'
+            },
+            'war-of-art': {
+                title: 'The War of Art',
+                author: 'Steven Pressfield'
+            }
+        };
+
+        // Update page content based on book ID
+        if (bookId && books[bookId]) {
+            const book = books[bookId];
+            document.getElementById('bookTitle').textContent = book.title;
+            document.getElementById('bookAuthor').textContent = 'By ' + book.author;
+            document.title = book.title + ' - Preview - Proximity';
+
+            // Update back to details button
+            const backBtn = document.getElementById('backToDetailsBtn');
+            if (backBtn) {
+                backBtn.href = 'book-purchase.html?id=' + bookId;
+            }
+        }
+    </script>
+</body>
+
+</html>

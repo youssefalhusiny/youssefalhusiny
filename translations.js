@@ -18,7 +18,7 @@ const translations = {
         // About Section
         about_subtitle: "If you want to know",
         about_title: "Things about me",
-        about_text: "I do not hate the ordinary, but I prefer not to be one of it. I might enjoy surprising others, but I make sure to surprise myself first.\n\nI believe life is a single opportunity, so I refuse to reduce it, despite my awareness of its impermanence and the impermanence of what is built within it. This contradiction does not unsettle me; I see it as balance, where there is no conflict between mortality and meaning, but rather a blend visible only to those who see the full picture.",
+        about_text: "Thinker, writer, founder of Nuqta Agency.<br>I believe life is a single opportunity, so I refuse to reduce it, despite my awareness of its impermanence and the impermanence of what is built within it. This contradiction does not unsettle me; I see it as balance, where there is no conflict between mortality and meaning, but rather a blend visible only to those who see the full picture.",
         about_join: "KNOW MORE",
 
         // Portfolio Section
@@ -107,7 +107,7 @@ const translations = {
         // About Section
         about_subtitle: "إذا كنت تريد أن تعرف",
         about_title: "أشياء عني",
-        about_text: "لا أكره العادي، لكنني أفضل ألا أكون واحداً منه. قد أستمتع بمفاجأة الآخرين، لكنني أتأكد من مفاجأة نفسي أولاً.\n\nأؤمن أن الحياة فرصة واحدة، لذا أرفض تقليصها، رغم وعيي بزوالها وزوال ما يُبنى فيها. هذا التناقض لا يقلقني؛ أراه توازناً، حيث لا صراع بين الفناء والمعنى، بل مزيج لا يراه إلا من يرى الصورة كاملة.",
+        about_text: "مفكر، كاتب، مؤسس وكالة نقطة.<br>أؤمن أن الحياة فرصة واحدة، لذا أرفض تقليصها، رغم وعيي بزوالها وزوال ما يُبنى فيها. هذا التناقض لا يقلقني؛ أراه توازناً، حيث لا صراع بين الفناء والمعنى، بل مزيج لا يراه إلا من يرى الصورة كاملة.",
         about_join: "اعرف المزيد",
 
         // Portfolio Section
@@ -204,7 +204,7 @@ function translatePage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
+            element.innerHTML = translations[lang][key];
         }
     });
 
