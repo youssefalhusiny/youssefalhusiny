@@ -25,6 +25,7 @@ const translations = {
         portfolio_subtitle: "PORTFOLIO",
         portfolio_title: "Things I Did",
         portfolio_text: "A collection of my latest works",
+        scroll_hint: "Swipe to explore",
 
         // Portfolio Items
         portfolio_summer: "Summer Collection",
@@ -114,6 +115,7 @@ const translations = {
         portfolio_subtitle: "أعمالي",
         portfolio_title: "أشياء قمت بها",
         portfolio_text: "مجموعة من أحدث أعمالي",
+        scroll_hint: "اسحب لاستكشاف المزيد",
 
         // Portfolio Items
         portfolio_summer: "مجموعة الصيف",

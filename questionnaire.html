@@ -554,14 +554,46 @@
             // Save final step
             saveCurrentStep();
 
-            // Here you would typically send the data to a server
-            console.log('Form Data:', formData);
+            // Build WhatsApp message with all form data
+            const projectTypeLabels = {
+                branding: 'Brand Identity',
+                web: 'Web Design',
+                content: 'Content Strategy',
+                photography: 'Photography',
+                consulting: 'Consulting',
+                other: 'Other'
+            };
+            const timelineLabels = {
+                urgent: 'ASAP (1-2 weeks)',
+                soon: 'Soon (1 month)',
+                flexible: 'Flexible (2-3 months)',
+                planning: 'Just Planning'
+            };
+
+            const message = `🚀 New Project Request
+
+👤 Name: ${formData.name || 'N/A'}
+📧 Email: ${formData.email || 'N/A'}
+📞 Phone: ${formData.phone || 'N/A'}
+🎯 Project Type: ${projectTypeLabels[formData.projectType] || formData.projectType || 'N/A'}
+💰 Budget: ${formData.budget || 'N/A'}
+⏱ Timeline: ${timelineLabels[formData.timeline] || formData.timeline || 'N/A'}
+📝 Description: ${formData.description || 'N/A'}`;
+
+            // Send via CallMeBot WhatsApp API
+            const apiKey = '6129614';
+            const phone = '+201033947717';
+            const encodedMessage = encodeURIComponent(message);
+            const apiUrl = `https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${encodedMessage}&apikey=${apiKey}`;
+
+            // Send the request (no-cors to avoid browser blocking)
+            fetch(apiUrl, { mode: 'no-cors' })
+                .catch(() => { }); // Silent fail - message still sent
 
             // Hide all cards first
             document.querySelectorAll('.question-card').forEach(card => {
                 card.classList.remove('active');
             });
-
             // Show completion message
             currentStep = 7;
             const completionCard = document.querySelector('.question-card[data-step="7"]');
@@ -571,10 +603,6 @@
 
             navigationButtons.style.display = 'none';
             updateProgress();
-
-            // Optional: Send to WhatsApp or Email
-            // const message = `New Project Request:\nName: ${formData.name}\nEmail: ${formData.email}\nProject: ${formData.projectType}\nBudget: ${formData.budget}\nTimeline: ${formData.timeline}\nDescription: ${formData.description}`;
-            // window.open(`https://wa.me/966577545142?text=${encodeURIComponent(message)}`);
         }
 
         // Hamburger menu functionality
