@@ -89,10 +89,20 @@ h1, h2, h3 {
 }
 
 .logo {
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 6px; /* High spacing for that luxury aesthetic */
-    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 32px; /* Premium subtle size */
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover img {
+    opacity: 0.8;
 }
 
 .lang-switcher {
@@ -1054,10 +1064,21 @@ h1, h2, h3 {
 }
 
 .footer-logo {
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 6px;
-    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo img {
+    height: 40px; /* Slightly larger in the footer */
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.footer-logo:hover img {
+    opacity: 0.8;
 }
 
 .footer-about-text {
