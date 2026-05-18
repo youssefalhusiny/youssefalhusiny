@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المقالات - يوسف الحسيني</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: IBM Plex Sans Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Horizontal Scroll Inspired Section Styles */
+        .inspired-section .container {
+            padding-top: 0;
+            padding-bottom: 2rem;
+        }
+        .inspired-slider {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+            width: 100%;
+        }
+        .inspired-slider::-webkit-scrollbar {
+            height: 4px;
+        }
+        .inspired-slider::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .inspired-slider::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        .inspired-slider .inspired-card {
+            min-width: 380px;
+            max-width: 380px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .inspired-img-wrapper {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            border-radius: 2px;
+            position: relative;
+        }
+        .inspired-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .inspired-card:hover .inspired-img-wrapper img {
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .inspired-slider {
+                gap: 1.2rem;
+                padding: 0 10% 1.5rem;
+                scroll-snap-type: x mandatory;
+            }
+            .inspired-slider .inspired-card {
+                min-width: 80%;
+                max-width: 80%;
+                scroll-snap-align: center;
+            }
+            .inspired-img-wrapper {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- الهيدر / النافبار -->
+    <nav class="navbar scrolled">
+        <div class="logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+        <ul class="nav-links">
+            <li><a href="index.html#hero">البداية</a></li>
+            <li><a href="gallery.html">المعرض</a></li>
+            <li><a href="articles.html" class="active">المقالات</a></li>
+            <li><a href="about.html">من أنا</a></li>
+            <li><a href="contact.html">تواصل معي</a></li>
+        </ul>
+    </nav>
+
+    <main style="padding-top: 90px; background: #050505;">
+        <!-- قسم شخصيات أحترمها ولم أتبعها -->
+        <section class="inspired-section" style="padding: 1.5rem 0 5rem 0; width: 100%;">
+            <div class="container">
+                
+                <!-- المجموعة الأولى -->
+                <div class="row-header" style="margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.8rem; text-align: right;">
+                    <h3 style="font-size: 1.2rem; font-weight: 400; color: var(--accent-color); font-family: 'IBM Plex Sans Arabic', sans-serif;">المجموعة الأولى: الفكر والمنهج الفلسفي</h3>
+                </div>
+                
+                <div class="inspired-slider" style="margin-bottom: 5rem;">
+                    <!-- الشخصية 1: الغزالي -->
+                    <a href="article.html?id=1" class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/ابو حامد الغزالي.jpg" alt="أبو حامد الغزالي">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">أبو حامد الغزالي</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">الشك والمنهج الوجودي</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه شجاعته الفكرية المطلقة في الشك وتفكيك قناعاته الشخصية، واعتزاله للبحث عن جوهر المعنى الوجودي من نقطة الصفر. لكنني لم أتبعه في عزوفه التام عن الحياة المادية؛ إذ أؤمن بضرورة البقاء في قلب الميدان, وتحويل الأفكار المجردة إلى شواهد بصرية وفراغات معمارية ملموسة تعاش وتترك أثراً في الواقع، بدلاً من الانسحاب الكامل.
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- الشخصية 2: نيتشه -->
+                    <a href="article.html?id=2" class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/فريدريك نيتشه - ويكيبيديا.jpg" alt="فريدريش نيتشه">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">فريدريش نيتشه</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">إرادة القوة والفرادة</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه تقديسه للفرادة الفردية، ورفضه لـ "عقلية القطيع"، وقدرة الإنسان المستقل على صياغة قيمه الخاصة وتحديد معناه الشخصي في كون فوضوي. لكنني لم أتبعه في عدميته القاسية التي قد تؤدي للتدمير الذاتي؛ بل أختار تسخير تلك الإرادة الحرة في بناء وتصميم هياكل جمالية منظمة، تصنع جسور تواصل مع الآخرين دون التنازل عن الاستقلالية.
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- الشخصية 3: رينيه ديكارت -->
+                    <a href="article.html?id=3" class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/رينيه ديكارت René Descartes _  عالم رياضيات وفيزياء وفيلسوف فرنسي ، ولد في عام 1596 وتوفي في عام 1650 ، اشتهر بنظام الاحداثيات الديكارتية والهندسة التحليلية ، واخترع فكرة القياسية التي تساعد على إظهار الأسس أ.jpg" alt="رينيه ديكارت">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">رينيه ديكارت</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">العقلانية والمنهج</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه إصراره على الشك المنهجي كأداة لبلوغ اليقين، وتقديسه لسلطة العقل، وتقسيم المعضلات المعقدة لأجزاء قابلة للحل. لكنني لم أتبعه في فصله الحاد بين الجسد والعقل؛ إذ أرى في الفن والتصميم اندماجاً عضوياً يذيب هذا الفاصل تماماً.
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- الشخصية 4: ألبرت آينشتاين -->
+                    <a href="article.html?id=4" class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/Albert Einstein - Wikipedia, la enciclopedia libre.jpg" alt="ألبرت آينشتاين">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">ألبرت آينشتاين</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">النسبية والفضول الوجودي</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه فضوله الطفولي اللانهائي، وقدرته على التفكير عبر "التجارب الذهنية"، وإدراكه الفذ بأن الزمان والمكان ليسا مطلقين بل يمتزجان بمرونة. لكنني لم أتبعه في سعيه وراء معادلة كونية موحدة تختزل الوجود؛ فبالنسبة لي، تكمن روعة الوجود والابتكار في التناقضات العاطفية والتفاصيل الصغيرة غير المتوقعة التي تعاند الاختزال.
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- الشخصية 5: راي داليو -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/ray dailo.jpg" alt="راي داليو">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">راي داليو</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">المبادئ والأنظمة</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه عقلانيته المفرطة وقدرته على نمذجة الحياة والعمل في هيئة نظام متسق مبني على مبادئ وحلقات تغذية راجعة واضحة. لكنني لم أتبعه في محاولته مكننة وتأطير المشاعر والروح الإنسانية؛ إذ أرى أن الأنظمة البحتة خالية من الروح دون الفن، والعفوية الإبداعية، وجمال الفراغات الصامتة التي لا يمكن قياسها بمعادلات مادية جافة.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 6: مصطفى محمود -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/الدكتور مصطفي محمود.jpg" alt="د. مصطفى محمود">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">د. مصطفى محمود</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">بوابة الفكر الأولى</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                له الفضل الأول والأعظم في خروجي إلى أولى دروب التفكير؛ فهو الذي سحبني بأطروحاته الفريدة إلى أولى خطوات الفكر، وأحمّله فضل كل نتيجة فلسفية أو عملية وصلتُ إليها اليوم. ورغم أنني اختلفتُ معه لاحقاً في بعض تحليلاته العلمية وتفسيراته الفلسفية، إلا أنني لا أزال أكنّ له الاحترام الكامل والامتنان المطلق كونه المُلهم الأول الذي أضاء طريقي نحو التأمل الحر.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 7: ابن تيمية -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/ابن تيمية.jpg" alt="ابن تيمية">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">ابن تيمية</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">الصلابة والمبدأ</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه صلابته الفكرية المدهشة، وعدم تهاونه في قول ما يعتقده حقاً، وقدرته على الكتابة والتأليف والاشتباك الفكري حتى من داخل جدران سجنه. لكنني لم أتبعه في الاشتباك الفقهي المباشر، متجهاً نحو إعادة بناء المعاني الجمالية عبر لغة التصميم المعاصر.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- المجموعة الثانية -->
+                <div class="row-header" style="margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.8rem; text-align: right;">
+                    <h3 style="font-size: 1.2rem; font-weight: 400; color: var(--accent-color); font-family: 'IBM Plex Sans Arabic', sans-serif;">المجموعة الثانية: الإستراتيجية والقيادة التاريخية</h3>
+                </div>
+                
+                <div class="inspired-slider" style="margin-bottom: 5rem;">
+                    <!-- الشخصية 8: د. نايف بن نهار -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/نايف بن نهار.jpg" alt="د. نايف بن نهار">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">د. نايف بن نهار</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">علم المنطق وتفكيك الخطابات</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه قدرته الفذة على تفكيك الخطابات وتطبيق أدوات علم المنطق ومناهج البحث العلمي بأسلوب منهجي صارم وواضح، يربط الأصالة بالواقع المعاصر. لكنني لم أتبعه في حصر الأدوات بالتحليل المنطقي والجدلي البحت؛ بل أسعى لدمج هذا التفكير المنظم العقلاني بلغة بصرية وفراغات إبداعية تجسد تلك القواعد المنهجية واقعاً ملموساً.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 9: تميم البرغوثي -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/download.jpg" alt="تميم البرغوثي">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">تميم البرغوثي</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">بلاغة الكلمة وجرأة الموقف</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم لغته العالية وجرأته في بعض المواقع التي تتطلب صوتاً حراً وقصيدة صارخة. ومع ذلك، أختلف معه في بعض التصورات العقدية والشخصية؛ إيماناً مني بأن الجمال اللغوي لا يكتمل إلا بسلامة المنهج وتوازن الرؤية.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 10: سون تزو -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/download (1).jpg" alt="سون تزو">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">سون تزو</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">الإستراتيجية والدهاء</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه دهاءه الإستراتيجي الفذ، وإدراكه المبكر بأن أعظم الانتصارات هي تلك التي تُنتزع دون قتال (كما تجلى في الفلسفة التي وحدت الصين). لكنني لم أتبعه في تحويل التفاعل إلى ساحة معركة؛ بل أوظف هذا التخطيط لاختراق السوق بنعومة وترك أثر مستدام.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 11: خالد بن الوليد -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/خالد ابن الوليد.jpg" alt="خالد بن الوليد">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">خالد بن الوليد</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">العبقرية العسكرية والإقدام</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه عبقريته التكتيكية التي لا تُضاهى، وشجاعته في اقتحام المجهول، وقدرته على تحويل مسار أي تحدٍ بفضل سرعة البديهة واليقين الراسخ. أستلهم هذا الإقدام في اختراق الأسواق وكسر الأنماط التقليدية بقرارات إبداعية حاسمة لا تعرف التردد.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 12: الإسكندر الأكبر -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/الإسكندر الأكبر.jpg" alt="الإسكندر الأكبر">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">الإسكندر الأكبر</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">الطموح الإمبراطوري واقتحام المجهول</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه طموحه الذي لا يحده أفق، وقدرته الأسطورية على قيادة الجيوش واقتحام أقاصي الأرض المجهولة بروح القائد الشاب الذي يتحدى المستحيل. لكنني لم أتبعه في مساره الإمبراطوري التوسعي المعتمد على الغزو والسيطرة المادية؛ بل أختار تحويل هذا الشغف بالاقتحام إلى فتوحات إبداعية وتصميم عوالم وفراغات مبتكرة تثري حضارة الإنسان دون تدمير.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 13: نيكولو مكيافيلي -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/ميكافيلي.jpg" alt="نيكولو مكيافيلي">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">نيكولو مكيافيلي</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">الواقعية السياسية ودراسة القوة</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه واقعيته المفرطة في قراءة النفس البشرية وتحليل مسرح القوة دون تجميل أو مثاليات زائفة. أختلف معه في مبدأ "الغاية تبرر الوسيلة"؛ إذ أرى أن الوسيلة جزء لا يتجزأ من شرف الغاية، ولا يمكن لصرح عظيم أن يُبنى على أسس فاسدة مهما بدا متيناً.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 14: عمر بن الخطاب "الفاروق" -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/الفاروق.jpg" alt="عمر بن الخطاب">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">عمر بن الخطاب</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">العدالة الصارمة والتأسيس المؤسساتي</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه عدالته المطلقة التي لا تحابي أحداً، وعبقريته الفذة في تأسيس الدواوين وبناء هياكل الدولة الإدارية من نقطة الصفر بوعي مؤسساتي سابق لعصره. أستلهم من شخصيته هذا الحزم المنهجي والالتزام بالحق المطلق في المعاملات، لكنني أختلف مع شدته المهيبة في فرض النظم؛ إذ أنحاز في رؤيتي الفنية والتجارية إلى المرونة العاطفية، والنعومة الإبداعية، وجمالية الخطوط المنحنية في مواجهة استقامة القواعد الجافة.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- المجموعة الثالثة -->
+                <div class="row-header" style="margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.8rem; text-align: right;">
+                    <h3 style="font-size: 1.2rem; font-weight: 400; color: var(--accent-color); font-family: 'IBM Plex Sans Arabic', sans-serif;">المجموعة الثالثة: الإبداع والرؤية والريادة</h3>
+                </div>
+                
+                <div class="inspired-slider">
+                    <!-- الشخصية 15: آل باتشينو -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/adf1c19ed9550bbf5617416759ab6742.jpg" alt="آل باتشينو">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">آل باتشينو</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">التقمص الإبداعي والعمق النفسي</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه قدرته الفذة على التقمص النفسي الكامل والاندماج العميق في تعقيدات الشخصيات الدرامية التي يجسدها، مقدماً أداءً تعبيرياً بليغاً يمس الروح. لكنني أختلف معه في الاستهلاك العاطفي المفرط والذوبان التام في عوالم درامية مصطنعة؛ إذ أؤمن بضرورة الحفاظ على مسافة واعية تسمح بتوظيف الإبداع في بناء كيانات وتجارب حقيقية مستدامة على أرض الواقع.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 16: ابن خلدون -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/ابن خلدون.jpg" alt="ابن خلدون">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">ابن خلدون</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">العمران وقراءة التاريخ</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه تأسيسه لعلم الاجتماع وفهمه العميق لطبائع العمران وصعود وسقوط الحضارات وفق قوانين دقيقة. لا أجد مساحة حقيقية للاخلاف معه هنا؛ بل أعتمد منهجيته في قراءة "العمران" لمحاولة بناء أعمال تتجاوز الزمن وتتفاعل بصدق مع سياق مجتمعاتها.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 17: ستيف جوبز -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/ستيف جوبز.jpg" alt="ستيف جوبز">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">ستيف جوبز</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">الرؤية العملية وربط الفلسفة بالعمل</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه رؤيته العملية الفذة وقدرته الاستثنائية على ربط الفلسفة بالعمل، حيث طوّع الجماليات البسيطة لتتحول إلى أدوات تفاعلية تصنع تجربة إنسانية فريدة. لكنني لم أتبعه في كماليته المفرطة وقسوته الإدارية التي قد تلغي البعد الإنساني المرن في سبيل تحقيق الرؤية المطلقة.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 18: نيكولا تسلا -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/نيكولا تسلا.jpg" alt="نيكولا تسلا">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">نيكولا تسلا</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">التفكير التخيلي والطاقة اللانهائية</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه قدرته المذهلة على التخيل الإبداعي ورؤية المستقبل، وتفكيك قوانين الفيزياء لابتكار مفاهيم ثورية في الطاقة والاتصال اللاسلكي قبل عصرها بعقود. لكنني لم أتبعه في مثاليته الحالمة التي جعلته يتغاضى عن الجوانب العملية والواقعية للأعمال؛ إذ أؤمن بضرورة هبوط الفكرة الملهمة إلى أرض الواقع وتحويلها إلى كيان مستدام يخدم الإنسان.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 19: هاياو ميازاكي -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/6e633c450f662c3fce768f4ce5c12196.jpg" alt="هاياو ميازاكي">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">هاياو ميازاكي</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">السرد البصري وعوالم الخيال</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه قدرته الفريدة على نسج الحكايات الخرافية وتجسيد عوالم خيالية مذهلة تفيض بالحياة وتخاطب الطفل الكامن داخل كل منا، مع تمسكه الحازم بالرسم اليدوي التقليدي في عصر الرقمنة. لكنني أختلف معه في نظرته المتشائمة والقاتمة أحياناً تجاه تقدم البشرية والتطور التقني؛ إذ أؤمن أن التكنولوجيا والابتكار هما امتداد طبيعي لقدرات الإنسان عندما يوظفان في خدمة الجمال وإعمار الأرض.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 20: الرئيس الصيني شي جين بينغ -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/الرئيس الصيني.jpg" alt="شي جين بينغ">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">شي جين بينغ</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">القوة الإستراتيجية وموازنة الهيمنة</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه قدرته الفذة وذكاءه الإستراتيجي الحاد في قيادة بلاده لمواجهة القوى الغربية، وتحويل الصين إلى تهديد حقيقي وفعلي للهيمنة الأمريكية عسكرياً وسياسياً واقتصادياً. لكنني أختلف معه جذرياً في سياساته الداخلية الشمولية وعمليات الاضطهاد الممنهجة ضد الأقليات في المجتمع، ولا أتبنى نظامه الاقتصادي أو أسلوبه الحاكم بأي شكل من الأشكال.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الشخصية 21: حبيب نورمحمدوف -->
+                    <div class="inspired-card">
+                        <div class="inspired-img-wrapper">
+                            <img src="Pics/download (3).jpg" alt="حبيب نورمحمدوف">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">حبيب نورمحمدوف</h3>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 300;">الانضباط والوفاء للعهد</span>
+                            </div>
+                            <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.8; margin-top: 0.5rem;">
+                                أحترم فيه انضباطه الحديدي، وقوة يقينه، ووفاءه الاستثنائي بعهده لوالدته ووالده رحمه الله، مما أثمر مسيرة أسطورية خالية من الهزائم. أستلهم من هذا الانضباط المثابرة والتركيز المطلق لتقديم أعلى معايير الجودة دون تشتت في عالم الأعمال.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر الموقع المطابق -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- العمود الأول: العلامة التجارية -->
+                <div class="footer-col brand-col">
+                    <div class="footer-logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+                    <p class="footer-about-text">مصمم إبداعي مستقل، مكرّس لصناعة التجارب البصرية الفاخرة، المعمار الحديث، والهويات الفنية الشخصية التي تصمد في وجه الزمن.</p>
+                </div>
+                
+                <!-- العمود الثاني: التنقل -->
+                <div class="footer-col">
+                    <h4 class="footer-title">استكشف</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#hero">البداية</a></li>
+                        <li><a href="about.html">من أنا</a></li>
+                        <li><a href="gallery.html">المعرض</a></li>
+                        <li><a href="articles.html" class="active">المقالات</a></li>
+                    </ul>
+                </div>
+                
+                <!-- العمود الثالث: مواقع التواصل -->
+                <div class="footer-col">
+                    <h4 class="footer-title">تابعني</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" target="_blank">بيهانس</a></li>
+                        <li><a href="#" target="_blank">إنستغرام</a></li>
+                        <li><a href="#" target="_blank">لينكدإن</a></li>
+                        <li><a href="#" target="_blank">إكس</a></li>
+                    </ul>
+                </div>
+                
+                <!-- العمود الرابع: معلومات التواصل -->
+                <div class="footer-col info-col">
+                    <h4 class="footer-title">معلومات الاتصال</h4>
+                    <p class="footer-info-item">دبي، الإمارات العربية المتحدة</p>
+                    <p class="footer-info-item">تواصل عبر الواتساب: +971 50 000 0000</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+                <span class="footer-note">تصميم إبداعي مستقل</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

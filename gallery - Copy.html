@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الهيكلة المنثورة - يوسف الحسيني</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ----- THE 5-COLUMN ENGINEERED MASONRY GRID ----- */
+        .gallery-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 4% 100px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 4%;
+            /* CRITICAL FIX: Force Left-to-Right direction so Column 1 appears on the LEFT, matching the English reference image exactly, overriding the site's RTL */
+            direction: ltr; 
+        }
+
+        .col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Image wrappers */
+        .img-wrap {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .img-wrap img {
+            display: block;
+            object-fit: cover;
+            filter: grayscale(15%) contrast(105%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+        }
+
+        .img-wrap:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%) contrast(110%);
+        }
+
+        /* ----- THE "HIDDEN ORDER" SIZE CLASSES ----- */
+        
+        .size-l-port img { width: 100%; aspect-ratio: 4 / 5; }
+        .size-m-port img { width: 100%; aspect-ratio: 5 / 6; }
+        .size-l-land img { width: 100%; aspect-ratio: 4 / 3; }
+        .size-s-land img { width: 75%; aspect-ratio: 4 / 3; }
+        .size-xs-land img { width: 60%; aspect-ratio: 3 / 2; }
+        .size-m-square img { width: 80%; aspect-ratio: 1 / 1; }
+
+        /* EXACT VERTICAL STAGGERING */
+        
+        .col-1 .img-wrap:nth-child(1) { margin-top: 0; }
+        .col-1 .img-wrap:nth-child(2) { margin-top: 8vw; }
+        .col-1 .img-wrap:nth-child(3) { margin-top: 12vw; }
+
+        .col-2 .img-wrap:nth-child(1) { margin-top: 0; }
+        .col-2 .img-wrap:nth-child(2) { margin-top: 16vw; }
+        .col-2 .img-wrap:nth-child(3) { margin-top: 6vw; }
+
+        .col-3 .img-wrap:nth-child(1) { margin-top: 0; }
+        .col-3 .img-wrap:nth-child(2) { margin-top: 20vw; }
+        .col-3 .img-wrap:nth-child(3) { margin-top: 8vw; }
+
+        .col-4 .img-wrap:nth-child(1) { margin-top: 0; }
+        .col-4 .img-wrap:nth-child(2) { margin-top: 10vw; }
+        .col-4 .img-wrap:nth-child(3) { margin-top: 14vw; }
+
+        .col-5 .img-wrap:nth-child(1) { margin-top: 0; }
+        .col-5 .img-wrap:nth-child(2) { margin-top: 14vw; }
+        .col-5 .img-wrap:nth-child(3) { margin-top: 10vw; }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .gallery-container { gap: 3%; }
+        }
+
+        @media (max-width: 900px) {
+            .gallery-container { padding: 80px 4% 80px; flex-wrap: wrap; gap: 20px; }
+            .col { width: calc(50% - 10px); flex: none; }
+            .col-1 .img-wrap:nth-child(1), .col-2 .img-wrap:nth-child(1), .col-3 .img-wrap:nth-child(1), .col-4 .img-wrap:nth-child(1), .col-5 .img-wrap:nth-child(1) { margin-top: 6vw; }
+        }
+
+        @media (max-width: 600px) {
+            .col { width: 100%; }
+            .col-1 .img-wrap:nth-child(1), .col-2 .img-wrap:nth-child(1), .col-3 .img-wrap:nth-child(1), .col-4 .img-wrap:nth-child(1), .col-5 .img-wrap:nth-child(1) { margin-top: 10vw; }
+            .size-s-land img, .size-xs-land img, .size-m-square img { width: 100%; } 
+        }
+    </style>
+</head>
+<body class="dark-theme">
+
+    <nav class="navbar scrolled">
+        <div class="logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+        <ul class="nav-links">
+            <li><a href="index.html#hero">البداية</a></li>
+            <li><a href="about.html">من أنا</a></li>
+            <li><a href="gallery.html" class="active">المعرض</a></li>
+            <li><a href="articles.html">المقالات</a></li>
+            <li><a href="index.html#contact">اتصال</a></li>
+        </ul>
+    </nav>
+
+    <main style="padding-top: 120px;">
+        <div class="container" style="text-align: center; margin-bottom: 2rem;">
+            <div class="section-header-minimal" style="align-items: center; justify-content: center; margin-bottom: 0;">
+                <span class="section-kicker-small" style="margin-bottom: 1rem;">الترتيب الصحيح (LTR)</span>
+                <h2 class="section-title-medium" style="font-size: 2rem;">معرض جيمس</h2>
+            </div>
+        </div>
+
+        <!-- 5-COLUMN GRID -->
+        <div class="gallery-container">
+            <!-- COLUMN 1 (LEFTMOST) -->
+            <div class="col col-1">
+                <div class="img-wrap size-l-port">
+                    <img src="Martine Emdur.jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-l-land">
+                    <img src="download (76).jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-l-port">
+                    <img src="ثثثث.jpg" alt="Art">
+                </div>
+            </div>
+
+            <!-- COLUMN 2 -->
+            <div class="col col-2">
+                <div class="img-wrap size-m-port">
+                    <img src="download (77).jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-l-port">
+                    <img src="58256943279491678   ةة32.png" alt="Art">
+                </div>
+                <div class="img-wrap size-m-square">
+                    <img src="download (733).jpg" alt="Art">
+                </div>
+            </div>
+
+            <!-- COLUMN 3 -->
+            <div class="col col-3">
+                <div class="img-wrap size-l-land">
+                    <img src="Man in the Ocean.jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-l-port">
+                    <img src="download (78).jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-l-land">
+                    <img src="Kingdom of dreams and madness.jpg" alt="Art">
+                </div>
+            </div>
+
+            <!-- COLUMN 4 -->
+            <div class="col col-4">
+                <div class="img-wrap size-s-land">
+                    <img src="download (74).jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-l-port">
+                    <img src="Martine Emdur.jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-l-port">
+                    <img src="download (77).jpg" alt="Art">
+                </div>
+            </div>
+
+            <!-- COLUMN 5 (RIGHTMOST) -->
+            <div class="col col-5">
+                <div class="img-wrap size-l-port">
+                    <img src="ثثثث.jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-xs-land">
+                    <img src="download (73).jpg" alt="Art">
+                </div>
+                <div class="img-wrap size-s-land">
+                    <img src="Man in the Ocean.jpg" alt="Art">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <div class="footer-logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+                    <p class="footer-about-text">مصمم إبداعي مستقل، مكرّس لصناعة التجارب البصرية الفاخرة، المعمار الحديث، والهويات الفنية الشخصية التي تصمد في وجه الزمن.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">استكشف</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#hero">البداية</a></li>
+                        <li><a href="about.html">من أنا</a></li>
+                        <li><a href="gallery.html">المعرض</a></li>
+                        <li><a href="articles.html">المقالات</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title">تابعني</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" target="_blank">بيهانس</a></li>
+                        <li><a href="#" target="_blank">إنستغرام</a></li>
+                        <li><a href="#" target="_blank">لينكدإن</a></li>
+                        <li><a href="#" target="_blank">إكس</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col info-col">
+                    <h4 class="footer-title">معلومات الاتصال</h4>
+                    <p class="footer-info-item">دبي، الإمارات العربية المتحدة</p>
+                    <p class="footer-info-item">تواصل عبر الواتساب: +971 50 000 0000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+                <span class="footer-note">تصميم إبداعي مستقل</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // Smooth entrance animation triggered on scroll
+        window.addEventListener("load", () => {
+            gsap.from(".img-wrap", {
+                scrollTrigger: {
+                    trigger: ".gallery-container",
+                    start: "top 85%"
+                },
+                opacity: 0,
+                y: 40,
+                duration: 1.2,
+                stagger: 0.1,
+                ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html>

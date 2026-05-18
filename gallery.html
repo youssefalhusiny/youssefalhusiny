@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المعرض - يوسف الحسيني</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* override body for dark theme matching the rest of the site */
+        body {
+            background-color: #050505 !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Museum Staggered Flex Grid (Perfect rectangle boundary with dynamic internal heights) */
+        .museum-grid {
+            display: flex;
+            gap: 3.5rem;
+            padding: 6rem 6% 12rem;
+            background-color: #050505;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .museum-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5.5rem; /* Enforces equal vertical spacing inside all columns */
+        }
+
+        /* Museum Item Card */
+        .museum-item {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+        .museum-img-wrapper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 1px;
+            background-color: #111111;
+            /* Ultra-smooth transition for the height, aspect-ratio, scale, and shadow morphing */
+            transition: aspect-ratio 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Three distinct responsive aspect ratios that mathematically sum up to 3.55 * W per column */
+        .museum-img-wrapper.tall {
+            aspect-ratio: 2 / 3;
+        }
+        .museum-img-wrapper.medium {
+            aspect-ratio: 4 / 5;
+        }
+        .museum-img-wrapper.short {
+            aspect-ratio: 5 / 4;
+        }
+
+        /* The morphing hover animation: Grows to a perfect square aspect ratio (1 / 1) */
+        .museum-item:hover .museum-img-wrapper {
+            aspect-ratio: 1 / 1 !important; /* Forces the card to smoothly morph into a square */
+            transform: scale(1.04); /* Expands/grows the size slightly */
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6); /* Premium deep dark shadow on active item */
+            z-index: 10;
+        }
+
+        .museum-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .museum-caption {
+            font-size: 0.72rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            text-align: right;
+            letter-spacing: 0.5px;
+            opacity: 0.85;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            transition: color 0.3s ease, opacity 0.3s ease;
+        }
+        .museum-item:hover .museum-caption {
+            color: var(--text-primary);
+            opacity: 1;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            .museum-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+                padding: 4rem 5%;
+            }
+            .museum-column {
+                gap: 2.5rem;
+            }
+            .museum-img-wrapper.tall, .museum-img-wrapper.medium, .museum-img-wrapper.short {
+                aspect-ratio: 1 / 1; /* Standardize on smaller tablets for layout stability */
+            }
+        }
+        @media (max-width: 768px) {
+            .museum-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                padding: 2.5rem 4%;
+            }
+            .museum-img-wrapper.tall {
+                aspect-ratio: 2 / 3;
+            }
+            .museum-img-wrapper.medium {
+                aspect-ratio: 4 / 5;
+            }
+            .museum-img-wrapper.short {
+                aspect-ratio: 5 / 4;
+            }
+            /* Disable morph animation on mobile to prevent layout shifts */
+            .museum-item:hover .museum-img-wrapper {
+                aspect-ratio: inherit !important;
+                transform: none;
+                box-shadow: none;
+            }
+        }
+        @media (max-width: 480px) {
+            .museum-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 2rem 3%;
+            }
+            .museum-column {
+                gap: 1rem;
+            }
+            .museum-img-wrapper.tall {
+                aspect-ratio: 2 / 3;
+            }
+            .museum-img-wrapper.medium {
+                aspect-ratio: 4 / 5;
+            }
+            .museum-img-wrapper.short {
+                aspect-ratio: 5 / 4;
+            }
+            .museum-caption {
+                font-size: 0.65rem;
+                letter-spacing: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- الهيدر / النافبار الموحد -->
+    <nav class="navbar scrolled">
+        <div class="logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+        <ul class="nav-links">
+            <li><a href="index.html#hero">البداية</a></li>
+            <li><a href="gallery.html" class="active">المعرض</a></li>
+            <li><a href="articles.html">المقالات</a></li>
+            <li><a href="about.html">من أنا</a></li>
+            <li><a href="contact.html">تواصل معي</a></li>
+        </ul>
+    </nav>
+
+    <main style="padding-top: 90px;">
+        <!-- شبكة المعرض غير المتناظرة هندسياً والمحاذية على أطراف الجوانب الأربعة -->
+        <section class="museum-grid">
+            
+            <!-- العمود الأول (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="Martine Emdur.jpg" alt="مارتين إمدور">
+                    </div>
+                    <span class="museum-caption">مارتين إمدور — لوحة مائية تشكيلية</span>
+                </a>
+                
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="Man in the Ocean.jpg" alt="رجل في المحيط">
+                    </div>
+                    <span class="museum-caption">رجل في المحيط — سكون الأعماق</span>
+                </a>
+
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="download (78).jpg" alt="تأمل عميق">
+                    </div>
+                    <span class="museum-caption">تأمل عميق — زوايا الضوء الشارد</span>
+                </a>
+            </div>
+            
+            <!-- العمود الثاني (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="download (77).jpg" alt="صمت مطبق">
+                    </div>
+                    <span class="museum-caption">صمت مطبق — درجات الرمادي</span>
+                </a>
+                
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="download (76).jpg" alt="غموض المياه">
+                    </div>
+                    <span class="museum-caption">غموض المياه — انسيابية الكتل</span>
+                </a>
+
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="download (74).jpg" alt="انعكاس الضوء">
+                    </div>
+                    <span class="museum-caption">انعكاس الضوء — حوار الظلال</span>
+                </a>
+            </div>
+            
+            <!-- العمود الثالث (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="download (73).jpg" alt="أفق بعيد">
+                    </div>
+                    <span class="museum-caption">أفق بعيد — تجريد معاصر</span>
+                </a>
+                
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="download (733).jpg" alt="حوار ملهم">
+                    </div>
+                    <span class="museum-caption">حوار ملهم — فلسفة الفراغ</span>
+                </a>
+
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="58256943279491678   ةة32.png" alt="أبعاد تشكيلية">
+                    </div>
+                    <span class="museum-caption">أبعاد تشكيلية — هندسة حركية صامتة</span>
+                </a>
+            </div>
+            
+            <!-- العمود الرابع (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="Kingdom of dreams and madness.jpg" alt="أحلام معمارية">
+                    </div>
+                    <span class="museum-caption">أحلام معمارية — مملكة الشغف</span>
+                </a>
+                
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="ثثثث.jpg" alt="زوايا حادة">
+                    </div>
+                    <span class="museum-caption">زوايا حادة — انعطافات حرة</span>
+                </a>
+
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="6fcc57d0d4d79dc5fda1a5b0e76c11f4.jpg" alt="تبادلات حسية">
+                    </div>
+                    <span class="museum-caption">تبادلات حسية — ظلال متباينة</span>
+                </a>
+            </div>
+            
+            <!-- العمود الخامس (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="download.jpg" alt="خطوط الأفق">
+                    </div>
+                    <span class="museum-caption">خطوط الأفق — موازين بصرية</span>
+                </a>
+                
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="Martine Emdur.jpg" alt="حوار الماء والجسد">
+                    </div>
+                    <span class="museum-caption">حوار الماء والجسد — أثر جمالي</span>
+                </a>
+
+                <a href="project.html" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="download (78).jpg" alt="لحظة تأمل">
+                    </div>
+                    <span class="museum-caption">لحظة تأمل — السكون المطلق</span>
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- فوتر الموقع المطابق -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- العمود الأول: العلامة التجارية -->
+                <div class="footer-col brand-col">
+                    <div class="footer-logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+                    <p class="footer-about-text">مصمم إبداعي مستقل، مكرّس لصناعة التجارب البصرية الفاخرة، المعمار الحديث، والهويات الفنية الشخصية التي تصمد في وجه الزمن.</p>
+                </div>
+                
+                <!-- العمود الثاني: التنقل -->
+                <div class="footer-col">
+                    <h4 class="footer-title">استكشف</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#hero">البداية</a></li>
+                        <li><a href="about.html">من أنا</a></li>
+                        <li><a href="gallery.html">المعرض</a></li>
+                        <li><a href="articles.html">المقالات</a></li>
+                    </ul>
+                </div>
+                
+                <!-- العمود الثالث: مواقع التواصل -->
+                <div class="footer-col">
+                    <h4 class="footer-title">تابعني</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" target="_blank">بيهانس</a></li>
+                        <li><a href="#" target="_blank">إنستغرام</a></li>
+                        <li><a href="#" target="_blank">لينكدإن</a></li>
+                        <li><a href="#" target="_blank">إكس</a></li>
+                    </ul>
+                </div>
+                
+                <!-- العمود الرابع: معلومات التواصل -->
+                <div class="footer-col info-col">
+                    <h4 class="footer-title">معلومات الاتصال</h4>
+                    <p class="footer-info-item">دبي، الإمارات العربية المتحدة</p>
+                    <p class="footer-info-item">تواصل عبر الواتساب: +971 50 000 0000</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="margin-top: 3rem; padding-top: 2rem;">
+                <p class="copyright">&copy; ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+                <span class="footer-note">تصميم إبداعي مستقل</span>
+                </a>
+        </div>
+    </footer>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // تأثير تدرج ظهور بطاقات المعرض المدهش عند تحميل الصفحة
+        window.addEventListener("load", () => {
+            gsap.from(".museum-item", {
+                opacity: 0,
+                y: 50,
+                duration: 1.6,
+                stagger: 0.08,
+                ease: "power4.out",
+                delay: 0.2
+            });
+        });
+    </script>
+</body>
+
+</html>

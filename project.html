@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل العمل - يوسف الحسيني</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505 !important;
+            color: var(--text-primary) !important;
+        }
+
+        .navbar {
+            background-color: rgba(5, 5, 5, 0.92) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: none !important;
+        }
+
+        .project-showcase {
+            padding: 6rem 0 4rem;
+            background-color: #050505;
+        }
+
+        .project-container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
+
+        /* Cinematic Video Player */
+        .cinematic-player {
+            width: 100%;
+            aspect-ratio: 21 / 9; /* Ultra-wide cinematic aspect ratio */
+            background-color: #111;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cinematic-player img.poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(15%) contrast(110%);
+            opacity: 0.8;
+            transition: opacity 0.8s ease, transform 1.5s ease;
+        }
+
+        .cinematic-player:hover img.poster {
+            opacity: 0.6;
+            transform: scale(1.02);
+        }
+
+        /* Ultra-Minimal Luxury Play Button */
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: scale(0.95);
+            z-index: -1;
+        }
+
+        .play-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-right: -4px; /* Optical centering compensation */
+            transition: color 0.4s ease, letter-spacing 0.4s ease;
+        }
+
+        .play-btn:hover {
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .play-btn:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .play-btn:hover .play-text {
+            color: #fff;
+            letter-spacing: 5px;
+        }
+
+        /* Project Info Layout */
+        .project-details {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 6rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 5rem;
+        }
+
+        .project-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-kicker {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-title {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        .project-desc {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        /* Artistic Pillars Section to fill empty space elegantly */
+        .project-pillars {
+            margin-top: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .pillars-title {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.8rem;
+        }
+
+        .pillars-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .pillar-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .pillar-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.15);
+            line-height: 1;
+        }
+
+        .pillar-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .pillar-name {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .pillar-text {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            padding-top: 2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.5rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        .meta-value {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif; /* For English tech specs if any */
+        }
+        .meta-value.ar-text {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        /* Vision Section - Vertically Centered Grid Items */
+        .project-vision {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 6rem;
+            padding: 6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            align-items: center; /* Centered vertically as requested */
+        }
+
+        .vision-header {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vision-kicker {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .vision-title {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: var(--text-primary);
+        }
+
+        .vision-content p {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .vision-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Sleek Filmstrip Gallery Section (Optimized & Less Bulky) */
+        .stills-section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .stills-header {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            color: var(--text-primary);
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .stills-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .stills-strip-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 1.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Custom minimal scrollbar */
+        .stills-strip-wrapper::-webkit-scrollbar {
+            height: 3px;
+        }
+        .stills-strip-wrapper::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .stills-strip-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 1px;
+            transition: background 0.3s ease;
+        }
+        .stills-strip-wrapper::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .stills-strip {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+        }
+
+        .still-item {
+            height: 280px; /* Highly elegant and compact vertical footprint */
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #111;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .still-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+        }
+
+        .still-item:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+
+        /* Credits Section */
+        .credits-section {
+            padding: 6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .credits-header {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 1.25rem; /* Smaller and extremely refined */
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5); /* Much lighter, muted white */
+            margin-bottom: 4rem;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .credit-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .credit-role {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .credit-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 300;
+        }
+
+        /* Director's Quote */
+        .project-quote {
+            padding: 5rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .quote-text {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-author {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Premium Visual Next Project Card */
+        .next-project-wrapper {
+            margin-top: 2rem;
+            padding: 4rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .next-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .next-project-card {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16 / 7;
+            background-color: #111;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: block;
+            text-decoration: none;
+        }
+
+        .next-project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.45;
+            filter: grayscale(40%) contrast(105%);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease, filter 0.8s ease;
+        }
+
+        .next-project-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0.1) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            padding: 2rem;
+        }
+
+        .next-project-card:hover img {
+            transform: scale(1.04);
+            opacity: 0.65;
+            filter: grayscale(10%) contrast(100%);
+        }
+
+        .next-project-title-large {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .next-project-card:hover .next-project-title-large {
+            transform: translateY(-4px);
+        }
+
+        .next-project-action {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .next-project-card:hover .next-project-action {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Back link */
+        .back-link-wrapper {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 300;
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(10px);
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 991px) {
+            .project-details {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            .cinematic-player {
+                aspect-ratio: 16 / 9;
+            }
+            .project-vision {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                align-items: stretch;
+            }
+            .still-item {
+                height: 220px;
+            }
+            .credits-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+            .project-meta {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 2rem;
+                padding-top: 0;
+            }
+            .meta-item {
+                flex: 1;
+                min-width: 140px;
+                border-top: none;
+                border-left: 1px solid rgba(255, 255, 255, 0.08);
+                padding-top: 0;
+                padding-left: 1.5rem;
+            }
+            .meta-item:last-child {
+                border-left: none;
+            }
+            .project-pillars {
+                margin-top: 2.5rem;
+            }
+            .next-project-card {
+                aspect-ratio: 16 / 9;
+            }
+            .next-project-title-large {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pillars-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .credits-grid {
+                grid-template-columns: 1fr;
+            }
+            .still-item {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar scrolled">
+        <div class="logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+        <ul class="nav-links">
+            <li><a href="index.html#hero">البداية</a></li>
+            <li><a href="gallery.html" class="active">المعرض</a></li>
+            <li><a href="articles.html">المقالات</a></li>
+            <li><a href="about.html">من أنا</a></li>
+            <li><a href="contact.html">تواصل معي</a></li>
+        </ul>
+    </nav>
+
+    <main style="padding-top: 80px;">
+        <section class="project-showcase">
+            <div class="project-container">
+                
+                <!-- 1. The Video Player Section -->
+                <div class="cinematic-player">
+                    <img class="poster" src="Martine Emdur.jpg" alt="Video Poster">
+                    <div class="play-btn">
+                        <span class="play-text">PLAY</span>
+                    </div>
+                </div>
+
+                <!-- 2. Overview / Details -->
+                <div class="project-details">
+                    <div class="project-text">
+                        <span class="project-kicker">إنتاج مرئي سينمائي</span>
+                        <h1 class="project-title">مارتين إمدور — لوحة مائية تشكيلية</h1>
+                        <p class="project-desc">
+                            هذا العمل السينمائي يغوص في أعقاق السكون والفراغ. تم تصويره برؤية هندسية تبحث في تناقضات الضوء والظل في الأوساط المائية، ليخلق حالة من التأمل المطلق. 
+                            التركيز على التفاصيل البطيئة والمشاهد التي تتنفس بهدوء يمنح المشاهد الفرصة للابتعاد عن ضجيج العالم، والاندماج الكامل في تجربة حسية وبصرية من الطراز الرفيع، حيث تتحدث اللقطات بلغة الصمت البليغة.
+                        </p>
+
+                        <!-- Artistic Pillars Section to fill empty space elegantly -->
+                        <div class="project-pillars">
+                            <h3 class="pillars-title">الركائز الفنية للعمل</h3>
+                            <div class="pillars-list">
+                                <div class="pillar-item">
+                                    <span class="pillar-num">٠١</span>
+                                    <div class="pillar-info">
+                                        <h4 class="pillar-name">سيكولوجية الضوء</h4>
+                                        <p class="pillar-text">دراسة انعكاسات النور والظلال العميقة على المسطحات المائية السائلة وتأثيراتها النفسية.</p>
+                                    </div>
+                                </div>
+                                <div class="pillar-item">
+                                    <span class="pillar-num">٠٢</span>
+                                    <div class="pillar-info">
+                                        <h4 class="pillar-name">كسر الزمن البصري</h4>
+                                        <p class="pillar-text">تقليل سرعة حركة الكاميرا إلى الحدود القصوى لحث الذهن على التباطؤ والتأمل العميق.</p>
+                                    </div>
+                                </div>
+                                <div class="pillar-item">
+                                    <span class="pillar-num">٠٣</span>
+                                    <div class="pillar-info">
+                                        <h4 class="pillar-name">هندسة الصمت</h4>
+                                        <p class="pillar-text">الاعتماد الكلي على الصوت البيئي الطبيعي وترك مساحات تعبيرية تتنفس بهدوء تام.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">العميل / المشروع</span>
+                            <span class="meta-value ar-text">مارتين إمدور</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">الدور الإبداعي</span>
+                            <span class="meta-value ar-text">إخراج فني، تصوير سينمائي</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">المعدات التقنية (Tech Specs)</span>
+                            <span class="meta-value">ARRI Alexa Mini LF, Cooke Anamorphic</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">المدة الزمنية</span>
+                            <span class="meta-value ar-text">٠٣:٤٥ دقيقة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. The Vision Section (Vertically Centered Elements) -->
+                <div class="project-vision">
+                    <div class="vision-header">
+                        <span class="vision-kicker">الفلسفة البصرية</span>
+                        <h2 class="vision-title">ما وراء العدسة</h2>
+                    </div>
+                    <div class="vision-content">
+                        <p>كان التحدي الرئيسي في هذا العمل هو تجسيد "الصمت" كعنصر ملموس وليس مجرد غياب للصوت. لقد ابتعدنا عن حركة الكاميرا المفرطة، واعتمدنا على التكوينات الثابتة التي تمنح العين مساحة كافية للتأمل. كل لقطة تم هندستها بعناية لتكون بمثابة لوحة فنية مستقلة، حيث يلعب الضوء الطبيعي وتدرجاته دور البطولة المطلقة في إبراز ملامح الوجوه، وانعكاسات المياه، وتفاصيل المكان الصامتة.</p>
+                        <p>على صعيد المعالجة اللونية (Color Grading)، كان الاختيار يميل بوضوح إلى البرودة المخملية والألوان العميقة، وذلك لخلق شعور بالعمق والغموض الذي يعكس الحالة النفسية المعقدة للموضوع. إنها رحلة بصرية مصممة خصيصاً لتهدئة الحواس، تقود المشاهد في مسار تأملي ليغوص في أعماق ذاته بعيداً عن التشويش البصري السائد.</p>
+                    </div>
+                </div>
+
+                <!-- 4. Sleek Filmstrip Gallery Section (Optimized Layout) -->
+                <div class="stills-section">
+                    <h2 class="stills-header">السينماتوغرافيا والتكوين</h2>
+                    <div class="stills-strip-wrapper">
+                        <div class="stills-strip">
+                            <div class="still-item">
+                                <img src="Kingdom of dreams and madness.jpg" alt="Still 1">
+                            </div>
+                            <div class="still-item">
+                                <img src="Man in the Ocean.jpg" alt="Still 2">
+                            </div>
+                            <div class="still-item">
+                                <img src="download (78).jpg" alt="Still 3">
+                            </div>
+                            <div class="still-item">
+                                <img src="download (76).jpg" alt="Still 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Credits Section -->
+                <div class="credits-section">
+                    <h2 class="credits-header">صناع العمل</h2>
+                    <div class="credits-grid">
+                        <div class="credit-item">
+                            <span class="credit-role">الإخراج الفني</span>
+                            <span class="credit-name">يوسف الحسيني</span>
+                        </div>
+                        <div class="credit-item">
+                            <span class="credit-role">مدير التصوير</span>
+                            <span class="credit-name">أحمد عبدلله</span>
+                        </div>
+                        <div class="credit-item">
+                            <span class="credit-role">تصميم الإضاءة</span>
+                            <span class="credit-name">سارة محمد</span>
+                        </div>
+                        <div class="credit-item">
+                            <span class="credit-role">تدرج الألوان</span>
+                            <span class="credit-name">يوسف الحسيني</span>
+                        </div>
+                        <div class="credit-item">
+                            <span class="credit-role">تصميم الصوت</span>
+                            <span class="credit-name">ماجد حسن</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Director's Quote (Simplified) -->
+                <div class="project-quote">
+                    <p class="quote-text">"الصمت ليس غياباً للصوت، بل هو المساحة التي تتيح للضوء أن يتحدث بصوت أعلى. في هذا العمل، كان الضوء هو الممثل الحقيقي الذي روى القصة."</p>
+                    <span class="quote-author">— يوسف الحسيني، المخرج الفني</span>
+                </div>
+
+                <!-- 7. Premium Visual Next Project Section -->
+                <div class="next-project-wrapper">
+                    <span class="next-label">المشروع التالي</span>
+                    <a href="project.html" class="next-project-card">
+                        <img src="Man in the Ocean.jpg" alt="Next Project Cover">
+                        <div class="next-project-overlay">
+                            <h3 class="next-project-title-large">صمت الأعماق</h3>
+                            <span class="next-project-action">استكشف العمل &larr;</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="back-link-wrapper">
+                    <a href="gallery.html" class="back-link">
+                        <span>&rarr;</span>
+                        <span>العودة للمعرض</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <div class="footer-logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+                    <p class="footer-about-text">مصمم إبداعي مستقل، مكرّس لصناعة التجارب البصرية الفاخرة، المعمار الحديث، والهويات الفنية الشخصية التي تصمد في وجه الزمن.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">استكشف</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#hero">البداية</a></li>
+                        <li><a href="about.html">من أنا</a></li>
+                        <li><a href="gallery.html">المعرض</a></li>
+                        <li><a href="articles.html">المقالات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title">تابعني</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" target="_blank">بيهانس</a></li>
+                        <li><a href="#" target="_blank">إنستغرام</a></li>
+                        <li><a href="#" target="_blank">لينكدإن</a></li>
+                        <li><a href="#" target="_blank">إكس</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col info-col">
+                    <h4 class="footer-title">معلومات الاتصال</h4>
+                    <p class="footer-info-item">دبي، الإمارات العربية المتحدة</p>
+                    <p class="footer-info-item">تواصل عبر الواتساب: +971 50 000 0000</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+                <span class="footer-note">تصميم إبداعي مستقل</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Animations specific to the project page
+        window.addEventListener("load", () => {
+            const tl = gsap.timeline();
+
+            tl.from(".cinematic-player", {
+                opacity: 0,
+                y: 40,
+                duration: 1.2,
+                ease: "power3.out"
+            })
+            .from(".project-text > *", {
+                opacity: 0,
+                y: 20,
+                stagger: 0.15,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.8")
+            .from(".meta-item", {
+                opacity: 0,
+                x: 20,
+                stagger: 0.1,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.8");
+            
+            // Interactive Play Button click logic
+            const playBtn = document.querySelector('.play-btn');
+            playBtn.addEventListener('click', () => {
+                gsap.to(playBtn, {
+                    scale: 0.8,
+                    opacity: 0,
+                    duration: 0.3,
+                    onComplete: () => {
+                        gsap.to(".cinematic-player img.poster", {
+                            filter: "grayscale(0%) contrast(100%)",
+                            duration: 1
+                        });
+                        console.log("Video Started");
+                    }
+                });
+            });
+        });
+        
+        // Scroll Animations for internal sections
+        gsap.from(".project-vision > *", {
+            scrollTrigger: {
+                trigger: ".project-vision",
+                start: "top 80%"
+            },
+            y: 40,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 1.2,
+            ease: "power3.out"
+        });
+
+        gsap.from(".stills-strip-wrapper", {
+            scrollTrigger: {
+                trigger: ".stills-section",
+                start: "top 80%"
+            },
+            y: 40,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out"
+        });
+
+        gsap.from(".credit-item", {
+            scrollTrigger: {
+                trigger: ".credits-section",
+                start: "top 85%"
+            },
+            y: 30,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Simplified Quote Animation
+        gsap.from(".project-quote > *", {
+            scrollTrigger: {
+                trigger: ".project-quote",
+                start: "top 90%"
+            },
+            y: 20,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 1.2,
+            ease: "power3.out"
+        });
+
+        gsap.from(".next-project-wrapper", {
+            scrollTrigger: {
+                trigger: ".next-project-wrapper",
+                start: "top 90%"
+            },
+            y: 30,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out"
+        });
+    </script>
+</body>
+</html>
