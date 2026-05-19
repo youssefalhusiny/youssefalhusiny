@@ -604,65 +604,96 @@ h1, h2, h3 {
 /* Responsive Layout */
 @media (max-width: 1024px) {
     .collapsible-gallery {
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
         height: auto;
-        gap: 2rem;
     }
     
     .gallery-col {
-        flex: none !important;
-        width: 100% !important;
-        height: auto !important;
+        display: contents; /* Bypass columns for direct grid placement */
     }
     
-    .gallery-col.col-landscape-group {
-        gap: 2rem;
-    }
-    
-    .gallery-col.col-portrait .monolithic-item {
+    /* Staggered Heights for tablet */
+    .collapsible-gallery .item-1,
+    .collapsible-gallery .item-4 {
         height: 380px !important;
     }
     
-    .gallery-col.col-landscape-group .monolithic-item {
-        flex: none !important;
+    .collapsible-gallery .item-2,
+    .collapsible-gallery .item-3 {
         height: 240px !important;
     }
     
     /* Disable interactive flex expansions on tablet/mobile */
-    .collapsible-gallery:hover .gallery-col {
-        flex: none !important;
-    }
-    .collapsible-gallery .gallery-col:hover {
-        flex: none !important;
-    }
-    .gallery-col.col-landscape-group:hover .monolithic-item {
-        flex: none !important;
-    }
+    .collapsible-gallery:hover .gallery-col,
+    .collapsible-gallery .gallery-col:hover,
+    .gallery-col.col-landscape-group:hover .monolithic-item,
     .gallery-col.col-landscape-group .monolithic-item:hover {
         flex: none !important;
     }
     
+    .monolithic-info {
+        padding: 2rem 1.2rem 1.2rem !important;
+    }
+    
+    .monolithic-title {
+        font-size: 1.05rem !important;
+    }
+    
+    .monolithic-category {
+        font-size: 0.65rem !important;
+    }
+    
     .monolithic-desc {
+        font-size: 0.78rem !important;
+        line-height: 1.5;
         opacity: 0.95;
         transform: none;
+    }
+    
+    /* Hide description on shorter cards to avoid overflow clutter */
+    .collapsible-gallery .item-2 .monolithic-desc,
+    .collapsible-gallery .item-3 .monolithic-desc {
+        display: none !important;
     }
 }
 
 @media (max-width: 600px) {
     .collapsible-gallery {
-        gap: 1.5rem;
+        gap: 1rem;
     }
     
-    .gallery-col.col-landscape-group {
-        gap: 1.5rem;
+    /* Staggered Heights for mobile */
+    .collapsible-gallery .item-1,
+    .collapsible-gallery .item-4 {
+        height: 280px !important;
     }
     
-    .gallery-col.col-portrait .monolithic-item {
-        height: 340px !important;
+    .collapsible-gallery .item-2,
+    .collapsible-gallery .item-3 {
+        height: 180px !important;
     }
     
-    .gallery-col.col-landscape-group .monolithic-item {
-        height: 200px !important;
+    .monolithic-info {
+        padding: 1.5rem 0.8rem 0.8rem !important;
+    }
+    
+    .monolithic-title {
+        font-size: 0.9rem !important;
+    }
+    
+    .monolithic-category {
+        font-size: 0.6rem !important;
+    }
+    
+    .monolithic-desc {
+        font-size: 0.72rem !important;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 }
 
