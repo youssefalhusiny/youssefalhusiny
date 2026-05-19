@@ -669,7 +669,7 @@ h1, h2, h3 {
 /* Editorial Articles Section */
 .articles {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 2rem 0 9.5rem; /* Reduced top padding to bring it closer to the gallery section above */
+    padding: 2rem 0 4.5rem; /* Matched to the perfect spacing between Gallery and Articles */
     background-color: var(--bg-color);
 }
 
@@ -841,7 +841,7 @@ h1, h2, h3 {
 /* Contact Section Styles (Redesigned with Premium Luxury Theme) */
 .contact-section {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 9rem 0 8rem;
+    padding: 2rem 0 8rem; /* Top padding aligned to match the vertical spacing above */
     background-color: var(--bg-color);
     position: relative;
 }
