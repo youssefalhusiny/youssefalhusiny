@@ -652,7 +652,7 @@ h1, h2, h3 {
     .collapsible-gallery {
         display: block !important;
         column-count: 2 !important;
-        column-gap: 1.5rem !important;
+        column-gap: 1.2rem !important;
         height: auto !important;
         overflow: visible !important;
     }
@@ -665,7 +665,7 @@ h1, h2, h3 {
         display: inline-block !important;
         width: 100% !important;
         break-inside: avoid !important;
-        margin-bottom: 2.5rem !important;
+        margin-bottom: 1.4rem !important;
         height: auto !important;
         border: none !important;
         box-shadow: none !important;
@@ -730,11 +730,11 @@ h1, h2, h3 {
 
 @media (max-width: 480px) {
     .collapsible-gallery {
-        column-gap: 1rem !important;
+        column-gap: 0.8rem !important;
     }
     
     .monolithic-item {
-        margin-bottom: 1.8rem !important;
+        margin-bottom: 1.0rem !important;
     }
     
     .monolithic-info {
