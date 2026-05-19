@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المعرض المنتظم - يوسف الحسيني</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* override body for dark theme matching the rest of the site */
+        body {
+            background-color: #050505 !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Museum Uniform Grid (Perfect symmetrical architectural matrix) */
+        .museum-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 perfectly balanced columns */
+            gap: 3rem 2.2rem; /* Clean vertical and horizontal gaps */
+            padding: 6rem 6% 12rem;
+            background-color: #050505;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Museum Item Card */
+        .museum-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .museum-img-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Symmetrical square aspect ratio */
+            overflow: hidden;
+            border-radius: 1px;
+            background-color: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            /* Ultra-smooth transition for standard luxury movement */
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Morphing Hover Lift and Ambient Glow */
+        .museum-item:hover .museum-img-wrapper {
+            transform: translateY(-8px) scale(1.015); /* Soft premium float */
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85); /* Premium deep dark shadow */
+            z-index: 10;
+        }
+
+        .museum-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .museum-item:hover .museum-img-wrapper img {
+            transform: scale(1.06); /* Slow majestic cinematic zoom */
+        }
+        
+        .museum-caption {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            text-align: right;
+            letter-spacing: 0.5px;
+            opacity: 0.85;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .museum-item:hover .museum-caption {
+            color: var(--text-primary);
+            opacity: 1;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            .museum-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem 2rem;
+                padding: 4rem 5%;
+            }
+        }
+        @media (max-width: 768px) {
+            .museum-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem 1.5rem;
+                padding: 3rem 4%;
+            }
+        }
+        @media (max-width: 480px) {
+            .museum-grid {
+                grid-template-columns: 1fr; /* Single column for maximum breathing space on phones */
+                gap: 2.5rem;
+                padding: 2.5rem 6%;
+            }
+            .museum-caption {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
+</head>
+
+<body>
+    <!-- الهيدر / النافبار الموحد -->
+    <nav class="navbar scrolled">
+        <div class="nav-brand-group">
+            <a href="/" class="logo"><img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني"></a>
+            <a href="#" class="lang-switcher">EN</a>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/#hero">البداية</a></li>
+            <li><a href="gallery-uniform.html" class="active">المعرض</a></li>
+            <li><a href="articles">المقالات</a></li>
+            <li><a href="about">من أنا</a></li>
+            <li><a href="contact">تواصل معي</a></li>
+        </ul>
+    </nav>
+
+    <main style="padding-top: 90px;">
+        <!-- شبكة المعرض المنتظمة الهندسية والمحاذية بالكامل -->
+        <section class="museum-grid">
+            
+            <!-- العمل 1 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="Martine Emdur.jpg" alt="مارتين إمدور">
+                </div>
+                <span class="museum-caption">مارتين إمدور — لوحة مائية تشكيلية</span>
+            </a>
+            
+            <!-- العمل 2 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="Man in the Ocean.jpg" alt="رجل في المحيط">
+                </div>
+                <span class="museum-caption">رجل في المحيط — سكون الأعماق</span>
+            </a>
+
+            <!-- العمل 3 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download (78).jpg" alt="تأمل عميق">
+                </div>
+                <span class="museum-caption">تأمل عميق — زوايا الضوء الشارد</span>
+            </a>
+
+            <!-- العمل 4 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download (77).jpg" alt="صمت مطبق">
+                </div>
+                <span class="museum-caption">صمت مطبق — درجات الرمادي</span>
+            </a>
+            
+            <!-- العمل 5 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download (76).jpg" alt="غموض المياه">
+                </div>
+                <span class="museum-caption">غموض المياه — انسيابية الكتل</span>
+            </a>
+
+            <!-- العمل 6 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download (74).jpg" alt="انعكاس الضوء">
+                </div>
+                <span class="museum-caption">انعكاس الضوء — حوار الظلال</span>
+            </a>
+
+            <!-- العمل 7 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download (73).jpg" alt="أفق بعيد">
+                </div>
+                <span class="museum-caption">أفق بعيد — تجريد معاصر</span>
+            </a>
+            
+            <!-- العمل 8 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download (733).jpg" alt="حوار ملهم">
+                </div>
+                <span class="museum-caption">حوار ملهم — فلسفة الفراغ</span>
+            </a>
+
+            <!-- العمل 9 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="58256943279491678   ةة32.png" alt="أبعاد تشكيلية">
+                </div>
+                <span class="museum-caption">أبعاد تشكيلية — هندسة حركية صامتة</span>
+            </a>
+
+            <!-- العمل 10 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="Kingdom of dreams and madness.jpg" alt="أحلام معمارية">
+                </div>
+                <span class="museum-caption">أحلام معمارية — مملكة الشغف</span>
+            </a>
+            
+            <!-- العمل 11 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="ثثثث.jpg" alt="زوايا حادة">
+                </div>
+                <span class="museum-caption">زوايا حادة — انعطافات حرة</span>
+            </a>
+
+            <!-- العمل 12 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="6fcc57d0d4d79dc5fda1a5b0e76c11f4.jpg" alt="تبادلات حسية">
+                </div>
+                <span class="museum-caption">تبادلات حسية — ظلال متباينة</span>
+            </a>
+
+            <!-- العمل 13 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download.jpg" alt="خطوط الأفق">
+                </div>
+                <span class="museum-caption">خطوط الأفق — موازين بصرية</span>
+            </a>
+            
+            <!-- العمل 14 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="Martine Emdur.jpg" alt="حوار الماء والجسد">
+                </div>
+                <span class="museum-caption">حوار الماء والجسد — أثر جمالي</span>
+            </a>
+
+            <!-- العمل 15 -->
+            <a href="project" class="museum-item">
+                <div class="museum-img-wrapper">
+                    <img src="download (78).jpg" alt="لحظة تأمل">
+                </div>
+                <span class="museum-caption">لحظة تأمل — السكون المطلق</span>
+            </a>
+
+        </section>
+    </main>
+
+    <!-- فوتر الموقع المطابق -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- العمود الأول: العلامة التجارية -->
+                <div class="footer-col brand-col">
+                    <a href="/" class="footer-logo"><img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني"></a>
+                    <p class="footer-about-text">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
+                </div>
+                
+                <!-- العمود الثاني: التنقل -->
+                <div class="footer-col">
+                    <h4 class="footer-title">استكشف</h4>
+                    <ul class="footer-links">
+                        <li><a href="/#hero">البداية</a></li>
+                        <li><a href="about">من أنا</a></li>
+                        <li><a href="gallery-uniform.html">المعرض</a></li>
+                        <li><a href="articles">المقالات</a></li>
+                        <li><a href="contact">تواصل معي</a></li>
+                    </ul>
+                </div>
+                
+                <!-- العمود الثالث: مواقع التواصل -->
+                <div class="footer-col">
+                    <h4 class="footer-title">تابعني</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
+                        <li><a href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
+                        <li><a href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
+                        <li><a href="#" target="_blank">إكس</a></li>
+                        <li><a href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
+                    </ul>
+                </div>
+                
+                <!-- العمود الرابع: معلومات التواصل -->
+                <div class="footer-col info-col">
+                    <h4 class="footer-title">معلومات الاتصال</h4>
+                    <p class="footer-info-item">القاهرة، جمهورية مصر العربية</p>
+                    <p class="footer-info-item">واتساب: <span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
+                    <p class="footer-info-item">البريد الإلكتروني: <a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="margin-top: 3rem; padding-top: 2rem;">
+                <p class="copyright">&copy; ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+                <span class="footer-note">مساحة للفكر</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // تأثير تدرج ظهور بطاقات المعرض المدهش عند تحميل الصفحة
+        window.addEventListener("load", () => {
+            gsap.from(".museum-item", {
+                opacity: 0,
+                y: 50,
+                duration: 1.6,
+                stagger: 0.08,
+                ease: "power4.out",
+                delay: 0.2
+            });
+        });
+    </script>
+</body>
+
+</html>
