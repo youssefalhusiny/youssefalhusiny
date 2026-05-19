@@ -344,7 +344,7 @@ h1, h2, h3 {
 /* About */
 .about {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 8rem 0 4rem; /* Balanced bottom padding for clean transition */
+    padding: 8rem 0 2rem; /* Reduced bottom padding for a closer transition */
 }
 
 .about .container {
@@ -454,7 +454,7 @@ h1, h2, h3 {
 /* Gallery */
 .gallery {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 6rem 2% 9rem; /* Perfect spacious padding for architectural breathing room */
+    padding: 2rem 2% 9rem; /* Reduced top padding to bring it closer to the above section */
     overflow: visible;
     background-color: #050505;
 }
