@@ -459,12 +459,12 @@ h1, h2, h3 {
     overflow: visible;
 }
 
-.monolithic-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1.2fr; /* Asymmetrical grid columns */
-    grid-template-rows: 238px 238px; /* Clean row spacing */
+.monolithic-flex {
+    display: flex;
     gap: 1.5rem;
     width: 100%;
+    height: 480px; /* Perfectly aligned, stable height */
+    align-items: stretch;
 }
 
 .monolithic-item {
@@ -473,35 +473,11 @@ h1, h2, h3 {
     cursor: pointer;
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.03); /* Delicate fine border outline */
-    transform: translateY(0) scale(1); /* Baseline physical state */
-    transition: border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Specific Asymmetric Placements & Heights */
-.monolithic-item:nth-child(1) {
-    grid-column: 1;
-    grid-row: span 2;
-    height: 500px; /* Tall portrait masterpiece */
-}
-
-.monolithic-item:nth-child(2) {
-    grid-column: 2;
-    grid-row: 1;
-    height: 238px; /* Landscape layout */
-}
-
-.monolithic-item:nth-child(3) {
-    grid-column: 2;
-    grid-row: 2;
-    height: 238px; /* Landscape layout */
-}
-
-.monolithic-item:nth-child(4) {
-    grid-column: 3;
-    grid-row: span 2;
-    height: 500px; /* Tall portrait masterpiece */
+    flex: 1; /* Balanced, identical vertical aspect ratio by default */
+    height: 100%;
+    transition: flex 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .monolithic-item img {
@@ -511,9 +487,9 @@ h1, h2, h3 {
     transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover: Stately 3D physical lift and soft shadow expansion */
+/* Hover: Stately transition to wide canvas (landscape/square) format */
 .monolithic-item:hover {
-    transform: translateY(-10px) scale(1.015); /* Elegant upward float and scale */
+    flex: 2.8; /* Expands smoothly into a majestic wide canvas */
     border-color: rgba(255, 255, 255, 0.15);
     box-shadow: 0 35px 70px rgba(0, 0, 0, 0.85); /* Deep soft ambient shadow */
 }
@@ -575,37 +551,37 @@ h1, h2, h3 {
     color: #ffffff;
 }
 
-/* Responsive Grid System */
+/* Responsive Flex System */
 @media (max-width: 1024px) {
-    .monolithic-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
-        gap: 1.5rem;
+    .monolithic-flex {
+        flex-direction: column;
+        height: auto;
+        gap: 2.5rem;
     }
     
-    .monolithic-item:nth-child(1),
-    .monolithic-item:nth-child(2),
-    .monolithic-item:nth-child(3),
-    .monolithic-item:nth-child(4) {
-        grid-column: auto;
-        grid-row: auto;
-        height: 380px;
+    .monolithic-item {
+        width: 100%;
+        height: 380px !important;
+        flex: none !important;
+    }
+    
+    .monolithic-item:hover {
+        flex: none !important;
+    }
+    
+    .monolithic-desc {
+        opacity: 0.95;
+        transform: none;
     }
 }
 
 @media (max-width: 600px) {
-    .monolithic-grid {
-        grid-template-columns: 1fr;
+    .monolithic-flex {
         gap: 2rem;
     }
     
     .monolithic-item {
         height: 340px !important;
-    }
-    
-    .monolithic-action {
-        opacity: 0.9;
-        transform: none;
     }
 }
 
