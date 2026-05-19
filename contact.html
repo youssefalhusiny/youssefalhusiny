@@ -83,17 +83,47 @@
     </nav>
 
     <main style="padding-top: 90px; background: #050505;">
-        <!-- قسم تواصل معي الرئيسي (Redesigned) -->
+        <!-- قسم تواصل معي الرئيسي (Fully Re-structured Split Luxury Layout) -->
         <section id="contact" class="contact-section">
             <div class="container">
-                <div style="display: flex; justify-content: center;">
-                    
-                    <!-- الاستبيان التفاعلي الفاخر -->
-                    <div class="contact-form-wrapper" style="width: 100%; max-width: 800px;">
+                <div class="contact-grid">
+                    <!-- Column 1: Studio Info & Board (Right side in RTL) -->
+                    <div class="contact-studio-card">
+                        <div class="studio-frame">
+                            <div class="studio-image" style="background-image: url('download (77).jpg');"></div>
+                            <div class="studio-frame-overlay"></div>
+                            <div class="studio-frame-content">
+                                <span class="studio-kicker">المكتب الإبداعي</span>
+                                <h3 class="studio-frame-title">نصنع أفكاراً تعيش وتصمد في وجه الزمن.</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="studio-meta-grid">
+                            <div class="meta-item">
+                                <span class="meta-label">الموقع</span>
+                                <span class="meta-val">القاهرة، جمهورية مصر العربية</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">ساعات العمل</span>
+                                <span class="meta-val">09:00 ص — 06:00 م (GST)</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">واتساب</span>
+                                <span class="meta-val"><a href="https://wa.me/966577545142" target="_blank" style="color: inherit; text-decoration: none;">+966 57 754 5142</a></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">البريد الإلكتروني</span>
+                                <span class="meta-val"><a href="mailto:info@youssefalhusiny.com" style="color: inherit; text-decoration: none;">info@youssefalhusiny.com</a></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Luxury Inquiry Form (Left side in RTL) -->
+                    <div class="contact-form-wrapper">
                         <div class="section-header-minimal align-start">
                             <span class="section-kicker-small">تواصل معي</span>
                             <h2 class="section-title-medium contact-form-title">دعنا نمنح أفكارك صوتاً مرئياً خافتاً وفخماً.</h2>
-                            <p class="section-desc-light">يرجى كتابة رسالتك لبدء مناقشة مشروعك الإبداعي الاستثنائي.</p>
+                            <p class="section-desc-light">يرجى تعبئة الاستبيان لبدء رحلة تصميم مشروعك الاستثنائي.</p>
                         </div>
                         
                         <form class="contact-inquiry-form" id="inquiryForm">
@@ -109,6 +139,29 @@
                                     <input type="email" id="userEmail" class="form-input-luxury" placeholder="البريد" required>
                                     <label for="userEmail" class="form-label-luxury">البريد الإلكتروني</label>
                                     <span class="input-focus-line"></span>
+                                </div>
+                            </div>
+
+                            <!-- تحديد نوع الخدمة المطلوبة (Services Chips) -->
+                            <div class="form-group-services">
+                                <span class="services-label">نوع المشروع والخدمة المطلوبة</span>
+                                <div class="services-chips">
+                                    <label class="service-chip">
+                                        <input type="checkbox" name="services" value="branding">
+                                        <span class="chip-content">تطوير الهوية الإبداعية</span>
+                                    </label>
+                                    <label class="service-chip">
+                                        <input type="checkbox" name="services" value="web-design">
+                                        <span class="chip-content">تصميم المواقع الفاخرة</span>
+                                    </label>
+                                    <label class="service-chip">
+                                        <input type="checkbox" name="services" value="spatial-design">
+                                        <span class="chip-content">التصميم الفراغي والمعماري</span>
+                                    </label>
+                                    <label class="service-chip">
+                                        <input type="checkbox" name="services" value="consulting">
+                                        <span class="chip-content">استشارة وتوجيه إبداعي</span>
+                                    </label>
                                 </div>
                             </div>
 
@@ -129,18 +182,6 @@
                                 </span>
                             </button>
                         </form>
-
-                        <!-- بيانات الاتصال -->
-                        <div class="studio-meta-grid" style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 2rem;">
-                            <div class="meta-item">
-                                <span class="meta-label">الموقع</span>
-                                <span class="meta-val">القاهرة، جمهورية مصر العربية</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">ساعات العمل</span>
-                                <span class="meta-val">09:00 ص — 06:00 م (GST)</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
