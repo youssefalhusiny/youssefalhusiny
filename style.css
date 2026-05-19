@@ -841,7 +841,7 @@ h1, h2, h3 {
 /* Minimalist Contact CTA Section */
 .contact-cta-section {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 7.5rem 0; /* Premium spacious vertical breathing room */
+    padding: 5.5rem 0; /* Refined breathing room to match page margins */
     background-color: var(--bg-color);
     text-align: center;
     position: relative;
@@ -854,40 +854,40 @@ h1, h2, h3 {
 }
 
 .contact-cta-content {
-    max-width: 800px;
+    max-width: 720px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem; /* Tighter, more cohesive flow */
 }
 
 .contact-cta-title {
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-size: clamp(1.6rem, 3vw, 2.2rem); /* Masterfully balanced size that whispers luxury */
     font-weight: 300;
     color: var(--text-primary);
-    line-height: 1.25;
+    line-height: 1.35;
     margin: 0;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
 
 .contact-cta-desc {
-    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-size: 0.9rem; /* Delicate, elegant editorial typography */
     font-weight: 300;
-    line-height: 1.8;
+    line-height: 1.85;
     color: var(--text-secondary);
-    opacity: 0.85;
+    opacity: 0.7; /* Soft contrast for a true quiet premium feel */
     margin: 0 auto;
-    max-width: 660px;
+    max-width: 580px;
 }
 
 .contact-cta-btn {
-    margin-top: 1rem;
+    margin-top: 0.8rem;
     align-self: center !important;
 }
 
 @media (max-width: 768px) {
     .contact-cta-section {
-        padding: 5rem 0;
+        padding: 4.5rem 0;
     }
 }
 
