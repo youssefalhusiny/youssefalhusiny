@@ -606,7 +606,7 @@ h1, h2, h3 {
     .collapsible-gallery {
         flex-direction: column;
         height: auto;
-        gap: 2rem;
+        gap: 1.2rem;
     }
     
     .gallery-col {
@@ -616,7 +616,7 @@ h1, h2, h3 {
     }
     
     .gallery-col.col-landscape-group {
-        gap: 2rem;
+        gap: 1.2rem;
     }
     
     .gallery-col.col-portrait .monolithic-item {
@@ -652,7 +652,7 @@ h1, h2, h3 {
     .collapsible-gallery {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 2.5rem 1.5rem !important;
+        gap: 1.4rem 1.5rem !important;
         height: auto !important;
         overflow: visible !important;
     }
@@ -729,7 +729,7 @@ h1, h2, h3 {
 
 @media (max-width: 480px) {
     .collapsible-gallery {
-        gap: 1.8rem 1rem !important;
+        gap: 0.9rem 1rem !important;
     }
     
     .monolithic-info {
