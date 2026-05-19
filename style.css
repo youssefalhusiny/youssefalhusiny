@@ -454,8 +454,9 @@ h1, h2, h3 {
 /* Gallery */
 .gallery {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 5rem 2% 5rem; /* Reduced top padding for consistent spacing */
+    padding: 6rem 2% 9rem; /* Perfect spacious padding for architectural breathing room */
     overflow: visible;
+    background-color: #050505;
 }
 
 .gallery .section-title {
@@ -471,34 +472,42 @@ h1, h2, h3 {
 
 .gallery-track {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     width: 100%;
-    height: 520px;
+    height: 560px; /* Taller luxury scale */
     align-items: flex-start;
+    transition: all 1.0s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .gallery-item {
     position: relative;
-    border-radius: 0; /* Sharp corners */
+    border-radius: 0; /* Pure sharp architectural design */
     overflow: hidden;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0%;
-    height: 420px; /* Base vertical height */
+    height: 460px; /* Elegant base height */
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-    transition: flex-grow 3.0s cubic-bezier(0.15, 1, 0.3, 1), transform 3.0s cubic-bezier(0.15, 1, 0.3, 1);
+    /* Soft desaturated fine-art museum tone by default */
+    filter: saturate(0.5) contrast(1.05) brightness(0.75);
+    transition: flex-grow 2.5s cubic-bezier(0.15, 1, 0.3, 1), 
+                transform 2.0s cubic-bezier(0.15, 1, 0.3, 1), 
+                filter 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Staggered Offset Position */
+/* Staggered elegant offset placement */
 .gallery-item:nth-child(even) {
     transform: translateY(60px);
 }
 
-/* Hover Grow to Square aspect ratio */
+/* Luxurious Hover Expansion (Flex Grow to Wide Canvas) */
 .gallery-item:hover {
-    flex-grow: 4.2; /* Grows to occupy more width, making it a square aspect ratio */
+    flex-grow: 3.5; /* Rich wide-canvas aspect ratio */
+    filter: saturate(1.0) contrast(1.0) brightness(1.05); /* Brings art to vivid life */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
 }
 
 .gallery-item:hover:nth-child(even) {
@@ -509,35 +518,138 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0; /* Sharp corners */
-    transition: transform 3.0s cubic-bezier(0.15, 1, 0.3, 1);
+    border-radius: 0;
+    transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .gallery-item:hover img {
-    transform: scale(1.08); /* Slow majestic luxury cinematic zoom */
+    transform: scale(1.06); /* Slow elegant movie-camera zoom */
 }
 
-
-
-.overlay {
+/* Large Floating Index Numbers */
+.gallery-item-number {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    top: 2rem;
+    right: 2rem;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 300;
+    font-size: 2.2rem;
+    color: #ffffff;
+    opacity: 0.12; /* Faint and extremely elegant */
+    z-index: 5;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover .gallery-item-number {
+    opacity: 0.4;
+    transform: scale(1.1) translateY(-3px);
+}
+
+/* Elegant Text Overlay */
+.gallery-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3rem 2rem 2.2rem;
+    z-index: 4;
+    text-align: right;
     display: flex;
-    align-items: flex-end;
-    padding: 1.5rem;
+    flex-direction: column;
+    gap: 0.4rem;
+    /* Soft cinema vignette gradient for seamless readability */
+    background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.4) 60%, transparent 100%);
+    transform: translateY(0);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-category {
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    opacity: 0.85;
+    transition: color 0.6s ease;
+}
+
+.gallery-item-title {
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    margin: 0 0 0.2rem 0;
+}
+
+.gallery-action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-primary);
     opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(12px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.gallery-item:hover .overlay {
-    opacity: 1;
+.gallery-action .arrow-icon {
+    font-size: 0.9rem;
+    transition: transform 0.4s ease;
+    display: inline-block;
 }
 
-.overlay span {
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+/* Hover Reveals details and slide CTA */
+.gallery-item:hover .gallery-action {
+    opacity: 0.9;
+    transform: translateY(0);
+}
+
+.gallery-item:hover .gallery-action .arrow-icon {
+    transform: translateX(-4px); /* Moves towards the left in RTL */
+}
+
+.gallery-item:hover .gallery-category {
+    color: #ffffff;
+}
+
+/* Balanced Responsive Grid for Tablet/Mobile */
+@media (max-width: 768px) {
+    .gallery {
+        padding: 5rem 5% 5rem;
+    }
+    
+    .gallery-track {
+        flex-direction: column;
+        height: auto;
+        gap: 3.5rem;
+    }
+    
+    .gallery-item {
+        width: 100% !important;
+        height: 380px !important;
+        flex-basis: auto;
+        flex-grow: 1 !important;
+        transform: none !important;
+    }
+    
+    .gallery-item:nth-child(even) {
+        transform: none !important;
+    }
+    
+    .gallery-item:hover:nth-child(even) {
+        transform: none !important;
+    }
+    
+    .gallery-item-number {
+        font-size: 1.8rem;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .gallery-action {
+        opacity: 0.85;
+        transform: none;
+    }
 }
 
 /* Editorial Articles Section */
