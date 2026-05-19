@@ -247,7 +247,7 @@ h1, h2, h3 {
 }
 
 .hero-logo {
-    height: clamp(75px, 15vw, 140px); /* Enlarged premium size for hero logo */
+    height: clamp(60px, 12vw, 110px); /* Majestic yet premium size for hero logo */
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
