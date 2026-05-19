@@ -13,6 +13,7 @@
 
 html {
     background-color: #050505;
+    overflow-x: hidden;
 }
 
 body {
@@ -652,7 +653,7 @@ h1, h2, h3 {
     .collapsible-gallery {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1.4rem 1.5rem !important;
+        gap: 0.8rem 1rem !important;
         height: auto !important;
         overflow: visible !important;
     }
@@ -686,14 +687,11 @@ h1, h2, h3 {
         transform: none !important;
     }
     
-    /* Staggered aspect ratios matching the Gallery page */
+    /* Uniform aspect ratios on mobile to align grid rows perfectly and remove empty spaces */
     .monolithic-item.item-1 img,
-    .monolithic-item.item-4 img {
-        aspect-ratio: 2 / 3 !important;
-    }
-    
     .monolithic-item.item-2 img,
-    .monolithic-item.item-3 img {
+    .monolithic-item.item-3 img,
+    .monolithic-item.item-4 img {
         aspect-ratio: 4 / 3 !important;
     }
     
@@ -729,11 +727,11 @@ h1, h2, h3 {
 
 @media (max-width: 480px) {
     .collapsible-gallery {
-        gap: 0.9rem 1rem !important;
+        gap: 0.6rem 0.6rem !important;
     }
     
     .monolithic-info {
-        padding: 0.6rem 0 0 0 !important;
+        padding: 0.5rem 0 0 0 !important;
     }
     
     .monolithic-title {
@@ -992,6 +990,7 @@ h1, h2, h3 {
     padding: 2rem 0 8rem; /* Top padding aligned to match the vertical spacing above */
     background-color: var(--bg-color);
     position: relative;
+    overflow: hidden; /* Contain GSAP horizontal slide animations */
 }
 
 .contact-section .container {
@@ -1480,7 +1479,7 @@ h1, h2, h3 {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         background: rgba(5, 5, 5, 0.98);
         backdrop-filter: blur(10px);
