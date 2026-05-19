@@ -490,70 +490,51 @@
             </div>
         </section>
         
-        <!-- المشاريع الحالية -->
-        <section id="articles" class="articles" style="padding: 5rem 0; border-top: 1px solid rgba(255, 255, 255, 0.05); background: #050505;">
+        <!-- المشاريع الحالية (شبكة تايبوغرافية مينيومال نقية لتفادي التكرار والزحام البصري) -->
+        <section id="about-projects" class="about-projects" style="padding: 6rem 0; border-top: 1px solid rgba(255, 255, 255, 0.05); background: #050505;">
             <div class="container">
-                <div class="section-header-minimal" style="margin-bottom: 2.5rem; text-align: center; align-items: center;">
-                    <span class="section-kicker-small">المشاريع الحالية</span>
-                    <h2 class="section-title-medium">مشاريع على أرض الواقع</h2>
+                <!-- توحيد المحاذاة جهة اليمين لتفادي النشاز البصري تماماً -->
+                <div class="section-header-minimal" style="margin-bottom: 4rem; text-align: right; align-items: flex-start;">
+                    <span class="section-kicker-small">الأثر المهني</span>
+                    <h2 class="section-title-medium" style="font-size: 2rem;">مشاريع ومؤسسات على أرض الواقع</h2>
                 </div>
                 
-                <div class="editorial-typo-grid">
-                    <!-- المشروع الأول: وكالة Axis -->
-                    <a href="project" class="inspired-card">
-                        <div class="inspired-img-wrapper">
-                            <img src="download.jpg" alt="وكالة Axis الإبداعية">
-                        </div>
-                        <div class="inspired-card-content">
-                            <div class="inspired-card-header">
-                                <h3 class="inspired-card-title">وكالة Axis الإبداعية</h3>
-                                <span class="inspired-card-kicker">توجيه إبداعي وتسويق استراتيجي</span>
-                            </div>
-                            <p class="inspired-card-desc">تأسيس وإدارة المنصة الإبداعية لوكالة Axis، التي تقدم حلولاً تسويقية واستراتيجيات متكاملة لبناء هويات بصرية وثقافية رفيعة المستوى للشركات والمنصات الطموحة.</p>
-                        </div>
-                    </a>
+                <div class="partners-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem 5rem;">
+                    <!-- المشروع الأول -->
+                    <div class="text-project-card" style="display: flex; flex-direction: column; gap: 0.8rem; border-right: 2px solid rgba(255, 255, 255, 0.06); padding-right: 1.8rem; text-align: right;">
+                        <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; font-weight: 300; color: var(--accent-color); opacity: 0.5;">01 / استراتيجية وتوجيه إبداعي</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">وكالة Axis الإبداعية</h3>
+                        <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.75; margin: 0;">
+                            تأسيس وإدارة المنصة الإبداعية لوكالة Axis، التي تقدم حلولاً تسويقية واستراتيجيات متكاملة لبناء هويات بصرية وثقافية رفيعة المستوى للشركات والمنصات الطموحة.
+                        </p>
+                    </div>
 
                     <!-- المشروع الثاني -->
-                    <a href="project" class="inspired-card">
-                        <div class="inspired-img-wrapper">
-                            <img src="download (76).jpg" alt="منصة التجربة المعمارية التفاعلية">
-                        </div>
-                        <div class="inspired-card-content">
-                            <div class="inspired-card-header">
-                                <h3 class="inspired-card-title">التجربة المعمارية الرقمية</h3>
-                                <span class="inspired-card-kicker">تصميم البيئات والواجهات</span>
-                            </div>
-                            <p class="inspired-card-desc">تصميم واجهات تفاعلية وأنظمة تجربة مستخدم معاصرة للمكاتب الهندسية الفاخرة، مع التركيز على دمج الفراغات الصامتة والفلسفة الحركية الصريحة في عرض التصميم المعماري.</p>
-                        </div>
-                    </a>
+                    <div class="text-project-card" style="display: flex; flex-direction: column; gap: 0.8rem; border-right: 2px solid rgba(255, 255, 255, 0.06); padding-right: 1.8rem; text-align: right;">
+                        <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; font-weight: 300; color: var(--accent-color); opacity: 0.5;">02 / فلسفة الفراغ الرقمي</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">التجربة المعمارية الرقمية</h3>
+                        <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.75; margin: 0;">
+                            تصميم واجهات تفاعلية وأنظمة تجربة مستخدم معاصرة للمكاتب الهندسية الفاخرة، مع التركيز على دمج الفراغات الصامتة والفلسفة الحركية الصريحة في عرض التصميم المعماري.
+                        </p>
+                    </div>
 
                     <!-- المشروع الثالث -->
-                    <a href="project" class="inspired-card">
-                        <div class="inspired-img-wrapper">
-                            <img src="download (733).jpg" alt="أنظمة الهوية البصرية المستدامة">
-                        </div>
-                        <div class="inspired-card-content">
-                            <div class="inspired-card-header">
-                                <h3 class="inspired-card-title">إعادة صياغة الهويات الفاخرة</h3>
-                                <span class="inspired-card-kicker">استراتيجية وبناء العلامات التجارية</span>
-                            </div>
-                            <p class="inspired-card-desc">تطوير وبناء هويات بصرية مستدامة مبنية على التقليل والتجريد المطلق، لمساعدة العلامات التجارية النخبوية على التعبير عن جوهرها النقي والتأثير بصدق وثقة متبادلة.</p>
-                        </div>
-                    </a>
+                    <div class="text-project-card" style="display: flex; flex-direction: column; gap: 0.8rem; border-right: 2px solid rgba(255, 255, 255, 0.06); padding-right: 1.8rem; text-align: right;">
+                        <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; font-weight: 300; color: var(--accent-color); opacity: 0.5;">03 / تقليص وتجريد مطلق</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">إعادة صياغة الهويات الفاخرة</h3>
+                        <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.75; margin: 0;">
+                            تطوير وبناء هويات بصرية مستدامة مبنية على التقليل والتجريد المطلق، لمساعدة العلامات التجارية النخبوية على التعبير عن جوهرها النقي والتأثير بصدق وثقة متبادلة.
+                        </p>
+                    </div>
 
                     <!-- المشروع الرابع -->
-                    <a href="project" class="inspired-card">
-                        <div class="inspired-img-wrapper">
-                            <img src="download (78).jpg" alt="منصات النشر الإبداعي المستقل">
-                        </div>
-                        <div class="inspired-card-content">
-                            <div class="inspired-card-header">
-                                <h3 class="inspired-card-title">منصات النشر الإبداعي المستقل</h3>
-                                <span class="inspired-card-kicker">تصميم تجربة المستخدم والتفاعل</span>
-                            </div>
-                            <p class="inspired-card-desc">ابتكار وبناء منصات قراءة إلكترونية ونشر ثقافي ترتكز على فلسفة الهدوء البصري، لتوفير مساحة قراءة وتأمل خالية من الضوضاء البصرية للمبدعين والمفكرين.</p>
-                        </div>
-                    </a>
+                    <div class="text-project-card" style="display: flex; flex-direction: column; gap: 0.8rem; border-right: 2px solid rgba(255, 255, 255, 0.06); padding-right: 1.8rem; text-align: right;">
+                        <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; font-weight: 300; color: var(--accent-color); opacity: 0.5;">04 / تصميم التفاعل المينيمال</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 500; color: var(--text-primary); margin: 0; font-family: 'IBM Plex Sans Arabic', sans-serif;">منصات Niche الإبداعية</h3>
+                        <p style="font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); opacity: 0.75; margin: 0;">
+                            ابتكار وبناء منصات قراءة إلكترونية ونشر ثقافي ترتكز على فلسفة الهدوء البصري، لتوفير مساحة قراءة وتأمل خالية من الضوضاء البصرية للمبدعين والمفكرين.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
