@@ -137,16 +137,13 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Scroll Trigger Animation for Contact Section (Horizontal slide on desktop, vertical slide on mobile to prevent layout overflow)
-const isMobile = window.innerWidth <= 768;
-
+// Scroll Trigger Animation for Contact Section
 gsap.from(".contact-studio-card", {
     scrollTrigger: {
         trigger: ".contact-section",
         start: "top 75%",
     },
-    x: isMobile ? 0 : 60,
-    y: isMobile ? 30 : 0,
+    x: 60,
     opacity: 0,
     duration: 1.4,
     ease: "power3.out"
@@ -157,8 +154,7 @@ gsap.from(".contact-form-wrapper", {
         trigger: ".contact-section",
         start: "top 75%",
     },
-    x: isMobile ? 0 : -60,
-    y: isMobile ? 30 : 0,
+    x: -60,
     opacity: 0,
     duration: 1.4,
     ease: "power3.out"
