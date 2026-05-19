@@ -473,9 +473,10 @@ h1, h2, h3 {
     cursor: pointer;
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.03); /* Delicate fine border outline */
-    transition: border-color 1.0s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 1.0s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(0) scale(1); /* Baseline physical state */
+    transition: border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Specific Asymmetric Placements & Heights */
@@ -507,17 +508,18 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 2.0s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover: Pure solid transition, no accordion flex growth */
+/* Hover: Stately 3D physical lift and soft shadow expansion */
 .monolithic-item:hover {
+    transform: translateY(-10px) scale(1.015); /* Elegant upward float and scale */
     border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.85); /* Deep soft ambient shadow */
 }
 
 .monolithic-item:hover img {
-    transform: scale(1.05); /* Soft premium cinematic zoom */
+    transform: scale(1.06); /* Slow premium cinematic zoom */
 }
 
 /* Elegant Text Overlay */
