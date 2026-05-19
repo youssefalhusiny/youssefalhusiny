@@ -459,12 +459,12 @@ h1, h2, h3 {
     overflow: visible;
 }
 
-.monolithic-flex {
-    display: flex;
+.monolithic-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr; /* Asymmetrical grid columns */
+    grid-template-rows: 238px 238px; /* Clean row spacing */
     gap: 1.5rem;
     width: 100%;
-    height: 480px; /* Perfectly aligned, stable height */
-    align-items: stretch;
 }
 
 .monolithic-item {
@@ -473,11 +473,60 @@ h1, h2, h3 {
     cursor: pointer;
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.03); /* Delicate fine border outline */
-    flex: 1; /* Balanced, identical vertical aspect ratio by default */
-    height: 100%;
-    transition: flex 1.8s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(0) scale(1); /* Baseline physical state */
+    transition: border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Specific Asymmetric Placements & Heights */
+.monolithic-item:nth-child(1) {
+    grid-column: 1;
+    grid-row: span 2;
+    height: 500px; /* Tall portrait masterpiece */
+}
+
+.monolithic-item:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+    height: 238px; /* Landscape layout */
+}
+
+.monolithic-item:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+    height: 238px; /* Landscape layout */
+}
+
+.monolithic-item:nth-child(4) {
+    grid-column: 3;
+    grid-row: span 2;
+    height: 500px; /* Tall portrait masterpiece */
+}
+
+/* Hover: Kinetic physical reshaping into square/rectangular dimensions without breaking grid flow */
+.monolithic-item:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.9); /* Deep soft luxury shadow */
+    z-index: 10; /* Ensures the hovered expanding card floats above adjacent items */
+}
+
+/* Portrait cards (1 & 4) expand horizontally to become wider (closer to a balanced square) */
+.monolithic-item:nth-child(1):hover {
+    transform: translateY(-10px) scale(1.06, 1.01);
+}
+
+.monolithic-item:nth-child(4):hover {
+    transform: translateY(-10px) scale(1.06, 1.01);
+}
+
+/* Landscape cards (2 & 3) expand vertically to become taller (closer to a square) */
+.monolithic-item:nth-child(2):hover {
+    transform: translateY(-8px) scale(1.01, 1.12);
+}
+
+.monolithic-item:nth-child(3):hover {
+    transform: translateY(-8px) scale(1.01, 1.12);
 }
 
 .monolithic-item img {
@@ -487,15 +536,8 @@ h1, h2, h3 {
     transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover: Stately transition to wide canvas (landscape/square) format */
-.monolithic-item:hover {
-    flex: 2.8; /* Expands smoothly into a majestic wide canvas */
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.85); /* Deep soft ambient shadow */
-}
-
 .monolithic-item:hover img {
-    transform: scale(1.06); /* Slow premium cinematic zoom */
+    transform: scale(1.05); /* Soft premium cinematic zoom inside the expanding frame */
 }
 
 /* Elegant Text Overlay */
@@ -551,37 +593,37 @@ h1, h2, h3 {
     color: #ffffff;
 }
 
-/* Responsive Flex System */
+/* Responsive Grid System */
 @media (max-width: 1024px) {
-    .monolithic-flex {
-        flex-direction: column;
-        height: auto;
-        gap: 2.5rem;
+    .monolithic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 1.5rem;
     }
     
-    .monolithic-item {
-        width: 100%;
-        height: 380px !important;
-        flex: none !important;
-    }
-    
-    .monolithic-item:hover {
-        flex: none !important;
-    }
-    
-    .monolithic-desc {
-        opacity: 0.95;
-        transform: none;
+    .monolithic-item:nth-child(1),
+    .monolithic-item:nth-child(2),
+    .monolithic-item:nth-child(3),
+    .monolithic-item:nth-child(4) {
+        grid-column: auto;
+        grid-row: auto;
+        height: 380px;
     }
 }
 
 @media (max-width: 600px) {
-    .monolithic-flex {
+    .monolithic-grid {
+        grid-template-columns: 1fr;
         gap: 2rem;
     }
     
     .monolithic-item {
         height: 340px !important;
+    }
+    
+    .monolithic-action {
+        opacity: 0.9;
+        transform: none;
     }
 }
 
