@@ -473,9 +473,7 @@ h1, h2, h3 {
     cursor: pointer;
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.03); /* Delicate fine border outline */
-    filter: saturate(0.5) contrast(1.05) brightness(0.85); /* Calm, desaturated tone */
-    transition: filter 1.0s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 1.0s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: border-color 1.0s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 1.0s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -514,33 +512,12 @@ h1, h2, h3 {
 
 /* Hover: Pure solid transition, no accordion flex growth */
 .monolithic-item:hover {
-    filter: saturate(1.0) contrast(1.0) brightness(1.05);
     border-color: rgba(255, 255, 255, 0.15);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
 }
 
 .monolithic-item:hover img {
     transform: scale(1.05); /* Soft premium cinematic zoom */
-}
-
-/* Floating Index Numbers */
-.monolithic-number {
-    position: absolute;
-    top: 1.8rem;
-    right: 1.8rem;
-    font-family: 'IBM Plex Sans Arabic', sans-serif;
-    font-weight: 300;
-    font-size: 1.8rem;
-    color: #ffffff;
-    opacity: 0.15;
-    z-index: 5;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.monolithic-item:hover .monolithic-number {
-    opacity: 0.5;
-    transform: translateY(-2px);
 }
 
 /* Elegant Text Overlay */
@@ -574,32 +551,22 @@ h1, h2, h3 {
     margin: 0;
 }
 
-.monolithic-action {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--text-primary);
+.monolithic-desc {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
+    margin: 0.2rem 0 0 0;
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.monolithic-action .arrow-icon {
-    font-size: 0.9rem;
-    transition: transform 0.4s ease;
-    display: inline-block;
-}
-
 /* Hover Details Reveal */
-.monolithic-item:hover .monolithic-action {
-    opacity: 0.9;
+.monolithic-item:hover .monolithic-desc {
+    opacity: 0.95;
     transform: translateY(0);
-}
-
-.monolithic-item:hover .monolithic-action .arrow-icon {
-    transform: translateX(-4px);
 }
 
 .monolithic-item:hover .monolithic-category {
