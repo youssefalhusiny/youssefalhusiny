@@ -241,6 +241,21 @@ h1, h2, h3 {
     color: #ffffff;
     font-weight: 300; /* Luxury thin styling */
     letter-spacing: -0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-logo {
+    height: clamp(60px, 12vw, 110px); /* Majestic yet premium size for hero logo */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-logo:hover {
+    transform: scale(1.05);
 }
 
 .hero-subtitle {
