@@ -1472,6 +1472,9 @@ h1, h2, h3 {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll !important;
+    }
     .mobile-menu-btn {
         display: flex;
     }
