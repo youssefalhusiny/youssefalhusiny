@@ -459,76 +459,78 @@ h1, h2, h3 {
     overflow: visible;
 }
 
-.monolithic-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1.2fr; /* Asymmetrical grid columns */
-    grid-template-rows: 238px 238px; /* Clean row spacing */
+/* Gallery Layout */
+.collapsible-gallery {
+    display: flex;
     gap: 1.5rem;
     width: 100%;
+    height: 500px; /* Stately locked vertical height of the monumental collage */
+    overflow: visible;
+}
+
+.gallery-col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: flex 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-col.col-portrait {
+    flex: 1.2;
+}
+
+.gallery-col.col-landscape-group {
+    flex: 1;
+    gap: 1.5rem;
 }
 
 .monolithic-item {
     position: relative;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.03); /* Delicate fine border outline */
-    transform: translateY(0) scale(1); /* Baseline physical state */
+    display: flex;
+    flex-direction: column;
     transition: border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+                flex 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Specific Asymmetric Placements & Heights */
-.monolithic-item:nth-child(1) {
-    grid-column: 1;
-    grid-row: span 2;
-    height: 500px; /* Tall portrait masterpiece */
+/* Portrait direct items take full height of column */
+.gallery-col.col-portrait .monolithic-item {
+    height: 100%;
 }
 
-.monolithic-item:nth-child(2) {
-    grid-column: 2;
-    grid-row: 1;
-    height: 238px; /* Landscape layout */
+/* Landscape nested items share height inside the column */
+.gallery-col.col-landscape-group .monolithic-item {
+    flex: 1;
+    height: auto; /* Governed by flex share */
 }
 
-.monolithic-item:nth-child(3) {
-    grid-column: 2;
-    grid-row: 2;
-    height: 238px; /* Landscape layout */
+/* KINETIC ZERO-OVERLAP GRID EXPANSION & SHRINKAGE */
+
+/* Width adjustments: when gallery is hovered, columns shrink by default, and hovered column expands */
+.collapsible-gallery:hover .gallery-col {
+    flex: 0.75; /* Surrounding columns shrink gracefully in width */
 }
 
-.monolithic-item:nth-child(4) {
-    grid-column: 3;
-    grid-row: span 2;
-    height: 500px; /* Tall portrait masterpiece */
+.collapsible-gallery .gallery-col:hover {
+    flex: 2.2; /* The active hovered column expands in width */
 }
 
-/* Hover: Kinetic physical reshaping into square/rectangular dimensions without breaking grid flow */
-.monolithic-item:hover {
-    border-color: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.9); /* Deep soft luxury shadow */
-    z-index: 10; /* Ensures the hovered expanding card floats above adjacent items */
+/* Height adjustments: inside the landscape column, unhovered items shrink, hovered expands */
+.gallery-col.col-landscape-group:hover .monolithic-item {
+    flex: 0.65; /* Surrounding landscape items shrink in height */
 }
 
-/* Portrait cards (1 & 4) expand horizontally to become wider (closer to a balanced square) */
-.monolithic-item:nth-child(1):hover {
-    transform: translateY(-10px) scale(1.06, 1.01);
+.gallery-col.col-landscape-group .monolithic-item:hover {
+    flex: 1.7; /* The active hovered landscape item expands vertically */
 }
 
-.monolithic-item:nth-child(4):hover {
-    transform: translateY(-10px) scale(1.06, 1.01);
-}
-
-/* Landscape cards (2 & 3) expand vertically to become taller (closer to a square) */
-.monolithic-item:nth-child(2):hover {
-    transform: translateY(-8px) scale(1.01, 1.12);
-}
-
-.monolithic-item:nth-child(3):hover {
-    transform: translateY(-8px) scale(1.01, 1.12);
-}
-
+/* Image & Hover details */
 .monolithic-item img {
     width: 100%;
     height: 100%;
@@ -536,8 +538,13 @@ h1, h2, h3 {
     transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.monolithic-item:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+}
+
 .monolithic-item:hover img {
-    transform: scale(1.05); /* Soft premium cinematic zoom inside the expanding frame */
+    transform: scale(1.05); /* Slow premium cinematic zoom */
 }
 
 /* Elegant Text Overlay */
@@ -594,36 +601,68 @@ h1, h2, h3 {
 }
 
 /* Responsive Grid System */
+/* Responsive Layout */
 @media (max-width: 1024px) {
-    .monolithic-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
-        gap: 1.5rem;
+    .collapsible-gallery {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
     }
     
-    .monolithic-item:nth-child(1),
-    .monolithic-item:nth-child(2),
-    .monolithic-item:nth-child(3),
-    .monolithic-item:nth-child(4) {
-        grid-column: auto;
-        grid-row: auto;
-        height: 380px;
+    .gallery-col {
+        flex: none !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+    
+    .gallery-col.col-landscape-group {
+        gap: 2rem;
+    }
+    
+    .gallery-col.col-portrait .monolithic-item {
+        height: 380px !important;
+    }
+    
+    .gallery-col.col-landscape-group .monolithic-item {
+        flex: none !important;
+        height: 240px !important;
+    }
+    
+    /* Disable interactive flex expansions on tablet/mobile */
+    .collapsible-gallery:hover .gallery-col {
+        flex: none !important;
+    }
+    .collapsible-gallery .gallery-col:hover {
+        flex: none !important;
+    }
+    .gallery-col.col-landscape-group:hover .monolithic-item {
+        flex: none !important;
+    }
+    .gallery-col.col-landscape-group .monolithic-item:hover {
+        flex: none !important;
+    }
+    
+    .monolithic-desc {
+        opacity: 0.95;
+        transform: none;
     }
 }
 
 @media (max-width: 600px) {
-    .monolithic-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+    .collapsible-gallery {
+        gap: 1.5rem;
     }
     
-    .monolithic-item {
+    .gallery-col.col-landscape-group {
+        gap: 1.5rem;
+    }
+    
+    .gallery-col.col-portrait .monolithic-item {
         height: 340px !important;
     }
     
-    .monolithic-action {
-        opacity: 0.9;
-        transform: none;
+    .gallery-col.col-landscape-group .monolithic-item {
+        height: 200px !important;
     }
 }
 
