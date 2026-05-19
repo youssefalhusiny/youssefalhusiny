@@ -514,20 +514,20 @@ h1, h2, h3 {
 
 /* Width adjustments: when gallery is hovered, columns shrink by default, and hovered column expands */
 .collapsible-gallery:hover .gallery-col {
-    flex: 0.75; /* Surrounding columns shrink gracefully in width */
+    flex: 0.85; /* Refined, gentler surrounding width shrinkage */
 }
 
 .collapsible-gallery .gallery-col:hover {
-    flex: 2.2; /* The active hovered column expands in width */
+    flex: 1.6; /* Balanced, subtle width expansion that whispers luxury */
 }
 
 /* Height adjustments: inside the landscape column, unhovered items shrink, hovered expands */
 .gallery-col.col-landscape-group:hover .monolithic-item {
-    flex: 0.65; /* Surrounding landscape items shrink in height */
+    flex: 0.8; /* Refined, gentler height shrinkage */
 }
 
 .gallery-col.col-landscape-group .monolithic-item:hover {
-    flex: 1.7; /* The active hovered landscape item expands vertically */
+    flex: 1.4; /* Balanced, subtle vertical expansion */
 }
 
 /* Image & Hover details */
@@ -544,7 +544,7 @@ h1, h2, h3 {
 }
 
 .monolithic-item:hover img {
-    transform: scale(1.05); /* Slow premium cinematic zoom */
+    transform: scale(1.03); /* Ultra-delicate slow premium zoom */
 }
 
 /* Elegant Text Overlay */
