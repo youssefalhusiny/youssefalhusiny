@@ -69,7 +69,7 @@ h1, h2, h3 {
     align-items: center;
     z-index: 100;
     background: transparent; /* Completely transparent at start */
-    border-bottom: none; /* No border at start */
+    border-bottom: 1px solid rgba(255, 255, 255, 0); /* Faint transparent border at start */
     transition: transform 1.0s cubic-bezier(0.15, 1, 0.3, 1), padding 0.5s ease, background-color 0.5s ease, backdrop-filter 0.5s ease, border-color 0.5s ease;
 }
 
