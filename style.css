@@ -469,7 +469,7 @@ h1, h2, h3 {
     flex: 1;
     height: 420px; /* Base vertical height */
     cursor: pointer;
-    transition: flex 2.2s cubic-bezier(0.15, 1, 0.3, 1), transform 2.2s cubic-bezier(0.15, 1, 0.3, 1);
+    transition: flex 2.5s cubic-bezier(0.15, 1, 0.3, 1), transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);
     flex-shrink: 1;
 }
 
@@ -492,7 +492,11 @@ h1, h2, h3 {
     height: 100%;
     object-fit: cover;
     border-radius: 0; /* Sharp corners */
-    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08); /* Slow majestic luxury cinematic zoom */
 }
 
 
