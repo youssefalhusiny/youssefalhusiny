@@ -471,6 +471,8 @@ h1, h2, h3 {
     flex-basis: 0%;
     height: 420px; /* Base vertical height */
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
     transition: flex-grow 3.0s cubic-bezier(0.15, 1, 0.3, 1), transform 3.0s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
