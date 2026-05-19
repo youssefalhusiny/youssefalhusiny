@@ -776,6 +776,7 @@ h1, h2, h3 {
     gap: 1.2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 1.8rem;
+    max-width: 380px; /* Keep key-value columns connected and premium */
 }
 
 .meta-item {
@@ -863,6 +864,13 @@ h1, h2, h3 {
 
 .form-input-luxury:focus, .form-textarea-luxury:focus {
     outline: none;
+}
+
+.form-input-luxury::placeholder,
+.form-textarea-luxury::placeholder {
+    color: transparent;
+    opacity: 0;
+    transition: color 0.3s ease;
 }
 
 .form-label-luxury {
