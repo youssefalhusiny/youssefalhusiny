@@ -128,7 +128,7 @@ h1, h2, h3 {
     border: none;
     cursor: pointer;
     z-index: 101; /* Above the overlay */
-    padding-right: 1.5rem;
+    padding: 0.5rem;
 }
 
 .mobile-menu-btn span {
