@@ -644,6 +644,7 @@
                     <div class="play-btn">
                         <span class="play-text">PLAY</span>
                     </div>
+                    <video id="projectVideo" src="https://assets.mixkit.co/videos/preview/mixkit-mysterious-pale-looking-woman-underwater-41712-large.mp4" loop playsinline controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; display: none; z-index: 2;"></video>
                 </div>
 
                 <!-- 2. Overview / Details -->
@@ -874,20 +875,41 @@
             
             // Interactive Play Button click logic
             const playBtn = document.querySelector('.play-btn');
-            playBtn.addEventListener('click', () => {
-                gsap.to(playBtn, {
-                    scale: 0.8,
-                    opacity: 0,
-                    duration: 0.3,
-                    onComplete: () => {
-                        gsap.to(".cinematic-player img.poster", {
-                            filter: "grayscale(0%) contrast(100%)",
-                            duration: 1
-                        });
-                        console.log("Video Started");
-                    }
+            const video = document.getElementById('projectVideo');
+            const poster = document.querySelector('.cinematic-player img.poster');
+            
+            if (playBtn && video) {
+                playBtn.addEventListener('click', () => {
+                    video.style.display = 'block';
+                    video.play().then(() => {
+                        gsap.timeline()
+                            .to(playBtn, {
+                                scale: 0.8,
+                                opacity: 0,
+                                duration: 0.4,
+                                ease: "power2.out",
+                                onComplete: () => { playBtn.style.display = 'none'; }
+                            })
+                            .to(poster, {
+                                opacity: 0,
+                                duration: 0.6,
+                                ease: "power2.out",
+                                onComplete: () => { poster.style.display = 'none'; }
+                            }, "-=0.3")
+                            .to(video, {
+                                opacity: 1,
+                                duration: 0.8,
+                                ease: "power2.out"
+                            }, "-=0.6");
+                    }).catch(err => {
+                        video.style.display = 'block';
+                        video.style.opacity = '1';
+                        poster.style.opacity = '0';
+                        playBtn.style.opacity = '0';
+                        video.play();
+                    });
                 });
-            });
+            }
         });
         
         // Scroll Animations for internal sections
