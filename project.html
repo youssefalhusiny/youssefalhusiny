@@ -35,7 +35,7 @@
         /* Cinematic Video Player */
         .cinematic-player {
             width: 100%;
-            aspect-ratio: 21 / 9; /* Ultra-wide cinematic aspect ratio */
+            aspect-ratio: 16 / 9; /* Standard cinematic aspect ratio matching YouTube */
             background-color: #111;
             position: relative;
             overflow: hidden;
@@ -765,7 +765,12 @@
                     <div class="play-btn">
                         <span class="play-text">PLAY</span>
                     </div>
-                    <video id="projectVideo" src="https://vjs.zencdn.net/v/oceans.mp4" loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; display: none; z-index: 2;"></video>
+                    
+                    <!-- YouTube Player target element -->
+                    <div id="projectVideo" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; display: none; z-index: 2; border: 0; pointer-events: none;"></div>
+                    
+                    <!-- Click overlay to toggle play/pause without opening YouTube links -->
+                    <div id="videoClickOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; display: none; cursor: pointer;"></div>
                     
                     <!-- Custom Video Controls Overlay -->
                     <div class="video-controls-overlay" id="videoControls">
@@ -992,7 +997,207 @@
     <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
     <script src="script.js"></script>
+    
+    <!-- YouTube Iframe Player API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // Global variables for YouTube Player integration
+        let player;
+        let timeUpdater;
+        let lastVolume = 1.0;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('projectVideo', {
+                videoId: '-O1dQ3Nh8As',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,      // Hide default YouTube controls
+                    'rel': 0,           // Disable related videos at the end
+                    'showinfo': 0,
+                    'mute': 0,
+                    'loop': 1,
+                    'playlist': '-O1dQ3Nh8As', // Required for looping
+                    'playsinline': 1,
+                    'modestbranding': 1,
+                    'iv_load_policy': 3
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Set initial volume to 100%
+            player.setVolume(100);
+            
+            // Wire up controls
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const progressContainer = document.getElementById('progressContainer');
+            const volumeSliderWrapper = document.getElementById('volumeSliderWrapper');
+            const volumeBar = document.getElementById('volumeBar');
+
+            const setVolumeUI = (percent) => {
+                if (volumeBar) volumeBar.style.width = `${percent * 100}%`;
+                if (muteBtn) muteBtn.textContent = percent > 0 ? 'MUTE' : 'UNMUTE';
+            };
+
+            const setVolume = (percent) => {
+                if (player && typeof player.setVolume === 'function') {
+                    player.setVolume(percent * 100);
+                    if (percent > 0) {
+                        player.unMute();
+                    } else {
+                        player.mute();
+                    }
+                    setVolumeUI(percent);
+                }
+            };
+
+            // Toggle Play/Pause on button click
+            if (playPauseBtn) {
+                playPauseBtn.addEventListener('click', () => {
+                    const state = player.getPlayerState();
+                    if (state === YT.PlayerState.PLAYING) {
+                        player.pauseVideo();
+                    } else {
+                        player.playVideo();
+                    }
+                });
+            }
+
+            // Toggle Mute on button click
+            if (muteBtn) {
+                muteBtn.addEventListener('click', () => {
+                    if (player.isMuted()) {
+                        player.unMute();
+                        setVolume(lastVolume > 0 ? lastVolume : 1.0);
+                    } else {
+                        lastVolume = player.getVolume() / 100;
+                        player.mute();
+                        setVolumeUI(0);
+                    }
+                });
+            }
+
+            // Volume Slider interactions
+            if (volumeSliderWrapper) {
+                const handleVolumeUpdate = (e) => {
+                    const rect = volumeSliderWrapper.getBoundingClientRect();
+                    let percent = (e.clientX - rect.left) / rect.width;
+                    percent = Math.max(0, Math.min(1, percent));
+                    setVolume(percent);
+                };
+
+                volumeSliderWrapper.addEventListener('click', handleVolumeUpdate);
+
+                let isDraggingVolume = false;
+                volumeSliderWrapper.addEventListener('mousedown', (e) => {
+                    isDraggingVolume = true;
+                    handleVolumeUpdate(e);
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDraggingVolume) {
+                        handleVolumeUpdate(e);
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDraggingVolume = false;
+                });
+            }
+
+            // Timeline Seeking
+            if (progressContainer) {
+                progressContainer.addEventListener('click', (e) => {
+                    const rect = progressContainer.getBoundingClientRect();
+                    const percent = (e.clientX - rect.left) / rect.width;
+                    const duration = player.getDuration();
+                    if (duration > 0) {
+                        player.seekTo(percent * duration, true);
+                    }
+                });
+            }
+
+            // Fullscreen button
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        const container = document.querySelector('.cinematic-player');
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        }
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                });
+            }
+
+            // Update fullscreen button text on change
+            const handleFullscreenChange = () => {
+                if (fullscreenBtn) {
+                    if (document.fullscreenElement || document.webkitFullscreenElement) {
+                        fullscreenBtn.textContent = 'EXIT';
+                    } else {
+                        fullscreenBtn.textContent = 'FULLSCREEN';
+                    }
+                }
+            };
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        }
+
+        function onPlayerStateChange(event) {
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            if (playPauseBtn) {
+                if (event.data === YT.PlayerState.PLAYING) {
+                    playPauseBtn.textContent = 'PAUSE';
+                    startTimeUpdater();
+                } else {
+                    playPauseBtn.textContent = 'PLAY';
+                    stopTimeUpdater();
+                }
+            }
+        }
+
+        function startTimeUpdater() {
+            if (timeUpdater) clearInterval(timeUpdater);
+            const progressBar = document.getElementById('progressBar');
+            const videoTime = document.getElementById('videoTime');
+
+            timeUpdater = setInterval(() => {
+                if (player && typeof player.getCurrentTime === 'function') {
+                    const currentTime = player.getCurrentTime();
+                    const duration = player.getDuration();
+                    if (duration > 0) {
+                        const progressPercent = (currentTime / duration) * 100;
+                        if (progressBar) progressBar.style.width = `${progressPercent}%`;
+
+                        const formatTime = (time) => {
+                            const mins = Math.floor(time / 60);
+                            const secs = Math.floor(time % 60);
+                            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                        };
+                        if (videoTime) {
+                            videoTime.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+                        }
+                    }
+                }
+            }, 250);
+        }
+
+        function stopTimeUpdater() {
+            if (timeUpdater) clearInterval(timeUpdater);
+        }
+
         // Animations specific to the project page
         document.addEventListener("DOMContentLoaded", () => {
             const tl = gsap.timeline();
@@ -1017,26 +1222,20 @@
                 duration: 0.8,
                 ease: "power3.out"
             }, "-=0.8");
-            
+
             // Interactive Play Button click logic
             const playBtn = document.querySelector('.play-btn');
-            const video = document.getElementById('projectVideo');
+            const videoElement = document.getElementById('projectVideo');
             const poster = document.querySelector('.cinematic-player img.poster');
             const videoControls = document.getElementById('videoControls');
-            
-            // Custom controls elements
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const muteBtn = document.getElementById('muteBtn');
-            const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const progressContainer = document.getElementById('progressContainer');
-            const progressBar = document.getElementById('progressBar');
-            const videoTime = document.getElementById('videoTime');
-            
-            if (playBtn && video) {
+            const clickOverlay = document.getElementById('videoClickOverlay');
+
+            if (playBtn && videoElement) {
                 playBtn.addEventListener('click', () => {
                     // Set video to visible
-                    video.style.display = 'block';
-                    
+                    videoElement.style.display = 'block';
+                    if (clickOverlay) clickOverlay.style.display = 'block';
+
                     // Smooth transition
                     gsap.timeline()
                         .to(playBtn, {
@@ -1057,190 +1256,31 @@
                                 }
                             }
                         }, "-=0.3")
-                        .to(video, {
+                        .to(videoElement, {
                             opacity: 1,
                             duration: 0.6,
                             ease: "power2.out"
                         }, "-=0.5");
-                    
-                    // Mute fallback if browsers block autoplay with sound
-                    video.play().then(() => {
-                        updatePlayPauseState();
-                    }).catch(err => {
-                        console.log("Autoplay with sound blocked, muting video to play...");
-                        video.muted = true;
-                        if (muteBtn) muteBtn.textContent = 'UNMUTE';
-                        if (volumeBar) volumeBar.style.width = '0%';
-                        video.play().then(() => {
-                            updatePlayPauseState();
-                        });
-                    });
+
+                    // Play YouTube Video
+                    if (player && typeof player.playVideo === 'function') {
+                        player.playVideo();
+                    }
                 });
             }
 
-            // Custom video player functions
-            const updatePlayPauseState = () => {
-                if (video && playPauseBtn) {
-                    if (video.paused) {
-                        playPauseBtn.textContent = 'PLAY';
-                    } else {
-                        playPauseBtn.textContent = 'PAUSE';
-                    }
-                }
-            };
-
-            if (video) {
-                // Play/Pause button
-                if (playPauseBtn) {
-                    playPauseBtn.addEventListener('click', () => {
-                        if (video.paused) {
-                            video.play();
+            // Click overlay to play/pause when clicking the video itself
+            if (clickOverlay) {
+                clickOverlay.addEventListener('click', () => {
+                    if (player && typeof player.getPlayerState === 'function') {
+                        const state = player.getPlayerState();
+                        if (state === YT.PlayerState.PLAYING) {
+                            player.pauseVideo();
                         } else {
-                            video.pause();
-                        }
-                        updatePlayPauseState();
-                    });
-                }
-
-                // Click on video to play/pause as well
-                video.addEventListener('click', () => {
-                    if (video.paused) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                    updatePlayPauseState();
-                });
-
-                // Volume slider controller implementation
-                const volumeSliderWrapper = document.getElementById('volumeSliderWrapper');
-                const volumeBar = document.getElementById('volumeBar');
-                let lastVolume = 1.0;
-
-                // Function to update volume both in player and UI
-                const setVolume = (percent) => {
-                    video.volume = percent;
-                    if (percent > 0) {
-                        video.muted = false;
-                        if (muteBtn) muteBtn.textContent = 'MUTE';
-                    } else {
-                        video.muted = true;
-                        if (muteBtn) muteBtn.textContent = 'UNMUTE';
-                    }
-                    if (volumeBar) {
-                        volumeBar.style.width = `${percent * 100}%`;
-                    }
-                };
-
-                // Initialize default volume
-                video.volume = 1.0;
-
-                // Toggle Mute button click
-                if (muteBtn) {
-                    muteBtn.addEventListener('click', () => {
-                        if (video.muted || video.volume === 0) {
-                            video.muted = false;
-                            setVolume(lastVolume > 0 ? lastVolume : 1.0);
-                        } else {
-                            lastVolume = video.volume;
-                            video.muted = true;
-                            setVolume(0);
-                        }
-                    });
-                }
-
-                // Volume slider click & drag interactions
-                if (volumeSliderWrapper) {
-                    const handleVolumeUpdate = (e) => {
-                        const rect = volumeSliderWrapper.getBoundingClientRect();
-                        let percent = (e.clientX - rect.left) / rect.width;
-                        percent = Math.max(0, Math.min(1, percent)); // clamp 0-1
-                        setVolume(percent);
-                    };
-
-                    volumeSliderWrapper.addEventListener('click', handleVolumeUpdate);
-
-                    let isDraggingVolume = false;
-                    volumeSliderWrapper.addEventListener('mousedown', (e) => {
-                        isDraggingVolume = true;
-                        handleVolumeUpdate(e);
-                    });
-
-                    document.addEventListener('mousemove', (e) => {
-                        if (isDraggingVolume) {
-                            handleVolumeUpdate(e);
-                        }
-                    });
-
-                    document.addEventListener('mouseup', () => {
-                        isDraggingVolume = false;
-                    });
-                }
-
-                // Fullscreen button
-                if (fullscreenBtn) {
-                    fullscreenBtn.addEventListener('click', () => {
-                        if (!document.fullscreenElement) {
-                            const player = document.querySelector('.cinematic-player');
-                            if (player.requestFullscreen) {
-                                player.requestFullscreen();
-                            } else if (player.webkitRequestFullscreen) {
-                                player.webkitRequestFullscreen();
-                            }
-                            fullscreenBtn.textContent = 'EXIT';
-                        } else {
-                            if (document.exitFullscreen) {
-                                document.exitFullscreen();
-                            } else if (document.webkitExitFullscreen) {
-                                document.webkitExitFullscreen();
-                            }
-                            fullscreenBtn.textContent = 'FULLSCREEN';
-                        }
-                    });
-                }
-
-                // Update timeline progress and timer display
-                video.addEventListener('timeupdate', () => {
-                    if (video.duration) {
-                        const progressPercent = (video.currentTime / video.duration) * 100;
-                        if (progressBar) progressBar.style.width = `${progressPercent}%`;
-                        
-                        const formatTime = (time) => {
-                            const mins = Math.floor(time / 60);
-                            const secs = Math.floor(time % 60);
-                            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                        };
-                        
-                        if (videoTime) {
-                            videoTime.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+                            player.playVideo();
                         }
                     }
                 });
-
-                // Seek video on click progress bar
-                if (progressContainer) {
-                    progressContainer.addEventListener('click', (e) => {
-                        const rect = progressContainer.getBoundingClientRect();
-                        const clickX = e.clientX - rect.left;
-                        const width = rect.width;
-                        if (video.duration) {
-                            video.currentTime = (clickX / width) * video.duration;
-                        }
-                    });
-                }
-
-                // Fullscreen change listeners to update text if user presses ESC
-                const handleFullscreenChange = () => {
-                    if (fullscreenBtn) {
-                        if (document.fullscreenElement || document.webkitFullscreenElement) {
-                            fullscreenBtn.textContent = 'EXIT';
-                        } else {
-                            fullscreenBtn.textContent = 'FULLSCREEN';
-                        }
-                    }
-                };
-                document.addEventListener('fullscreenchange', handleFullscreenChange);
-                document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
             }
         });
         
