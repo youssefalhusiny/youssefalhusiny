@@ -43,6 +43,7 @@
             cursor: pointer;
             text-decoration: none;
             position: relative;
+            opacity: 0; /* يمنع ظهور البطاقات فجأة قبل بدء الأنيميشن */
         }
         .museum-img-wrapper {
             width: 100%;
@@ -188,7 +189,7 @@
 
     <main style="padding-top: 90px;">
         <!-- شبكة المعرض غير المتناظرة هندسياً والمحاذية على أطراف الجوانب الأربعة -->
-        <section class="museum-grid">
+        <div class="museum-grid">
             
             <!-- العمود الأول (مجموع الارتفاعات المنسقة) -->
             <div class="museum-column">
@@ -310,7 +311,7 @@
                 </a>
             </div>
 
-        </section>
+        </div>
     </main>
 
     <!-- فوتر الموقع المطابق -->
@@ -372,15 +373,18 @@
 
     <script>
         // تأثير تدرج ظهور بطاقات المعرض المدهش عند تحميل الصفحة
-        window.addEventListener("load", () => {
-            gsap.from(".museum-item", {
-                opacity: 0,
-                y: 50,
-                duration: 1.6,
-                stagger: 0.08,
-                ease: "power4.out",
-                delay: 0.2
-            });
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.fromTo(".museum-item", 
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.6,
+                    stagger: 0.08,
+                    ease: "power4.out",
+                    delay: 0.2
+                }
+            );
         });
     </script>
 </body>
