@@ -611,6 +611,90 @@
                 height: 180px;
             }
         }
+
+        /* Custom Video Controls */
+        .video-controls-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0) 100%);
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cinematic-player:hover .video-controls-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .video-progress-container {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            position: relative;
+            transition: height 0.3s ease;
+        }
+
+        .video-progress-container:hover {
+            height: 5px;
+        }
+
+        .video-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--text-primary);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 0.1s linear;
+        }
+
+        .video-controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .video-controls-left, .video-controls-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .video-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 0;
+            opacity: 0.75;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-btn:hover {
+            opacity: 1;
+        }
+
+        .video-time {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
+            direction: ltr; /* Keeps timestamps formatted properly */
+        }
     </style>
     <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
 </head>
@@ -644,7 +728,24 @@
                     <div class="play-btn">
                         <span class="play-text">PLAY</span>
                     </div>
-                    <video id="projectVideo" src="https://vjs.zencdn.net/v/oceans.mp4" loop playsinline controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; display: none; z-index: 2;"></video>
+                    <video id="projectVideo" src="https://vjs.zencdn.net/v/oceans.mp4" loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; display: none; z-index: 2;"></video>
+                    
+                    <!-- Custom Video Controls Overlay -->
+                    <div class="video-controls-overlay" id="videoControls">
+                        <div class="video-progress-container" id="progressContainer">
+                            <div class="video-progress-bar" id="progressBar"></div>
+                        </div>
+                        <div class="video-controls-row">
+                            <div class="video-controls-left">
+                                <button class="video-btn" id="playPauseBtn">PAUSE</button>
+                                <span class="video-time" id="videoTime">00:00 / 00:00</span>
+                            </div>
+                            <div class="video-controls-right">
+                                <button class="video-btn" id="muteBtn">MUTE</button>
+                                <button class="video-btn" id="fullscreenBtn">FULLSCREEN</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 2. Overview / Details -->
@@ -877,6 +978,15 @@
             const playBtn = document.querySelector('.play-btn');
             const video = document.getElementById('projectVideo');
             const poster = document.querySelector('.cinematic-player img.poster');
+            const videoControls = document.getElementById('videoControls');
+            
+            // Custom controls elements
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const videoTime = document.getElementById('videoTime');
             
             if (playBtn && video) {
                 playBtn.addEventListener('click', () => {
@@ -896,7 +1006,12 @@
                             opacity: 0,
                             duration: 0.5,
                             ease: "power2.out",
-                            onComplete: () => { poster.style.display = 'none'; }
+                            onComplete: () => { 
+                                poster.style.display = 'none'; 
+                                if (videoControls) {
+                                    videoControls.classList.add('active');
+                                }
+                            }
                         }, "-=0.3")
                         .to(video, {
                             opacity: 1,
@@ -905,12 +1020,125 @@
                         }, "-=0.5");
                     
                     // Mute fallback if browsers block autoplay with sound
-                    video.play().catch(err => {
+                    video.play().then(() => {
+                        updatePlayPauseState();
+                    }).catch(err => {
                         console.log("Autoplay with sound blocked, muting video to play...");
                         video.muted = true;
-                        video.play();
+                        if (muteBtn) muteBtn.textContent = 'UNMUTE';
+                        video.play().then(() => {
+                            updatePlayPauseState();
+                        });
                     });
                 });
+            }
+
+            // Custom video player functions
+            const updatePlayPauseState = () => {
+                if (video && playPauseBtn) {
+                    if (video.paused) {
+                        playPauseBtn.textContent = 'PLAY';
+                    } else {
+                        playPauseBtn.textContent = 'PAUSE';
+                    }
+                }
+            };
+
+            if (video) {
+                // Play/Pause button
+                if (playPauseBtn) {
+                    playPauseBtn.addEventListener('click', () => {
+                        if (video.paused) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                        updatePlayPauseState();
+                    });
+                }
+
+                // Click on video to play/pause as well
+                video.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                    updatePlayPauseState();
+                });
+
+                // Mute button
+                if (muteBtn) {
+                    muteBtn.addEventListener('click', () => {
+                        video.muted = !video.muted;
+                        muteBtn.textContent = video.muted ? 'UNMUTE' : 'MUTE';
+                    });
+                }
+
+                // Fullscreen button
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (!document.fullscreenElement) {
+                            const player = document.querySelector('.cinematic-player');
+                            if (player.requestFullscreen) {
+                                player.requestFullscreen();
+                            } else if (player.webkitRequestFullscreen) {
+                                player.webkitRequestFullscreen();
+                            }
+                            fullscreenBtn.textContent = 'EXIT';
+                        } else {
+                            if (document.exitFullscreen) {
+                                document.exitFullscreen();
+                            } else if (document.webkitExitFullscreen) {
+                                document.webkitExitFullscreen();
+                            }
+                            fullscreenBtn.textContent = 'FULLSCREEN';
+                        }
+                    });
+                }
+
+                // Update timeline progress and timer display
+                video.addEventListener('timeupdate', () => {
+                    if (video.duration) {
+                        const progressPercent = (video.currentTime / video.duration) * 100;
+                        if (progressBar) progressBar.style.width = `${progressPercent}%`;
+                        
+                        const formatTime = (time) => {
+                            const mins = Math.floor(time / 60);
+                            const secs = Math.floor(time % 60);
+                            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                        };
+                        
+                        if (videoTime) {
+                            videoTime.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+                        }
+                    }
+                });
+
+                // Seek video on click progress bar
+                if (progressContainer) {
+                    progressContainer.addEventListener('click', (e) => {
+                        const rect = progressContainer.getBoundingClientRect();
+                        const clickX = e.clientX - rect.left;
+                        const width = rect.width;
+                        if (video.duration) {
+                            video.currentTime = (clickX / width) * video.duration;
+                        }
+                    });
+                }
+
+                // Fullscreen change listeners to update text if user presses ESC
+                const handleFullscreenChange = () => {
+                    if (fullscreenBtn) {
+                        if (document.fullscreenElement || document.webkitFullscreenElement) {
+                            fullscreenBtn.textContent = 'EXIT';
+                        } else {
+                            fullscreenBtn.textContent = 'FULLSCREEN';
+                        }
+                    }
+                };
+                document.addEventListener('fullscreenchange', handleFullscreenChange);
+                document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
             }
         });
         
