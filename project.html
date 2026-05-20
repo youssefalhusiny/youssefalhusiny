@@ -674,13 +674,13 @@
             border: none;
             color: var(--text-primary);
             font-family: 'IBM Plex Sans Arabic', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 500;
-            letter-spacing: 1px;
+            font-size: 0.7rem;
+            font-weight: 300; /* خط أخف للخيارات */
+            letter-spacing: 1.5px; /* زيادة التباعد بين الحروف للجمالية */
             text-transform: uppercase;
             cursor: pointer;
             padding: 0;
-            opacity: 0.75;
+            opacity: 0.65; /* شفافية أخف بشكل افتراضي */
             transition: opacity 0.3s ease;
         }
 
@@ -689,11 +689,48 @@
         }
 
         .video-time {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Inter', 'IBM Plex Sans Arabic', sans-serif; /* تغيير نوع خط رقم طول الفيديو */
+            font-size: 0.72rem;
+            font-weight: 300; /* خط أخف للوقت */
+            color: rgba(255, 255, 255, 0.55);
             letter-spacing: 0.5px;
             direction: ltr; /* Keeps timestamps formatted properly */
+        }
+
+        /* Volume Slider Styling */
+        .video-volume-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .volume-slider-wrapper {
+            width: 70px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .volume-slider {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: height 0.2s ease;
+        }
+
+        .volume-slider-wrapper:hover .volume-slider {
+            height: 4px;
+        }
+
+        .volume-bar {
+            height: 100%;
+            width: 100%; /* Default 100% volume width */
+            background: var(--text-primary);
+            position: absolute;
+            top: 0;
+            left: 0;
         }
     </style>
     <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
@@ -741,7 +778,14 @@
                                 <span class="video-time" id="videoTime">00:00 / 00:00</span>
                             </div>
                             <div class="video-controls-right">
-                                <button class="video-btn" id="muteBtn">MUTE</button>
+                                <div class="video-volume-container">
+                                    <button class="video-btn" id="muteBtn">MUTE</button>
+                                    <div class="volume-slider-wrapper" id="volumeSliderWrapper">
+                                        <div class="volume-slider" id="volumeSlider">
+                                            <div class="volume-bar" id="volumeBar"></div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <button class="video-btn" id="fullscreenBtn">FULLSCREEN</button>
                             </div>
                         </div>
@@ -1026,6 +1070,7 @@
                         console.log("Autoplay with sound blocked, muting video to play...");
                         video.muted = true;
                         if (muteBtn) muteBtn.textContent = 'UNMUTE';
+                        if (volumeBar) volumeBar.style.width = '0%';
                         video.play().then(() => {
                             updatePlayPauseState();
                         });
@@ -1067,11 +1112,68 @@
                     updatePlayPauseState();
                 });
 
-                // Mute button
+                // Volume slider controller implementation
+                const volumeSliderWrapper = document.getElementById('volumeSliderWrapper');
+                const volumeBar = document.getElementById('volumeBar');
+                let lastVolume = 1.0;
+
+                // Function to update volume both in player and UI
+                const setVolume = (percent) => {
+                    video.volume = percent;
+                    if (percent > 0) {
+                        video.muted = false;
+                        if (muteBtn) muteBtn.textContent = 'MUTE';
+                    } else {
+                        video.muted = true;
+                        if (muteBtn) muteBtn.textContent = 'UNMUTE';
+                    }
+                    if (volumeBar) {
+                        volumeBar.style.width = `${percent * 100}%`;
+                    }
+                };
+
+                // Initialize default volume
+                video.volume = 1.0;
+
+                // Toggle Mute button click
                 if (muteBtn) {
                     muteBtn.addEventListener('click', () => {
-                        video.muted = !video.muted;
-                        muteBtn.textContent = video.muted ? 'UNMUTE' : 'MUTE';
+                        if (video.muted || video.volume === 0) {
+                            video.muted = false;
+                            setVolume(lastVolume > 0 ? lastVolume : 1.0);
+                        } else {
+                            lastVolume = video.volume;
+                            video.muted = true;
+                            setVolume(0);
+                        }
+                    });
+                }
+
+                // Volume slider click & drag interactions
+                if (volumeSliderWrapper) {
+                    const handleVolumeUpdate = (e) => {
+                        const rect = volumeSliderWrapper.getBoundingClientRect();
+                        let percent = (e.clientX - rect.left) / rect.width;
+                        percent = Math.max(0, Math.min(1, percent)); // clamp 0-1
+                        setVolume(percent);
+                    };
+
+                    volumeSliderWrapper.addEventListener('click', handleVolumeUpdate);
+
+                    let isDraggingVolume = false;
+                    volumeSliderWrapper.addEventListener('mousedown', (e) => {
+                        isDraggingVolume = true;
+                        handleVolumeUpdate(e);
+                    });
+
+                    document.addEventListener('mousemove', (e) => {
+                        if (isDraggingVolume) {
+                            handleVolumeUpdate(e);
+                        }
+                    });
+
+                    document.addEventListener('mouseup', () => {
+                        isDraggingVolume = false;
                     });
                 }
 
