@@ -28,6 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Force scroll to top on page load and disable browser automatic scroll restoration
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 // Initialize Lenis Smooth Scroll
 const lenis = new Lenis({
     duration: 1.8, // Incredibly premium slowness and gentle inertia
@@ -36,20 +42,21 @@ const lenis = new Lenis({
     smoothTouch: false
 });
 
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
 // Register GSAP ScrollTrigger and sync with Lenis
 gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);
 
+// Use GSAP's ticker to drive Lenis (removes redundant requestAnimationFrame loop to prevent scroll jumping)
 gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
 });
 gsap.ticker.lagSmoothing(0);
+
+// Force scroll to top on complete load
+window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+    lenis.scrollTo(0, { immediate: true });
+});
 
 
 // Set initial states for hero elements
