@@ -732,6 +732,71 @@
             top: 0;
             left: 0;
         }
+
+        /* Fullscreen styles for the custom video player */
+        .cinematic-player:fullscreen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            aspect-ratio: auto !important;
+            border: none !important;
+            margin: 0 !important;
+            background-color: #000 !important;
+        }
+        
+        .cinematic-player:-webkit-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            aspect-ratio: auto !important;
+            border: none !important;
+            margin: 0 !important;
+            background-color: #000 !important;
+        }
+
+        .cinematic-player:fullscreen video {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+        }
+
+        .cinematic-player:-webkit-full-screen video {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+        }
+        
+        .cinematic-player:fullscreen .video-controls-overlay {
+            padding: 3rem 4rem !important;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%) !important;
+        }
+        .cinematic-player:-webkit-full-screen .video-controls-overlay {
+            padding: 3rem 4rem !important;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 100%) !important;
+        }
+
+        /* Hide cursor in fullscreen when inactive */
+        .cinematic-player.hide-cursor {
+            cursor: none !important;
+        }
+        .cinematic-player.hide-cursor * {
+            cursor: none !important;
+        }
+
+        /* Transition black flash overlay */
+        .fullscreen-flash-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
     <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
 </head>
@@ -761,6 +826,7 @@
                 
                 <!-- 1. The Video Player Section -->
                 <div class="cinematic-player">
+                    <div class="fullscreen-flash-overlay" id="fullscreenFlashOverlay"></div>
                     <img class="poster" src="Kingdom of dreams and madness.jpg" alt="Video Poster">
                     <div class="play-btn">
                         <span class="play-text">PLAY</span>
@@ -1178,26 +1244,84 @@
                 }
 
                 // Fullscreen button
-                if (fullscreenBtn) {
+                const playerEl = document.querySelector('.cinematic-player');
+                if (fullscreenBtn && playerEl) {
                     fullscreenBtn.addEventListener('click', () => {
-                        if (!document.fullscreenElement) {
-                            const player = document.querySelector('.cinematic-player');
-                            if (player.requestFullscreen) {
-                                player.requestFullscreen();
-                            } else if (player.webkitRequestFullscreen) {
-                                player.webkitRequestFullscreen();
+                        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                            if (playerEl.requestFullscreen) {
+                                playerEl.requestFullscreen();
+                            } else if (playerEl.webkitRequestFullscreen) {
+                                playerEl.webkitRequestFullscreen();
                             }
-                            fullscreenBtn.textContent = 'EXIT';
                         } else {
                             if (document.exitFullscreen) {
                                 document.exitFullscreen();
                             } else if (document.webkitExitFullscreen) {
                                 document.webkitExitFullscreen();
                             }
-                            fullscreenBtn.textContent = 'FULLSCREEN';
                         }
                     });
                 }
+
+                // Auto-hide controls and cursor logic in fullscreen
+                let controlsTimeout;
+                const resetControlsTimeout = () => {
+                    const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                    if (!isFullscreen) return;
+                    
+                    // Show controls and cursor
+                    playerEl.classList.remove('hide-cursor');
+                    gsap.to(videoControls, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out",
+                        overwrite: "auto"
+                    });
+                    
+                    clearTimeout(controlsTimeout);
+                    
+                    // Auto-hide only if video is playing
+                    if (!video.paused) {
+                        controlsTimeout = setTimeout(() => {
+                            const stillFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                            if (stillFullscreen) {
+                                gsap.to(videoControls, {
+                                    opacity: 0,
+                                    y: 15,
+                                    duration: 0.6,
+                                    ease: "power2.inOut",
+                                    onComplete: () => {
+                                        if (!!(document.fullscreenElement || document.webkitFullscreenElement)) {
+                                            playerEl.classList.add('hide-cursor');
+                                        }
+                                    }
+                                });
+                            }
+                        }, 3000);
+                    }
+                };
+
+                if (playerEl) {
+                    playerEl.addEventListener('mousemove', resetControlsTimeout);
+                    playerEl.addEventListener('click', resetControlsTimeout);
+                }
+                
+                video.addEventListener('play', resetControlsTimeout);
+                video.addEventListener('pause', () => {
+                    const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                    if (isFullscreen) {
+                        playerEl.classList.remove('hide-cursor');
+                        gsap.to(videoControls, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.4,
+                            ease: "power2.out",
+                            overwrite: "auto"
+                        });
+                        clearTimeout(controlsTimeout);
+                    }
+                });
 
                 // Update timeline progress and timer display
                 video.addEventListener('timeupdate', () => {
@@ -1229,14 +1353,63 @@
                     });
                 }
 
-                // Fullscreen change listeners to update text if user presses ESC
+                // Fullscreen change listeners to update text if user presses ESC & trigger premium animations
                 const handleFullscreenChange = () => {
+                    const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                    const flashOverlay = document.getElementById('fullscreenFlashOverlay');
+                    
                     if (fullscreenBtn) {
-                        if (document.fullscreenElement || document.webkitFullscreenElement) {
-                            fullscreenBtn.textContent = 'EXIT';
-                        } else {
-                            fullscreenBtn.textContent = 'FULLSCREEN';
+                        fullscreenBtn.textContent = isFullscreen ? 'EXIT' : 'FULLSCREEN';
+                    }
+                    
+                    if (isFullscreen) {
+                        // 1. Black flash transition
+                        if (flashOverlay) {
+                            gsap.fromTo(flashOverlay, 
+                                { opacity: 1 }, 
+                                { opacity: 0, duration: 0.6, ease: "power2.inOut" }
+                            );
                         }
+                        
+                        // 2. Cinematic Video Lens Zoom/Focus
+                        gsap.fromTo(video, 
+                            { scale: 1.15, filter: "blur(12px) brightness(0.1)" }, 
+                            { scale: 1, filter: "blur(0px) brightness(1)", duration: 1.2, ease: "power3.out" }
+                        );
+                        
+                        // 3. Controls Slide-Up Animation
+                        gsap.fromTo(videoControls, 
+                            { y: 50, opacity: 0 }, 
+                            { y: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: "power3.out" }
+                        );
+                        
+                        resetControlsTimeout();
+                    } else {
+                        // 1. Black flash transition
+                        if (flashOverlay) {
+                            gsap.fromTo(flashOverlay, 
+                                { opacity: 1 }, 
+                                { opacity: 0, duration: 0.4, ease: "power2.inOut" }
+                            );
+                        }
+                        
+                        // 2. Lens return to normal
+                        gsap.fromTo(video, 
+                            { scale: 0.95, filter: "blur(4px)" }, 
+                            { scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power2.out" }
+                        );
+                        
+                        // Remove any idle hidden state and clear props
+                        clearTimeout(controlsTimeout);
+                        if (playerEl) playerEl.classList.remove('hide-cursor');
+                        gsap.to(videoControls, { 
+                            opacity: 1, 
+                            y: 0, 
+                            duration: 0.4,
+                            onComplete: () => {
+                                gsap.set(videoControls, { clearProps: "all" });
+                            }
+                        });
                     }
                 };
                 document.addEventListener('fullscreenchange', handleFullscreenChange);
