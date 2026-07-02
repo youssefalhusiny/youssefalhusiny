@@ -1,3 +1,19 @@
+/* Hide Google Translate UI completely to avoid flashing */
+.goog-te-banner-frame.skiptranslate, 
+.skiptranslate > iframe,
+iframe.skiptranslate,
+iframe.VIpgJd-Zvi9od-xl07Ob-OEVmcd,
+#goog-gt-tt, .goog-te-balloon-frame { 
+    display: none !important; 
+    visibility: hidden !important; 
+    opacity: 0 !important; 
+    width: 0 !important;
+    height: 0 !important;
+}
+body { top: 0px !important; }
+.goog-tooltip, .goog-tooltip:hover { display: none !important; }
+.goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
+
 :root {
     --bg-color: #050505;
     --text-primary: #ffffff;

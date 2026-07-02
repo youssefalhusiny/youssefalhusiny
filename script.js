@@ -222,24 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gtScript.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     document.body.appendChild(gtScript);
 
-    // 4. Inject CSS to hide the Google Translate toolbar and tooltips
-    const style = document.createElement('style');
-    style.textContent = `
-        .goog-te-banner-frame.skiptranslate, 
-        .skiptranslate > iframe,
-        iframe.skiptranslate,
-        iframe.VIpgJd-Zvi9od-xl07Ob-OEVmcd { 
-            display: none !important; 
-            visibility: hidden !important; 
-            opacity: 0 !important; 
-        }
-        body { top: 0px !important; }
-        .goog-tooltip, .goog-tooltip:hover, #goog-gt-tt { display: none !important; }
-        .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
-    `;
-    document.head.appendChild(style);
-
-    // 5. Handle language switcher click
+    // 4. Handle language switcher click
     const langBtn = document.querySelector('.lang-switcher');
     if (langBtn) {
         langBtn.classList.add('notranslate'); // Protect from Google Translate modifying the text
@@ -252,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentLang === 'EN') {
                 // Switch to English
                 document.cookie = 'googtrans=/ar/en; path=/';
+                document.cookie = 'googtrans=/ar/en; path=/; domain=' + location.hostname;
                 if (selectBox) {
                     selectBox.value = 'en';
                     selectBox.dispatchEvent(new Event('change', { bubbles: true }));
@@ -264,6 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Switch back to Arabic
                 document.cookie = 'googtrans=/ar/ar; path=/';
                 document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+                
                 if (selectBox) {
                     selectBox.value = 'ar';
                     selectBox.dispatchEvent(new Event('change', { bubbles: true }));
