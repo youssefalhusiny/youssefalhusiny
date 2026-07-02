@@ -225,12 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Inject CSS to hide the Google Translate toolbar and tooltips
     const style = document.createElement('style');
     style.textContent = `
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; position: static !important; }
-        .goog-tooltip { display: none !important; }
-        .goog-tooltip:hover { display: none !important; }
+        .goog-te-banner-frame.skiptranslate, 
+        .skiptranslate > iframe,
+        iframe.skiptranslate,
+        iframe.VIpgJd-Zvi9od-xl07Ob-OEVmcd { 
+            display: none !important; 
+            visibility: hidden !important; 
+            opacity: 0 !important; 
+        }
+        body { top: 0px !important; }
+        .goog-tooltip, .goog-tooltip:hover, #goog-gt-tt { display: none !important; }
         .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
-        #goog-gt-tt { display: none !important; }
     `;
     document.head.appendChild(style);
 
