@@ -198,3 +198,86 @@ if (inquiryForm) {
         }, 1800);
     });
 }
+
+// --- Google Translate Integration ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Create a hidden div for Google Translate
+    const gtDiv = document.createElement('div');
+    gtDiv.id = 'google_translate_element';
+    gtDiv.style.cssText = 'position: absolute; opacity: 0; z-index: -999; pointer-events: none;';
+    document.body.appendChild(gtDiv);
+
+    // 2. Define the init function
+    window.googleTranslateElementInit = function() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ar',
+            includedLanguages: 'ar,en',
+            autoDisplay: false
+        }, 'google_translate_element');
+    };
+
+    // 3. Load the Google Translate script
+    const gtScript = document.createElement('script');
+    gtScript.type = 'text/javascript';
+    gtScript.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(gtScript);
+
+    // 4. Inject CSS to hide the Google Translate toolbar and tooltips
+    const style = document.createElement('style');
+    style.textContent = `
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; position: static !important; }
+        .goog-tooltip { display: none !important; }
+        .goog-tooltip:hover { display: none !important; }
+        .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
+        #goog-gt-tt { display: none !important; }
+    `;
+    document.head.appendChild(style);
+
+    // 5. Handle language switcher click
+    const langBtn = document.querySelector('.lang-switcher');
+    if (langBtn) {
+        langBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const currentLang = langBtn.textContent.trim().toUpperCase();
+            const selectBox = document.querySelector('.goog-te-combo');
+            
+            if (currentLang === 'EN') {
+                // Switch to English
+                langBtn.textContent = 'AR';
+                document.cookie = 'googtrans=/ar/en; path=/';
+                if (selectBox) {
+                    selectBox.value = 'en';
+                    selectBox.dispatchEvent(new Event('change', { bubbles: true }));
+                } else {
+                    window.location.reload();
+                }
+            } else {
+                // Switch back to Arabic
+                langBtn.textContent = 'EN';
+                document.cookie = 'googtrans=/ar/ar; path=/';
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                if (selectBox) {
+                    selectBox.value = 'ar';
+                    selectBox.dispatchEvent(new Event('change', { bubbles: true }));
+                    
+                    if (selectBox.value !== 'ar') {
+                        selectBox.value = '';
+                        selectBox.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                } else {
+                    window.location.reload();
+                }
+            }
+        });
+
+        // 6. Restore active state based on cookie on load
+        const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
+        if (match) {
+            const transValue = match[2];
+            if (transValue === '/ar/en') {
+                langBtn.textContent = 'AR';
+            }
+        }
+    }
+});
