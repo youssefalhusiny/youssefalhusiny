@@ -242,6 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Handle language switcher click
     const langBtn = document.querySelector('.lang-switcher');
     if (langBtn) {
+        langBtn.classList.add('notranslate'); // Protect from Google Translate modifying the text
+        
         langBtn.addEventListener('click', (e) => {
             e.preventDefault();
             const currentLang = langBtn.textContent.trim().toUpperCase();
@@ -249,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (currentLang === 'EN') {
                 // Switch to English
-                langBtn.textContent = 'AR';
                 document.cookie = 'googtrans=/ar/en; path=/';
                 if (selectBox) {
                     selectBox.value = 'en';
@@ -257,9 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     window.location.reload();
                 }
+                // Delay text change slightly so Google Translate snapshots the original state properly
+                setTimeout(() => langBtn.textContent = 'AR', 50);
             } else {
                 // Switch back to Arabic
-                langBtn.textContent = 'EN';
                 document.cookie = 'googtrans=/ar/ar; path=/';
                 document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                 if (selectBox) {
@@ -273,6 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     window.location.reload();
                 }
+                // Delay text change so it overrides the DOM restoration
+                setTimeout(() => langBtn.textContent = 'EN', 50);
             }
         });
 
