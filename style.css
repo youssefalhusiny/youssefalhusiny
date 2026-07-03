@@ -1565,21 +1565,21 @@ html.lenis, html.lenis body {
 /* Elegant Gallery System */
 .elegant-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
-    padding-bottom: 5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding-bottom: 2rem;
 }
 
 .elegant-gallery-card {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
     text-decoration: none;
     cursor: pointer;
 }
 
 .elegant-gallery-card:nth-child(even) {
-    margin-top: 6rem;
+    margin-top: 2rem;
 }
 
 .eg-image-wrapper {
