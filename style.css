@@ -1561,3 +1561,81 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
     pointer-events: none;
 }
+
+/* Elegant Gallery System */
+.elegant-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    padding-bottom: 5rem;
+}
+
+.elegant-gallery-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.elegant-gallery-card:nth-child(even) {
+    margin-top: 6rem;
+}
+
+.eg-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.eg-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), filter 1.6s ease;
+    filter: brightness(0.9) grayscale(10%);
+}
+
+.elegant-gallery-card:hover .eg-image-wrapper img {
+    transform: scale(1.04);
+    filter: brightness(1.1) grayscale(0%);
+}
+
+.eg-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.eg-category {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    transition: color 0.4s ease;
+}
+
+.eg-title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-primary);
+}
+
+.elegant-gallery-card:hover .eg-category {
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .elegant-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding-bottom: 0;
+    }
+    .elegant-gallery-card:nth-child(even) {
+        margin-top: 0;
+    }
+    .eg-image-wrapper {
+        aspect-ratio: 4 / 3;
+    }
+}
