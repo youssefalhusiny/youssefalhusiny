@@ -166,7 +166,7 @@
     <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
 </head>
 
-<body>
+<body style="overflow: hidden; height: 100vh;">
     <!-- الهيدر / النافبار الموحد -->
     <nav class="navbar scrolled">
         <div class="nav-brand-group">
@@ -187,9 +187,65 @@
         </ul>
     </nav>
 
-    <main style="padding-top: 90px;">
-        <!-- شبكة المعرض غير المتناظرة هندسياً والمحاذية على أطراف الجوانب الأربعة -->
-        <div class="museum-grid">
+    <main style="padding-top: 90px; height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+        <!-- معرض الأعمال (التصميم المأخوذ من الرئيسية) -->
+        <section id="gallery" class="gallery" style="width: 100%; padding: 0;">
+            <div class="container">
+                <div class="section-header-minimal" style="display: none !important; margin-bottom: 4rem; margin-top: 2rem;">
+                    <span class="section-kicker-small">أحدث المشاريع</span>
+                    <h2 class="section-title-medium">معرض الأعمال</h2>
+                </div>
+                
+                <div class="elegant-gallery-grid">
+                    <!-- Project 1 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <img src="download (77).jpg" alt="طيف أزرق">
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">سينماتوغرافيا تجريدية</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">طيف أزرق</h3>
+                        </div>
+                    </a>
+
+                    <!-- Project 2 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <img src="download (76).jpg" alt="تناغم الحواس">
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">توجيه إبداعي</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">تناغم الحواس</h3>
+                        </div>
+                    </a>
+
+                    <!-- Project 3 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <img src="download (74).jpg" alt="انعكاس الروح">
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">تصميم مرئي</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">انعكاس الروح</h3>
+                        </div>
+                    </a>
+
+                    <!-- Project 4 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <img src="download (73).jpg" alt="ظل النور">
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">إنتاج فني</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">ظل النور</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- شبكة المتاحف (المخفية بناء على طلب العميل) -->
+        <div class="museum-grid" style="display: none !important;">
             
             <!-- العمود الأول (مجموع الارتفاعات المنسقة) -->
             <div class="museum-column">
@@ -314,8 +370,8 @@
         </div>
     </main>
 
-    <!-- فوتر الموقع المطابق -->
-    <footer class="footer">
+    <!-- الفوتر مخفي بناء على طلب العميل لمنع التمرير -->
+    <footer class="footer" style="display: none !important;">
         <div class="container">
             <div class="footer-grid">
                 <!-- العمود الأول: العلامة التجارية -->
