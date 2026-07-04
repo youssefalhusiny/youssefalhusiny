@@ -1840,17 +1840,21 @@ html.lenis, html.lenis body {
     width: 180px;
 }
 .fr-image::after {
-    content: 'قراءة';
+    content: 'اقرأ الآن';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #050505;
-    padding: 0.4rem 1.2rem;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: 400;
     opacity: 0;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
