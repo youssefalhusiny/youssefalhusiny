@@ -1812,6 +1812,7 @@ html.lenis, html.lenis body {
 }
 .figure-row {
     display: flex;
+    align-items: flex-end;
     gap: 2.5rem;
     padding: 3rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -1828,6 +1829,7 @@ html.lenis, html.lenis body {
 }
 .fr-image {
     width: 140px;
+    height: 160px;
     flex-shrink: 0;
     overflow: hidden;
     border-radius: 4px;
@@ -1868,7 +1870,6 @@ html.lenis, html.lenis body {
 }
 .figure-row:hover .fr-image img {
     filter: grayscale(0%) brightness(1);
-    transform: scale(1.05);
 }
 .fr-content {
     display: flex;
