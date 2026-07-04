@@ -1786,7 +1786,8 @@ html.lenis, html.lenis body {
 .split-header-col {
     flex: 0 0 30%;
     position: sticky;
-    top: 120px;
+    top: 50vh;
+    transform: translateY(-50%);
 }
 .sticky-header {
     display: flex;
@@ -1826,11 +1827,11 @@ html.lenis, html.lenis body {
     padding-bottom: 0;
 }
 .fr-image {
-    width: 80px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
     flex-shrink: 0;
     overflow: hidden;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 .fr-image img {
     width: 100%;
