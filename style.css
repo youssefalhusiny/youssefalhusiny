@@ -207,6 +207,33 @@ h1, h2, h3 {
     transform-origin: bottom left;
 }
 
+/* Nav subtitle (Arabic translation below English label) */
+.nav-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.nav-sub {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 300;
+    transition: opacity 0.4s ease;
+}
+
+.nav-links a:hover .nav-sub {
+    opacity: 1;
+}
+
+.nav-links a.active .nav-sub {
+    opacity: 0.85;
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -1649,14 +1676,15 @@ html.lenis, html.lenis body {
 
 .ea-item {
     display: grid;
-    grid-template-columns: 40px 120px 1.5fr 2fr 40px;
+    grid-template-columns: 40px 110px 1.4fr 2fr 40px;
     align-items: center;
     gap: 2rem;
     padding: 2.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     text-decoration: none;
     color: var(--text-primary);
-    transition: all 0.4s ease;
+    transition: background-color 0.4s ease;
+    cursor: pointer;
 }
 
 .ea-item:first-child {
@@ -1670,17 +1698,18 @@ html.lenis, html.lenis body {
 }
 
 .ea-image {
-    width: 100%;
-    aspect-ratio: 16/9;
+    width: 110px;
+    aspect-ratio: 3/4;
     overflow: hidden;
     border-radius: 2px;
+    flex-shrink: 0;
 }
 
 .ea-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) brightness(0.7);
+    filter: brightness(0.8);
     transition: all 0.6s ease;
 }
 
@@ -1724,7 +1753,7 @@ html.lenis, html.lenis body {
 }
 
 .ea-item:hover .ea-image img {
-    filter: grayscale(0%) brightness(1);
+    filter: brightness(1);
     transform: scale(1.05);
 }
 
@@ -1733,83 +1762,174 @@ html.lenis, html.lenis body {
     color: var(--text-primary);
 }
 
-@media (max-width: 1024px) {
-    .ea-item {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 1.5rem;
+@media (max-width: 1100px) {
+    .split-layout-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 5% 5rem;
     }
-    .ea-index, .ea-desc {
+    .split-sidebar {
+        display: none;
+    }
+    .mobile-only-header {
+        display: flex;
+    }
+    .section-kicker-small,
+    .section-title-medium {
+        display: block;
+    }
+    .section-header-minimal {
+        display: none;
+    }
+    .group-nav {
+        display: flex;
+    }
+}
+@media (max-width: 768px) {
+    .ea-item {
+        grid-template-columns: 28px 80px 1fr;
+        gap: 1.2rem;
+        padding: 2rem 0;
+    }
+    .ea-text-col {
         display: none;
     }
     .ea-image {
-        width: 100px;
-        flex-shrink: 0;
+        width: 80px;
     }
-    .ea-content {
-        flex-grow: 1;
-    }
-    .ea-arrow {
-        flex-shrink: 0;
+    .ea-title {
+        font-size: 1.1rem;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 480px) {
     .ea-item {
+        grid-template-columns: 24px 70px 1fr;
+        gap: 1rem;
         padding: 1.5rem 0;
     }
+    .ea-index {
+        display: none;
+    }
+    .ea-item {
+        grid-template-columns: 70px 1fr;
+    }
 }
 
-.ea-image { display: none; }
-}
-
-/* Split Layout Articles Page */
-.split-main {
-    padding-top: 120px;
+/* ═══════════════════════════════════════
+   Articles Page — Full Width Layout
+═══════════════════════════════════════ */
+.articles-main {
+    padding-top: 110px;
     background-color: var(--bg-color);
+    min-height: 100vh;
 }
-.split-section {
+
+.articles-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 4rem 5% 8rem;
+}
+
+/* Group navigation */
+.group-nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.group-nav-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text-secondary);
+    padding: 0.4rem 1.1rem;
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.2px;
+}
+.group-nav-btn.active,
+.group-nav-btn:hover {
+    border-color: rgba(255,255,255,0.55);
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.04);
+}
+
+/* Section: header above + full-width list */
+.art-section {
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-.split-section:last-child {
+
+.art-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
     border-bottom: none;
 }
-.split-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 6rem 5%;
-    display: flex;
-    gap: 6rem;
-    align-items: flex-start;
-}
-.split-header-col {
-    flex: 0 0 30%;
-    position: sticky;
-    top: 50vh;
-    transform: translateY(-50%);
-}
-.sticky-header {
+.header-text {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
-.sh-kicker {
-    font-size: 0.85rem;
+.art-kicker {
+    font-size: 0.7rem;
     color: var(--text-secondary);
     letter-spacing: 2px;
+    text-transform: uppercase;
 }
-.sh-title {
-    font-size: 2.2rem;
+.art-title {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
     font-weight: 300;
     color: var(--text-primary);
-    line-height: 1.3;
+    line-height: 1.2;
 }
-.split-list-col {
-    flex: 1;
+
+.art-list {
     display: flex;
     flex-direction: column;
 }
+
+/* ea-item overrides for new layout */
+.ea-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.ea-read-more {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease, color 0.4s ease;
+}
+.ea-item:hover .ea-read-more {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .art-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+}
+@media (max-width: 768px) {
+    .art-title { font-size: 1.4rem; }
+    .art-section-header { margin-bottom: 2rem; }
+}
+@media (max-width: 480px) {
+    .group-nav-btn { padding: 0.4rem 0.9rem; font-size: 0.7rem; }
+}
+
+
 .figure-row {
     display: flex;
     align-items: flex-end;
@@ -1869,11 +1989,11 @@ html.lenis, html.lenis body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) brightness(0.8);
+    filter: brightness(0.85);
     transition: all 0.6s ease;
 }
 .figure-row:hover .fr-image img {
-    filter: grayscale(0%) brightness(1);
+    filter: brightness(1);
 }
 .fr-content {
     display: flex;
@@ -2085,3 +2205,249 @@ html.lenis, html.lenis body {
             }
         }
     
+
+
+/* ==========================================================================
+   Teardown Page Layout
+   ========================================================================== */
+
+.teardown-main {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.td-hero {
+    height: 70vh;
+    min-height: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin-bottom: 4rem;
+}
+.td-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(5,5,5,0.7) 0%, rgba(5,5,5,0.9) 100%);
+}
+.td-hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 5%;
+}
+.td-hero-kicker {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+.td-hero-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+
+/* Split Section (Text on Right, Info on Left) */
+.td-split-section {
+    padding: 4rem 0 8rem;
+}
+.td-split-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2fr for text (right), 1fr for info (left) */
+    gap: 6rem;
+    align-items: start;
+}
+
+/* Right Column: Paragraph */
+.td-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.td-section-title {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+.td-paragraph {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Left Column: Stacked Info */
+.td-info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0.5rem;
+}
+.td-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.td-info-item:first-child {
+    padding-top: 0;
+}
+.td-info-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.td-info-label {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.td-info-value {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .td-split-container {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+}
+
+
+/* ==========================================================================
+   Teardown: Market Reality Section
+   ========================================================================== */
+.td-market-section {
+    padding: 6rem 0 8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.td-market-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+.td-market-header {
+    margin-bottom: 5rem;
+}
+.td-kicker {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+.td-market-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+.td-market-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+}
+.td-market-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.td-market-subtitle {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .td-market-content {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+}
+
+/* Teardown: Anatomy Section */
+.td-anatomy-section {
+    padding: 8rem 0;
+    background-color: #030303;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.td-anatomy-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+.td-anatomy-header {
+    margin-bottom: 5rem;
+}
+.td-anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+.td-anatomy-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 3rem 2.5rem;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s ease, border-color 0.5s ease;
+}
+.td-anatomy-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+.td-anatomy-number {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+    display: block;
+    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+}
+.td-anatomy-card:hover .td-anatomy-number {
+    color: rgba(255, 255, 255, 0.3);
+}
+.td-anatomy-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+.td-anatomy-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 1024px) {
+    .td-anatomy-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .td-anatomy-grid {
+        grid-template-columns: 1fr;
+    }
+}
