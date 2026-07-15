@@ -745,7 +745,7 @@ h1, h2, h3 {
 .inspired-card {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     text-decoration: none;
     cursor: pointer;
 }
@@ -772,7 +772,7 @@ h1, h2, h3 {
 .inspired-card-content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .inspired-card-header {
@@ -780,7 +780,7 @@ h1, h2, h3 {
     justify-content: space-between;
     align-items: baseline;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
     transition: border-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -790,7 +790,7 @@ h1, h2, h3 {
 
 .inspired-card-title {
     font-size: 1.15rem;
-    font-weight: 500;
+    font-weight: 300;
     color: var(--text-primary);
     margin: 0;
     font-family: 'IBM Plex Sans Arabic', sans-serif;
@@ -815,7 +815,7 @@ h1, h2, h3 {
     line-height: 1.8;
     color: var(--text-secondary);
     opacity: 0.8;
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
