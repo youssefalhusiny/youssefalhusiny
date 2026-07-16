@@ -52,44 +52,52 @@
         </button>
         <ul class="nav-links">
             <li><a href="/#hero">البداية</a></li>
-            <li><a href="gallery">المعرض</a></li>
-            <li><a class="active" href="articles">تفكيك</a></li>
+            <li><a class="active" href="gallery">المعرض</a></li>
+            <li><a href="articles">تفكيك</a></li>
             <li><a href="about">من أنا</a></li>
             <li><a href="contact">تواصل معي</a></li>
         </ul>
     </nav>
     <main class="case-main">
         <!-- Hero Section -->
-        <section class="case-hero">
+        <section class="case-hero no-anim" style="background-image: url('شين.png'); background-attachment: fixed; background-size: cover; background-position: center;">
             <div class="case-hero-image">
-                <img src="شين.png" alt="شين">
                 <div class="case-hero-overlay"></div>
             </div>
-            <div class="case-hero-content" style="align-items: flex-start; text-align: right;">
-                <span class="case-kicker" style="font-family: 'IBM Plex Sans Arabic', sans-serif; margin-bottom: -0.5rem;">دراسة حالة</span>
-                <h1 class="case-title" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 400; margin: 0 0 1rem 0;">شين</h1>
+            <div class="case-hero-content" style="align-items: center; text-align: center; flex-direction: column; gap: 2.5rem; justify-content: center;">
                 
-                <div style="display: flex; gap: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; margin-bottom: 2rem;">
-                    <div>
-                        <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; letter-spacing: 1px; display: block; margin-bottom: 0.3rem;">العميل</span>
-                        <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: var(--text-primary); font-weight: 300;">مشروع مستقل</span>
+                <!-- Title block -->
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+                    <span class="case-kicker" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; letter-spacing: 3px; opacity: 0.6; font-weight: 300; margin-bottom: 0.4rem;">دراسة حالة</span>
+                    <h1 class="case-title" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 200; font-size: 5rem; letter-spacing: -1px; margin: 0; line-height: 1;">شين</h1>
+                </div>
+
+                <!-- Meta strip -->
+                <div style="display: flex; gap: 3rem; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <span style="display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 300;">العميل</span>
+                        <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 300;">مستقل</span>
                     </div>
-                    <div>
-                        <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; letter-spacing: 1px; display: block; margin-bottom: 0.3rem;">النوع</span>
-                        <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: var(--text-primary); font-weight: 300;">موشن جرافيك / 3D</span>
+                    <div style="width: 1px; height: 30px; background: rgba(255,255,255,0.15);"></div>
+                    <div style="text-align: center;">
+                        <span style="display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 300;">النوع</span>
+                        <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 300;">موشن جرافيك · 3D</span>
                     </div>
-                    <div>
-                        <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.6; letter-spacing: 1px; display: block; margin-bottom: 0.3rem;">الدور</span>
-                        <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: var(--text-primary); font-weight: 300;">إخراج، تحريك، إضاءة</span>
+                    <div style="width: 1px; height: 30px; background: rgba(255,255,255,0.15);"></div>
+                    <div style="text-align: center;">
+                        <span style="display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 300;">التاريخ</span>
+                        <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 300;">2026</span>
                     </div>
                 </div>
 
-                <a id="playHeroVideo" href="#" onclick="document.getElementById('videoModal').classList.add('active'); document.getElementById('modalVideo').play(); return false;" style="display: inline-flex; align-items: center; gap: 0.75rem; color: var(--text-primary); text-decoration: none; font-size: 0.85rem; font-family: 'IBM Plex Sans Arabic', sans-serif; transition: opacity 0.3s ease; opacity: 0.85;" onmouseover="this.style.opacity='1'; this.querySelector('.play-circle').style.borderColor='#fff'; this.querySelector('.play-circle').style.backgroundColor='rgba(255,255,255,0.1)';" onmouseout="this.style.opacity='0.85'; this.querySelector('.play-circle').style.borderColor='rgba(255,255,255,0.3)'; this.querySelector('.play-circle').style.backgroundColor='transparent';">
-                    <span class="play-circle" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; transition: all 0.3s ease;">
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="margin-left: 2px;"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
-                    </span>
-                    <span style="letter-spacing: 1px; font-weight: 300;">تشغيل الفيديو</span>
+                <!-- Play button -->
+                <a id="playHeroVideo" href="#" onclick="document.getElementById('videoModal').classList.add('active'); document.getElementById('modalVideo').play(); return false;"
+                   style="display: inline-flex; align-items: center; gap: 0.8rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s ease; margin-top: 1rem;"
+                   onmouseover="this.style.color='rgba(255,255,255,1)'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+                    <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.8rem; letter-spacing: 3px; font-weight: 300;">تشغيل الفيديو</span>
+                    <span style="display: block; width: 30px; height: 1px; background: currentColor; transition: width 0.4s ease;" class="play-line"></span>
                 </a>
+
             </div>
         </section>
 
@@ -98,36 +106,26 @@
             <div class="container">
                 <div class="case-overview-grid">
                     <div class="overview-text" style="text-align: right;">
-                        <div style="margin-bottom: 1.5rem;">
-                            <span style="font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); opacity: 0.7; font-weight: 300;">تفكيك الأعمال</span>
-                            <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.7rem; font-weight: 400; color: var(--text-primary); margin: 0.5rem 0 0 0;">نظرة عامة</h2>
+                        <div style="margin-bottom: 2rem;">
+                            <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0.5rem 0 0 0;">نظرة عامة</h2>
                         </div>
                         
-                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary); text-align: justify; margin: 0 0 0.8rem 0;">أؤمن أن الحياة فرصة وحيدة، لذا أرفض اختزالها، رغم إدراكي التام لزوالها وزوال كل ما يُبنى فيها. هذا التناقض لا يربكني؛ بل أراه توازناً، حيث لا تعارض بين الفناء والمعنى، وإنما هو امتزاج لا يراه إلا من يتأمل الصورة الكاملة.</p>
-                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary); text-align: justify; margin: 0 0 0.8rem 0;">لا أميل إلى الانحياز، ولا أرتاح للولاء الأعمى للأفكار أو الأشخاص؛ فالانتماء الضيق سجن يحرم العقل من آفاق الرؤية الشاملة. أنظر إلى العالم بعين مجردة وتواقة للمطلق، متخففاً من قيود الأيديولوجيا والمسلمات المسبقة؛ لا يهمني مَن قال، بل يهمني ما قيل، فالأفكار الحقيقية هي التي تملك سلطتها الذاتية وتتحدث بلغة الحقيقة المجردة.</p>
-                        <div style="margin-top: 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem;">
-                            <div>
-                                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.1rem; font-weight: 400; color: var(--text-primary); margin: 0 0 0.4rem 0;">المشكلة:</h3>
-                                <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); margin: 0;">اكتب المشكلة أو التحدي هنا...</p>
-                            </div>
-                            <div>
-                                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.1rem; font-weight: 400; color: var(--text-primary); margin: 0 0 0.4rem 0;">الهدف:</h3>
-                                <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); margin: 0;">اكتب الهدف المرجو تحقيقه...</p>
-                            </div>
-                            <div>
-                                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.1rem; font-weight: 400; color: var(--text-primary); margin: 0 0 0.4rem 0;">دوري:</h3>
-                                <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); margin: 0;">اكتب طبيعة دورك وإنجازك...</p>
-                            </div>
-                        </div>
+                        <p style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); text-align: justify; margin: 0 0 0.8rem 0;">أؤمن أن الحياة فرصة وحيدة، لذا أرفض اختزالها، رغم إدراكي التام لزوالها وزوال كل ما يُبنى فيها. هذا التناقض لا يربكني؛ بل أراه توازناً، حيث لا تعارض بين الفناء والمعنى، وإنما هو امتزاج لا يراه إلا من يتأمل الصورة الكاملة.</p>
+                        <p style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); text-align: justify; margin: 0 0 0.8rem 0;">لا أميل إلى الانحياز، ولا أرتاح للولاء الأعمى للأفكار أو الأشخاص؛ فالانتماء الضيق سجن يحرم العقل من آفاق الرؤية الشاملة. أنظر إلى العالم بعين مجردة وتواقة للمطلق، متخففاً من قيود الأيديولوجيا والمسلمات المسبقة؛ لا يهمني مَن قال، بل يهمني ما قيل، فالأفكار الحقيقية هي التي تملك سلطتها الذاتية وتتحدث بلغة الحقيقة المجردة.</p>
+                        <p style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); text-align: justify; margin: 0 0 0.8rem 0;">كان التحدي الرئيسي هو تجسيد هذه الرؤية الفلسفية المعقدة في شكل مرئي مبسط وقوي في نفس الوقت. استخدمت حركة الحرف العربي لخلق توازن بين الثبات والتحول، مع التركيز على التكوينات البصرية التي تعكس التناقضات بين الفناء والمعنى، مما أدى إلى منتج نهائي يحاكي عمق الفكرة الأساسية.</p>
                     </div>
                     <div class="overview-meta">
                         <div class="meta-item">
-                            <span class="meta-label">النوع</span>
-                            <span class="meta-value">تفكيك أعمال</span>
+                            <span class="meta-label">المشكلة</span>
+                            <span class="meta-value" style="font-size: 0.85rem; line-height: 1.5;">تحويل مفاهيم فلسفية مجردة إلى سرد بصري مفهوم وجذاب.</span>
                         </div>
                         <div class="meta-item">
-                            <span class="meta-label">السنة</span>
-                            <span class="meta-value">2026</span>
+                            <span class="meta-label">الهدف</span>
+                            <span class="meta-value" style="font-size: 0.85rem; line-height: 1.5;">صناعة هوية بصرية حركية تعكس التوازن بين الفناء والمعنى.</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">الدور</span>
+                            <span class="meta-value" style="font-size: 0.85rem; line-height: 1.5;">إدارة فنية، تحريك 3D، وتركيب المشاهد النهائية (Compositing).</span>
                         </div>
                     </div>
                 </div>
@@ -137,8 +135,7 @@
         <!-- Pre-production Gallery Section -->
         <section class="case-gallery">
             <div style="text-align: right; margin-bottom: 2.5rem; padding: 0 5%; max-width: 1450px; margin-left: auto; margin-right: auto;">
-                <span style="font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); opacity: 0.7; font-weight: 300;">معرض الصور</span>
-                <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.7rem; font-weight: 400; color: var(--text-primary); margin: 0.5rem 0 0 0;">ما قبل الإنتاج</h2>
+                <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0;">ما قبل الإنتاج</h2>
             </div>
             <div class="study-case-grid">
                     <div class="gallery-item">
@@ -163,10 +160,10 @@
         </section>
 
         <!-- Breakdowns Section -->
-        <section style="padding: 6rem 0 14rem 0; background-color: var(--bg-color);">
+        <section style="position: relative; z-index: 2; padding: 6rem 0 14rem 0; background-color: var(--bg-color);">
             <div style="padding: 0 5%; max-width: 1450px; margin: 0 auto;">
                 
-                <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="text-align: right; margin-bottom: 4rem;">
                     <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); margin: 0; letter-spacing: 1px;">كواليس العمل</h2>
                 </div>
 
@@ -211,7 +208,7 @@
 
 
         <!-- Results Section -->
-        <section class="case-results" style="position: relative; padding: 4rem 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; min-height: 30vh;">
+        <section class="case-results" style="position: relative; z-index: 2; padding: 2.5rem 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
             <!-- Video Background with Blur -->
             <video autoplay loop muted playsinline style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.1); width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: blur(15px);">
                 <source src="3D.mp4" type="video/mp4">
@@ -237,7 +234,7 @@
         </section>
 
         <!-- Reflections Section -->
-        <section class="case-reflections" style="padding: 7rem 0; background-color: var(--bg-color); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <section class="case-reflections" style="position: relative; z-index: 2; padding: 7rem 0; background-color: var(--bg-color); border-bottom: 1px solid rgba(255,255,255,0.05);">
             <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
                 <span style="font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); opacity: 0.7; font-weight: 300; display: block; margin-bottom: 1.5rem;">تأملات</span>
                 <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); line-height: 1.6; margin: 0 0 1.5rem 0;">التقنية مجرد أداة، الأثر الحقيقي يُخلق عندما تلامس القصة شيئاً صادقاً بداخلنا.</h3>
@@ -245,12 +242,48 @@
                 <p style="font-size: 1rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0 0 3rem 0; opacity: 0.85;">في هذا المشروع، لم يكن التحدي الأكبر في إتقان الحركة أو ضبط الإضاءة، بل في كيفية تطويع هذه الأدوات التقنية لخدمة الفكرة المجردة. التجربة أكدت لي أن أقوى الأعمال البصرية هي تلك التي تترك مساحة للمشاهد ليكمل القصة بخياله، بدلاً من إخباره بكل شيء.</p>
                 
                 <div style="display: flex; justify-content: center; gap: 1rem;">
-                    <a href="/contact" class="reflection-cta-btn">دعنا نبني فكرتك</a>
-                    <a href="gallery.html" class="reflection-cta-btn" style="border-color: rgba(255,255,255,0.08); color: var(--text-secondary);">تصفح المعرض</a>
+                    <a href="/contact" class="hero-cta-btn" style="margin-top: 0;">دعنا نبني فكرتك</a>
                 </div>
             </div>
         </section>
-
+        
+        <!-- Next Projects Section -->
+        <section class="next-projects" style="position: relative; z-index: 2; padding: 6rem 0; background-color: var(--bg-color); border-top: 1px solid rgba(255,255,255,0.05);">
+            <div class="container" style="max-width: 1450px; margin: 0 auto; padding: 0 5%;">
+                <div style="text-align: right; margin-bottom: 3rem;">
+                    <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0;">الأعمال التالية</h2>
+                </div>
+                
+                <div class="next-projects-grid">
+                    <!-- Project 1 -->
+                    <a href="case-shin.html" class="gallery-item">
+                        <img src="رشف.png" alt="رشف">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-overlay-title">رشف</h3>
+                            <p class="gallery-overlay-desc">تصميم بصري يجمع بين الخط والتصوير.</p>
+                        </div>
+                    </a>
+                    
+                    <!-- Project 2 -->
+                    <a href="case-shin.html" class="gallery-item">
+                        <img src="بينهم.png" alt="بينهم">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-overlay-title">بينهم</h3>
+                            <p class="gallery-overlay-desc">عمل بصري يتناول العلاقات الإنسانية.</p>
+                        </div>
+                    </a>
+                    
+                    <!-- Project 3 -->
+                    <a href="case-shin.html" class="gallery-item">
+                        <img src="Dar Al-Ula Branding.jpg" alt="دار العلا">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-overlay-title">Dar Al-Ula Branding</h3>
+                            <p class="gallery-overlay-desc">هوية بصرية تعكس روح العلا.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 <!-- فوتر الموقع المطابق -->
     <footer class="footer">
@@ -267,8 +300,8 @@
                     <ul class="footer-links">
                         <li><a href="/#hero">البداية</a></li>
                         <li><a href="about">من أنا</a></li>
-                        <li><a href="gallery">المعرض</a></li>
-                        <li><a class="active" href="articles">تفكيك</a></li>
+                        <li><a class="active" href="gallery">المعرض</a></li>
+                        <li><a href="articles">تفكيك</a></li>
                         <li><a href="contact">تواصل معي</a></li>
                     </ul>
                 </div>
