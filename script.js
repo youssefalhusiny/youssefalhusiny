@@ -88,7 +88,7 @@ window.addEventListener("load", () => {
 });
 
 // Scroll Animations for all sections except hero
-const sections = gsap.utils.toArray('section:not(.hero), .footer');
+const sections = gsap.utils.toArray('section:not(.hero):not(.no-anim), .footer');
 
 sections.forEach((section) => {
     gsap.from(section, {
@@ -104,18 +104,21 @@ sections.forEach((section) => {
     });
 });
 
-// Stagger animation for gallery items
-gsap.from(".gallery-item", {
-    scrollTrigger: {
-        trigger: ".gallery",
-        start: "top 75%",
-    },
-    opacity: 0,
-    scale: 0.95,
-    duration: 1.2,
-    stagger: 0.15,
-    ease: "power3.out"
-});
+// Stagger animation for gallery items (only when the .gallery section is visible)
+const galleryTrigger = document.querySelector('.gallery');
+if (galleryTrigger && galleryTrigger.style.display !== 'none' && !galleryTrigger.closest('[style*="display: none"]')) {
+    gsap.from(".gallery-item", {
+        scrollTrigger: {
+            trigger: ".gallery",
+            start: "top 75%",
+        },
+        opacity: 0,
+        scale: 0.95,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+    });
+}
 
 // Stagger animation for typographic editorial cards
 gsap.from(".editorial-typo-card", {

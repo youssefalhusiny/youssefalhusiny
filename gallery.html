@@ -166,7 +166,7 @@
     <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
 </head>
 
-<body style="overflow: hidden; height: 100vh;">
+<body>
     <!-- الهيدر / النافبار الموحد -->
     <nav class="navbar scrolled">
         <div class="nav-brand-group">
@@ -187,9 +187,59 @@
         </ul>
     </nav>
 
-    <main style="padding-top: 90px; height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
-        <!-- معرض الأعمال (التصميم المأخوذ من الرئيسية) -->
-        <section id="gallery" class="gallery" style="width: 100%; padding: 0;">
+    <main style="padding-top: 90px;">
+
+        <!-- Pre-production Gallery Section (Active) -->
+        <section class="no-anim" style="padding: 5rem 0;">
+
+            <div class="case-gallery-grid">
+                <div class="gallery-item">
+                    <img src="شين.png" alt="ما قبل الإنتاج 1">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-overlay-title">شين</h3>
+                        <p class="gallery-overlay-desc">فيديو موشن جرافيك يستكشف مفهوم الحرف العربي وعلاقته بالهوية البصرية والثقافية عبر حركة مدروسة وإيقاع بصري متأنٍّ.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="رشف.png" alt="ما قبل الإنتاج 2">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-overlay-title">رشف</h3>
+                        <p class="gallery-overlay-desc">تصميم بصري يجمع بين الخط العربي والتصوير الضوئي في تجربة مرئية تتسلل إلى الحواس بهدوء وعمق غير مباشر.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="بينهم.png" alt="ما قبل الإنتاج 3">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-overlay-title">بينهم</h3>
+                        <p class="gallery-overlay-desc">عمل بصري يتناول العلاقات الإنسانية وما يسكن المساحات الصامتة بين الناس من توتر ودفء وغموض لا يُقال.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Dar Al-Ula Branding.jpg" alt="ما قبل الإنتاج 4">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-overlay-title">Dar Al-Ula Branding</h3>
+                        <p class="gallery-overlay-desc">هوية بصرية متكاملة تجمع بين عراقة المكان وحداثة التصميم في منظومة بصرية تعكس روح العلا وعمقها الحضاري.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Poems for Life.jpg" alt="ما قبل الإنتاج 5">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-overlay-title">Poems for Life</h3>
+                        <p class="gallery-overlay-desc">مشروع بصري شعري يترجم النصوص الأدبية إلى تجارب مرئية تأملية تقف عند حدود ما بين الكلمة والصورة والمعنى.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="_light_.jpg" alt="ما قبل الإنتاج 6">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-overlay-title">Light</h3>
+                        <p class="gallery-overlay-desc">دراسة بصرية في الضوء وتأثيره على الفضاء والمزاج، تُسجَّل عبر لقطات دقيقة وتكوينات هادئة تجعل من الإضاءة لغةً قائمة بذاتها.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- معرض الأعمال (مخفي) -->
+        <section id="gallery" class="gallery" style="display: none !important; width: 100%; padding: 0;">
             <div class="container">
                 <div class="section-header-minimal" style="display: none !important; margin-bottom: 4rem; margin-top: 2rem;">
                     <span class="section-kicker-small">أحدث المشاريع</span>
@@ -244,10 +294,10 @@
             </div>
         </section>
 
-        <!-- شبكة المتاحف (المخفية بناء على طلب العميل) -->
+        <!-- شبكة المتاحف (مخفية) -->
         <div class="museum-grid" style="display: none !important;">
             
-            <!-- العمود الأول (مجموع الارتفاعات المنسقة) -->
+            <!-- العمود الأول -->
             <div class="museum-column">
                 <a href="project" class="museum-item">
                     <div class="museum-img-wrapper tall">
@@ -271,7 +321,7 @@
                 </a>
             </div>
             
-            <!-- العمود الثاني (مجموع الارتفاعات المنسقة) -->
+            <!-- العمود الثاني -->
             <div class="museum-column">
                 <a href="project" class="museum-item">
                     <div class="museum-img-wrapper short">
@@ -295,7 +345,7 @@
                 </a>
             </div>
             
-            <!-- العمود الثالث (مجموع الارتفاعات المنسقة) -->
+            <!-- العمود الثالث -->
             <div class="museum-column">
                 <a href="project" class="museum-item">
                     <div class="museum-img-wrapper medium">
@@ -319,7 +369,7 @@
                 </a>
             </div>
             
-            <!-- العمود الرابع (مجموع الارتفاعات المنسقة) -->
+            <!-- العمود الرابع -->
             <div class="museum-column">
                 <a href="project" class="museum-item">
                     <div class="museum-img-wrapper tall">
@@ -343,7 +393,7 @@
                 </a>
             </div>
             
-            <!-- العمود الخامس (مجموع الارتفاعات المنسقة) -->
+            <!-- العمود الخامس -->
             <div class="museum-column">
                 <a href="project" class="museum-item">
                     <div class="museum-img-wrapper short">
@@ -369,6 +419,7 @@
 
         </div>
     </main>
+
 
     <!-- الفوتر مخفي بناء على طلب العميل لمنع التمرير -->
     <footer class="footer" style="display: none !important;">

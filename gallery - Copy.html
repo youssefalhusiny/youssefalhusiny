@@ -1,203 +1,386 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض الهيكلة المنثورة - يوسف الحسيني</title>
+    <title>المعرض - يوسف الحسيني</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Google Fonts -->
+    <!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <style>
-        /* ----- THE 5-COLUMN ENGINEERED MASONRY GRID ----- */
-        .gallery-container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 40px 4% 100px; 
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 4%;
-            /* CRITICAL FIX: Force Left-to-Right direction so Column 1 appears on the LEFT, matching the English reference image exactly, overriding the site's RTL */
-            direction: ltr; 
+        /* override body for dark theme matching the rest of the site */
+        body {
+            background-color: #050505 !important;
+            color: var(--text-primary) !important;
         }
 
-        .col {
+        /* Museum Staggered Flex Grid (Perfect rectangle boundary with dynamic internal heights) */
+        .museum-grid {
+            display: flex;
+            gap: 3.5rem;
+            padding: 6rem 6% 12rem;
+            background-color: #050505;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .museum-column {
             flex: 1;
             display: flex;
             flex-direction: column;
+            gap: 5.5rem; /* Enforces equal vertical spacing inside all columns */
         }
 
-        /* Image wrappers */
-        .img-wrap {
-            display: flex;
-            justify-content: center;
+        /* Museum Item Card */
+        .museum-item {
             width: 100%;
-            margin-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            opacity: 0; /* يمنع ظهور البطاقات فجأة قبل بدء الأنيميشن */
+        }
+        .museum-img-wrapper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 1px;
+            background-color: #111111;
+            /* Ultra-smooth transition for the scale and shadow */
+            transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1),
+                        box-shadow 2.5s cubic-bezier(0.15, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
         }
 
-        .img-wrap img {
+        /* Three distinct responsive aspect ratios that mathematically sum up to 3.55 * W per column */
+        .museum-img-wrapper.tall {
+            aspect-ratio: 2 / 3;
+        }
+        .museum-img-wrapper.medium {
+            aspect-ratio: 4 / 5;
+        }
+        .museum-img-wrapper.short {
+            aspect-ratio: 5 / 4;
+        }
+
+        /* The morphing hover animation: Grows to a perfect square aspect ratio (1 / 1) */
+        .museum-item:hover .museum-img-wrapper {
+            transform: scale(1.02); /* Expands/grows the size slightly and elegantly */
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6); /* Premium deep dark shadow on active item */
+            z-index: 10;
+        }
+
+        .museum-img-wrapper img {
+            width: 100%;
+            height: 100%;
             display: block;
             object-fit: cover;
-            filter: grayscale(15%) contrast(105%);
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+            transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);
+        }
+        
+        .museum-item:hover .museum-img-wrapper img {
+            transform: scale(1.08); /* Slow majestic luxury cinematic zoom */
+        }
+        
+        .museum-caption {
+            font-size: 0.72rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            text-align: right;
+            letter-spacing: 0.5px;
+            opacity: 0.85;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            transition: color 0.8s cubic-bezier(0.15, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.15, 1, 0.3, 1);
+        }
+        .museum-item:hover .museum-caption {
+            color: var(--text-primary);
+            opacity: 1;
         }
 
-        .img-wrap:hover img {
-            transform: scale(1.04);
-            filter: grayscale(0%) contrast(110%);
-        }
-
-        /* ----- THE "HIDDEN ORDER" SIZE CLASSES ----- */
-        
-        .size-l-port img { width: 100%; aspect-ratio: 4 / 5; }
-        .size-m-port img { width: 100%; aspect-ratio: 5 / 6; }
-        .size-l-land img { width: 100%; aspect-ratio: 4 / 3; }
-        .size-s-land img { width: 75%; aspect-ratio: 4 / 3; }
-        .size-xs-land img { width: 60%; aspect-ratio: 3 / 2; }
-        .size-m-square img { width: 80%; aspect-ratio: 1 / 1; }
-
-        /* EXACT VERTICAL STAGGERING */
-        
-        .col-1 .img-wrap:nth-child(1) { margin-top: 0; }
-        .col-1 .img-wrap:nth-child(2) { margin-top: 8vw; }
-        .col-1 .img-wrap:nth-child(3) { margin-top: 12vw; }
-
-        .col-2 .img-wrap:nth-child(1) { margin-top: 0; }
-        .col-2 .img-wrap:nth-child(2) { margin-top: 16vw; }
-        .col-2 .img-wrap:nth-child(3) { margin-top: 6vw; }
-
-        .col-3 .img-wrap:nth-child(1) { margin-top: 0; }
-        .col-3 .img-wrap:nth-child(2) { margin-top: 20vw; }
-        .col-3 .img-wrap:nth-child(3) { margin-top: 8vw; }
-
-        .col-4 .img-wrap:nth-child(1) { margin-top: 0; }
-        .col-4 .img-wrap:nth-child(2) { margin-top: 10vw; }
-        .col-4 .img-wrap:nth-child(3) { margin-top: 14vw; }
-
-        .col-5 .img-wrap:nth-child(1) { margin-top: 0; }
-        .col-5 .img-wrap:nth-child(2) { margin-top: 14vw; }
-        .col-5 .img-wrap:nth-child(3) { margin-top: 10vw; }
-
-        /* Responsive adjustments */
+        /* Responsive Breakpoints */
         @media (max-width: 1200px) {
-            .gallery-container { gap: 3%; }
+            .museum-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+                padding: 4rem 5%;
+            }
+            .museum-column {
+                gap: 2.5rem;
+            }
+            .museum-img-wrapper.tall, .museum-img-wrapper.medium, .museum-img-wrapper.short {
+                aspect-ratio: 1 / 1; /* Standardize on smaller tablets for layout stability */
+            }
         }
-
-        @media (max-width: 900px) {
-            .gallery-container { padding: 80px 4% 80px; flex-wrap: wrap; gap: 20px; }
-            .col { width: calc(50% - 10px); flex: none; }
-            .col-1 .img-wrap:nth-child(1), .col-2 .img-wrap:nth-child(1), .col-3 .img-wrap:nth-child(1), .col-4 .img-wrap:nth-child(1), .col-5 .img-wrap:nth-child(1) { margin-top: 6vw; }
+        @media (max-width: 768px) {
+            .museum-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                padding: 2.5rem 4%;
+            }
+            .museum-img-wrapper.tall {
+                aspect-ratio: 2 / 3;
+            }
+            .museum-img-wrapper.medium {
+                aspect-ratio: 4 / 5;
+            }
+            .museum-img-wrapper.short {
+                aspect-ratio: 5 / 4;
+            }
+            /* Disable morph animation on mobile to prevent layout shifts */
+            .museum-item:hover .museum-img-wrapper {
+                aspect-ratio: inherit !important;
+                transform: none;
+                box-shadow: none;
+            }
         }
-
-        @media (max-width: 600px) {
-            .col { width: 100%; }
-            .col-1 .img-wrap:nth-child(1), .col-2 .img-wrap:nth-child(1), .col-3 .img-wrap:nth-child(1), .col-4 .img-wrap:nth-child(1), .col-5 .img-wrap:nth-child(1) { margin-top: 10vw; }
-            .size-s-land img, .size-xs-land img, .size-m-square img { width: 100%; } 
+        @media (max-width: 480px) {
+            .museum-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 2rem 3%;
+            }
+            .museum-column {
+                gap: 1rem;
+            }
+            .museum-img-wrapper.tall {
+                aspect-ratio: 2 / 3;
+            }
+            .museum-img-wrapper.medium {
+                aspect-ratio: 4 / 5;
+            }
+            .museum-img-wrapper.short {
+                aspect-ratio: 5 / 4;
+            }
+            .museum-caption {
+                font-size: 0.65rem;
+                letter-spacing: 0;
+            }
         }
     </style>
     <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
 </head>
-<body class="dark-theme">
 
+<body style="overflow: hidden; height: 100vh;">
+    <!-- الهيدر / النافبار الموحد -->
     <nav class="navbar scrolled">
-        <div class="logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
+        <div class="nav-brand-group">
+            <a href="/" class="logo"><img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني"></a>
+            <a href="#" class="lang-switcher">EN</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="/#hero">البداية</a></li>
-            <li><a href="about">من أنا</a></li>
             <li><a href="gallery" class="active">المعرض</a></li>
             <li><a href="articles">تفكيك</a></li>
-            <li><a href="index.html#contact">اتصال</a></li>
+            <li><a href="about">من أنا</a></li>
+            <li><a href="contact">تواصل معي</a></li>
         </ul>
     </nav>
 
-    <main style="padding-top: 120px;">
-        <div class="container" style="text-align: center; margin-bottom: 2rem;">
-            <div class="section-header-minimal" style="align-items: center; justify-content: center; margin-bottom: 0;">
-                <span class="section-kicker-small" style="margin-bottom: 1rem;">الترتيب الصحيح (LTR)</span>
-                <h2 class="section-title-medium" style="font-size: 2rem;">معرض جيمس</h2>
-            </div>
-        </div>
+    <main style="padding-top: 90px; height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+        <!-- معرض الأعمال (التصميم المأخوذ من الرئيسية) -->
+        <section id="gallery" class="gallery" style="width: 100%; padding: 0;">
+            <div class="container">
+                <div class="section-header-minimal" style="display: none !important; margin-bottom: 4rem; margin-top: 2rem;">
+                    <span class="section-kicker-small">أحدث المشاريع</span>
+                    <h2 class="section-title-medium">معرض الأعمال</h2>
+                </div>
+                
+                <div class="elegant-gallery-grid">
+                    <!-- Project 1 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <video autoplay muted loop playsinline src="Written.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">سينماتوغرافيا تجريدية</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">طيف أزرق</h3>
+                        </div>
+                    </a>
 
-        <!-- 5-COLUMN GRID -->
-        <div class="gallery-container">
-            <!-- COLUMN 1 (LEFTMOST) -->
-            <div class="col col-1">
-                <div class="img-wrap size-l-port">
-                    <img src="Martine Emdur.jpg" alt="Art">
+                    <!-- Project 2 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <video autoplay muted loop playsinline src="Motion Design.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">توجيه إبداعي</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">تناغم الحواس</h3>
+                        </div>
+                    </a>
+
+                    <!-- Project 3 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <video autoplay muted loop playsinline src="3D.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">تصميم مرئي</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">انعكاس الروح</h3>
+                        </div>
+                    </a>
+
+                    <!-- Project 4 -->
+                    <a href="project" class="elegant-gallery-card">
+                        <div class="eg-image-wrapper">
+                            <video autoplay muted loop playsinline src="Sounds.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" style="font-size: 0.75rem;">إنتاج فني</span>
+                            <h3 class="eg-title" style="font-size: 1.2rem; font-weight: 300;">ظل النور</h3>
+                        </div>
+                    </a>
                 </div>
-                <div class="img-wrap size-l-land">
-                    <img src="download (76).jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-l-port">
-                    <img src="ثثثث.jpg" alt="Art">
-                </div>
+            </div>
+        </section>
+
+        <!-- شبكة المتاحف (المخفية بناء على طلب العميل) -->
+        <div class="museum-grid" style="display: none !important;">
+            
+            <!-- العمود الأول (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="Martine Emdur.jpg" alt="مارتين إمدور">
+                    </div>
+                    <span class="museum-caption">مارتين إمدور — لوحة مائية تشكيلية</span>
+                </a>
+                
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="Man in the Ocean.jpg" alt="رجل في المحيط">
+                    </div>
+                    <span class="museum-caption">رجل في المحيط — سكون الأعماق</span>
+                </a>
+
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="download (78).jpg" alt="تأمل عميق">
+                    </div>
+                    <span class="museum-caption">تأمل عميق — زوايا الضوء الشارد</span>
+                </a>
+            </div>
+            
+            <!-- العمود الثاني (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="download (77).jpg" alt="صمت مطبق">
+                    </div>
+                    <span class="museum-caption">صمت مطبق — درجات الرمادي</span>
+                </a>
+                
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="download (76).jpg" alt="غموض المياه">
+                    </div>
+                    <span class="museum-caption">غموض المياه — انسيابية الكتل</span>
+                </a>
+
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="download (74).jpg" alt="انعكاس الضوء">
+                    </div>
+                    <span class="museum-caption">انعكاس الضوء — حوار الظلال</span>
+                </a>
+            </div>
+            
+            <!-- العمود الثالث (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="download (73).jpg" alt="أفق بعيد">
+                    </div>
+                    <span class="museum-caption">أفق بعيد — تجريد معاصر</span>
+                </a>
+                
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="download (733).jpg" alt="حوار ملهم">
+                    </div>
+                    <span class="museum-caption">حوار ملهم — فلسفة الفراغ</span>
+                </a>
+
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="58256943279491678   ةة32.png" alt="أبعاد تشكيلية">
+                    </div>
+                    <span class="museum-caption">أبعاد تشكيلية — هندسة حركية صامتة</span>
+                </a>
+            </div>
+            
+            <!-- العمود الرابع (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="Kingdom of dreams and madness.jpg" alt="أحلام معمارية">
+                    </div>
+                    <span class="museum-caption">أحلام معمارية — مملكة الشغف</span>
+                </a>
+                
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="ثثثث.jpg" alt="زوايا حادة">
+                    </div>
+                    <span class="museum-caption">زوايا حادة — انعطافات حرة</span>
+                </a>
+
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="6fcc57d0d4d79dc5fda1a5b0e76c11f4.jpg" alt="تبادلات حسية">
+                    </div>
+                    <span class="museum-caption">تبادلات حسية — ظلال متباينة</span>
+                </a>
+            </div>
+            
+            <!-- العمود الخامس (مجموع الارتفاعات المنسقة) -->
+            <div class="museum-column">
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper short">
+                        <img src="download.jpg" alt="خطوط الأفق">
+                    </div>
+                    <span class="museum-caption">خطوط الأفق — موازين بصرية</span>
+                </a>
+                
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper medium">
+                        <img src="Martine Emdur.jpg" alt="حوار الماء والجسد">
+                    </div>
+                    <span class="museum-caption">حوار الماء والجسد — أثر جمالي</span>
+                </a>
+
+                <a href="project" class="museum-item">
+                    <div class="museum-img-wrapper tall">
+                        <img src="download (78).jpg" alt="لحظة تأمل">
+                    </div>
+                    <span class="museum-caption">لحظة تأمل — السكون المطلق</span>
+                </a>
             </div>
 
-            <!-- COLUMN 2 -->
-            <div class="col col-2">
-                <div class="img-wrap size-m-port">
-                    <img src="download (77).jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-l-port">
-                    <img src="58256943279491678   ةة32.png" alt="Art">
-                </div>
-                <div class="img-wrap size-m-square">
-                    <img src="download (733).jpg" alt="Art">
-                </div>
-            </div>
-
-            <!-- COLUMN 3 -->
-            <div class="col col-3">
-                <div class="img-wrap size-l-land">
-                    <img src="Man in the Ocean.jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-l-port">
-                    <img src="download (78).jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-l-land">
-                    <img src="Kingdom of dreams and madness.jpg" alt="Art">
-                </div>
-            </div>
-
-            <!-- COLUMN 4 -->
-            <div class="col col-4">
-                <div class="img-wrap size-s-land">
-                    <img src="download (74).jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-l-port">
-                    <img src="Martine Emdur.jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-l-port">
-                    <img src="download (77).jpg" alt="Art">
-                </div>
-            </div>
-
-            <!-- COLUMN 5 (RIGHTMOST) -->
-            <div class="col col-5">
-                <div class="img-wrap size-l-port">
-                    <img src="ثثثث.jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-xs-land">
-                    <img src="download (73).jpg" alt="Art">
-                </div>
-                <div class="img-wrap size-s-land">
-                    <img src="Man in the Ocean.jpg" alt="Art">
-                </div>
-            </div>
         </div>
     </main>
 
-    <footer class="footer">
+    <!-- الفوتر مخفي بناء على طلب العميل لمنع التمرير -->
+    <footer class="footer" style="display: none !important;">
         <div class="container">
             <div class="footer-grid">
+                <!-- العمود الأول: العلامة التجارية -->
                 <div class="footer-col brand-col">
-                    <div class="footer-logo">ي  و  س  ف    ا  ل  ح  س  ي  ن  ي</div>
-                    <p class="footer-about-text">مصمم إبداعي مستقل، مكرّس لصناعة التجارب البصرية الفاخرة، المعمار الحديث، والهويات الفنية الشخصية التي تصمد في وجه الزمن.</p>
+                    <a href="/" class="footer-logo"><img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني"></a>
+                    <p class="footer-about-text">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
                 </div>
+                
+                <!-- العمود الثاني: التنقل -->
                 <div class="footer-col">
                     <h4 class="footer-title">استكشف</h4>
                     <ul class="footer-links">
@@ -208,6 +391,8 @@
                                             <li><a href="contact">تواصل معي</a></li>
 </ul>
                 </div>
+                
+                <!-- العمود الثالث: مواقع التواصل -->
                 <div class="footer-col">
                     <h4 class="footer-title">تابعني</h4>
                     <ul class="footer-links">
@@ -218,16 +403,20 @@
                         <li><a href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
                     </ul>
                 </div>
+                
+                <!-- العمود الرابع: معلومات التواصل -->
                 <div class="footer-col info-col">
                     <h4 class="footer-title">معلومات الاتصال</h4>
                     <p class="footer-info-item">القاهرة، جمهورية مصر العربية</p>
-                    <p class="footer-info-item">تواصل عبر الواتساب: <span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
+                    <p class="footer-info-item">واتساب: <span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
+                    <p class="footer-info-item">البريد الإلكتروني: <a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
                 </div>
             </div>
-            <div class="footer-bottom">
+            
+            <div class="footer-bottom" style="margin-top: 3rem; padding-top: 2rem;">
                 <p class="copyright">&copy; ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
-                <span class="footer-note">تصميم إبداعي مستقل</span>
-            </div>
+                <span class="footer-note">مساحة للفكر</span>
+                </a>
         </div>
     </footer>
 
@@ -239,22 +428,23 @@
     <script src="script.js"></script>
 
     <script>
-        // Smooth entrance animation triggered on scroll
-        window.addEventListener("load", () => {
-            gsap.from(".img-wrap", {
-                scrollTrigger: {
-                    trigger: ".gallery-container",
-                    start: "top 85%"
-                },
-                opacity: 0,
-                y: 40,
-                duration: 1.2,
-                stagger: 0.1,
-                ease: "power3.out"
-            });
+        // تأثير تدرج ظهور بطاقات المعرض المدهش عند تحميل الصفحة
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.fromTo(".museum-item", 
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.6,
+                    stagger: 0.08,
+                    ease: "power4.out",
+                    delay: 0.2
+                }
+            );
         });
     </script>
 </body>
+
 </html>
 
 
