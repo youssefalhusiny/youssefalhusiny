@@ -3034,3 +3034,9 @@ html.lenis, html.lenis body {
     }
     /* Let them use their original nth-child spans without overriding */
 }
+
+@media (max-width: 768px) {
+    .about-hero {
+        background-position: center -180px !important;
+    }
+}
