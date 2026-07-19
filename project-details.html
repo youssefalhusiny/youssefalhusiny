@@ -63,7 +63,13 @@
         <section class="case-hero no-anim" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('شين.png'); background-attachment: fixed; background-size: cover; background-position: center; position: relative; overflow: hidden;">
             
             <!-- Inline Video that will fade in -->
-            <video id="heroInlineVideo" src="SONY ZV-E1  CINEMATIC TRAVEL FILM - Reilín Joey (1080p, h264).mp4" playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background-color: #000; z-index: 0; opacity: 0; pointer-events: none; filter: blur(0px) brightness(1); transition: opacity 1s ease, filter 0.5s ease;"></video>
+            <video id="heroInlineVideo" src="SONY ZV-E1  CINEMATIC TRAVEL FILM - Reilín Joey (1080p, h264).mp4" playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background-color: #000; z-index: 0; opacity: 0; pointer-events: none; filter: blur(0px) brightness(1); transition: opacity 1s ease, filter 1.5s ease;"></video>
+            
+            <!-- Pause Overlay Text -->
+            <div id="pauseOverlayText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); opacity: 0; pointer-events: none; z-index: 20; color: white; font-family: 'IBM Plex Sans Arabic', sans-serif; text-align: center; transition: opacity 0.8s ease, transform 0.8s ease;">
+                <h2 id="pauseMessageTitle" style="font-size: 3rem; font-weight: 300; letter-spacing: -1px; margin: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">لماذا توقفت؟</h2>
+                <p style="font-size: 0.9rem; opacity: 0.7; letter-spacing: 2px; font-weight: 300; margin-top: 1rem;">انقر للمواصلة</p>
+            </div>
             
             <!-- Custom Video Controls -->
             <div id="customVideoControls" style="position: absolute; bottom: 40px; left: 5%; right: 5%; display: flex; align-items: center; gap: 1.5rem; z-index: 15; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; flex-direction: row-reverse; font-family: 'Inter', sans-serif;">
@@ -80,14 +86,22 @@
                     <span id="customDurationTime">0:00</span>
                 </div>
 
-                <div id="customProgressBarContainer" style="flex: 1; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px; overflow: hidden; margin: 0 1rem;">
-                    <div id="customProgressBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #ffffff; transition: width 0.1s linear;"></div>
+                <div id="customProgressBarContainer" style="flex: 1; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px; margin: 0 1rem;">
+                    
+                    <!-- Hover Tooltip -->
+                    <div id="progressTooltip" style="position: absolute; top: -30px; left: 0; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-variant-numeric: tabular-nums; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; white-space: nowrap;">0:00</div>
+
+                    <div id="customProgressBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #ffffff; transition: width 0.1s linear; border-radius: 2px;">
+                        <div style="position: absolute; right: -5px; top: -3px; width: 10px; height: 10px; background: #fff; border-radius: 50%; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>
+                    </div>
                 </div>
 
                 <!-- Volume Block -->
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <div id="customVolumeContainer" style="width: 50px; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px; overflow: hidden;">
-                        <div id="customVolumeBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: #ffffff;"></div>
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                    <div id="customVolumeContainer" style="width: 80px; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px;">
+                        <div id="customVolumeBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: #ffffff; border-radius: 2px;">
+                            <div style="position: absolute; right: -4px; top: -3px; width: 10px; height: 10px; background: #fff; border-radius: 50%; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>
+                        </div>
                     </div>
                     <button id="customMuteBtn" style="background: none; border: none; color: white; cursor: pointer; padding: 0; opacity: 0.8; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
                         <svg id="unmuteIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
@@ -239,10 +253,25 @@
                             }
                         });
                         
+                        const pauseOverlayText = document.getElementById('pauseOverlayText');
+                        const pauseMessageTitle = document.getElementById('pauseMessageTitle');
+                        const pauseMessages = [
+                            "لماذا توقفت؟",
+                            "استراحة قصيرة؟",
+                            "اللقطة القادمة أجمل!",
+                            "نحن بانتظارك...",
+                            "هل هناك خطب ما؟",
+                            "القصة لم تنتهِ بعد",
+                            "لا تتوقف هنا!"
+                        ];
+
                         vid.addEventListener('play', () => { 
                             playIcon.style.display = 'none'; 
                             pauseIcon.style.display = 'block'; 
                             vid.style.filter = 'blur(0px) brightness(1)';
+                            
+                            pauseOverlayText.style.opacity = '0';
+                            pauseOverlayText.style.transform = 'translate(-50%, -40%)';
                             
                             const nav = document.querySelector('.navbar');
                             const heroElements = Array.from(document.getElementById('heroContentBlock').children);
@@ -265,6 +294,13 @@
                             playIcon.style.display = 'block'; 
                             vid.style.filter = 'blur(10px) brightness(0.6)';
                             
+                            // Select random message
+                            const randomMsg = pauseMessages[Math.floor(Math.random() * pauseMessages.length)];
+                            pauseMessageTitle.innerText = randomMsg;
+
+                            pauseOverlayText.style.opacity = '1';
+                            pauseOverlayText.style.transform = 'translate(-50%, -50%)';
+                            
                             const nav = document.querySelector('.navbar');
                             const heroElements = Array.from(document.getElementById('heroContentBlock').children);
                             const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
@@ -283,8 +319,15 @@
                         
                         muteBtn.onclick = () => { vid.muted = !vid.muted; showControls(); };
                         vid.addEventListener('volumechange', () => {
-                            if(vid.muted) { muteIcon.style.display = 'block'; unmuteIcon.style.display = 'none'; }
-                            else { unmuteIcon.style.display = 'block'; muteIcon.style.display = 'none'; }
+                            if(vid.muted || vid.volume === 0) { 
+                                muteIcon.style.display = 'block'; 
+                                unmuteIcon.style.display = 'none'; 
+                                volumeBar.style.width = '0%';
+                            } else { 
+                                unmuteIcon.style.display = 'block'; 
+                                muteIcon.style.display = 'none'; 
+                                volumeBar.style.width = (vid.volume * 100) + '%';
+                            }
                         });
 
                         const currentTimeEl = document.getElementById('customCurrentTime');
@@ -310,6 +353,29 @@
                         });
 
                         let isDraggingProg = false;
+                        const progressTooltip = document.getElementById('progressTooltip');
+
+                        function updateTooltipPosition(e) {
+                            const rect = progressContainer.getBoundingClientRect();
+                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                            if (clientX === undefined) return;
+                            let pos = (clientX - rect.left) / rect.width;
+                            pos = Math.max(0, Math.min(1, pos));
+                            const hoverTime = pos * vid.duration;
+                            if (!isNaN(hoverTime)) {
+                                progressTooltip.innerText = formatTime(hoverTime);
+                                progressTooltip.style.left = (pos * 100) + '%';
+                                progressTooltip.style.opacity = '1';
+                            }
+                        }
+
+                        progressContainer.addEventListener('mousemove', (e) => {
+                            if (!isDraggingProg) updateTooltipPosition(e);
+                        });
+                        progressContainer.addEventListener('mouseleave', () => {
+                            if (!isDraggingProg) progressTooltip.style.opacity = '0';
+                        });
+
                         function updateProgress(e) {
                             const rect = progressContainer.getBoundingClientRect();
                             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -362,16 +428,30 @@
                         }, {passive: false});
 
                         document.addEventListener('mousemove', (e) => {
-                            if (isDraggingProg) updateProgress(e);
+                            if (isDraggingProg) {
+                                updateProgress(e);
+                                updateTooltipPosition(e);
+                            }
                             if (isDraggingVol) updateVolume(e);
                         });
                         document.addEventListener('touchmove', (e) => {
-                            if (isDraggingProg) updateProgress(e);
+                            if (isDraggingProg) {
+                                updateProgress(e);
+                                updateTooltipPosition(e);
+                            }
                             if (isDraggingVol) updateVolume(e);
                         }, {passive: false});
 
-                        document.addEventListener('mouseup', () => { isDraggingProg = false; isDraggingVol = false; });
-                        document.addEventListener('touchend', () => { isDraggingProg = false; isDraggingVol = false; });
+                        document.addEventListener('mouseup', () => { 
+                            isDraggingProg = false; 
+                            isDraggingVol = false; 
+                            progressTooltip.style.opacity = '0';
+                        });
+                        document.addEventListener('touchend', () => { 
+                            isDraggingProg = false; 
+                            isDraggingVol = false; 
+                            progressTooltip.style.opacity = '0';
+                        });
 
                         // Prevent buttons from triggering video pause when clicked
                         [playPauseBtn, muteBtn, fullscreenBtn].forEach(btn => {
