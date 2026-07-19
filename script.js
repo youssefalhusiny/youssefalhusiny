@@ -279,51 +279,72 @@ document.addEventListener('DOMContentLoaded', () => {
         // 6. Restore active state based on cookie on load
         const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
         if (match) {
-            console.log("Language cookie found:", match[2]);
             const transValue = match[2];
             if (transValue === '/ar/en') {
                 langBtn.textContent = 'AR';
             }
         }
+        
+        // Save explicit user choice to prevent location-based auto-switching later
+        langBtn.addEventListener('click', () => {
+            localStorage.setItem('userExplicitLang', 'true');
+        });
     }
 });
 
 // --- Geolocation Language Detection (Runs immediately) ---
-(function() {
-    console.log("Checking language cookies and location...");
+(async function() {
+    // If the user has explicitly changed the language before, do not auto-detect location anymore.
+    if (localStorage.getItem('userExplicitLang')) return;
+
+    // Check if google translate cookie is already set
     const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
-    
-    if (!match) {
-        console.log("No language cookie found. Checking location...");
-        const locationChecked = sessionStorage.getItem('locationLangChecked'); 
+    if (match && match[2] === '/ar/en') return;
+
+    // Prevent infinite reload loops if cookies are blocked
+    if (sessionStorage.getItem('locationLangChecked')) return;
+    sessionStorage.setItem('locationLangChecked', 'true');
+
+    // Middle East & Arab countries
+    const middleEastCountries = [
+        'AE', 'BH', 'EG', 'IQ', 'JO', 'KW', 'LB', 'OM', 'PS', 'QA', 'SA', 'SY', 'YE', 
+        'DZ', 'MA', 'TN', 'LY', 'SD', 'MR', 'SO', 'DJ', 'KM', 
+        'IR', 'TR', 'IL', 'CY'
+    ];
+
+    // Helper to fetch from multiple APIs in case VPNs are blocked/rate-limited
+    async function getCountry() {
+        try {
+            const r1 = await fetch('https://api.country.is/');
+            const d1 = await r1.json();
+            if (d1 && d1.country) return d1.country;
+        } catch(e) {}
         
-        if (!locationChecked) {
-            sessionStorage.setItem('locationLangChecked', 'true');
-            fetch('https://ipinfo.io/json')
-                .then(response => response.json())
-                .then(data => {
-                    console.log("User country detected as:", data.country || "UNKNOWN");
-                    const middleEastCountries = [
-                        'AE', 'BH', 'EG', 'IQ', 'JO', 'KW', 'LB', 'OM', 'PS', 'QA', 'SA', 'SY', 'YE', // Middle East
-                        'DZ', 'MA', 'TN', 'LY', 'SD', 'MR', 'SO', 'DJ', 'KM', // Other Arab countries
-                        'IR', 'TR', 'IL', 'CY' // Others geographically in ME
-                    ];
-                    
-                    // If data.country exists and is not in the Middle East list
-                    if (data.country && !middleEastCountries.includes(data.country)) {
-                        console.log("Country is outside Middle East. Switching to English...");
-                        document.cookie = 'googtrans=/ar/en; path=/';
-                        if (location.hostname) {
-                            document.cookie = 'googtrans=/ar/en; path=/; domain=' + location.hostname;
-                        }
-                        window.location.reload();
-                    } else {
-                        console.log("Country is in Middle East (or undetected). Defaulting to Arabic.");
-                    }
-                })
-                .catch(err => console.log('Geolocation detection failed:', err));
-        } else {
-            console.log("Location was already checked in this session.");
+        try {
+            const r2 = await fetch('https://ipinfo.io/json');
+            const d2 = await r2.json();
+            if (d2 && d2.country) return d2.country;
+        } catch(e) {}
+
+        try {
+            const r3 = await fetch('https://get.geojs.io/v1/ip/country.json');
+            const d3 = await r3.json();
+            if (d3 && d3.country) return d3.country;
+        } catch(e) {}
+
+        return null;
+    }
+
+    const country = await getCountry();
+    
+    if (country && !middleEastCountries.includes(country)) {
+        console.log("Country is outside Middle East:", country, "- Switching to English...");
+        document.cookie = 'googtrans=/ar/en; path=/';
+        if (location.hostname) {
+            document.cookie = 'googtrans=/ar/en; path=/; domain=' + location.hostname;
         }
+        window.location.reload();
+    } else {
+        console.log("Country is Middle East or undetected:", country, "- Defaulting to Arabic.");
     }
 })();
