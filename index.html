@@ -15,7 +15,68 @@
 </head>
 
 <body>
-    <nav class="navbar">
+    <!-- Cinematic Preloader -->
+    <div id="cinematic-preloader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--bg-color, #0a0a0a); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), visibility 2s cubic-bezier(0.4, 0, 0.2, 1);">
+        <img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني" style="width: 100px; -webkit-mask-image: linear-gradient(to bottom right, transparent 35%, black 65%); -webkit-mask-size: 300% 300%; mask-image: linear-gradient(to bottom right, transparent 35%, black 65%); mask-size: 300% 300%; animation: cinematicEntrance 3.5s ease-out forwards;">
+    </div>
+
+    <style>
+        @keyframes cinematicEntrance {
+            0% { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; opacity: 1; transform: scale(1); filter: blur(0px); }
+            50% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; opacity: 1; transform: scale(1.01); filter: blur(0px); }
+            75% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; opacity: 1; transform: scale(1.03); filter: blur(0px); }
+            100% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; opacity: 0; transform: scale(1.15); filter: blur(6px); }
+        }
+
+
+        .hero-initial-hide {
+            opacity: 0 !important;
+            transform: translateY(20px) !important;
+        }
+
+        @keyframes heroFadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-animate-in {
+            animation: heroFadeUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const preloader = document.getElementById('cinematic-preloader');
+            const heroElements = document.querySelectorAll('.hero-initial-hide');
+            
+            if (!sessionStorage.getItem('siteLoadedCinematic')) {
+                // Start fading out the background slowly right before the logo fully disappears
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                    
+                    // Staggered reveal of hero elements
+                    heroElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.remove('hero-initial-hide');
+                            el.classList.add('hero-animate-in');
+                            
+                            // Clean up animation class after it finishes to restore hover transitions
+                            setTimeout(() => {
+                                el.classList.remove('hero-animate-in');
+                            }, 1500);
+                        }, index * 200 + 800); // Wait 800ms to ensure preloader is mostly gone
+                    });
+
+                    sessionStorage.setItem('siteLoadedCinematic', 'true');
+                }, 3000);
+            } else {
+                preloader.style.display = 'none';
+                heroElements.forEach(el => el.classList.remove('hero-initial-hide'));
+            }
+        });
+    </script>
+    <nav class="navbar hero-initial-hide">
         <div class="nav-brand-group">
             <a href="/" class="logo"><img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني"></a>
             <a href="#" class="lang-switcher">EN</a>
@@ -39,11 +100,11 @@
         <section id="hero" class="hero" style="background-image: url('ؤؤؤؤ.png');">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1 class="hero-title">
+                <h1 class="hero-title hero-initial-hide">
                     <img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني" class="hero-logo">
                 </h1>
-                <p class="hero-subtitle">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
-                <a href="https://wa.me/966577545142" target="_blank" class="hero-cta-btn">تحدث معي</a>
+                <p class="hero-subtitle hero-initial-hide">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
+                <a href="https://wa.me/966577545142" target="_blank" class="hero-cta-btn hero-initial-hide">تحدث معي</a>
             </div>
         </section>
 

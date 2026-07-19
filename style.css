@@ -40,6 +40,25 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Custom Premium Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #050505;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) #050505;
+}
+
 /* Typography */
 h1, h2, h3 {
     font-weight: 500;
@@ -290,7 +309,7 @@ h1, h2, h3 {
 }
 
 .hero-logo {
-    height: clamp(60px, 12vw, 110px); /* Restored to the perfect majestic size */
+    height: clamp(50px, 9vw, 90px); /* Slightly shrunk majestic size */
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
