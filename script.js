@@ -172,33 +172,40 @@ gsap.from(".contact-form-wrapper", {
 
 // Interactive Form Submit with premium animation feedback
 const inquiryForm = document.getElementById('inquiryForm');
-if (inquiryForm) {
+const contactContainer = document.getElementById('contactFormContainer');
+
+if (inquiryForm && contactContainer) {
     inquiryForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const submitBtn = inquiryForm.querySelector('.submit-btn-luxury');
-        const originalContent = submitBtn.innerHTML;
+        const submitBtn = inquiryForm.querySelector('button[type="submit"]');
         
         // Animated loading state
-        submitBtn.innerHTML = '<span class="btn-text">جاري إرسال رؤيتك...</span>';
-        submitBtn.style.opacity = '0.7';
+        submitBtn.innerHTML = 'جاري الإرسال...';
+        submitBtn.style.opacity = '0.5';
         submitBtn.style.pointerEvents = 'none';
         
         setTimeout(() => {
-            // Success transition
-            submitBtn.innerHTML = '<span class="btn-text">تم استلام استبيانك بنجاح! شكرًا لك</span>';
-            submitBtn.style.borderColor = '#10b981';
-            submitBtn.style.color = '#10b981';
+            // Success transition: Replace entire container with success message
+            contactContainer.style.opacity = '0';
             
-            // Elegant recovery to original state
             setTimeout(() => {
-                inquiryForm.reset();
-                submitBtn.innerHTML = originalContent;
-                submitBtn.style.borderColor = '';
-                submitBtn.style.color = '';
-                submitBtn.style.opacity = '';
-                submitBtn.style.pointerEvents = '';
-            }, 4000);
-        }, 1800);
+                contactContainer.style.paddingBottom = '1rem'; // Bring contact channels much closer
+                contactContainer.innerHTML = `
+                    <style>
+                        @keyframes successFadeUp {
+                            from { opacity: 0; transform: translateY(20px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                    </style>
+                    <div style="text-align: center; padding: 2rem 0; animation: successFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+                        <h3 style="color: rgba(255,255,255,0.95); font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 200; font-size: 2.2rem; margin-bottom: 1rem; letter-spacing: -0.5px;">تم استلام طلبك بنجاح</h3>
+                        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.8; font-weight: 200; max-width: 500px; margin: 0 auto;">شكراً لثقتك. سأقوم بمراجعة التفاصيل والتواصل معك قريباً لنبدأ رحلة تجسيد فكرتك.</p>
+                    </div>
+                `;
+                contactContainer.style.opacity = '1';
+            }, 800); // Wait for fade out
+            
+        }, 1500); // Simulate network delay
     });
 }
 

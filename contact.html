@@ -86,77 +86,71 @@
         <!-- قسم تواصل معي الرئيسي (Fully Re-structured Split Luxury Layout) -->
         <section id="contact" class="contact-section" style="padding-top: 10rem;">
             <div class="container">
-                <div class="contact-grid">
-                    <!-- العمود الأول: النص التعريفي والعنوان (مكان الصورة سابقاً) -->
-                    <div class="contact-header-wrapper" style="display: flex; flex-direction: column; justify-content: center; padding-left: 2rem;">
-                        <div class="section-header-minimal align-start">
-                            <span class="section-kicker-small">تواصل معي</span>
-                            <h2 class="section-title-medium contact-form-title" style="font-size: 2.8rem; line-height: 1.3; margin-bottom: 1.5rem; max-width: 100%;">دعنا نمنح أفكارك صوتاً مرئياً غامضاً وفخماً.</h2>
-                            <p class="section-desc-light" style="font-size: 1.1rem; max-width: 85%;">يرجى تعبئة الاستبيان لبدء رحلة تصميم مشروعك الاستثنائي.</p>
-                        </div>
-                    </div>
+                <div id="contactFormContainer" style="max-width: 800px; display: flex; flex-direction: column; align-items: center; margin: 0 auto; text-align: center; padding-bottom: 5rem; transition: opacity 0.8s ease;">
+                    <h2 class="section-title-medium" style="margin: 0;">
+                        هل لديك فكرة تود تجسيدها؟
+                    </h2>
+                    <p style="font-size: 0.9rem; line-height: 1.8; color: rgba(255,255,255,0.4); font-weight: 300; margin: 1.5rem 0 3.5rem 0; max-width: 500px;">
+                        دعنا نصنع أثراً معاً. إذا كانت لديك رؤية تبحث عن تجسيد حقيقي، أو أفكار مبدئية تنتظر من يمنحها الحياة، يسعدني أن نستكشف آفاقها ونصيغها في واقع ملموس.
+                    </p>
 
-                    <!-- العمود الثاني: نموذج التواصل -->
-                    <div class="contact-form-wrapper" style="display: flex; flex-direction: column; justify-content: center;">
-                        
-                        <form class="contact-inquiry-form" id="inquiryForm">
-                            <!-- الاسم والبريد في سطر واحد -->
-                            <div class="form-row">
-                                <div class="form-group-floating">
-                                    <input type="text" id="userName" class="form-input-luxury" placeholder="الاسم" required>
-                                    <label for="userName" class="form-label-luxury">الاسم الكامل</label>
-                                    <span class="input-focus-line"></span>
-                                </div>
-                                
-                                <div class="form-group-floating">
+                    <div class="contact-form-wrapper" style="width: 100%; max-width: 600px;">
+                        <form class="contact-inquiry-form" id="inquiryForm" style="text-align: right;">
+                            <!-- 1. الإسم -->
+                            <div class="form-group-floating">
+                                <input type="text" id="userName" class="form-input-luxury" placeholder="الاسم" required>
+                                <label for="userName" class="form-label-luxury">الإسم الكامل</label>
+                                <span class="input-focus-line"></span>
+                            </div>
+                            
+                            <!-- 2. وسيلة التواصل -->
+                            <div class="form-row" style="display: flex; gap: 1.5rem;">
+                                <div class="form-group-floating" style="flex: 1;">
                                     <input type="email" id="userEmail" class="form-input-luxury" placeholder="البريد" required>
                                     <label for="userEmail" class="form-label-luxury">البريد الإلكتروني</label>
                                     <span class="input-focus-line"></span>
                                 </div>
+                                <div class="form-group-floating" style="flex: 1;">
+                                    <input type="tel" id="userPhone" class="form-input-luxury" placeholder="الهاتف" required style="direction: rtl;">
+                                    <label for="userPhone" class="form-label-luxury">رقم الهاتف</label>
+                                    <span class="input-focus-line"></span>
+                                </div>
                             </div>
 
-                            <!-- تفاصيل المشروع -->
+                            <!-- 3. موضوع المشروع -->
                             <div class="form-group-floating">
-                                <textarea id="projectDetails" class="form-textarea-luxury" rows="4" placeholder="التفاصيل" required></textarea>
-                                <label for="projectDetails" class="form-label-luxury">أخبرني أكثر عن رؤيتك وأهدافك الإبداعية...</label>
+                                <textarea id="projectTopic" class="form-textarea-luxury" rows="3" placeholder="موضوع المشروع" required></textarea>
+                                <label for="projectTopic" class="form-label-luxury">موضوع المشروع وتفاصيله</label>
                                 <span class="input-focus-line"></span>
                             </div>
                             
-                            <!-- زر الإرسال الإبداعي الفخم -->
-                            <button type="submit" class="submit-btn-luxury">
-                                <span class="btn-text">إرسال الرسالة</span>
-                                <span class="btn-icon">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19 12H5M5 12L12 5M5 12L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                            </button>
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <button type="submit" class="hero-cta-btn" style="margin: 0; border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); cursor: pointer; padding: 1rem 3.5rem; background: transparent;">
+                                    إرسال الطلب
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
 
-                <!-- قنوات الاتصال المباشرة -->
-                <div class="contact-info-grid">
-                    <!-- القناة الأولى: المحادثة المباشرة -->
-                    <div class="info-card-premium">
-                        <span class="info-card-kicker">محادثة مباشرة</span>
-                        <span class="info-card-value">واتساب الأعمال</span>
-                        <p class="info-card-desc">تواصل مباشر وسريع لمناقشة الأفكار والمواعيد الاستشارية العاجلة: <br><strong><span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></strong></p>
+                <!-- قنوات الاتصال الإضافية (Compact Layout to save space) -->
+                <div style="display: flex; justify-content: center; gap: 4rem; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 3rem; flex-wrap: wrap; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    
+                    <div style="text-align: center; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <span style="font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); font-weight: 300;">محادثة مباشرة</span>
+                        <a href="https://wa.me/966577545142" target="_blank" style="color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.95rem; font-family: 'IBM Plex Sans Arabic', sans-serif; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.85)'" dir="ltr">+966 57 754 5142</a>
                     </div>
 
-                    <!-- القناة الثانية: المراسلات الرسمية -->
-                    <div class="info-card-premium">
-                        <span class="info-card-kicker">المراسلات الرسمية</span>
-                        <span class="info-card-value">البريد الإلكتروني</span>
-                        <p class="info-card-desc">لطلبات المشاريع المتكاملة، الشراكات الإبداعية، والاستشارات المطولة: <br><strong>youssefalhusiny@gmail.com</strong></p>
+                    <div style="text-align: center; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <span style="font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); font-weight: 300;">المراسلات الرسمية</span>
+                        <a href="mailto:youssefalhusiny@gmail.com" style="color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.95rem; font-family: 'IBM Plex Sans Arabic', sans-serif; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.85)'">youssefalhusiny@gmail.com</a>
                     </div>
 
-                    <!-- القناة الثالثة: الفضاء الفيزيائي -->
-                    <div class="info-card-premium">
-                        <span class="info-card-kicker">الفضاء الفيزيائي</span>
-                        <span class="info-card-value">الاستوديو الخاص</span>
-                        <p class="info-card-desc">القاهرة، جمهورية مصر العربية. <br>نستقبل الزيارات والمناقشات الفنية بعد التنسيق المسبق وتأكيد الموعد.</p>
+                    <div style="text-align: center; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <span style="font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); font-weight: 300;">الفضاء الفيزيائي</span>
+                        <span style="color: rgba(255,255,255,0.85); font-size: 0.95rem; font-family: 'IBM Plex Sans Arabic', sans-serif;">القاهرة، جمهورية مصر العربية</span>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -188,10 +182,10 @@
                 <div class="footer-col">
                     <h4 class="footer-title">تابعني</h4>
                     <ul class="footer-links">
-                        <li><a href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
-                        <li><a href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
                         <li><a href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
+                        <li><a href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
                         <li><a href="#" target="_blank">إكس</a></li>
+                        <li><a href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
                         <li><a href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
                     </ul>
                 </div>
