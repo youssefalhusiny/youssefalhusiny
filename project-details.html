@@ -53,7 +53,7 @@
         <ul class="nav-links">
             <li><a href="/#hero">البداية</a></li>
             <li><a class="active" href="gallery">المعرض</a></li>
-            <li><a href="articles">تفكيك</a></li>
+            <li><a href="case-studies">دراسات حالة</a></li>
             <li><a href="about">من أنا</a></li>
             <li><a href="contact">تواصل معي</a></li>
         </ul>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">الدور</span>
-                            <span class="meta-value" style="font-size: 0.85rem; line-height: 1.5;">إدارة فنية، تحريك 3D، وتركيب المشاهد النهائية (Compositing).</span>
+                            <span class="meta-value" style="font-size: 0.85rem; line-height: 1.5;">Motion designer</span>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
         </section>
 
         <!-- Pre-production Gallery Section -->
-        <section class="case-gallery">
+        <section class="case-gallery" style="margin-top: 2.5rem;">
             <div style="text-align: right; margin-bottom: 2.5rem; padding: 0 5%; max-width: 1450px; margin-left: auto; margin-right: auto;">
                 <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0;">ما قبل الإنتاج</h2>
             </div>
@@ -159,56 +159,153 @@
                 </div>
         </section>
 
-        <!-- Breakdowns Section -->
-        <section style="position: relative; z-index: 2; padding: 6rem 0 14rem 0; background-color: var(--bg-color);">
-            <div style="padding: 0 5%; max-width: 1450px; margin: 0 auto;">
+        <!-- Breakdowns Section (Sticky Scroll) -->
+        <style>
+            .collaboration-section {
+                padding: 10rem 0;
+                background: var(--bg-color);
+                position: relative;
+                border-top: 1px solid rgba(255,255,255,0.03);
+            }
+            .collaboration-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5rem;
+                align-items: flex-start;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 5%;
+            }
+            .collaboration-sticky {
+                flex: 1;
+                min-width: 320px;
+                position: sticky;
+                top: 35vh;
+            }
+            .collaboration-blocks {
+                flex: 1.5;
+                min-width: 320px;
+                display: flex;
+                flex-direction: column;
+            }
+            .collab-block {
+                padding: 4.5rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                display: flex;
+                gap: 2rem;
+                align-items: flex-start;
+                transition: opacity 0.4s ease;
+            }
+            .collab-block:first-child {
+                padding-top: 0;
+            }
+            .collab-block:last-child {
+                border-bottom: none;
+            }
+            .collab-num {
+                font-family: 'IBM Plex Sans Arabic', sans-serif;
+                font-size: 1.4rem;
+                color: rgba(255,255,255,0.3);
+                font-weight: 200;
+                line-height: 1.2;
+                min-width: 40px;
+                margin-top: 0.2rem;
+            }
+            .collab-content {
+                flex: 1;
+            }
+            .collab-title {
+                font-family: 'IBM Plex Sans Arabic', sans-serif;
+                font-size: 1.5rem;
+                font-weight: 200;
+                color: var(--text-primary);
+                margin-bottom: 1.2rem;
+                letter-spacing: -0.5px;
+            }
+            .collab-desc {
+                font-size: 0.95rem;
+                line-height: 2.1;
+                color: var(--text-secondary);
+                font-weight: 300;
+                margin: 0;
+            }
+            @media (max-width: 900px) {
+                .collaboration-sticky {
+                    position: static;
+                    margin-bottom: 2rem;
+                }
+                .collab-block {
+                    padding: 3rem 0;
+                    gap: 1.5rem;
+                }
+                .collab-num {
+                    font-size: 1.2rem;
+                    min-width: 30px;
+                }
+            }
+        </style>
+
+        <section class="collaboration-section" dir="rtl" style="z-index: 2;">
+            <div class="collaboration-container">
                 
-                <div style="text-align: right; margin-bottom: 4rem;">
-                    <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); margin: 0; letter-spacing: 1px;">كواليس العمل</h2>
+                <!-- الجانب الأيمن: العنوان الثابت (Sticky) -->
+                <div class="collaboration-sticky">
+                    <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.75rem; letter-spacing: 3px; color: var(--text-secondary); opacity: 0.6; text-transform: uppercase;">تشريح العمل</span>
+                    <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 3.5rem; font-weight: 200; color: var(--text-primary); line-height: 1.2; margin: 1.5rem 0 2rem 0;">كواليس<br>العمل<br>والمراحل</h2>
+                    <p style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); font-weight: 200; max-width: 85%;">تتطلب صناعة الأثر دقة متناهية في كل تفصيلة، من البناء الأولي وحتى خروج المشهد للنور.</p>
                 </div>
 
-                <div class="breakdowns-grid">
-                    <!-- Item 1 -->
-                    <div style="group">
-                        <div style="aspect-ratio: 16/10; overflow: hidden; margin-bottom: 1.5rem; border-radius: 2px;">
-                            <img src="شين.png" alt="الطبقات" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.4s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
-                        </div>
-                        <div style="text-align: right;">
-                            <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.1rem; font-weight: 400; color: var(--text-primary); margin: 0 0 0.5rem 0;">بناء الطبقات</h3>
-                            <p style="font-size: 0.95rem; color: var(--text-secondary); opacity: 0.6; margin: 0; line-height: 1.6; font-weight: 300;">فصل العناصر للتحكم المستقل والمرونة التامة.</p>
-                        </div>
+                <!-- الجانب الأيسر: شبكة الصور (Grid) -->
+                <div class="collaboration-blocks" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding-top: 1rem; padding-bottom: 4rem;">
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+                        <img src="شين.png" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
+                    </div>
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+                        <img src="رشف.png" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
+                    </div>
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+                        <img src="بينهم.png" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
+                    </div>
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+                        <img src="Dar Al-Ula Branding.jpg" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
                     </div>
 
-                    <!-- Item 2 -->
-                    <div style="group">
-                        <div style="aspect-ratio: 16/10; overflow: hidden; margin-bottom: 1.5rem; border-radius: 2px;">
-                            <img src="رشف.png" alt="الحركة" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.4s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
-                        </div>
-                        <div style="text-align: right;">
-                            <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.1rem; font-weight: 400; color: var(--text-primary); margin: 0 0 0.5rem 0;">المنحنيات والحركة</h3>
-                            <p style="font-size: 0.95rem; color: var(--text-secondary); opacity: 0.6; margin: 0; line-height: 1.6; font-weight: 300;">الـ Rigging الدقيق ومنحنيات السرعة الانسيابية.</p>
-                        </div>
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+                        <img src="Poems for Life.jpg" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
+                    </div>
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+                        <img src="_light_.jpg" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
                     </div>
 
-                    <!-- Item 3 -->
-                    <div style="group">
-                        <div style="aspect-ratio: 16/10; overflow: hidden; margin-bottom: 1.5rem; border-radius: 2px;">
-                            <img src="بينهم.png" alt="التركيب" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.4s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
-                        </div>
-                        <div style="text-align: right;">
-                            <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.1rem; font-weight: 400; color: var(--text-primary); margin: 0 0 0.5rem 0;">الإضاءة والمخرجات</h3>
-                            <p style="font-size: 0.95rem; color: var(--text-secondary); opacity: 0.6; margin: 0; line-height: 1.6; font-weight: 300;">مرحلة التركيب النهائي وضبط المزاج العام للمشهد.</p>
-                        </div>
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+                        <img src="شين.png" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
                     </div>
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+                        <img src="رشف.png" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
+                    </div>
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+                        <img src="بينهم.png" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
+                    </div>
+                    
+                    <div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+                        <img src="Dar Al-Ula Branding.jpg" alt="كواليس العمل" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';">
+                    </div>
+
                 </div>
-
             </div>
         </section>
 
 
 
         <!-- Results Section -->
-        <section class="case-results" style="position: relative; z-index: 2; padding: 2.5rem 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
+        <section class="case-results" style="position: relative; z-index: 2; padding: 1rem 0; margin: 1.5rem 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
             <!-- Video Background with Blur -->
             <video autoplay loop muted playsinline style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.1); width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: blur(15px);">
                 <source src="3D.mp4" type="video/mp4">
@@ -236,10 +333,14 @@
         <!-- Reflections Section -->
         <section class="case-reflections" style="position: relative; z-index: 2; padding: 7rem 0; background-color: var(--bg-color); border-bottom: 1px solid rgba(255,255,255,0.05);">
             <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <span style="font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); opacity: 0.7; font-weight: 300; display: block; margin-bottom: 1.5rem;">تأملات</span>
-                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); line-height: 1.6; margin: 0 0 1.5rem 0;">التقنية مجرد أداة، الأثر الحقيقي يُخلق عندما تلامس القصة شيئاً صادقاً بداخلنا.</h3>
-                <div style="width: 30px; height: 1px; background-color: rgba(255,255,255,0.15); margin: 0 auto 2rem auto;"></div>
-                <p style="font-size: 1rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0 0 3rem 0; opacity: 0.85;">في هذا المشروع، لم يكن التحدي الأكبر في إتقان الحركة أو ضبط الإضاءة، بل في كيفية تطويع هذه الأدوات التقنية لخدمة الفكرة المجردة. التجربة أكدت لي أن أقوى الأعمال البصرية هي تلك التي تترك مساحة للمشاهد ليكمل القصة بخياله، بدلاً من إخباره بكل شيء.</p>
+                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; line-height: 1.2; margin: 0 0 2rem 0;">ماذا أقول</h3>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 3.5rem;">
+                    <img src="ss.png" alt="يوسف الحسيني" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem;">
+                    <span style="font-size: 0.8rem; font-weight: 300; color: var(--text-primary); margin-bottom: 1.5rem; letter-spacing: 1px; opacity: 0.9;">يوسف الحسيني</span>
+                    <p style="font-size: 0.95rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0 0 1rem 0; opacity: 0.85; max-width: 700px; text-align: center;">كل مشروع هو رحلة لاكتشاف أبعاد جديدة للتعبير البصري. العمل هنا لم يكن مجرد بناء مشهد، بل كان محاولة جادة لترجمة الأفكار غير الملموسة إلى لغة يفهمها البصر، حيث تتشابك الرؤية الفنية مع الرسالة العميقة لتخلق تجربة لا تُنسى.</p>
+                    <p style="font-size: 0.95rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0; opacity: 0.85; max-width: 700px; text-align: center;">في هذا المشروع، لم يكن التحدي الأكبر في إتقان الحركة أو ضبط الإضاءة، بل في كيفية تطويع هذه الأدوات التقنية لخدمة الفكرة المجردة. التقنية مجرد أداة، الأثر الحقيقي يُخلق عندما تلامس القصة شيئاً صادقاً بداخلنا. التجربة أكدت لي أن أقوى الأعمال البصرية هي تلك التي تترك مساحة للمشاهد ليكمل القصة بخياله، بدلاً من إخباره بكل شيء.</p>
+                </div>
                 
                 <div style="display: flex; justify-content: center; gap: 1rem;">
                     <a href="/contact" class="hero-cta-btn" style="margin-top: 0;">دعنا نبني فكرتك</a>
@@ -256,7 +357,7 @@
                 
                 <div class="next-projects-grid">
                     <!-- Project 1 -->
-                    <a href="case-shin.html" class="gallery-item">
+                    <a href="project-details.html" class="gallery-item">
                         <img src="رشف.png" alt="رشف">
                         <div class="gallery-overlay">
                             <h3 class="gallery-overlay-title">رشف</h3>
@@ -265,7 +366,7 @@
                     </a>
                     
                     <!-- Project 2 -->
-                    <a href="case-shin.html" class="gallery-item">
+                    <a href="project-details.html" class="gallery-item">
                         <img src="بينهم.png" alt="بينهم">
                         <div class="gallery-overlay">
                             <h3 class="gallery-overlay-title">بينهم</h3>
@@ -274,7 +375,7 @@
                     </a>
                     
                     <!-- Project 3 -->
-                    <a href="case-shin.html" class="gallery-item">
+                    <a href="project-details.html" class="gallery-item">
                         <img src="Dar Al-Ula Branding.jpg" alt="دار العلا">
                         <div class="gallery-overlay">
                             <h3 class="gallery-overlay-title">Dar Al-Ula Branding</h3>
@@ -301,7 +402,7 @@
                         <li><a href="/#hero">البداية</a></li>
                         <li><a href="about">من أنا</a></li>
                         <li><a class="active" href="gallery">المعرض</a></li>
-                        <li><a href="articles">تفكيك</a></li>
+                        <li><a href="case-studies">دراسات حالة</a></li>
                         <li><a href="contact">تواصل معي</a></li>
                     </ul>
                 </div>

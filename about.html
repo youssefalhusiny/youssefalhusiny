@@ -9,7 +9,7 @@
     <!-- Google Fonts: IBM Plex Sans Arabic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;700&display=swap"
         rel="stylesheet">
     <style>
         .inspired-grid {
@@ -444,7 +444,7 @@
         <ul class="nav-links">
             <li><a href="/#hero">البداية</a></li>
             <li><a href="gallery">المعرض</a></li>
-            <li><a href="articles">تفكيك</a></li>
+            <li><a href="case-studies">دراسات حالة</a></li>
             <li><a href="about" class="active">من أنا</a></li>
             <li><a href="contact">تواصل معي</a></li>
         </ul>
@@ -995,8 +995,8 @@
             </div>
         </section>
 
-        <!-- قسم جديد: منهجية العمل (تصميم شبكي editorial) -->
-        <section class="workflow-section" style="padding: 5rem 0 7rem 0; background: #050505; border-top: 1px solid rgba(255,255,255,0.05);">
+        <!-- قسم منهجية العمل (مخفي حالياً) -->
+        <section class="workflow-section" style="padding: 5rem 0 7rem 0; background: #050505; border-top: 1px solid rgba(255,255,255,0.05); display: none;">
             <div class="container">
                 <div class="section-header-minimal" style="margin-bottom: 5rem; text-align: right;">
                     <span class="section-kicker-small">الاحترافية والدقة</span>
@@ -1004,7 +1004,6 @@
                 </div>
 
                 <div class="workflow-grid">
-
                     <!-- Step 1 -->
                     <div class="workflow-step workflow-step-1" onmouseover="this.style.background='rgba(255,255,255,0.02)';" onmouseout="this.style.background='transparent';">
                         <span class="workflow-step-num">01</span>
@@ -1040,12 +1039,144 @@
                             <p class="workflow-step-desc">لا يقتصر عملنا على التسليم؛ نراجع كل لقطة، نصقل التفاصيل النهائية، ونضمن أن المنتج يطابق الرؤية الأصلية ويحقق الأثر المطلوب بأبهى حلة ممكنة.</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
+        <!-- قسم معايير العمل החדش بتصميم احترافي (Sticky Scroll & Minimal Editorial) -->
+        <style>
+            .collaboration-section {
+                padding: 10rem 0;
+                background: var(--bg-color);
+                position: relative;
+                border-top: 1px solid rgba(255,255,255,0.03);
+            }
+            .collaboration-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5rem;
+                align-items: flex-start;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 5%;
+            }
+            .collaboration-sticky {
+                flex: 1;
+                min-width: 320px;
+                position: sticky;
+                top: 35vh;
+            }
+            .collaboration-blocks {
+                flex: 1.5;
+                min-width: 320px;
+                display: flex;
+                flex-direction: column;
+            }
+            .collab-block {
+                padding: 4.5rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                display: flex;
+                gap: 2rem;
+                align-items: flex-start;
+                transition: opacity 0.4s ease;
+            }
+            .collab-block:first-child {
+                padding-top: 0;
+            }
+            .collab-block:last-child {
+                border-bottom: none;
+            }
+            .collab-num {
+                font-family: 'IBM Plex Sans Arabic', sans-serif;
+                font-size: 1.4rem;
+                color: rgba(255,255,255,0.3);
+                font-weight: 200;
+                line-height: 1.2;
+                min-width: 40px;
+                margin-top: 0.2rem;
+            }
+            .collab-content {
+                flex: 1;
+            }
+            .collab-title {
+                font-family: 'IBM Plex Sans Arabic', sans-serif;
+                font-size: 1.5rem;
+                font-weight: 200;
+                color: var(--text-primary);
+                margin-bottom: 1.2rem;
+                letter-spacing: -0.5px;
+            }
+            .collab-desc {
+                font-size: 0.95rem;
+                line-height: 2.1;
+                color: var(--text-secondary);
+                font-weight: 300;
+                margin: 0;
+            }
+            @media (max-width: 900px) {
+                .collaboration-sticky {
+                    position: static;
+                    margin-bottom: 2rem;
+                }
+                .collab-block {
+                    padding: 3rem 0;
+                    gap: 1.5rem;
+                }
+                .collab-num {
+                    font-size: 1.2rem;
+                    min-width: 30px;
+                }
+            }
+        </style>
 
+        <section class="collaboration-section" dir="rtl">
+            <div class="collaboration-container">
+                
+                <!-- الجانب الأيمن: العنوان الثابت (Sticky) -->
+                <div class="collaboration-sticky">
+                    <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.75rem; letter-spacing: 3px; color: var(--text-secondary); opacity: 0.6; text-transform: uppercase;">التوافق المهني والفكري</span>
+                    <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 3.5rem; font-weight: 200; color: var(--text-primary); line-height: 1.2; margin: 1.5rem 0 2rem 0;">مع من<br>نتوافق؟</h2>
+                    <p style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); font-weight: 200; max-width: 85%;">أؤمن أن أفضل الأعمال لا تُولد من مجرد عقود عمل، بل من التقاء في الرؤى وشغف مشترك للوصول إلى الجوهر.</p>
+                </div>
+
+                <!-- الجانب الأيسر: الكتل النصية الفاخرة -->
+                <div class="collaboration-blocks">
+                    
+                    <div class="collab-block">
+                        <div class="collab-num">01</div>
+                        <div class="collab-content">
+                            <h3 class="collab-title">المهووس بالتفاصيل</h3>
+                            <p class="collab-desc">من يبحث عن عمل متقن يُصنع بحب وعناية، ولا يرضى بالحلول السريعة أو القوالب الجاهزة. ذلك الذي يدرك أن الجمال العظيم يكمن في التفاصيل التي قد لا يلاحظها الجميع، لكنها تصنع الفارق الجوهري وتمنح العمل روحه الخاصة.</p>
+                        </div>
+                    </div>
+
+                    <div class="collab-block">
+                        <div class="collab-num">02</div>
+                        <div class="collab-content">
+                            <h3 class="collab-title">الشريك وليس مجرد عميل</h3>
+                            <p class="collab-desc">أنت لا تبحث عن مجرد مُنفذ أعمى للأوامر، بل عن خبير يشاركك الرؤية، يقترح الأفكار، يختلف معك أحياناً للوصول للأفضل، ويساهم في تطوير مشروعك وتنميته من البذرة الأولى وحتى يصبح واقعاً ملموساً.</p>
+                        </div>
+                    </div>
+
+                    <div class="collab-block">
+                        <div class="collab-num">03</div>
+                        <div class="collab-content">
+                            <h3 class="collab-title">المؤمن بقوة السرد</h3>
+                            <p class="collab-desc">من يدرك أن وراء كل منتج أو خدمة قصة حقيقية تستحق أن تُروى، ويبحث عمن يستطيع تجسيد هذه القصة بصرياً أو نصياً بشكل يستفز المشاعر، يُلهم الجمهور، ويترك أثراً لا يُنسى في الذاكرة.</p>
+                        </div>
+                    </div>
+
+                    <div class="collab-block">
+                        <div class="collab-num">04</div>
+                        <div class="collab-content">
+                            <h3 class="collab-title">طالب الأثر لا اللحظة</h3>
+                            <p class="collab-desc">من يفضل بناء علاقات مهنية طويلة الأمد مبنية على الثقة المتبادلة، والشفافية التامة، بدلاً من المشاريع العابرة؛ لضمان التطور المتواصل والنجاح المشترك المستدام الذي لا ينتهي بانتهاء المشروع.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
         <!-- قسم المعرض المبعثر -->
         <style>
@@ -1218,7 +1349,7 @@
                         <li><a href="/#hero">البداية</a></li>
                         <li><a href="about">من أنا</a></li>
                         <li><a href="gallery">المعرض</a></li>
-                        <li><a href="articles">تفكيك</a></li>
+                        <li><a href="case-studies">دراسات حالة</a></li>
                                             <li><a href="contact">تواصل معي</a></li>
 </ul>
                 </div>
