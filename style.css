@@ -2504,7 +2504,7 @@ html.lenis, html.lenis body {
 /* --- Hero Section --- */
 .case-hero {
     position: relative;
-    height: 85vh;
+    height: 100vh;
     min-height: 640px;
     display: flex;
     align-items: center;
