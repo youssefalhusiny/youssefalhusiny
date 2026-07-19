@@ -326,6 +326,7 @@ h1, h2, h3 {
     color: #e0e0e0;
     max-width: 450px;
     line-height: 1.8;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -2599,10 +2600,22 @@ html.lenis, html.lenis body {
     padding-right: 3rem;
 }
 
+[dir="ltr"] .overview-meta {
+    border-right: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-right: 0;
+    padding-left: 3rem;
+}
+
 .meta-item {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.overview-meta .meta-item {
+    align-items: center !important;
+    text-align: center !important;
 }
 
 .meta-label {
@@ -3059,4 +3072,77 @@ html.lenis, html.lenis body {
     .about-hero {
         background-position: center -180px !important;
     }
+}
+
+/* LTR Direction Overrides */
+[dir="ltr"] p, 
+[dir="ltr"] h1, [dir="ltr"] h2, [dir="ltr"] h3, [dir="ltr"] h4, [dir="ltr"] h5, [dir="ltr"] h6,
+[dir="ltr"] .footer-about-text,
+[dir="ltr"] .about-details p,
+[dir="ltr"] .gallery-overlay-title,
+[dir="ltr"] .gallery-overlay-desc,
+[dir="ltr"] .inspired-card-desc,
+[dir="ltr"] .contact-info p,
+[dir="ltr"] .form-group label,
+[dir="ltr"] .form-group input,
+[dir="ltr"] .form-group textarea,
+[dir="ltr"] .inspired-card-content,
+[dir="ltr"] .footer-col,
+[dir="ltr"] .section-title-medium,
+[dir="ltr"] .section-kicker-small,
+[dir="ltr"] .project-details-content {
+    text-align: left !important;
+}
+
+[dir="ltr"] p.hero-subtitle {
+    text-align: center !important;
+}
+
+[dir="ltr"] .project-info {
+    border-right: none !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-right: 0 !important;
+    padding-left: 3rem !important;
+}
+
+[dir="ltr"] .project-content {
+    border-left: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-left: 0 !important;
+    padding-right: 3rem !important;
+}
+
+/* LTR Overrides for newly added components */
+[dir="ltr"] .about-container { text-align: left; }
+[dir="ltr"] .about-brand { border-left: none; border-right: 1px solid rgba(255, 255, 255, 0.05); padding-left: 0; padding-right: 3rem; }
+@media (max-width: 1024px) { [dir="ltr"] .about-brand { border-right: none; padding-right: 0; } }
+[dir="ltr"] .about-stats h3 { text-align: end !important; }
+
+[dir="ltr"] .monolithic-info { text-align: left; }
+[dir="ltr"] .section-subtitle-small { text-align: left; }
+[dir="ltr"] .studio-frame-content { text-align: left; }
+[dir="ltr"] .contact-form-wrapper { text-align: left; }
+[dir="ltr"] .align-start { text-align: left; }
+[dir="ltr"] .form-input-luxury, [dir="ltr"] .form-textarea-luxury { text-align: left; }
+[dir="ltr"] .form-label-luxury { right: auto; left: 0; transform-origin: top left; }
+[dir="ltr"] .input-focus-line { right: auto; left: 0; }
+
+[dir="ltr"] .footer-info-item { text-align: left; }
+
+/* Keep Navbar Layout RTL */
+[dir="ltr"] .navbar { direction: rtl; }
+
+/* Adjust Button visual weight for English */
+[dir="ltr"] .hero-cta-btn {
+    font-size: 0.8rem;
+    text-transform: none;
+    letter-spacing: 1px;
+}
+
+[dir="ltr"] .results-grid * {
+    text-align: center !important;
+}
+[dir="ltr"] .result-item:not(:first-child) {
+    border-right: none;
+    border-left: 1px solid rgba(255,255,255,0.12);
 }

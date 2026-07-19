@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
 
+<html dir="rtl" lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقال - يوسف الحسيني</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <style>
+    <meta name="google" content="notranslate">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>المقال - يوسف الحسيني</title>
+<link href="style.css" rel="stylesheet"/>
+<!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&amp;family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<style>
         /* الأنماط العامة لنسق القراءة التحريري المخملي الداكن المتناسق مع الموقع */
         body {
             background-color: #050505 !important;
@@ -365,153 +365,137 @@
             }
         }
     </style>
-    <link rel="icon" type="image/png" href="Pics/Alhusiny- W logoai.png">
+<link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
 </head>
-
 <body>
-    <!-- الهيدر / النافبار -->
-    <nav class="navbar scrolled">
-        <div class="nav-brand-group">
-            <a href="/" class="logo"><img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني"></a>
-            <a href="#" class="lang-switcher">EN</a>
-        </div>
-        <button class="mobile-menu-btn" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <ul class="nav-links">
-            <li><a href="/#hero">البداية</a></li>
-            <li><a href="gallery">المعرض</a></li>
-            <li><a href="case-studies" class="active">دراسات حالة</a></li>
-            <li><a href="about">من أنا</a></li>
-            <li><a href="contact">تواصل معي</a></li>
-        </ul>
-    </nav>
-
-    <main style="padding-top: 80px;">
-        <!-- الهيكل التدفقي الطبيعي الانسيابي بمظهر المجلات العالمية المطبوعة -->
-        <section class="article-content-section">
-            <div class="article-reading-canvas">
-                <!-- الصورة اليسارية تطفو يساراً -->
-                <div class="float-image-left">
-                    <img id="article-left-img" src="" alt="زوايا فنية يسار">
-                </div>
-
-                <!-- الصورة اليمينية تطفو يميناً -->
-                <div class="float-image-right">
-                    <img id="article-right-top" src="" alt="تفاصيل جمالية يمين">
-                </div>
-
-                <!-- محتوى النص الانسيابي الذي يتمدد تلقائياً ليمشط كامل العرض فور انتهاء عوائق الصور -->
-                <div class="article-text-flow">
-                    <span id="middle-kicker-vol" class="middle-kicker">الإصدار الرابع • مجلد ٢٦</span>
-                    <h2 class="middle-title-italic">
-                        <span id="middle-title-en">Space</span>
-                        <span id="middle-title-ar" class="middle-title-arabic">الفراغ النشط كقيمة</span>
-                    </h2>
-                    
-                    <!-- كتلة البيانات التوثيقية البسيطة والمنسجمة مع صميم التصميم المجهّز حديثاً -->
-                    <div class="middle-meta-block">
-                        <span class="meta-author">بقلم: يوسف الحسيني</span>
-                        <span class="meta-separator">•</span>
-                        <span id="middle-meta-date" class="meta-date">١٥ أبريل ٢٠٢٦</span>
-                        <span class="meta-separator">•</span>
-                        <span id="middle-meta-readtime" class="meta-readtime">وقت القراءة: ٣ دقائق</span>
-                    </div>
-                    
-                    <div id="article-paragraphs" class="article-paragraphs-content"></div>
-
-                    <!-- رابط الرجوع للرئيسية يظهر في النهاية المطلقة بعد التدفق النصي بالكامل -->
-                    <div class="back-link-wrapper">
-                        <a href="index.html#articles" class="back-link">
-                            <span>&rarr;</span>
-                            <span>العودة لجميع الإصدارات</span>
-                        </a>
-                        <span class="concluding-signature">النهاية</span>
-                    </div>
-                </div>
-
-                <!-- تنظيف الطفو لمنع انهيار الحاوية -->
-                <div style="clear: both;"></div>
-            </div>
-        </section>
-    </main>
-
-    <!-- قسم مقالات مشابهة (Related Articles) المضاف حديثاً بلمسة فنية فخمة -->
-    <section class="related-articles-section">
-        <div class="container">
-            <div class="section-header-minimal" style="margin-bottom: 3.5rem; text-align: right; align-items: flex-start;">
-                <span class="section-kicker-small">مواصلة القراءة</span>
-                <h2 class="section-title-medium">كتابات أخرى قد تثير اهتمامك</h2>
-            </div>
-            <!-- الحاوية الشبكية للمقالات المقترحة -->
-            <div class="related-grid" id="related-articles-grid">
-                <!-- سيتم توليد المقالات الـ 3 المقترحة ديناميكياً هنا باستبعاد المقال الحالي -->
-            </div>
-        </div>
-    </section>
-
-    <!-- فوتر الموقع المطابق تماماً لصفحات الموقع الرسمية -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- العمود الأول: العلامة التجارية -->
-                <div class="footer-col brand-col">
-                    <a href="/" class="footer-logo"><img src="Pics/Alhusiny- W logoai.png" alt="يوسف الحسيني"></a>
-                    <p class="footer-about-text">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
-                </div>
-                
-                <!-- العمود الثاني: التنقل -->
-                <div class="footer-col">
-                    <h4 class="footer-title">استكشف</h4>
-                    <ul class="footer-links">
-                        <li><a href="/#hero">البداية</a></li>
-                        <li><a href="about">من أنا</a></li>
-                        <li><a href="gallery">المعرض</a></li>
-                        <li><a href="case-studies">دراسات حالة</a></li>
-                        <li><a href="content.html">المحتوى</a></li>
-                                            <li><a href="contact">تواصل معي</a></li>
+<!-- الهيدر / النافبار -->
+<nav class="navbar scrolled">
+<div class="nav-brand-group">
+<a class="logo" href="/"><img alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
+<a class="lang-switcher" href="#">EN</a>
+</div>
+<button aria-label="Menu" class="mobile-menu-btn">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<ul class="nav-links">
+<li><a data-i18n="text_1" href="/#hero">البداية</a></li>
+<li><a data-i18n="text_129" href="gallery">المعرض</a></li>
+<li><a class="active" data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
+<li><a data-i18n="text_4" href="about">من أنا</a></li>
+<li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
 </ul>
-                </div>
-                
-                <!-- العمود الثالث: مواقع التواصل -->
-                <div class="footer-col">
-                    <h4 class="footer-title">تابعني</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
-                        <li><a href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
-                        <li><a href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
-                        <li><a href="#" target="_blank">إكس</a></li>
-                        <li><a href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
-                    </ul>
-                </div>
-                
-                <!-- العمود الرابع: معلومات التواصل -->
-                <div class="footer-col info-col">
-                    <h4 class="footer-title">معلومات الاتصال</h4>
-                    <p class="footer-info-item">القاهرة، جمهورية مصر العربية</p>
-                    <p class="footer-info-item">واتساب: <span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
-                    <p class="footer-info-item">البريد الإلكتروني: <a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">&copy; ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
-                <span class="footer-note">مساحة للفكر</span>
-            </div>
-        </div>
-    </footer>
-
-    <!-- GSAP for animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Lenis Smooth Scroll -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+</nav>
+<main style="padding-top: 80px;">
+<!-- الهيكل التدفقي الطبيعي الانسيابي بمظهر المجلات العالمية المطبوعة -->
+<section class="article-content-section">
+<div class="article-reading-canvas" data-i18n="text_146">
+<!-- الصورة اليسارية تطفو يساراً -->
+<div class="float-image-left">
+<img alt="زوايا فنية يسار" id="article-left-img" src=""/>
+</div>
+<!-- الصورة اليمينية تطفو يميناً -->
+<div class="float-image-right">
+<img alt="تفاصيل جمالية يمين" id="article-right-top" src=""/>
+</div>
+<!-- محتوى النص الانسيابي الذي يتمدد تلقائياً ليمشط كامل العرض فور انتهاء عوائق الصور -->
+<div class="article-text-flow" data-i18n="text_146">
+<span class="middle-kicker" data-i18n="text_147" id="middle-kicker-vol">الإصدار الرابع • مجلد ٢٦</span>
+<h2 class="middle-title-italic">
+<span id="middle-title-en">Space</span>
+<span class="middle-title-arabic" data-i18n="text_148" id="middle-title-ar">الفراغ النشط كقيمة</span>
+</h2>
+<!-- كتلة البيانات التوثيقية البسيطة والمنسجمة مع صميم التصميم المجهّز حديثاً -->
+<div class="middle-meta-block">
+<span class="meta-author" data-i18n="text_149">بقلم: يوسف الحسيني</span>
+<span class="meta-separator">•</span>
+<span class="meta-date" data-i18n="text_150" id="middle-meta-date">١٥ أبريل ٢٠٢٦</span>
+<span class="meta-separator">•</span>
+<span class="meta-readtime" data-i18n="text_151" id="middle-meta-readtime">وقت القراءة: ٣ دقائق</span>
+</div>
+<div class="article-paragraphs-content" id="article-paragraphs"></div>
+<!-- رابط الرجوع للرئيسية يظهر في النهاية المطلقة بعد التدفق النصي بالكامل -->
+<div class="back-link-wrapper">
+<a class="back-link" href="index.html#articles">
+<span>→</span>
+<span data-i18n="text_152">العودة لجميع الإصدارات</span>
+</a>
+<span class="concluding-signature" data-i18n="text_153">النهاية</span>
+</div>
+</div>
+<!-- تنظيف الطفو لمنع انهيار الحاوية -->
+<div style="clear: both;"></div>
+</div>
+</section>
+</main>
+<!-- قسم مقالات مشابهة (Related Articles) المضاف حديثاً بلمسة فنية فخمة -->
+<section class="related-articles-section">
+<div class="container" data-i18n="text_156">
+<div class="section-header-minimal" style="margin-bottom: 3.5rem; text-align: right; align-items: flex-start;">
+<span class="section-kicker-small" data-i18n="text_154">مواصلة القراءة</span>
+<h2 class="section-title-medium" data-i18n="text_155">كتابات أخرى قد تثير اهتمامك</h2>
+</div>
+<!-- الحاوية الشبكية للمقالات المقترحة -->
+<div class="related-grid" data-i18n="text_132" id="related-articles-grid">
+<!-- سيتم توليد المقالات الـ 3 المقترحة ديناميكياً هنا باستبعاد المقال الحالي -->
+</div>
+</div>
+</section>
+<!-- فوتر الموقع المطابق تماماً لصفحات الموقع الرسمية -->
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<!-- العمود الأول: العلامة التجارية -->
+<div class="footer-col brand-col">
+<a class="footer-logo" href="/"><img alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
+<p class="footer-about-text" data-i18n="text_134">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
+</div>
+<!-- العمود الثاني: التنقل -->
+<div class="footer-col">
+<h4 class="footer-title" data-i18n="text_135">استكشف</h4>
+<ul class="footer-links">
+<li><a data-i18n="text_1" href="/#hero">البداية</a></li>
+<li><a data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
+<li><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
+<li><a data-i18n="text_4" href="about.html">من أنا</a></li>
+<li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
+</ul>
+</div>
+<!-- العمود الثالث: مواقع التواصل -->
+<div class="footer-col">
+<h4 class="footer-title" data-i18n="text_136">تابعني</h4>
+<ul class="footer-links">
+<li><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
+<li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
+<li><a data-i18n="text_137" href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
+<li><a data-i18n="text_139" href="#" target="_blank">إكس</a></li>
+<li><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
+</ul>
+</div>
+<!-- العمود الرابع: معلومات التواصل -->
+<div class="footer-col info-col">
+<h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
+<p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
+<p class="footer-info-item">واتساب: <span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
+<p class="footer-info-item">البريد الإلكتروني: <a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+<span class="footer-note" data-i18n="text_145">مساحة للفكر</span>
+</div>
+</div>
+</footer>
+<!-- GSAP for animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+<script src="translations.js"></script>
     <script src="script.js"></script>
-
-    <!-- جلب محتوى المقال ديناميكياً وعرضه في الهيكل التدفقي الانسيابي الجديد -->
-    <script>
+<!-- جلب محتوى المقال ديناميكياً وعرضه في الهيكل التدفقي الانسيابي الجديد -->
+<script>
         // كائن البيانات الفخم الذي يغذي الهيكل التدفقي بالفقرات الطويلة والعميقة المتماسكة
         const articlesData = {
             "1": {
@@ -729,8 +713,4 @@
         window.addEventListener('DOMContentLoaded', loadArticle);
     </script>
 </body>
-
 </html>
-
-
-

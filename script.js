@@ -179,8 +179,15 @@ if (inquiryForm && contactContainer) {
         e.preventDefault();
         const submitBtn = inquiryForm.querySelector('button[type="submit"]');
         
+        const htmlTag = document.documentElement;
+        const lang = htmlTag.getAttribute('lang') || 'ar';
+        
+        const sendingText = lang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
+        const successTitle = lang === 'ar' ? 'تم استلام طلبك بنجاح' : 'Request Received Successfully';
+        const successDesc = lang === 'ar' ? 'شكراً لثقتك. سأقوم بمراجعة التفاصيل والتواصل معك قريباً لنبدأ رحلة تجسيد فكرتك.' : 'Thank you for your trust. I will review the details and contact you shortly to begin bringing your idea to life.';
+
         // Animated loading state
-        submitBtn.innerHTML = 'جاري الإرسال...';
+        submitBtn.innerHTML = sendingText;
         submitBtn.style.opacity = '0.5';
         submitBtn.style.pointerEvents = 'none';
         
@@ -198,8 +205,8 @@ if (inquiryForm && contactContainer) {
                         }
                     </style>
                     <div style="text-align: center; padding: 2rem 0; animation: successFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
-                        <h3 style="color: rgba(255,255,255,0.95); font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 200; font-size: 2.2rem; margin-bottom: 1rem; letter-spacing: -0.5px;">تم استلام طلبك بنجاح</h3>
-                        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.8; font-weight: 200; max-width: 500px; margin: 0 auto;">شكراً لثقتك. سأقوم بمراجعة التفاصيل والتواصل معك قريباً لنبدأ رحلة تجسيد فكرتك.</p>
+                        <h3 style="text-align: center !important; color: rgba(255,255,255,0.95); font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 200; font-size: 2.2rem; margin-bottom: 1rem; letter-spacing: -0.5px;">${successTitle}</h3>
+                        <p style="text-align: center !important; color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.8; font-weight: 200; max-width: 500px; margin: 0 auto;">${successDesc}</p>
                     </div>
                 `;
                 contactContainer.style.opacity = '1';
@@ -209,142 +216,53 @@ if (inquiryForm && contactContainer) {
     });
 }
 
-// --- Google Translate Integration ---
+// --- Internal i18n Localization ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Create a hidden div for Google Translate
-    const gtDiv = document.createElement('div');
-    gtDiv.id = 'google_translate_element';
-    gtDiv.style.cssText = 'position: absolute; opacity: 0; z-index: -999; pointer-events: none;';
-    document.body.appendChild(gtDiv);
-
-    // 2. Define the init function
-    window.googleTranslateElementInit = function() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'ar',
-            includedLanguages: 'ar,en',
-            autoDisplay: false
-        }, 'google_translate_element');
+    const langBtn = document.querySelector('.lang-switcher');
+    
+    // Function to apply translation
+    const setLanguage = (lang) => {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        
+        // Update button text
+        if (langBtn) {
+            langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
+        }
+        
+        // Apply translations from translations object (defined in translations.js)
+        if (typeof translations !== 'undefined' && translations[lang]) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        // For normal elements, keep inner HTML tags if any (like spans or imgs)
+                        // This simple approach replaces text. If you have complex HTML inside, 
+                        // you might need a more robust approach.
+                        el.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+        }
+        
+        // Save preference
+        localStorage.setItem('preferredLang', lang);
     };
 
-    // 3. Load the Google Translate script
-    const gtScript = document.createElement('script');
-    gtScript.type = 'text/javascript';
-    gtScript.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    document.body.appendChild(gtScript);
-
-    // 4. Handle language switcher click
-    const langBtn = document.querySelector('.lang-switcher');
     if (langBtn) {
-        langBtn.classList.add('notranslate'); // Protect from Google Translate modifying the text
-        
         langBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const currentLang = langBtn.textContent.trim().toUpperCase();
-            const selectBox = document.querySelector('.goog-te-combo');
-            
-            if (currentLang === 'EN') {
-                // Switch to English
-                document.cookie = 'googtrans=/ar/en; path=/';
-                document.cookie = 'googtrans=/ar/en; path=/; domain=' + location.hostname;
-                if (selectBox) {
-                    selectBox.value = 'en';
-                    selectBox.dispatchEvent(new Event('change', { bubbles: true }));
-                } else {
-                    window.location.reload();
-                }
-                // Delay text change slightly so Google Translate snapshots the original state properly
-                setTimeout(() => langBtn.textContent = 'AR', 50);
-            } else {
-                // Switch back to Arabic
-                document.cookie = 'googtrans=/ar/ar; path=/';
-                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
-                
-                if (selectBox) {
-                    selectBox.value = 'ar';
-                    selectBox.dispatchEvent(new Event('change', { bubbles: true }));
-                    
-                    if (selectBox.value !== 'ar') {
-                        selectBox.value = '';
-                        selectBox.dispatchEvent(new Event('change', { bubbles: true }));
-                    }
-                } else {
-                    window.location.reload();
-                }
-                // Delay text change so it overrides the DOM restoration
-                setTimeout(() => langBtn.textContent = 'EN', 50);
-            }
+            const currentLang = document.documentElement.lang || 'ar';
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            setLanguage(newLang);
         });
-
-        // 6. Restore active state based on cookie on load
-        const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
-        if (match) {
-            const transValue = match[2];
-            if (transValue === '/ar/en') {
-                langBtn.textContent = 'AR';
-            }
-        }
         
-        // Save explicit user choice to prevent location-based auto-switching later
-        langBtn.addEventListener('click', () => {
-            localStorage.setItem('userExplicitLang', 'true');
-        });
+        // Initialize from saved preference
+        const savedLang = localStorage.getItem('preferredLang');
+        if (savedLang && savedLang === 'en') {
+            setLanguage('en');
+        }
     }
 });
-
-// --- Geolocation Language Detection (Runs immediately) ---
-(async function() {
-    // If the user has explicitly changed the language before, do not auto-detect location anymore.
-    if (localStorage.getItem('userExplicitLang')) return;
-
-    // Check if google translate cookie is already set
-    const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
-    if (match && match[2] === '/ar/en') return;
-
-    // Prevent infinite reload loops if cookies are blocked
-    if (sessionStorage.getItem('locationLangChecked')) return;
-    sessionStorage.setItem('locationLangChecked', 'true');
-
-    // Middle East & Arab countries
-    const middleEastCountries = [
-        'AE', 'BH', 'EG', 'IQ', 'JO', 'KW', 'LB', 'OM', 'PS', 'QA', 'SA', 'SY', 'YE', 
-        'DZ', 'MA', 'TN', 'LY', 'SD', 'MR', 'SO', 'DJ', 'KM', 
-        'IR', 'TR', 'IL', 'CY'
-    ];
-
-    // Helper to fetch from multiple APIs in case VPNs are blocked/rate-limited
-    async function getCountry() {
-        try {
-            const r1 = await fetch('https://api.country.is/');
-            const d1 = await r1.json();
-            if (d1 && d1.country) return d1.country;
-        } catch(e) {}
-        
-        try {
-            const r2 = await fetch('https://ipinfo.io/json');
-            const d2 = await r2.json();
-            if (d2 && d2.country) return d2.country;
-        } catch(e) {}
-
-        try {
-            const r3 = await fetch('https://get.geojs.io/v1/ip/country.json');
-            const d3 = await r3.json();
-            if (d3 && d3.country) return d3.country;
-        } catch(e) {}
-
-        return null;
-    }
-
-    const country = await getCountry();
-    
-    if (country && !middleEastCountries.includes(country)) {
-        console.log("Country is outside Middle East:", country, "- Switching to English...");
-        document.cookie = 'googtrans=/ar/en; path=/';
-        if (location.hostname) {
-            document.cookie = 'googtrans=/ar/en; path=/; domain=' + location.hostname;
-        }
-        window.location.reload();
-    } else {
-        console.log("Country is Middle East or undetected:", country, "- Defaulting to Arabic.");
-    }
-})();
