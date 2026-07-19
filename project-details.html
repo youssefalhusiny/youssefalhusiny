@@ -243,6 +243,20 @@
                             playIcon.style.display = 'none'; 
                             pauseIcon.style.display = 'block'; 
                             vid.style.filter = 'blur(0px) brightness(1)';
+                            
+                            const nav = document.querySelector('.navbar');
+                            const heroElements = Array.from(document.getElementById('heroContentBlock').children);
+                            const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
+                            
+                            elementsToFade.forEach((el, index) => {
+                                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                                setTimeout(() => {
+                                    el.style.opacity = '0';
+                                    el.style.transform = 'translateY(-20px)';
+                                    el.style.pointerEvents = 'none';
+                                }, index * 100);
+                            });
+
                             showControls(); 
                         });
                         
@@ -250,6 +264,20 @@
                             pauseIcon.style.display = 'none'; 
                             playIcon.style.display = 'block'; 
                             vid.style.filter = 'blur(10px) brightness(0.6)';
+                            
+                            const nav = document.querySelector('.navbar');
+                            const heroElements = Array.from(document.getElementById('heroContentBlock').children);
+                            const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
+                            
+                            elementsToFade.forEach((el, index) => {
+                                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                                setTimeout(() => {
+                                    el.style.opacity = '1';
+                                    el.style.transform = 'translateY(0)';
+                                    if(el === nav) el.style.pointerEvents = 'auto'; // Make navbar clickable
+                                }, index * 100);
+                            });
+
                             showControls(); 
                         });
                         
