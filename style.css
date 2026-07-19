@@ -354,9 +354,9 @@ h1, h2, h3 {
 }
 
 .hero-cta-btn:hover {
-    background-color: var(--text-primary);
-    color: var(--bg-color); /* Turns pitch black */
-    border-color: var(--text-primary);
+    background-color: var(--text-primary) !important;
+    color: var(--bg-color) !important; /* Turns pitch black */
+    border-color: var(--text-primary) !important;
 }
 
 .hero-bottom-text {
