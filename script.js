@@ -279,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 6. Restore active state based on cookie on load
         const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
         if (match) {
+            console.log("Language cookie found:", match[2]);
             const transValue = match[2];
             if (transValue === '/ar/en') {
                 langBtn.textContent = 'AR';
@@ -286,3 +287,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// --- Geolocation Language Detection (Runs immediately) ---
+(function() {
+    console.log("Checking language cookies and location...");
+    const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
+    
+    if (!match) {
+        console.log("No language cookie found. Checking location...");
+        const locationChecked = sessionStorage.getItem('locationLangChecked'); 
+        
+        if (!locationChecked) {
+            sessionStorage.setItem('locationLangChecked', 'true');
+            fetch('https://get.geojs.io/v1/ip/country.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("User country detected as:", data.country);
+                    const middleEastCountries = [
+                        'AE', 'BH', 'EG', 'IQ', 'JO', 'KW', 'LB', 'OM', 'PS', 'QA', 'SA', 'SY', 'YE', // Middle East
+                        'DZ', 'MA', 'TN', 'LY', 'SD', 'MR', 'SO', 'DJ', 'KM', // Other Arab countries
+                        'IR', 'TR', 'IL', 'CY' // Others geographically in ME
+                    ];
+                    if (data.country && !middleEastCountries.includes(data.country)) {
+                        console.log("Country is outside Middle East. Switching to English...");
+                        document.cookie = 'googtrans=/ar/en; path=/';
+                        if (location.hostname) {
+                            document.cookie = 'googtrans=/ar/en; path=/; domain=' + location.hostname;
+                        }
+                        window.location.reload();
+                    } else {
+                        console.log("Country is in Middle East. Defaulting to Arabic.");
+                    }
+                })
+                .catch(err => console.log('Geolocation detection failed:', err));
+        } else {
+            console.log("Location was already checked in this session.");
+        }
+    }
+})();
