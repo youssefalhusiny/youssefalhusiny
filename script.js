@@ -46,6 +46,16 @@ const lenis = new Lenis({
 gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);
 
+// Refresh ScrollTrigger when DOM height changes (crucial for lazy-loaded images pushing content down)
+let scrollRefreshTimeout;
+const resizeObserver = new ResizeObserver(() => {
+    clearTimeout(scrollRefreshTimeout);
+    scrollRefreshTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+    }, 150);
+});
+resizeObserver.observe(document.body);
+
 // Use GSAP's ticker to drive Lenis (removes redundant requestAnimationFrame loop to prevent scroll jumping)
 gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
@@ -60,26 +70,26 @@ window.addEventListener("load", () => {
 
 
 // Set initial states for hero elements
-gsap.set([".hero-title", ".hero-subtitle", ".hero-cta-btn"], { y: 30, opacity: 0 });
+gsap.set([".hero .hero-title", ".hero .hero-subtitle", ".hero .hero-cta-btn"], { y: 30, opacity: 0 });
 
 // Hero Animations on load
 window.addEventListener("load", () => {
     const heroTl = gsap.timeline();
 
-    heroTl.to(".hero-title", {
+    heroTl.to(".hero .hero-title", {
         y: 0,
         opacity: 1,
         duration: 1.2,
         ease: "power3.out",
         delay: 0.2
     })
-        .to(".hero-subtitle", {
+        .to(".hero .hero-subtitle", {
             y: 0,
             opacity: 1,
             duration: 1,
             ease: "power3.out"
         }, "-=0.8")
-        .to(".hero-cta-btn", {
+        .to(".hero .hero-cta-btn", {
             y: 0,
             opacity: 1,
             duration: 1,
@@ -87,8 +97,30 @@ window.addEventListener("load", () => {
         }, "-=0.8");
 });
 
-// Scroll Animations for all sections except hero
-const sections = gsap.utils.toArray('section:not(.hero):not(.no-anim), .footer');
+// Project Details Hero Animation on load
+window.addEventListener("load", () => {
+    const projectHeroBlock = document.getElementById("heroContentBlock");
+    if (projectHeroBlock) {
+        // Only select direct children that are not hidden scripts
+        const projectHeroChildren = Array.from(projectHeroBlock.children).filter(el => el.tagName !== 'SCRIPT');
+        
+        // Hide them initially
+        gsap.set(projectHeroChildren, { y: 30, opacity: 0 });
+        
+        // Stagger them in
+        gsap.to(projectHeroChildren, {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.2
+        });
+    }
+});
+
+// Scroll Animations for all sections except hero and specific staggered sections
+const sections = gsap.utils.toArray('section:not(.hero):not(.no-anim):not(.about):not(.expertise-section):not(.collaboration-section):not(.scattered-gallery-section):not(.case-overview):not(.case-gallery):not(.case-results):not(.case-reflections), .footer');
 
 sections.forEach((section) => {
     gsap.from(section, {
@@ -104,33 +136,79 @@ sections.forEach((section) => {
     });
 });
 
-// Stagger animation for gallery items (only when the .gallery section is visible)
-const galleryTrigger = document.querySelector('.gallery');
-if (galleryTrigger && galleryTrigger.style.display !== 'none' && !galleryTrigger.closest('[style*="display: none"]')) {
-    gsap.from(".gallery-item", {
+// Stagger animation for Expertise Cards (About page) - triggers individually upon reaching them
+const expertiseCards = gsap.utils.toArray('.expertise-card');
+expertiseCards.forEach((card, index) => {
+    // Simple pseudo-stagger based on DOM order for cards in the same row
+    const delay = (index % 4) * 0.15;
+    
+    gsap.from(card, {
         scrollTrigger: {
-            trigger: ".gallery",
-            start: "top 75%",
+            trigger: card,
+            start: "top 85%", // Starts only when the specific card enters viewport
+            toggleActions: "play none none reverse"
         },
         opacity: 0,
-        scale: 0.95,
         duration: 1.2,
-        stagger: 0.15,
+        delay: delay,
         ease: "power3.out"
     });
-}
+});
 
-// Stagger animation for typographic editorial cards
-gsap.from(".editorial-typo-card", {
-    scrollTrigger: {
-        trigger: ".articles",
-        start: "top 75%",
-    },
-    y: 40,
-    opacity: 0,
-    duration: 1.2,
-    stagger: 0.15,
-    ease: "power3.out"
+// Stagger animation for About section elements
+gsap.utils.toArray('.about').forEach(aboutSection => {
+    const aboutElements = aboutSection.querySelectorAll('.about-brand, .about-details > div, .about-details > p, .stat-item, .bio-social-icons');
+    if (aboutElements.length > 0) {
+        gsap.from(aboutElements, {
+            scrollTrigger: {
+                trigger: aboutSection,
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            },
+            y: 40,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+    }
+});
+
+// Stagger animation for gallery items (works across home and portfolio pages)
+const galleryGrids = document.querySelectorAll('.case-gallery-grid');
+galleryGrids.forEach(grid => {
+    if (grid.offsetParent !== null) { // only if visible
+        gsap.from(grid.querySelectorAll(".gallery-item"), {
+            scrollTrigger: {
+                trigger: grid,
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+    }
+});
+
+// Animation for typographic editorial cards (Case Studies) - triggers per card so bottom rows wait until visible
+const articleCards = gsap.utils.toArray('.inspired-card');
+articleCards.forEach((card, index) => {
+    // Simple pseudo-stagger based on DOM order for cards in the same row
+    const delay = (index % 3) * 0.15;
+    
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: "top 85%", // Starts animation when the top of the card is 85% down the viewport
+            toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        duration: 1.2,
+        delay: delay,
+        ease: "power3.out"
+    });
 });
 
 // Luxury Navbar Scroll behavior (Always fixed, toggle background style on scroll)
@@ -146,6 +224,184 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('scrolled');
     }
 });
+
+// Animation for Collaboration Section (Who do we align with?)
+// 1. Animate the sticky header section first
+gsap.from(".collaboration-sticky > *", {
+    scrollTrigger: {
+        trigger: ".collaboration-sticky",
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+    },
+    y: 40,
+    opacity: 0,
+    duration: 1.2,
+    stagger: 0.15,
+    ease: "power3.out"
+});
+
+// 2. Animate each collab-block individually when it reaches the viewport
+gsap.utils.toArray('.collab-block').forEach(block => {
+    // Inside each block, we stagger the number, title, and description
+    const elements = block.querySelectorAll('.collab-num, .collab-title, .collab-desc');
+    
+    gsap.from(elements, {
+        scrollTrigger: {
+            trigger: block,
+            start: "top 85%", // trigger only when the specific block arrives
+            toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+    });
+});
+
+// Animation for Scattered Gallery Section (مختارات بصرية)
+const scatteredElements = gsap.utils.toArray('.scattered-gallery-section .section-header-minimal > *, .scattered-gallery-section .scattered-text-grid > p');
+if (scatteredElements.length > 0) {
+    gsap.from(scatteredElements, {
+        scrollTrigger: {
+            trigger: ".scattered-gallery-section",
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+    });
+}
+
+const scatterImages = gsap.utils.toArray('.scattered-gallery-section .scatter-img');
+scatterImages.forEach((img, index) => {
+    gsap.from(img, {
+        scrollTrigger: {
+            trigger: img,
+            start: "top 90%",
+            toggleActions: "play none none reverse"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1.2,
+        delay: (index % 3) * 0.15, // slight stagger feel for images close together
+        ease: "power3.out"
+    });
+});
+
+// Animation for Pre-production Section (Project Details)
+const caseGalleryHeading = document.querySelector('.case-gallery h2');
+if (caseGalleryHeading) {
+    gsap.from(caseGalleryHeading, {
+        scrollTrigger: {
+            trigger: ".case-gallery",
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out"
+    });
+}
+
+// Animate each Pre-production gallery item individually
+gsap.utils.toArray('.case-gallery .gallery-item').forEach((item, index) => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 90%", // Trigger when the item itself is reached
+            toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        duration: 1.2,
+        delay: (index % 3) * 0.15, // Stagger columns
+        ease: "power3.out"
+    });
+});
+
+// Animation for Breakdowns Image Grid (Project Details)
+gsap.utils.toArray('.collaboration-section .collaboration-blocks > div:not(.collab-block)').forEach((item, index) => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 90%",
+            toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        duration: 1.2,
+        delay: (index % 2) * 0.15, // It's a 2-column grid
+        ease: "power3.out"
+    });
+});
+
+// Animation for Case Overview Section (Project Details)
+const overviewElements = gsap.utils.toArray('.case-overview .overview-text > *, .case-overview .overview-meta .meta-item');
+if (overviewElements.length > 0) {
+    gsap.from(overviewElements, {
+        scrollTrigger: {
+            trigger: ".case-overview",
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+    });
+}
+
+// Animation for Results Section (Project Details)
+const resultsElements = gsap.utils.toArray('.case-results .container > p, .case-results .result-item');
+if (resultsElements.length > 0) {
+    gsap.from(resultsElements, {
+        scrollTrigger: {
+            trigger: ".case-results",
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+    });
+}
+
+// Animation for Reflections Section (Project Details)
+const reflectionElements = gsap.utils.toArray('.case-reflections h3, .case-reflections img, .case-reflections span, .case-reflections p, .case-reflections .hero-cta-btn');
+if (reflectionElements.length > 0) {
+    reflectionElements.forEach((item) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: item,
+                start: "top 90%", // Trigger exactly when the item itself appears
+                toggleActions: "play none none reverse"
+            },
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out"
+        });
+    });
+}
+
+// Animation for Contact Channels
+const contactChannels = document.querySelector('.contact-channels');
+if (contactChannels) {
+    gsap.from(".contact-channels > div", {
+        scrollTrigger: {
+            trigger: ".contact-channels",
+            start: "top 85%", 
+            toggleActions: "play none none reverse"
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+    });
+}
 
 // Scroll Trigger Animation for Contact Section
 gsap.from(".contact-studio-card", {

@@ -449,9 +449,10 @@ h1, h2, h3 {
 }
 
 .about-brand .brand-sub {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     letter-spacing: 2px;
     color: var(--text-secondary);
+    transform: translateY(10px);
     margin-bottom: 1.5rem;
 }
 
