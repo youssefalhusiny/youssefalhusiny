@@ -3147,3 +3147,71 @@ html.lenis, html.lenis body {
     border-right: none;
     border-left: 1px solid rgba(255,255,255,0.12);
 }
+
+/* Coming Soon Overlay */
+.coming-soon-wrapper {
+    position: relative !important;
+    cursor: default !important;
+}
+
+/* Hide texts initially */
+.coming-soon-wrapper .gallery-overlay,
+.coming-soon-wrapper .case-overlay {
+    opacity: 0 !important;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease !important;
+}
+
+/* Show texts on hover */
+.coming-soon-wrapper:hover .gallery-overlay,
+.coming-soon-wrapper:hover .case-overlay {
+    opacity: 1 !important;
+    visibility: visible;
+}
+
+/* Blur image */
+.coming-soon-wrapper img,
+.coming-soon-wrapper video {
+    filter: blur(5px) brightness(0.25) !important;
+    transform: scale(1.02);
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+/* Coming soon text without background */
+.coming-soon-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 300;
+    z-index: 20;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    pointer-events: none;
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+.coming-soon-wrapper:hover .coming-soon-badge {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+}
+
+.inspired-card.coming-soon-wrapper:hover .coming-soon-badge {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+.coming-soon-wrapper:hover img,
+.coming-soon-wrapper:hover video {
+    filter: blur(8px) brightness(0.15) !important;
+}
+
+/* Center badge in case studies image */
+.inspired-card.coming-soon-wrapper .coming-soon-badge {
+    top: 120px;
+}

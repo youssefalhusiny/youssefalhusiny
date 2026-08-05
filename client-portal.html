@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>بوابة العميل — يوسف الحسيني</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;700&display=swap" rel="stylesheet"/>
+<link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
+<style>
+    html { scroll-behavior: smooth; }
+
+    body {
+        background-color: #050505 !important;
+        color: #ffffff;
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+    }
+
+    /* ─── CLIENT STRIP ─── */
+    .client-strip {
+        padding: 3rem 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* يمين: بروفايل */
+    .client-profile {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    .client-avatar-sm {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid rgba(255,255,255,0.12);
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .client-profile-text {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .client-strip-name {
+        font-size: 1rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.82);
+        letter-spacing: 0.3px;
+    }
+
+    .client-strip-since {
+        font-size: 0.62rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.2);
+        letter-spacing: 0.3px;
+    }
+
+    /* يسار: إحصائيات */
+    .client-stats {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .client-strip-divider {
+        width: 1px;
+        height: 18px;
+        background: rgba(255,255,255,0.08);
+        flex-shrink: 0;
+    }
+
+    .client-strip-stat {
+        display: flex;
+        align-items: baseline;
+        gap: 0.4rem;
+    }
+
+    .client-stat-num {
+        font-size: 0.88rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.65);
+    }
+
+    .client-stat-label {
+        font-size: 0.68rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.22);
+        letter-spacing: 0.2px;
+    }
+
+    /* Back button */
+    .portal-back-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.68rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.3);
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        border: 1px solid rgba(255,255,255,0.08);
+        padding: 5px 14px;
+        border-radius: 20px;
+        transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .portal-back-btn:hover {
+        color: rgba(255,255,255,0.7);
+        border-color: rgba(255,255,255,0.2);
+    }
+    .portal-back-btn svg {
+        width: 11px;
+        height: 11px;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+    }
+    .portal-back-btn:hover svg { opacity: 1; }
+
+    /* ─── GALLERY WRAP ─── */
+    .portal-gallery-wrap {
+        padding: 5vh 0 10vh;
+        width: 100%;
+    }
+
+    /* ─── WIP + DONE card overrides ─── */
+    .gallery-item.wip-card { cursor: pointer; }
+
+    /* Subtle darkening on WIP cards */
+    .gallery-item.wip-card img {
+        filter: brightness(0.6) !important;
+        transition: filter 0.6s ease, transform 2.2s cubic-bezier(0.15,1,0.3,1);
+    }
+    .gallery-item.wip-card:hover img {
+        filter: brightness(1) !important;
+        transform: scale(1.03) !important;
+    }
+
+    /* Hide overlay on wip hover — reveal image + overlay */
+    .gallery-item.wip-card .gallery-overlay { opacity: 0; }
+    .gallery-item.wip-card:hover .gallery-overlay { opacity: 1 !important; }
+
+    .wip-label {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 6;
+        font-size: 0.78rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 5px;
+        pointer-events: none;
+        transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .gallery-item:hover .wip-label {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    /* ─── FOOTER ─── */
+    .portal-footer {
+        text-align: center;
+        padding: 2.5rem 0 3rem;
+        border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .portal-footer img {
+        height: 22px;
+        opacity: 0.18;
+        display: inline-block;
+        margin-bottom: 0.8rem;
+    }
+
+    .portal-footer p {
+        font-size: 0.62rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.13);
+        letter-spacing: 1.5px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+        .portal-grid { grid-template-columns: repeat(2,1fr); }
+        .client-stats { gap: 1.2rem; }
+    }
+    @media (max-width: 640px) {
+        .client-strip {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem 5%;
+        }
+        .client-stats { flex-wrap: wrap; gap: 1rem; }
+        .client-strip-divider { display: none; }
+    }
+    @media (max-width: 480px) {
+        .portal-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+<main style="padding-top: 20px;">
+
+    <!-- ─── CLIENT INFO STRIP ─── -->
+    <div class="client-strip">
+
+        <!-- يمين: بروفايل العميل -->
+        <div class="client-profile">
+            <img alt="العميل" class="client-avatar-sm" src="Pics/download (1).jpg"/>
+            <div class="client-profile-text">
+                <span class="client-strip-name">أحمد عبد الله</span>
+                <span class="client-strip-since">المدير التنفيذي</span>
+            </div>
+        </div>
+
+        <!-- يسار: الإحصائيات -->
+        <div class="client-stats">
+            <div class="client-strip-stat">
+                <span class="client-stat-num" dir="ltr">1</span>
+                <span class="client-stat-label">مشروع منجز</span>
+            </div>
+            <div class="client-strip-divider"></div>
+            <div class="client-strip-stat">
+                <span class="client-stat-num" dir="ltr">28 Aug</span>
+                <span class="client-stat-label">موعد التسليم القادم</span>
+            </div>
+            <div class="client-strip-divider"></div>
+            <div class="client-strip-stat">
+                <span class="client-stat-num" dir="ltr">$20,000</span>
+                <span class="client-stat-label">إجمالي الميزانية</span>
+            </div>
+            <div class="client-strip-divider"></div>
+            <a class="portal-back-btn" href="/">
+                العودة للبداية
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1);">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- ─── PROJECTS GRID ─── -->
+    <div class="portal-gallery-wrap">
+    <div class="case-gallery-grid" style="max-width: 100%; padding: 0 5%;">
+
+        <!-- ✅ شين - مكتمل -->
+        <a class="gallery-item done-card" href="client-project.html" style="display:block; text-decoration:none; color:inherit;">
+            <img alt="شين" loading="lazy" src="شين.png"/>
+            <div class="gallery-overlay">
+                <h3 class="gallery-overlay-title">شين</h3>
+                <p class="gallery-overlay-desc">موشن جرافيك</p>
+            </div>
+        </a>
+
+        <!-- 🔄 رشف -->
+        <a class="gallery-item wip-card" href="client-project.html" style="display:block; text-decoration:none; color:inherit;">
+            <img alt="رشف" loading="lazy" src="رشف.png"/>
+            <div class="gallery-overlay">
+                <h3 class="gallery-overlay-title">رشف</h3>
+                <p class="gallery-overlay-desc">تصميم بصري</p>
+            </div>
+            <div class="wip-label">قيد الإنجاز</div>
+        </a>
+
+        <!-- 🔄 بينهم -->
+        <a class="gallery-item wip-card" href="client-project.html" style="display:block; text-decoration:none; color:inherit;">
+            <img alt="بينهم" loading="lazy" src="بينهم.png"/>
+            <div class="gallery-overlay">
+                <h3 class="gallery-overlay-title">بينهم</h3>
+                <p class="gallery-overlay-desc">عمل بصري</p>
+            </div>
+            <div class="wip-label">قيد الإنجاز</div>
+        </a>
+
+        <!-- 🔄 ضوء -->
+        <a class="gallery-item wip-card" href="client-project.html" style="display:block; text-decoration:none; color:inherit;">
+            <img alt="ضوء" loading="lazy" src="_light_.jpg"/>
+            <div class="gallery-overlay">
+                <h3 class="gallery-overlay-title">ضوء</h3>
+                <p class="gallery-overlay-desc">دراسة بصرية</p>
+            </div>
+            <div class="wip-label">قيد الإنجاز</div>
+        </a>
+
+    </div>
+    </div>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer class="portal-footer">
+    <img alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/>
+    <p>صفحة خاصة بالعميل · سرية وغير قابلة للمشاركة</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(".client-strip",
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", delay: 0.15 }
+        );
+        gsap.fromTo(".gallery-item",
+            { opacity: 0, y: 28 },
+            { opacity: 1, y: 0, duration: 1, stagger: 0.09, ease: "power3.out", delay: 0.35 }
+        );
+    });
+</script>
+
+</body>
+</html>

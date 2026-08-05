@@ -1,61 +1,568 @@
 <!DOCTYPE html>
-
 <html dir="rtl" lang="ar">
 <head>
-    <meta name="google" content="notranslate">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>تفاصيل المشروع - يوسف الحسيني</title>
-<link href="style.css?v=9" rel="stylesheet"/>
-<!-- Google Fonts: IBM Plex Sans Arabic -->
+<title>تفاصيل المشروع — يوسف الحسيني</title>
+<link href="style.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;700&display=swap" rel="stylesheet"/>
 <link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
 <style>
-        .articles-4-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4.5rem 2rem;
-            margin-top: 3rem;
-        }
-        @media (max-width: 1200px) {
-            .articles-4-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 991px) {
-            .articles-4-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 600px) {
-            .articles-4-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    html { scroll-behavior: smooth; }
+
+    body {
+        background-color: #050505 !important;
+        color: #ffffff;
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+    }
+
+    /* ─── CLIENT INFO STRIP (Header for Project) ─── */
+    .client-strip {
+        padding: 3rem 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .client-profile {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    
+    .client-strip-name {
+        font-size: 1rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.82);
+        letter-spacing: 0.3px;
+    }
+    
+    .client-strip-since {
+        font-size: 0.62rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.2);
+        letter-spacing: 0.3px;
+    }
+    
+    .portal-back-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.68rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 5px 14px;
+        border-radius: 20px;
+        transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .portal-back-btn:hover {
+        color: #ffffff;
+        border-color: #ffffff;
+    }
+    .portal-back-btn svg {
+        width: 11px;
+        height: 11px;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+    }
+    .portal-back-btn:hover svg { opacity: 1; }
+
+    /* ─── PROJECT CONTENT CANVAS ─── */
+    .project-content-canvas {
+        padding: 6rem 6%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .canvas-placeholder {
+        text-align: center;
+        padding: 8rem 0;
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: 4px;
+        color: rgba(255,255,255,0.2);
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    /* Floating Actions Styles */
+    .floating-actions-container {
+        position: fixed;
+        top: 50%;
+        right: 3rem;
+        transform: translateY(-50%);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .floating-toc,
+    .floating-pdf {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .action-icon {
+        width: 44px;
+        height: 44px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-primary);
+        transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                    color 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 2;
+    }
+
+    .action-icon svg {
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .action-icon:hover,
+    .action-icon.active {
+        background-color: var(--text-primary) !important;
+        color: var(--bg-color) !important;
+        border-color: var(--text-primary) !important;
+    }
+
+    /* Specific tooltip/menu mechanics for TOC */
+    .toc-menu {
+        position: absolute;
+        right: 100%; /* Push it to the left of the icon */
+        margin-right: 1.5rem; /* Gap between menu and icon */
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
+        transform-origin: right center;
+        background: #050505;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 2px;
+        padding: 2rem 1.5rem;
+        width: 280px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1;
+    }
+
+    .toc-menu::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -1.5rem;
+        width: 1.5rem;
+        height: 100%;
+    }
+
+    .floating-toc:hover .toc-menu,
+    .floating-pdf:hover .toc-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+    }
+
+    /* Typography and Scrollbar */
+    .toc-title {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 0.65rem;
+        color: rgba(255,255,255,0.3);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        text-align: right;
+        position: relative;
+    }
+
+    .toc-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 20px;
+        height: 1px;
+        background: rgba(255,255,255,0.2);
+    }
+
+    .toc-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 60vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        direction: rtl;
+        padding-left: 0.5rem;
+        pointer-events: auto;
+    }
+
+    .toc-menu ul::-webkit-scrollbar {
+        width: 2px;
+    }
+    .toc-menu ul::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .toc-menu ul::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .toc-menu ul li {
+        margin-bottom: 0;
+    }
+
+    .toc-category {
+        font-size: 0.6rem;
+        font-weight: 500;
+        color: #ffffff;
+        letter-spacing: 2px;
+        margin-top: 1.2rem !important;
+        margin-bottom: 0.3rem !important;
+        padding-right: 0.5rem;
+    }
+
+    .toc-menu ul li:first-child.toc-category {
+        margin-top: 0 !important;
+    }
+
+    .toc-menu ul li a {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: rgba(255,255,255,0.4);
+        text-decoration: none;
+        display: block;
+        padding: 0.7rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.02);
+        transition: all 0.4s ease;
+        text-align: right;
+        position: relative;
+    }
+
+    .toc-menu ul li:last-child a {
+        border-bottom: none;
+    }
+
+    .toc-menu ul li a:hover {
+        color: #fff;
+        padding-right: 1.2rem;
+    }
+
+    .toc-menu ul li a::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2px;
+        height: 0;
+        background: rgba(255,255,255,0.8);
+        transition: all 0.4s ease;
+    }
+
+    .toc-menu ul li a:hover::before {
+        height: 100%;
+    }
+/* ─── CLEAN POSTER DOCUMENTS VIEW (TABS) ─── */
+#documents-view {
+    background-color: #050505 !important;
+    padding: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.doc-tab-content { width: 100%; }
+.doc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.doc-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 200px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpStagger 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeUpStagger {
+    to { opacity: 1; transform: translateY(0); }
+}
+.doc-item:nth-child(1) { animation-delay: 0.05s; }
+.doc-item:nth-child(2) { animation-delay: 0.15s; }
+.doc-item:nth-child(3) { animation-delay: 0.25s; }
+.doc-item:nth-child(4) { animation-delay: 0.35s; }
+.doc-item:nth-child(5) { animation-delay: 0.45s; }
+.doc-item:nth-child(6) { animation-delay: 0.55s; }
+.doc-item:nth-child(7) { animation-delay: 0.65s; }
+.doc-item:nth-child(8) { animation-delay: 0.75s; }
+
+.minimal-doc-card {
+    aspect-ratio: 1 / 1.414;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: url('downlسسسoad.jpg') center/cover no-repeat;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease, box-shadow 0.5s ease;
+}
+.minimal-doc-card:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+.doc-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 0.2rem;
+}
+.doc-title {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #ffffff;
+}
+.doc-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.doc-date {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.5px;
+}
+.doc-dl-icon {
+    color: rgba(255,255,255,0.3);
+    transition: color 0.3s ease;
+    display: flex;
+}
+.doc-dl-icon:hover {
+    color: rgba(255,255,255,0.9);
+}
+.doc-dl-icon svg {
+    width: 14px;
+    height: 14px;
+}
+/* Tabs CSS */
+.docs-tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.doc-tab-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    padding: 0 0 1rem 0;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    letter-spacing: 1px;
+}
+.doc-tab-btn:hover {
+    color: rgba(255,255,255,0.8);
+}
+.doc-tab-btn.active {
+    color: #fff;
+}
+.doc-tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+.doc-tab-btn.active::after {
+    background: #fff;
+}
+
+</style>
 </head>
 <body>
 <!-- الهيدر / النافبار -->
 <nav class="navbar">
-<div class="nav-brand-group">
-<a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
-<a class="lang-switcher" href="#">EN</a>
-</div>
-<button aria-label="Menu" class="mobile-menu-btn">
-<span></span>
-<span></span>
-<span></span>
-</button>
-<ul class="nav-links">
-<li><a data-i18n="text_1" href="/#hero">البداية</a></li>
-<li><a class="active" data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
-<li><a data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
-<li><a data-i18n="text_4" href="about">من أنا</a></li>
-<li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
-</ul>
+    <div class="nav-brand-group">
+        <a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <a class="portal-back-btn" href="client-portal.html" style="font-family: 'IBM Plex Sans Arabic', sans-serif;">
+            العودة لبوابة العميل
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1);">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </div>
 </nav>
+
+<main>
+
+    <!-- ─── Floating Table of Contents ─── -->
+    <div class="floating-actions-container">
+        
+        <!-- Workflow/Report Action (No Menu) -->
+        <a href="#" class="action-icon report-icon active" title="مسار العمل" style="text-decoration: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                <line x1="8" y1="2" x2="8" y2="18"></line>
+                <line x1="16" y1="6" x2="16" y2="22"></line>
+            </svg>
+        </a>
+
+        <!-- Documents Action (No Menu) -->
+        <a href="#" class="action-icon docs-icon" title="المستندات" style="text-decoration: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </a>
+        
+        <!-- PDF Action -->
+        <div class="floating-pdf">
+            <div class="action-icon pdf-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+            </div>
+            <div class="toc-menu pdf-menu">
+                <ul>
+                    <li><a href="#" download>التحميل باللغة العربية | PDF</a></li>
+                    <li><a href="#" download>Download in English | PDF</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── CONTENT CANVAS ─── -->
+    <div class="project-content-canvas">
+<div id="documents-view" style="display: none; width: 100%;">
+    
+    <div class="docs-tabs-nav">
+        <button class="doc-tab-btn active" onclick="switchDocTab('tab-main', this)">المستندات الرئيسية</button>
+        <button class="doc-tab-btn" onclick="switchDocTab('tab-invoices', this)">الفواتير والماليات</button>
+        <button class="doc-tab-btn" onclick="switchDocTab('tab-files', this)">ملفات العمل</button>
+    </div>
+
+    <!-- Tab 1: المستندات الرئيسية -->
+    <div class="doc-tab-content" id="tab-main" style="display: block;">
+        <div class="doc-grid">
+            <!-- Document 1 -->
+            <div class="doc-item">
+                <div class="minimal-doc-card"></div>
+                <div class="doc-info">
+                    <span class="doc-title">عقد العمل</span>
+                    <div class="doc-meta-row">
+                        <span class="doc-date">تاريخ التسليم: 10 أكتوبر 2026</span>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document 2 -->
+            <div class="doc-item">
+                <div class="minimal-doc-card"></div>
+                <div class="doc-info">
+                    <span class="doc-title">البريف</span>
+                    <div class="doc-meta-row">
+                        <span class="doc-date">تاريخ التسليم: 10 أكتوبر 2026</span>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document 3 -->
+            <div class="doc-item">
+                <div class="minimal-doc-card"></div>
+                <div class="doc-info">
+                    <span class="doc-title">البيتش ديك</span>
+                    <div class="doc-meta-row">
+                        <span class="doc-date">تاريخ التسليم: 12 أكتوبر 2026</span>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 2: الفواتير والماليات -->
+    <div class="doc-tab-content" id="tab-invoices" style="display: none;">
+        <div class="doc-grid">
+            <!-- Invoice 1 -->
+            <div class="doc-item">
+                <div class="minimal-doc-card"></div>
+                <div class="doc-info">
+                    <span class="doc-title">فاتورة الدفعة الأولى</span>
+                    <div class="doc-meta-row">
+                        <span class="doc-date">تاريخ التسليم: 15 أكتوبر 2026</span>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 3: ملفات العمل -->
+    <div class="doc-tab-content" id="tab-files" style="display: none;">
+        <div class="doc-grid">
+            <!-- Folder 1 -->
+            <div class="doc-item">
+                <div class="minimal-doc-card"></div>
+                <div class="doc-info">
+                    <span class="doc-title">مجلد After Effects</span>
+                    <div class="doc-meta-row">
+                        <span class="doc-date">تاريخ التسليم: 20 أكتوبر 2026</span>
+                        <a href="#" class="doc-dl-icon" title="فتح المجلد"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function switchDocTab(tabId, btnElement) {
+    document.querySelectorAll('.doc-tab-content').forEach(function(el) {
+        el.style.display = 'none';
+    });
+    document.querySelectorAll('.doc-tab-btn').forEach(function(el) {
+        el.classList.remove('active');
+    });
+    
+    document.getElementById(tabId).style.display = 'block';
+    btnElement.classList.add('active');
+}
+</script>
+<div id='embedded-case-study' style='display:none; width: 100%;'>
 <main class="case-main">
 <!-- Hero Section -->
 <section class="case-hero no-anim" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('شين.png'); background-attachment: fixed; background-size: cover; background-position: center; position: relative; overflow: hidden;">
@@ -135,371 +642,25 @@
 <span class="play-line" style="display: block; width: 30px; height: 1px; background: currentColor; transition: width 0.4s ease;"></span>
 </a>
 <script>
-                    function triggerStaggeredHeroFade() {
-                        const nav = document.querySelector('.navbar');
-                        const heroElements = Array.from(document.getElementById('heroContentBlock').children);
-                        const customControls = document.getElementById('customVideoControls');
-                        
-                        // Auto Fullscreen - MUST be synchronous with click event
-                        const heroSection = document.querySelector('.case-hero');
-                        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                            if (heroSection.requestFullscreen) heroSection.requestFullscreen().catch(e => console.log(e));
-                            else if (heroSection.webkitRequestFullscreen) heroSection.webkitRequestFullscreen();
-                        }
-                        
-                        // Sequence: Navbar first, then Hero elements (Title, Meta, Button)
-                        const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
-                        
-                        elementsToFade.forEach((el, index) => {
-                            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                            setTimeout(() => {
-                                el.style.opacity = '0';
-                                el.style.transform = 'translateY(-20px)';
-                                el.style.pointerEvents = 'none';
-                            }, index * 150);
-                        });
+    document.addEventListener('DOMContentLoaded', () => {
+        const reportBtn = document.querySelector('.report-icon');
+        const embedded = document.getElementById('embedded-case-study');
 
-                        // Start the video after the stagger completes
-                        setTimeout(() => {
-                            const vid = document.getElementById('heroInlineVideo');
-                            vid.style.transition = 'opacity 1s ease';
-                            vid.style.opacity = '1';
-                            vid.style.pointerEvents = 'auto';
-                            vid.style.zIndex = '10';
-                            vid.play();
-                            
-                            customControls.setAttribute('data-active', 'true');
-                            customControls.style.opacity = '1';
-                            customControls.style.pointerEvents = 'auto';
-                            
-                            // Hide the page scrollbar
-                            document.body.style.overflow = 'hidden';
-                        }, (elementsToFade.length * 150) + 300);
-                    }
-
-                    // Custom Video Controls Logic
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const vid = document.getElementById('heroInlineVideo');
-                        const playPauseBtn = document.getElementById('customPlayPauseBtn');
-                        const playIcon = document.getElementById('playIcon');
-                        const pauseIcon = document.getElementById('pauseIcon');
-                        const muteBtn = document.getElementById('customMuteBtn');
-                        const muteIcon = document.getElementById('muteIcon');
-                        const unmuteIcon = document.getElementById('unmuteIcon');
-                        const progressBar = document.getElementById('customProgressBar');
-                        const progressContainer = document.getElementById('customProgressBarContainer');
-                        const customControls = document.getElementById('customVideoControls');
-                        
-                        const fullscreenBtn = document.getElementById('customFullscreenBtn');
-                        const enterFullscreenIcon = document.getElementById('enterFullscreenIcon');
-                        const exitFullscreenIcon = document.getElementById('exitFullscreenIcon');
-
-                        let controlsTimeout;
-
-                        function hideControls() {
-                            if (customControls.getAttribute('data-active') !== 'true') return;
-                            if (!vid.paused) {
-                                customControls.style.opacity = '0';
-                                document.body.style.cursor = 'none'; // Optional: hide cursor for true cinematic feel
-                            }
-                        }
-
-                        function showControls() {
-                            if (customControls.getAttribute('data-active') !== 'true') return;
-                            customControls.style.opacity = '1';
-                            document.body.style.cursor = 'default';
-                            clearTimeout(controlsTimeout);
-                            if (!vid.paused) {
-                                controlsTimeout = setTimeout(hideControls, 2500);
-                            }
-                        }
-
-                        // Trigger showControls on mouse movement over the hero area
-                        document.querySelector('.case-hero').addEventListener('mousemove', showControls);
-                        document.querySelector('.case-hero').addEventListener('click', showControls);
-
-                        function togglePlayPause() {
-                            if (customControls.getAttribute('data-active') === 'true') {
-                                vid.paused ? vid.play() : vid.pause();
-                            }
-                        }
-
-                        playPauseBtn.onclick = togglePlayPause;
-                        vid.onclick = togglePlayPause; // Click screen to play/pause
-
-                        document.addEventListener('keydown', (e) => {
-                            if (customControls.getAttribute('data-active') === 'true' && e.code === 'Space') {
-                                e.preventDefault(); // Prevent page scroll
-                                togglePlayPause();
-                            }
-                        });
-                        
-                        const pauseOverlayText = document.getElementById('pauseOverlayText');
-                        const pauseMessageTitle = document.getElementById('pauseMessageTitle');
-                        const pauseMessages = [
-                            "لماذا توقفت؟",
-                            "استراحة قصيرة؟",
-                            "اللقطة القادمة أجمل!",
-                            "نحن بانتظارك...",
-                            "لحظة تأمل؟",
-                            "القصة لم تنتهِ بعد",
-                            "لا تتوقف هنا!"
-                        ];
-
-                        vid.addEventListener('play', () => { 
-                            playIcon.style.display = 'none'; 
-                            pauseIcon.style.display = 'block'; 
-                            vid.style.filter = 'blur(0px) brightness(1)';
-                            
-                            pauseOverlayText.style.opacity = '0';
-                            pauseOverlayText.style.transform = 'translate(-50%, -40%)';
-                            
-                            const nav = document.querySelector('.navbar');
-                            const heroElements = Array.from(document.getElementById('heroContentBlock').children);
-                            const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
-                            
-                            elementsToFade.forEach((el, index) => {
-                                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                                setTimeout(() => {
-                                    el.style.opacity = '0';
-                                    el.style.transform = 'translateY(-20px)';
-                                    el.style.pointerEvents = 'none';
-                                }, index * 100);
-                            });
-
-                            showControls(); 
-                        });
-                        
-                        vid.addEventListener('pause', () => { 
-                            pauseIcon.style.display = 'none'; 
-                            playIcon.style.display = 'block'; 
-                            vid.style.filter = 'blur(10px) brightness(0.6)';
-                            
-                            // Select random message
-                            const randomMsg = pauseMessages[Math.floor(Math.random() * pauseMessages.length)];
-                            pauseMessageTitle.innerText = randomMsg;
-
-                            pauseOverlayText.style.opacity = '1';
-                            pauseOverlayText.style.transform = 'translate(-50%, -50%)';
-                            
-                            const nav = document.querySelector('.navbar');
-                            const heroElements = Array.from(document.getElementById('heroContentBlock').children);
-                            const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
-                            
-                            elementsToFade.forEach((el, index) => {
-                                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                                setTimeout(() => {
-                                    el.style.opacity = '1';
-                                    el.style.transform = 'translateY(0)';
-                                    if(el === nav) el.style.pointerEvents = 'auto'; // Make navbar clickable
-                                }, index * 100);
-                            });
-
-                            showControls(); 
-                        });
-                        
-                        muteBtn.onclick = () => { vid.muted = !vid.muted; showControls(); };
-                        vid.addEventListener('volumechange', () => {
-                            if(vid.muted || vid.volume === 0) { 
-                                muteIcon.style.display = 'block'; 
-                                unmuteIcon.style.display = 'none'; 
-                                volumeBar.style.width = '0%';
-                            } else { 
-                                unmuteIcon.style.display = 'block'; 
-                                muteIcon.style.display = 'none'; 
-                                volumeBar.style.width = (vid.volume * 100) + '%';
-                            }
-                        });
-
-                        const currentTimeEl = document.getElementById('customCurrentTime');
-                        const durationTimeEl = document.getElementById('customDurationTime');
-
-                        function formatTime(seconds) {
-                            if (isNaN(seconds)) return "0:00";
-                            const m = Math.floor(seconds / 60);
-                            const s = Math.floor(seconds % 60);
-                            return m + ":" + (s < 10 ? "0" + s : s);
-                        }
-
-                        vid.addEventListener('loadedmetadata', () => {
-                            durationTimeEl.innerText = formatTime(vid.duration);
-                        });
-
-                        vid.addEventListener('timeupdate', () => {
-                            if (!isDraggingProg) {
-                                const percentage = (vid.currentTime / vid.duration) * 100;
-                                progressBar.style.width = percentage + '%';
-                            }
-                            currentTimeEl.innerText = formatTime(vid.currentTime);
-                        });
-
-                        let isDraggingProg = false;
-                        const progressTooltip = document.getElementById('progressTooltip');
-
-                        function updateTooltipPosition(e) {
-                            const rect = progressContainer.getBoundingClientRect();
-                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                            if (clientX === undefined) return;
-                            let pos = (clientX - rect.left) / rect.width;
-                            pos = Math.max(0, Math.min(1, pos));
-                            const hoverTime = pos * vid.duration;
-                            if (!isNaN(hoverTime)) {
-                                progressTooltip.innerText = formatTime(hoverTime);
-                                progressTooltip.style.left = (pos * 100) + '%';
-                                progressTooltip.style.opacity = '1';
-                            }
-                        }
-
-                        progressContainer.addEventListener('mousemove', (e) => {
-                            if (!isDraggingProg) updateTooltipPosition(e);
-                        });
-                        progressContainer.addEventListener('mouseleave', () => {
-                            if (!isDraggingProg) progressTooltip.style.opacity = '0';
-                        });
-
-                        function updateProgress(e) {
-                            const rect = progressContainer.getBoundingClientRect();
-                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                            let pos = (clientX - rect.left) / rect.width; // LTR logic
-                            pos = Math.max(0, Math.min(1, pos));
-                            progressBar.style.width = (pos * 100) + '%';
-                            vid.currentTime = pos * vid.duration; 
-                        }
-
-                        progressContainer.addEventListener('mousedown', (e) => {
-                            e.stopPropagation();
-                            isDraggingProg = true;
-                            updateProgress(e);
-                            currentTimeEl.innerText = formatTime(vid.currentTime);
-                            showControls();
-                        });
-                        progressContainer.addEventListener('touchstart', (e) => {
-                            e.stopPropagation();
-                            isDraggingProg = true;
-                            updateProgress(e);
-                            currentTimeEl.innerText = formatTime(vid.currentTime);
-                            showControls();
-                        }, {passive: false});
-
-                        const volumeContainer = document.getElementById('customVolumeContainer');
-                        const volumeBar = document.getElementById('customVolumeBar');
-                        let isDraggingVol = false;
-
-                        function updateVolume(e) {
-                            const rect = volumeContainer.getBoundingClientRect();
-                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                            let pos = (clientX - rect.left) / rect.width; // LTR logic
-                            pos = Math.max(0, Math.min(1, pos));
-                            volumeBar.style.width = (pos * 100) + '%';
-                            vid.volume = pos;
-                            vid.muted = (pos === 0);
-                        }
-
-                        volumeContainer.addEventListener('mousedown', (e) => {
-                            e.stopPropagation();
-                            isDraggingVol = true;
-                            updateVolume(e);
-                            showControls();
-                        });
-                        volumeContainer.addEventListener('touchstart', (e) => {
-                            e.stopPropagation();
-                            isDraggingVol = true;
-                            updateVolume(e);
-                            showControls();
-                        }, {passive: false});
-
-                        document.addEventListener('mousemove', (e) => {
-                            if (isDraggingProg) {
-                                updateProgress(e);
-                                updateTooltipPosition(e);
-                            }
-                            if (isDraggingVol) updateVolume(e);
-                        });
-                        document.addEventListener('touchmove', (e) => {
-                            if (isDraggingProg) {
-                                updateProgress(e);
-                                updateTooltipPosition(e);
-                            }
-                            if (isDraggingVol) updateVolume(e);
-                        }, {passive: false});
-
-                        document.addEventListener('mouseup', () => { 
-                            isDraggingProg = false; 
-                            isDraggingVol = false; 
-                            progressTooltip.style.opacity = '0';
-                        });
-                        document.addEventListener('touchend', () => { 
-                            isDraggingProg = false; 
-                            isDraggingVol = false; 
-                            progressTooltip.style.opacity = '0';
-                        });
-
-                        // Prevent buttons from triggering video pause when clicked
-                        [playPauseBtn, muteBtn, fullscreenBtn].forEach(btn => {
-                            btn.onmousedown = (e) => e.stopPropagation();
-                            btn.ontouchstart = (e) => e.stopPropagation();
-                            btn.onclick = (e) => {
-                                e.stopPropagation();
-                                if(btn === playPauseBtn) togglePlayPause();
-                                if(btn === muteBtn) { vid.muted = !vid.muted; showControls(); }
-                                if(btn === fullscreenBtn) toggleFullscreen();
-                            };
-                        });
-                        
-                        function toggleFullscreen() {
-                            const heroSection = document.querySelector('.case-hero');
-                            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                                if (heroSection.requestFullscreen) heroSection.requestFullscreen();
-                                else if (heroSection.webkitRequestFullscreen) heroSection.webkitRequestFullscreen();
-                            } else {
-                                if (document.exitFullscreen) document.exitFullscreen();
-                                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                            }
-                            showControls();
-                        }
-
-                        ['fullscreenchange', 'webkitfullscreenchange'].forEach(evt => {
-                            document.addEventListener(evt, () => {
-                                if (document.fullscreenElement || document.webkitFullscreenElement) {
-                                    enterFullscreenIcon.style.display = 'none';
-                                    exitFullscreenIcon.style.display = 'block';
-                                } else {
-                                    enterFullscreenIcon.style.display = 'block';
-                                    exitFullscreenIcon.style.display = 'none';
-                                }
-                            });
-                        });
-
-                        function closeVideoMode() {
-                            vid.pause();
-                            vid.style.opacity = '0';
-                            vid.style.pointerEvents = 'none';
-                            vid.style.filter = 'blur(0px) brightness(1)'; // Reset for next time
-                            customControls.setAttribute('data-active', 'false');
-                            customControls.style.opacity = '0';
-                            customControls.style.pointerEvents = 'none';
-                            document.body.style.cursor = 'default';
-                            document.body.style.overflow = ''; // Show page scrollbar again
-                            clearTimeout(controlsTimeout);
-                            
-                            // Exit fullscreen if active
-                            if (document.fullscreenElement || document.webkitFullscreenElement) {
-                                if (document.exitFullscreen) document.exitFullscreen();
-                                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                            }
-                            
-                            const nav = document.querySelector('.navbar');
-                            const heroElements = Array.from(document.getElementById('heroContentBlock').children);
-                            [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT').forEach((el, index) => {
-                                setTimeout(() => {
-                                    el.style.opacity = '1';
-                                    el.style.transform = 'translateY(0)';
-                                    el.style.pointerEvents = 'auto';
-                                }, index * 100);
-                            });
-                        }
-                    });
-                </script>
+        reportBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(embedded) {
+                embedded.style.display = 'block';
+                window.scrollTo({
+                    top: embedded.offsetTop - 50,
+                    behavior: 'smooth'
+                });
+                if (typeof ScrollTrigger !== 'undefined') {
+                    setTimeout(() => ScrollTrigger.refresh(), 500);
+                }
+            }
+        });
+    });
+</script>
 </div>
 </section>
 <!-- Overview Section -->
@@ -759,119 +920,95 @@
 </div>
 </section>
 </main>
-<!-- فوتر الموقع المطابق -->
-<footer class="footer">
-<div class="container">
-<div class="footer-grid">
-<!-- العمود الأول: العلامة التجارية -->
-<div class="footer-col brand-col">
-<a class="footer-logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
-<p class="footer-about-text" data-i18n="text_134">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
 </div>
-<!-- العمود الثاني: التنقل -->
-<div class="footer-col">
-<h4 class="footer-title" data-i18n="text_135">استكشف</h4>
-<ul class="footer-links">
-<li><a data-i18n="text_1" href="/#hero">البداية</a></li>
-<li><a data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
-<li><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
-<li><a data-i18n="text_4" href="about.html">من أنا</a></li>
-<li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
-</ul>
-</div>
-<!-- العمود الثالث: مواقع التواصل -->
-<div class="footer-col">
-<h4 class="footer-title" data-i18n="text_136">تابعني</h4>
-<ul class="footer-links">
-<li><a data-i18n="text_137" href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
-<li><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
-<li><a data-i18n="text_139" href="#" target="_blank">إكس</a></li>
-<li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
-<li><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
-</ul>
-</div>
-<!-- العمود الرابع: معلومات التواصل -->
-<div class="footer-col info-col">
-<h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
-<p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
-<p class="footer-info-item">واتساب: <span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
-<p class="footer-info-item">البريد الإلكتروني: <a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
-</div>
-</div>
-<div class="footer-bottom">
-<p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
-<span class="footer-note" data-i18n="text_145">مساحة للفكر</span>
-</div>
-</div>
-</footer>
-<!-- GSAP for animations -->
+    </div>
+</main>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<!-- Lenis Smooth Scroll -->
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-<!-- Video Modal -->
-<div class="video-modal" id="videoModal" onclick="if(event.target === this) { this.classList.remove('active'); document.getElementById('modalVideo').pause(); }">
-<div class="video-modal-close" id="closeVideoModal" onclick="document.getElementById('videoModal').classList.remove('active'); document.getElementById('modalVideo').pause();">
-<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
-</div>
-<div class="video-modal-content">
-<video controls="" id="modalVideo" preload="none">
-<source src="3D.mp4" type="video/mp4"/>
-</video>
-</div>
-</div>
-<!-- Main Script -->
-<script src="translations.js"></script>
-    <script src="script.js"></script>
+<script src="script.js"></script>
+
 <script>
-        // Video Modal Inline Logic (so it works independently for this page)
-        (function() {
-            const playBtn = document.getElementById('playHeroVideo');
-            const videoModal = document.getElementById('videoModal');
-            const closeVideoBtn = document.getElementById('closeVideoModal');
-            const modalVideo = document.getElementById('modalVideo');
+    document.addEventListener('DOMContentLoaded', () => {
+        const reportBtn = document.querySelector('.report-icon');
+        const docsBtn = document.querySelector('.docs-icon');
+        const canvas = document.querySelector('.project-content-canvas');
+        const embedded = document.getElementById('embedded-case-study');
+        const docsView = document.getElementById('documents-view');
 
-            if (playBtn && videoModal && closeVideoBtn && modalVideo) {
-                playBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    videoModal.classList.add('active');
-                    modalVideo.play();
-                });
+        function showWorkflow(smoothScroll = true) {
+            if(embedded) {
+                if (docsView) docsView.style.display = 'none';
+                
+                const placeholder = canvas.querySelector('.canvas-placeholder');
+                if (placeholder) placeholder.style.display = 'none';
+                
+                canvas.style.maxWidth = 'none';
+                canvas.style.padding = '0';
+                canvas.style.margin = '0';
 
-                closeVideoBtn.addEventListener('click', () => {
-                    videoModal.classList.remove('active');
-                    modalVideo.pause();
-                });
-
-                videoModal.addEventListener('click', (e) => {
-                    if (e.target === videoModal) {
-                        videoModal.classList.remove('active');
-                        modalVideo.pause();
-                    }
-                });
+                embedded.style.display = 'block';
+                
+                reportBtn.classList.add('active');
+                if(docsBtn) docsBtn.classList.remove('active');
+                
+                if (smoothScroll) {
+                    window.scrollTo({
+                        top: canvas.offsetTop - 50,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                if (typeof ScrollTrigger !== 'undefined') {
+                    setTimeout(() => ScrollTrigger.refresh(), 500);
+                }
             }
-        })();
-
-        // Group navigation for articles page
-        const groupNavBtns = document.querySelectorAll('.group-nav-btn');
-        const sections = document.querySelectorAll('.art-section');
-
-        function switchGroup(groupId) {
-            sections.forEach(s => s.style.display = 'none');
-            groupNavBtns.forEach(b => b.classList.remove('active'));
-
-            const targetSection = document.getElementById(groupId);
-            if (targetSection) targetSection.style.display = 'block';
-
-            const targetBtns = document.querySelectorAll(`[data-group="${groupId}"]`);
-            targetBtns.forEach(btn => btn.classList.add('active'));
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        groupNavBtns.forEach(btn => {
-            btn.addEventListener('click', () => switchGroup(btn.dataset.group));
+        function showDocs() {
+            if(docsView) {
+                if (embedded) embedded.style.display = 'none';
+                
+                const placeholder = canvas.querySelector('.canvas-placeholder');
+                if (placeholder) placeholder.style.display = 'none';
+                
+                // Keep canvas unconstrained as documents view handles its own max-width
+                canvas.style.maxWidth = 'none';
+                canvas.style.padding = '0';
+                canvas.style.margin = '0';
+
+                docsView.style.display = 'flex';
+                
+                if(docsBtn) docsBtn.classList.add('active');
+                reportBtn.classList.remove('active');
+                
+                window.scrollTo({
+                    top: canvas.offsetTop - 50,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        reportBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showWorkflow(true);
         });
-    </script>
+
+        if(docsBtn) {
+            docsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showDocs();
+            });
+        }
+
+        // Load the workflow structure by default on page load
+        showWorkflow(false);
+    });
+</script>
 </body>
 </html>
+
+
+
+
