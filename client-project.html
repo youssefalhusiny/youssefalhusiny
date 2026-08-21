@@ -126,7 +126,23 @@
                     color 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
                     border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: 2;
+        
+        /* Entrance Animation */
+        opacity: 0;
+        transform: translateX(40px);
+        animation: slideInFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+    
+    @keyframes slideInFromRight {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .action-icon.report-icon { animation-delay: 0.1s; }
+    .action-icon.docs-icon { animation-delay: 0.2s; }
+    .action-icon.pdf-icon { animation-delay: 0.3s; }
 
     .action-icon svg {
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -182,7 +198,7 @@
         letter-spacing: 4px;
         text-transform: uppercase;
         display: block;
-        margin-bottom: 1.5rem;
+        margin: 0 auto 1.5rem auto;
         padding-bottom: 1rem;
         text-align: right;
         position: relative;
@@ -299,7 +315,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 200px;
+    width: 280px; /* Increased from 200px to 280px */
     opacity: 0;
     transform: translateY(20px);
     animation: fadeUpStagger 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -431,7 +447,7 @@
         
         <!-- Workflow/Report Action (No Menu) -->
         <a href="#" class="action-icon report-icon active" title="مسار العمل" style="text-decoration: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
                 <line x1="8" y1="2" x2="8" y2="18"></line>
                 <line x1="16" y1="6" x2="16" y2="22"></line>
@@ -440,7 +456,7 @@
 
         <!-- Documents Action (No Menu) -->
         <a href="#" class="action-icon docs-icon" title="المستندات" style="text-decoration: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
             </svg>
         </a>
@@ -448,7 +464,7 @@
         <!-- PDF Action -->
         <div class="floating-pdf">
             <div class="action-icon pdf-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -483,7 +499,7 @@
                     <span class="doc-title">عقد العمل</span>
                     <div class="doc-meta-row">
                         <span class="doc-date">تاريخ التسليم: 10 أكتوبر 2026</span>
-                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
                     </div>
                 </div>
             </div>
@@ -495,7 +511,7 @@
                     <span class="doc-title">البريف</span>
                     <div class="doc-meta-row">
                         <span class="doc-date">تاريخ التسليم: 10 أكتوبر 2026</span>
-                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
                     </div>
                 </div>
             </div>
@@ -507,7 +523,7 @@
                     <span class="doc-title">البيتش ديك</span>
                     <div class="doc-meta-row">
                         <span class="doc-date">تاريخ التسليم: 12 أكتوبر 2026</span>
-                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
                     </div>
                 </div>
             </div>
@@ -524,7 +540,7 @@
                     <span class="doc-title">فاتورة الدفعة الأولى</span>
                     <div class="doc-meta-row">
                         <span class="doc-date">تاريخ التسليم: 15 أكتوبر 2026</span>
-                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                        <a href="#" class="doc-dl-icon" title="تحميل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
                     </div>
                 </div>
             </div>
@@ -541,7 +557,7 @@
                     <span class="doc-title">مجلد After Effects</span>
                     <div class="doc-meta-row">
                         <span class="doc-date">تاريخ التسليم: 20 أكتوبر 2026</span>
-                        <a href="#" class="doc-dl-icon" title="فتح المجلد"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                        <a href="#" class="doc-dl-icon" title="فتح المجلد"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
                     </div>
                 </div>
             </div>
@@ -692,6 +708,527 @@ function switchDocTab(tabId, btnElement) {
 </div>
 </div>
 </section>
+
+<!-- Project Timeline Section -->
+<style>
+    /* Delivery Stats Design */
+    .delivery-stats-wrapper {
+        display: flex;
+        align-items: center;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 2px;
+        padding: 0;
+        margin-bottom: 5rem;
+        overflow: hidden;
+    }
+    .stat-card {
+        flex: 1;
+        padding: 2.5rem 3rem;
+        position: relative;
+    }
+    .stat-divider {
+        width: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .stat-divider svg {
+        opacity: 0.5;
+    }
+    .stat-label {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 0.7rem;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 1px;
+        margin-bottom: 0.8rem;
+    }
+    .stat-value {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 1.8rem;
+        color: #fff;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+    }
+    .stat-card.highlight {
+        background: rgba(255,255,255,0.02);
+    }
+    .stat-badge {
+        position: absolute;
+        top: 2.5rem;
+        left: 3rem; /* RTL */
+        background: rgba(76, 175, 80, 0.08);
+        color: #4CAF50;
+        border: 1px solid rgba(76, 175, 80, 0.15);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.65rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+    }
+
+        /* Modern Brutalist Timeline Design */
+    .timeline-modern-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        margin-top: 2rem;
+    }
+    .tm-step {
+        position: relative;
+        padding: 3rem 1.5rem 3rem 0;
+        border-top: 2px solid rgba(255,255,255,0.08);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+    }
+    .tm-step:hover {
+        border-top-color: #fff;
+        background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+        transform: translateY(-5px);
+    }
+    .tm-number {
+        position: absolute;
+        top: -15px;
+        right: 0; /* RTL */
+        font-size: 8rem;
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-weight: 700;
+        color: rgba(255,255,255,0.02);
+        z-index: 0;
+        line-height: 1;
+        pointer-events: none;
+        transition: color 0.4s ease;
+    }
+    .tm-step:hover .tm-number {
+        color: rgba(255,255,255,0.04);
+    }
+    .tm-content {
+        position: relative;
+        z-index: 1;
+    }
+    .tm-date-pill {
+        display: inline-block;
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 0.65rem;
+        color: rgba(255,255,255,0.8);
+        background: rgba(255,255,255,0.08);
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .tm-title {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 400;
+        color: #fff;
+        margin: 0 0 1rem 0;
+    }
+    .tm-desc {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.55);
+        line-height: 1.9;
+        margin: 0;
+        font-weight: 300;
+        max-width: 90%;
+    }
+    @media (max-width: 1024px) {
+        .timeline-modern-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem 0; }
+        .tm-step { padding-left: 1.5rem; }
+    }
+    @media (max-width: 768px) {
+        .timeline-modern-grid { grid-template-columns: 1fr; gap: 0; }
+        .tm-step { padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .tm-step:hover { transform: translateY(0); padding-right: 1rem; }
+        .tm-number { font-size: 7rem; right: -10px; }
+        .tm-desc { max-width: 100%; }
+    }
+    /* Responsive */
+    @media (max-width: 1024px) {
+        
+        
+    }
+    @media (max-width: 768px) {
+        .delivery-stats-wrapper { flex-direction: column; }
+        .stat-card { width: 100%; padding: 2.5rem; }
+        .stat-divider { width: 100%; height: 40px; }
+        .stat-divider svg { transform: rotate(90deg); }
+        .stat-badge { position: relative; top: auto; left: auto; display: inline-block; margin-top: 1.5rem; }
+        
+        
+        
+        
+        
+        
+    }
+</style>
+
+<section class="project-timeline" style="padding: 2.5rem 0 5.5rem; background: var(--bg-color); position: relative; z-index: 2;">
+    <div class="container" style="max-width: 1450px; margin: 0 auto; padding: 0 5%;">
+        
+        <div style="margin-bottom: 4rem;">
+            <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0 0 0.2rem 0;">الجدول الزمني ومراحل الإنجاز</h2>
+            <span style="font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;">Timeline & Milestones</span>
+        </div>
+
+        <div class="delivery-stats-wrapper">
+            <div class="stat-card">
+                <div class="stat-label">تاريخ التسليم المتفق عليه</div>
+                <div class="stat-value">15 نوفمبر 2026</div>
+            </div>
+            <div class="stat-divider">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+            <div class="stat-card highlight">
+                <div class="stat-label">تاريخ التسليم الفعلي</div>
+                <div class="stat-value">13 نوفمبر 2026</div>
+                <div class="stat-badge">أُنجز مبكراً بـ 48 ساعة</div>
+            </div>
+        </div>
+
+                <div class="timeline-modern-grid">
+            
+            <div class="tm-step">
+                <div class="tm-number">01</div>
+                <div class="tm-content">
+                    <div class="tm-date-pill">1 أكتوبر 2026</div>
+                    <h4 class="tm-title">اعتماد التصور</h4>
+                    <p class="tm-desc">تمت مراجعة القصة المصورة واعتمادها من قبل الفريق للبدء.</p>
+                </div>
+            </div>
+            
+            <div class="tm-step">
+                <div class="tm-number">02</div>
+                <div class="tm-content">
+                    <div class="tm-date-pill">3 أكتوبر 2026</div>
+                    <h4 class="tm-title">اللقطات الافتتاحية</h4>
+                    <p class="tm-desc">إنهاء المشاهد الأولى كعينة للتوجه الفني، وقبولها فوراً.</p>
+                </div>
+            </div>
+            
+            <div class="tm-step">
+                <div class="tm-number">03</div>
+                <div class="tm-content">
+                    <div class="tm-date-pill">20 أكتوبر 2026</div>
+                    <h4 class="tm-title">المونتاج الأولي</h4>
+                    <p class="tm-desc">تسليم النسخة الأولى لمراجعة الإيقاع وتزامن الصوت.</p>
+                </div>
+            </div>
+            
+            <div class="tm-step">
+                <div class="tm-number">04</div>
+                <div class="tm-content">
+                    <div class="tm-date-pill">5 نوفمبر 2026</div>
+                    <h4 class="tm-title">الميكساج الصوتي</h4>
+                    <p class="tm-desc">الانتهاء من التعديلات وتطبيق الهندسة الصوتية النهائية.</p>
+                </div>
+            </div>
+            
+            <div class="tm-step">
+                <div class="tm-number">05</div>
+                <div class="tm-content">
+                    <div class="tm-date-pill">13 نوفمبر 2026</div>
+                    <h4 class="tm-title">التسليم والإغلاق</h4>
+                    <p class="tm-desc">تصدير وتسليم كافة الصيغ النهائية وملفات المصدر.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Execution Efficiency Section -->
+<style>
+    .efficiency-grid {
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 3.5rem;
+    }
+    .efficiency-box {
+        border-right: 1px solid rgba(255,255,255,0.08); 
+        padding-right: 1.8rem; 
+        padding: 0 0.5rem;
+    }
+    @media (max-width: 900px) {
+        .efficiency-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+        .efficiency-box { border-right: none; border-top: 1px solid rgba(255,255,255,0.08); padding-right: 0; padding-top: 1.8rem; }
+        .efficiency-box:first-child { border-top: none; padding-top: 0; }
+    }
+</style>
+<section class="execution-efficiency" style="padding: 2.5rem 0 4.5rem; background: var(--bg-color); position: relative; z-index: 2;">
+    <div class="container" style="max-width: 1450px; margin: 0 auto; padding: 0 5%;">
+        
+        <div style="margin-bottom: 3.5rem;">
+            <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0 0 0.2rem 0;">ملخص الكفاءة والجدول الزمني</h2>
+            <span style="font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;">Execution Efficiency</span>
+        </div>
+
+        <div class="efficiency-grid">
+            <!-- Box 1 -->
+            <div class="efficiency-box">
+                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; font-weight: 400; color: var(--text-primary); margin-bottom: 1rem; opacity: 0.9;">نطاق العمل المُتفق عليه vs المُنفذ</h3>
+                <p style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.82rem; color: var(--text-secondary); line-height: 2; font-weight: 300; margin: 0;">تغطية كافة طلبات المشروع المحددة، مع تقديم حلول بصرية متقدمة تجاوزت النطاق المبدئي لتلائم هوية العلامة التجارية.</p>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="efficiency-box">
+                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; font-weight: 400; color: var(--text-primary); margin-bottom: 1rem; opacity: 0.9;">الجداول الزمنية</h3>
+                <p style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.82rem; color: var(--text-secondary); line-height: 2; font-weight: 300; margin: 0;">التاريخ الإجمالي للتسليم وافق الخطة الأساسية تماماً (دون أي انحراف زمني)، مما ساهم في انطلاق الحملة في وقتها المحدد.</p>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="efficiency-box">
+                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; font-weight: 400; color: var(--text-primary); margin-bottom: 1rem; opacity: 0.9;">إجمالي دورات التعديل (Revision Cycles)</h3>
+                <p style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.82rem; color: var(--text-secondary); line-height: 2; font-weight: 300; margin: 0;">تم إجراء 3 دورات تعديل شاملة (Revision Passes) غطت 14 ملاحظة دقيقة دون الخروج عن الهيكلية الأساسية.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Log of Critical Iterations Section -->
+<style>
+    .iteration-card {
+        background: rgba(255,255,255,0.015); 
+        border: 1px solid rgba(255,255,255,0.05); 
+        padding: 2.5rem; 
+        display: grid; 
+        grid-template-columns: 1fr 1.5fr; 
+        gap: 3rem; 
+        border-radius: 2px;
+        transition: background 0.3s ease;
+    }
+    .iteration-card:hover {
+        background: rgba(255,255,255,0.03);
+    }
+    .iteration-divider {
+        border-right: 1px solid rgba(255,255,255,0.08); 
+        padding-right: 3rem;
+    }
+    @media (max-width: 900px) {
+        .iteration-card {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 1.8rem;
+        }
+        .iteration-divider {
+            border-right: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-right: 0;
+            padding-top: 2rem;
+        }
+    }
+</style>
+<section class="critical-iterations" style="padding: 1.5rem 0 5rem; background: var(--bg-color); position: relative; z-index: 2;">
+    <div class="container" style="max-width: 1450px; margin: 0 auto; padding: 0 5%;">
+        
+        <div style="margin-bottom: 3.5rem;">
+            <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0 0 0.2rem 0;">سجل التعديلات الجوهرية</h2>
+            <span style="font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;">Log of Critical Iterations</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+            
+            <!-- Iteration 1 -->
+            <div class="iteration-card">
+                <div>
+                    <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; display: block; margin-bottom: 0.8rem;">التعديل الهيكلي أو الفني</span>
+                    <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; font-weight: 400; color: #fff; margin: 0; line-height: 1.7;">إعادة صياغة الإيقاع في المشهد الثالث وتقليل المدة الزمنية بـ 4 ثوانٍ.</h3>
+                </div>
+                <div class="iteration-divider">
+                    <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; display: block; margin-bottom: 0.8rem;">السبب والنتيجة</span>
+                    <p style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.9; font-weight: 300; margin: 0;">التخلص من التكرار اللفظي ورفع معدل الاحتفاظ باهتمام المشاهد (Retention) في الجزء الأكثر أهمية.</p>
+                </div>
+            </div>
+
+            <!-- Iteration 2 -->
+            <div class="iteration-card">
+                <div>
+                    <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; display: block; margin-bottom: 0.8rem;">التعديل الهيكلي أو الفني</span>
+                    <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; font-weight: 400; color: #fff; margin: 0; line-height: 1.7;">تعديل التدرج اللوني للقطات الافتتاحية وجعلها أكثر تبايناً.</h3>
+                </div>
+                <div class="iteration-divider">
+                    <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; display: block; margin-bottom: 0.8rem;">السبب والنتيجة</span>
+                    <p style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.9; font-weight: 300; margin: 0;">خلق صدمة بصرية مبدئية تجذب المشاهد منذ الثانية الأولى، وتأسيس هوية لونية تتناسب مع طبيعة المنتج.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Asset Index & Deliverables Section -->
+<style>
+    .asset-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+    .asset-box {
+        background: rgba(255,255,255,0.015);
+        border: 1px solid rgba(255,255,255,0.05);
+        padding: 2.5rem;
+        border-radius: 2px;
+        transition: border-color 0.3s ease;
+    }
+    .asset-box:hover {
+        border-color: rgba(255,255,255,0.15);
+    }
+    .asset-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .asset-list li {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.65);
+        margin-bottom: 1.2rem;
+        padding-right: 1.2rem;
+        position: relative;
+        line-height: 1.8;
+        font-weight: 300;
+    }
+    .asset-list li:last-child { margin-bottom: 0; }
+    .asset-list li::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--text-primary);
+        opacity: 0.5;
+    }
+    .asset-list li strong {
+        color: #fff;
+        font-weight: 400;
+        opacity: 0.9;
+    }
+    @media (max-width: 900px) {
+        .asset-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        .asset-box { padding: 1.8rem; }
+    }
+</style>
+<section class="asset-index" style="padding: 1.5rem 0 6rem; background: var(--bg-color); position: relative; z-index: 2;">
+    <div class="container" style="max-width: 1450px; margin: 0 auto; padding: 0 5%;">
+        
+        <div style="margin-bottom: 3.5rem;">
+            <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0 0 0.2rem 0;">إدارة الأصول والتسليمات المعتمدة</h2>
+            <span style="font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;">Asset Index & Deliverables</span>
+        </div>
+
+        <div class="asset-grid">
+            
+            <!-- Box 1 -->
+            <div class="asset-box">
+                <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; display: block; margin-bottom: 1.8rem;">01. قائمة المخرجات النهائية</span>
+                <ul class="asset-list">
+                    <li><strong>Master Files:</strong> فيديو عالي الجودة (4K UHD, ProRes 422) معتمد للاستخدام التلفزيوني والعرض السينمائي.</li>
+                    <li><strong>Social Cuts:</strong> نسخ متعددة مخصصة للمنصات (9:16 للريلز، 1:1 للانستقرام، 16:9 لليوتيوب).</li>
+                    <li><strong>Raw Project Files:</strong> تسليم كافة ملفات المصدر (Premiere Pro / After Effects) مفتوحة وقابلة للتعديل مستقبلاً.</li>
+                </ul>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="asset-box">
+                <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; display: block; margin-bottom: 1.8rem;">02. حقوق الملكية والاستخدام</span>
+                <ul class="asset-list">
+                    <li><strong>نقل الملكية:</strong> انتقال الملكية الكاملة والحصرية لجميع المخرجات النهائية للعميل بمجرد إتمام التسليم.</li>
+                    <li><strong>الرخص الصوتية (Audio Licenses):</strong> تراخيص تجارية عالمية ممتدة للموسيقى والمؤثرات الصوتية خالية من حقوق النشر.</li>
+                    <li><strong>الخطوط والمواد الأرشيفية:</strong> استخدام خطوط ومواد أرشيفية (Stock Footage) مرخصة بالكامل للاستخدام التجاري غير المحدود.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Post-Handover Recommendations Section -->
+<style>
+    .recommendations-wrapper {
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 2px;
+        padding: 3.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .recommendations-wrapper::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--text-primary);
+        opacity: 0.7;
+    }
+    .recommendation-item {
+        margin-bottom: 3rem;
+    }
+    .recommendation-item:last-child {
+        margin-bottom: 0;
+    }
+    .recommendation-icon {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        margin-bottom: 1.2rem;
+        color: var(--text-primary);
+    }
+    @media (max-width: 768px) {
+        .recommendations-wrapper { padding: 2.5rem 1.8rem; }
+    }
+</style>
+<section class="post-handover" style="padding: 1.5rem 0 6rem; background: var(--bg-color); position: relative; z-index: 2;">
+    <div class="container" style="max-width: 1450px; margin: 0 auto; padding: 0 5%;">
+        
+        <div style="margin-bottom: 3.5rem;">
+            <h2 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0 0 0.2rem 0;">التوصيات المستقبلية والخطوات القادمة</h2>
+            <span style="font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;">Post-Handover Recommendations</span>
+        </div>
+
+        <div class="recommendations-wrapper">
+            
+            <div class="recommendation-item">
+                <div class="recommendation-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </div>
+                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; font-weight: 400; color: #fff; margin-bottom: 1rem; opacity: 0.9;">نصائح الاستخدام الأفضل للأصول</h3>
+                <p style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 2; font-weight: 300; margin: 0; max-width: 900px;">
+                    لتحقيق أقصى تفاعل ممكن، يُنصح بنشر النسخ المخصصة للمنصات (Social Cuts) وعدم تطبيق أي فلاتر لونية إضافية عليها في تطبيقات مثل إنستقرام أو تيك توك للحفاظ على دقة التدرج اللوني. يفضل ربط الفيديو الإعلاني المرجعي بحملة استهداف دقيقة (Retargeting) خلال الأسبوعين القادمين للحصول على أعلى عائد استثماري (ROI).
+                </p>
+            </div>
+
+            <div class="recommendation-item">
+                <div class="recommendation-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                </div>
+                <h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; font-weight: 400; color: #fff; margin-bottom: 1rem; opacity: 0.9;">ملاحظات وفرص للتحديثات القادمة</h3>
+                <p style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 2; font-weight: 300; margin: 0; max-width: 900px;">
+                    أثناء العمل على المشروع، لاحظنا استجابة ممتازة للهوية البصرية الجديدة في اللقطات المقربة (Close-ups). كخطوة مقبلة، نقترح التركيز على بناء مكتبة لقطات قصيرة متخصصة (B-roll library) للمنتج تعتمد على نفس النهج الفني، لتغذي محتوى السوشيال ميديا بشكل مستمر للأشهر الستة القادمة بتكلفة إنتاجية أقل.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <!-- Pre-production Gallery Section -->
 <section class="case-gallery" style="margin-top: 2.5rem;" dir="rtl">
 <div style="text-align: start; margin-bottom: 2.5rem; padding: 0 5%; max-width: 1450px; margin-left: auto; margin-right: auto;">
@@ -876,7 +1413,7 @@ function switchDocTab(tabId, btnElement) {
 <h3 data-i18n="text_261" style="text-align: center !important; font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; line-height: 1.2; margin: 0 0 2rem 0;">ماذا أقول</h3>
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 3.5rem;">
 <img loading="lazy" alt="يوسف الحسيني" src="ss.png" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem;"/>
-<span data-i18n="text_133" style="font-size: 0.95rem; font-weight: 300; color: var(--text-primary); margin-bottom: 1.5rem; letter-spacing: 1px; opacity: 0.9;">يوسف الحسيني</span>
+<span data-i18n="text_133" style="font-size: 0.95rem; font-weight: 300; color: var(--text-primary); margin: 0 auto 1.5rem auto; letter-spacing: 1px; opacity: 0.9;">يوسف الحسيني</span>
 <p data-i18n="text_262" style="font-size: 0.95rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0 0 1rem 0; opacity: 0.85; max-width: 700px; text-align: center !important;">كل مشروع هو رحلة لاكتشاف أبعاد جديدة للتعبير البصري. العمل هنا لم يكن مجرد بناء مشهد، بل كان محاولة جادة لترجمة الأفكار غير الملموسة إلى لغة يفهمها البصر، حيث تتشابك الرؤية الفنية مع الرسالة العميقة لتخلق تجربة لا تُنسى.</p>
 <p data-i18n="text_263" style="font-size: 0.95rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0; opacity: 0.85; max-width: 700px; text-align: center !important;">في هذا المشروع، لم يكن التحدي الأكبر في إتقان الحركة أو ضبط الإضاءة، بل في كيفية تطويع هذه الأدوات التقنية لخدمة الفكرة المجردة. التقنية مجرد أداة، الأثر الحقيقي يُخلق عندما تلامس القصة شيئاً صادقاً بداخلنا. التجربة أكدت لي أن أقوى الأعمال البصرية هي تلك التي تترك مساحة للمشاهد ليكمل القصة بخياله، بدلاً من إخباره بكل شيء.</p>
 </div>
