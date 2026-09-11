@@ -3215,3 +3215,22 @@ html.lenis, html.lenis body {
 .inspired-card.coming-soon-wrapper .coming-soon-badge {
     top: 120px;
 }
+
+/* Hide long description in coming-soon cards on hover */
+.coming-soon-wrapper .gallery-overlay-desc,
+.coming-soon-wrapper .case-overlay-desc {
+    display: none;
+}
+
+/* Show simple status text instead */
+.coming-soon-wrapper .gallery-overlay::after,
+.coming-soon-wrapper .case-overlay::after {
+    content: 'يُعمل عليه الآن';
+    display: block;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.6rem;
+}
