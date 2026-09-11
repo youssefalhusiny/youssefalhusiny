@@ -3222,7 +3222,7 @@ html.lenis, html.lenis body {
     display: none;
 }
 
-/* Show simple status text instead */
+/* Show simple status text instead — starts hidden & shifted */
 .coming-soon-wrapper .gallery-overlay::after,
 .coming-soon-wrapper .case-overlay::after {
     content: 'يُعمل عليه الآن';
@@ -3233,4 +3233,14 @@ html.lenis, html.lenis body {
     letter-spacing: 3px;
     color: rgba(255, 255, 255, 0.5);
     margin-top: 0.6rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: transform 0.4s ease 0.05s, opacity 0.4s ease 0.05s;
+}
+
+/* Animate in on hover */
+.coming-soon-wrapper:hover .gallery-overlay::after,
+.coming-soon-wrapper:hover .case-overlay::after {
+    opacity: 1;
+    transform: translateY(0);
 }
