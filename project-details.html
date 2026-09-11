@@ -531,32 +531,71 @@
 </div>
 </div>
 </section>
-<!-- Pre-production Gallery Section -->
+<!-- Visual Details Gallery Section -->
 <section class="case-gallery" style="margin-top: 2.5rem;" dir="rtl">
 <div style="text-align: start; margin-bottom: 2.5rem; padding: 0 5%; max-width: 1450px; margin-left: auto; margin-right: auto;">
 <h2 data-i18n="text_254" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0;">تفاصيل بصرية</h2>
 </div>
 <div class="study-case-grid">
-<div class="gallery-item">
-<img loading="lazy" alt="ما قبل الإنتاج 1" src="شين.png"/>
+<div class="gallery-item" style="overflow:hidden; background:#000;">
+<video class="gallery-clip" data-start="3"   data-end="18"  muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"><source src="Vids/Edios_1.mp4" type="video/mp4"/></video>
 </div>
-<div class="gallery-item">
-<img loading="lazy" alt="ما قبل الإنتاج 2" src="رشف.png"/>
+<div class="gallery-item" style="overflow:hidden; background:#000;">
+<video class="gallery-clip" data-start="22"  data-end="38"  muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"><source src="Vids/Edios_1.mp4" type="video/mp4"/></video>
 </div>
-<div class="gallery-item">
-<img loading="lazy" alt="ما قبل الإنتاج 3" src="بينهم.png"/>
+<div class="gallery-item" style="overflow:hidden; background:#000;">
+<video class="gallery-clip" data-start="44"  data-end="60"  muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"><source src="Vids/Edios_1.mp4" type="video/mp4"/></video>
 </div>
-<div class="gallery-item">
-<img loading="lazy" alt="ما قبل الإنتاج 4" src="Dar Al-Ula Branding.jpg"/>
+<div class="gallery-item" style="overflow:hidden; background:#000;">
+<video class="gallery-clip" data-start="65"  data-end="82"  muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"><source src="Vids/Edios_1.mp4" type="video/mp4"/></video>
 </div>
-<div class="gallery-item">
-<img loading="lazy" alt="ما قبل الإنتاج 5" src="Poems for Life.jpg"/>
+<div class="gallery-item" style="overflow:hidden; background:#000;">
+<video class="gallery-clip" data-start="88"  data-end="105" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"><source src="Vids/Edios_1.mp4" type="video/mp4"/></video>
 </div>
-<div class="gallery-item">
-<img loading="lazy" alt="ما قبل الإنتاج 6" src="_light_.jpg"/>
+<div class="gallery-item" style="overflow:hidden; background:#000;">
+<video class="gallery-clip" data-start="112" data-end="130" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"><source src="Vids/Edios_1.mp4" type="video/mp4"/></video>
 </div>
 </div>
 </section>
+<script>
+(function() {
+    // Intersection Observer: play only when card is visible, pause when not
+    var clips = document.querySelectorAll('.gallery-clip');
+    function initClip(video) {
+        var start = parseFloat(video.dataset.start);
+        var end   = parseFloat(video.dataset.end);
+        // Seek to start once metadata is ready
+        video.addEventListener('loadedmetadata', function() {
+            video.currentTime = start;
+        }, { once: true });
+        // Custom loop: reset to start when reaching end time
+        video.addEventListener('timeupdate', function() {
+            if (video.currentTime >= end) {
+                video.currentTime = start;
+            }
+        });
+    }
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            var video = entry.target;
+            var start = parseFloat(video.dataset.start);
+            if (entry.isIntersecting) {
+                // Ensure we're at the right segment before playing
+                if (video.readyState >= 1 && (video.currentTime < start || video.currentTime >= parseFloat(video.dataset.end))) {
+                    video.currentTime = start;
+                }
+                video.play().catch(function(){});
+            } else {
+                video.pause();
+            }
+        });
+    }, { threshold: 0.25 });
+    clips.forEach(function(video) {
+        initClip(video);
+        observer.observe(video);
+    });
+})();
+</script>
 <!-- Breakdowns Section (Sticky Scroll) -->
 <style>
             .collaboration-section {
