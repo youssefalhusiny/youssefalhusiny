@@ -178,7 +178,7 @@ const translations = {
     "text_144": "© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.",
     "text_145": "مساحة للفكر",
 
-    "text_159": "بينهم",
+    "text_159": "Frog - ضفدع",
     "text_160": "حوار الفردية والمنظومة",
     "text_161": "تحليل فلسفي يبحث في المقارنة والدمج بين التفكير الفردي الإبداعي والتفكير المؤسسي المستدام، وكيف يمكن للمنظومات الناجحة أن تحتضن فرادة المبتكرين دون خسارة تماسك الكيان.",
     "text_162": "رشف",
@@ -492,7 +492,7 @@ const translations = {
     "text_144": "© 2026 Youssef Alhusiny. All rights reserved.",
     "text_145": "Space for Thought",
 
-    "text_159": "Among Them",
+    "text_159": "Frog - ضفدع",
     "text_160": "Dialogue of Individuality and System",
     "text_161": "A philosophical analysis exploring the comparison and integration between creative individual thinking and sustainable institutional thinking, and how successful systems can embrace the uniqueness of innovators without losing the entity's cohesion.",
     "text_162": "Rashf",
