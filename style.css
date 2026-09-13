@@ -2826,6 +2826,19 @@ html[lang="en"] .fr-image::after {
     border-color: #ffffff;
 }
 
+/* ==========================================================================
+   REFLECTIONS SECTION ("What I Say" / "ماذا أقول") SPACING
+   - Original / Default state:
+       padding: 7rem 0; (padding-top: 7rem / 112px; margin-top: 0;)
+   - Pulled-up state (.pulled-up):
+       padding-top: 3.5rem !important; (56px) - reduces gap above section by 50%
+   To revert back to original position at any time:
+       Simply remove the class "pulled-up" from <section class="case-reflections pulled-up">
+   ========================================================================== */
+.case-reflections.pulled-up {
+    padding-top: 3.5rem !important;
+}
+
 /* Next Project Section */
 
 .back-to-all {
