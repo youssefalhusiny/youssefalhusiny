@@ -58,19 +58,18 @@
 </nav>
 <main class="case-main">
 <!-- Hero Section -->
-<section class="case-hero no-anim" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Vids/cover.png'); background-attachment: fixed; background-size: cover; background-position: center; position: relative; overflow: hidden;">
-<!-- Inline Video that will fade in -->
-<video autoplay id="heroInlineVideo" loop muted playsinline src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Edios_1.mp4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background-color: transparent; z-index: 0; opacity: 0; pointer-events: none; filter: blur(14px) brightness(0.4); transition: opacity 1.2s ease, filter 1.8s ease;"></video>
-<!-- Pause Overlay Text -->
-<div id="pauseOverlayText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); opacity: 0; pointer-events: none; z-index: 20; color: white; font-family: 'IBM Plex Sans Arabic', sans-serif; text-align: center !important; transition: opacity 0.8s ease, transform 0.8s ease;">
-<h2 data-i18n="text_238" id="pauseMessageTitle" style="font-size: 3rem; font-weight: 300; letter-spacing: -1px; margin: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">لماذا توقفت؟</h2>
-<p data-i18n="text_239" style="font-size: 0.95rem; opacity: 0.7; letter-spacing: 2px; font-weight: 300; margin-top: 1rem;">انقر للمواصلة</p>
-</div>
+<section class="case-hero no-anim" style="position: relative; overflow: hidden; background-color: #050505;">
+<!-- Instant Blurred Background Cover Image (Eliminates black screen completely) -->
+<div id="heroCoverBg" style="position: absolute; top: -15px; left: -15px; width: calc(100% + 30px); height: calc(100% + 30px); background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Vids/cover.png') center/cover no-repeat; z-index: 0; filter: blur(14px) brightness(0.6); transform: scale(1.04); transition: filter 1s ease, transform 1s ease, opacity 0.8s ease;"></div>
+<!-- Inline Background Video: loads over cover, starts blurred & muted -->
+<video autoplay id="heroInlineVideo" loop muted playsinline preload="auto" poster="Vids/cover.png" src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Edios_1.mp4" style="position: absolute; top: -15px; left: -15px; width: calc(100% + 30px); height: calc(100% + 30px); object-fit: cover; z-index: 1; opacity: 0; filter: blur(14px) brightness(0.6); transform: scale(1.04); transition: opacity 0.8s ease, filter 1s ease, transform 1s ease; pointer-events: none;"></video>
+<!-- Pause Overlay Text (hidden to keep hero content intact) -->
+<div id="pauseOverlayText" style="display: none;"></div>
 <!-- Custom Video Controls -->
 <div id="customVideoControls" style="position: absolute; bottom: 40px; left: 5%; right: 5%; display: flex; align-items: center; gap: 1.5rem; z-index: 15; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; flex-direction: row-reverse; font-family: 'Inter', sans-serif;">
 <button id="customPlayPauseBtn" onmouseout="this.style.opacity='0.8'" onmouseover="this.style.opacity='1'" style="background: none; border: none; color: white; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; opacity: 0.8; transition: opacity 0.3s ease;">
-<svg fill="none" height="24" id="pauseIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><rect height="16" width="4" x="6" y="4"></rect><rect height="16" width="4" x="14" y="4"></rect></svg>
-<svg fill="none" height="24" id="playIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+<svg fill="none" height="24" id="pauseIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="24"><rect height="16" width="4" x="6" y="4"></rect><rect height="16" width="4" x="14" y="4"></rect></svg>
+<svg fill="none" height="24" id="playIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
 </button>
 <!-- Time display -->
 <div style="color: white; font-size: 0.95rem; font-variant-numeric: tabular-nums; opacity: 0.8; letter-spacing: 1px; display: flex; gap: 0.4rem; direction: ltr;">
@@ -106,7 +105,7 @@
 <div class="case-hero-image">
 <div class="case-hero-overlay"></div>
 </div>
-<div class="case-hero-content" id="heroContentBlock" style="align-items: center; text-align: center !important; flex-direction: column; gap: 2.5rem; justify-content: center; z-index: 1;">
+<div class="case-hero-content" id="heroContentBlock" style="align-items: center; text-align: center !important; flex-direction: column; gap: 2.5rem; justify-content: center; z-index: 2; position: relative;">
 <!-- Title block -->
 <div class="hero-initial-hide" style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
 <span class="case-kicker" data-i18n="text_240" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; opacity: 0.6; font-weight: 300; margin-bottom: 0.4rem;">تفاصيل المشروع</span>
@@ -129,50 +128,82 @@
 <span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 300;">2026</span>
 </div>
 </div>
-<!-- Play button -->
-<a class="hero-initial-hide" href="#" id="playHeroVideo" onclick="triggerStaggeredHeroFade(); return false;" onmouseout="this.style.color='rgba(255,255,255,0.7)'" onmouseover="this.style.color='rgba(255,255,255,1)'" style="display: inline-flex; align-items: center; gap: 0.8rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s ease; margin-top: 1rem;">
-<span data-i18n="text_246" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; font-weight: 300;">تشغيل الفيديو</span>
+<!-- Play button (Never disappears) -->
+<a class="hero-initial-hide" href="#" id="playHeroVideo" onclick="toggleHeroVideo(); return false;" onmouseout="this.style.color='rgba(255,255,255,0.7)'" onmouseover="this.style.color='rgba(255,255,255,1)'" style="display: inline-flex; align-items: center; gap: 0.8rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s ease; margin-top: 1rem; cursor: pointer; z-index: 5;">
+<span id="playHeroVideoText" data-i18n="text_246" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; font-weight: 300;">تشغيل الفيديو</span>
 <span class="play-line" style="display: block; width: 30px; height: 1px; background: currentColor; transition: width 0.4s ease;"></span>
 </a>
 <script>
-                    // Show video smoothly once enough data is loaded (no black screen)
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const vid = document.getElementById('heroInlineVideo');
-                        vid.addEventListener('canplay', function() {
-                            vid.style.opacity = '1';
-                        }, { once: true });
-                    });
+                    let isVideoActivated = false;
 
-                    function triggerStaggeredHeroFade() {
+                    function applyHeroVideoState(active) {
                         const vid = document.getElementById('heroInlineVideo');
+                        const heroCover = document.getElementById('heroCoverBg');
                         const customControls = document.getElementById('customVideoControls');
-                        const heroSection = document.querySelector('.case-hero');
+                        const playText = document.getElementById('playHeroVideoText');
+                        const playIcon = document.getElementById('playIcon');
+                        const pauseIcon = document.getElementById('pauseIcon');
+                        const lang = document.documentElement.lang || 'ar';
 
-                        // Go fullscreen (must be sync with click)
-                        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                            if (heroSection.requestFullscreen) heroSection.requestFullscreen().catch(e => {});
-                            else if (heroSection.webkitRequestFullscreen) heroSection.webkitRequestFullscreen();
+                        if (active) {
+                            // Unblur video and cover
+                            vid.style.filter = 'blur(0px) brightness(0.85)';
+                            vid.style.transform = 'scale(1)';
+                            if (heroCover) {
+                                heroCover.style.filter = 'blur(0px) brightness(0.85)';
+                                heroCover.style.transform = 'scale(1)';
+                            }
+                            customControls.setAttribute('data-active', 'true');
+                            customControls.style.opacity = '1';
+                            customControls.style.pointerEvents = 'auto';
+
+                            if (playText) {
+                                playText.innerText = lang === 'ar' ? 'إيقاف الفيديو' : 'Pause Video';
+                            }
+                            if (playIcon && pauseIcon) {
+                                playIcon.style.display = 'none';
+                                pauseIcon.style.display = 'block';
+                            }
+                        } else {
+                            // Blur video and cover
+                            vid.style.filter = 'blur(14px) brightness(0.6)';
+                            vid.style.transform = 'scale(1.04)';
+                            if (heroCover) {
+                                heroCover.style.filter = 'blur(14px) brightness(0.6)';
+                                heroCover.style.transform = 'scale(1.04)';
+                            }
+                            if (playText) {
+                                playText.innerText = lang === 'ar' ? 'تشغيل الفيديو' : 'Play Video';
+                            }
+                            if (playIcon && pauseIcon) {
+                                pauseIcon.style.display = 'none';
+                                playIcon.style.display = 'block';
+                            }
                         }
+                    }
 
-                        // Unmute + remove blur → full quality video
-                        vid.muted = false;
-                        vid.style.filter = 'brightness(0.85)';
-                        vid.style.pointerEvents = 'auto';
-                        vid.style.zIndex = '10';
-
-                        customControls.setAttribute('data-active', 'true');
-                        customControls.style.opacity = '1';
-                        customControls.style.pointerEvents = 'auto';
-
-                        document.body.style.overflow = 'hidden';
+                    function toggleHeroVideo() {
+                        const vid = document.getElementById('heroInlineVideo');
+                        if (!isVideoActivated) {
+                            isVideoActivated = true;
+                            vid.muted = false;
+                            vid.play().catch(e => console.log(e));
+                            applyHeroVideoState(true);
+                        } else {
+                            if (vid.paused) {
+                                vid.play().catch(e => console.log(e));
+                                applyHeroVideoState(true);
+                            } else {
+                                vid.pause();
+                                applyHeroVideoState(false);
+                            }
+                        }
                     }
 
                     // Custom Video Controls Logic
                     document.addEventListener('DOMContentLoaded', () => {
                         const vid = document.getElementById('heroInlineVideo');
                         const playPauseBtn = document.getElementById('customPlayPauseBtn');
-                        const playIcon = document.getElementById('playIcon');
-                        const pauseIcon = document.getElementById('pauseIcon');
                         const muteBtn = document.getElementById('customMuteBtn');
                         const muteIcon = document.getElementById('muteIcon');
                         const unmuteIcon = document.getElementById('unmuteIcon');
@@ -184,23 +215,33 @@
                         const enterFullscreenIcon = document.getElementById('enterFullscreenIcon');
                         const exitFullscreenIcon = document.getElementById('exitFullscreenIcon');
 
+                        // Show video smoothly as soon as first frame is ready (no black screen)
+                        function revealVideo() {
+                            vid.style.opacity = '1';
+                        }
+                        if (vid.readyState >= 2) {
+                            revealVideo();
+                        } else {
+                            vid.addEventListener('canplay', revealVideo, { once: true });
+                            vid.addEventListener('playing', revealVideo, { once: true });
+                        }
+                        vid.play().catch(() => {});
+
                         let controlsTimeout;
 
                         function hideControls() {
                             if (customControls.getAttribute('data-active') !== 'true') return;
                             if (!vid.paused) {
                                 customControls.style.opacity = '0';
-                                document.body.style.cursor = 'none'; // Optional: hide cursor for true cinematic feel
                             }
                         }
 
                         function showControls() {
                             if (customControls.getAttribute('data-active') !== 'true') return;
                             customControls.style.opacity = '1';
-                            document.body.style.cursor = 'default';
                             clearTimeout(controlsTimeout);
                             if (!vid.paused) {
-                                controlsTimeout = setTimeout(hideControls, 2500);
+                                controlsTimeout = setTimeout(hideControls, 3000);
                             }
                         }
 
@@ -209,82 +250,25 @@
                         document.querySelector('.case-hero').addEventListener('click', showControls);
 
                         function togglePlayPause() {
-                            if (customControls.getAttribute('data-active') === 'true') {
-                                vid.paused ? vid.play() : vid.pause();
-                            }
+                            toggleHeroVideo();
                         }
 
                         playPauseBtn.onclick = togglePlayPause;
-                        vid.onclick = togglePlayPause; // Click screen to play/pause
 
                         document.addEventListener('keydown', (e) => {
                             if (customControls.getAttribute('data-active') === 'true' && e.code === 'Space') {
-                                e.preventDefault(); // Prevent page scroll
+                                e.preventDefault();
                                 togglePlayPause();
                             }
                         });
-                        
-                        const pauseOverlayText = document.getElementById('pauseOverlayText');
-                        const pauseMessageTitle = document.getElementById('pauseMessageTitle');
-                        const pauseMessages = [
-                            "لماذا توقفت؟",
-                            "استراحة قصيرة؟",
-                            "اللقطة القادمة أجمل!",
-                            "نحن بانتظارك...",
-                            "لحظة تأمل؟",
-                            "القصة لم تنتهِ بعد",
-                            "لا تتوقف هنا!"
-                        ];
 
                         vid.addEventListener('play', () => { 
-                            playIcon.style.display = 'none'; 
-                            pauseIcon.style.display = 'block'; 
-                            vid.style.filter = 'blur(0px) brightness(1)';
-                            
-                            pauseOverlayText.style.opacity = '0';
-                            pauseOverlayText.style.transform = 'translate(-50%, -40%)';
-                            
-                            const nav = document.querySelector('.navbar');
-                            const heroElements = Array.from(document.getElementById('heroContentBlock').children);
-                            const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
-                            
-                            elementsToFade.forEach((el, index) => {
-                                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                                setTimeout(() => {
-                                    el.style.opacity = '0';
-                                    el.style.transform = 'translateY(-20px)';
-                                    el.style.pointerEvents = 'none';
-                                }, index * 100);
-                            });
-
+                            applyHeroVideoState(true);
                             showControls(); 
                         });
                         
                         vid.addEventListener('pause', () => { 
-                            pauseIcon.style.display = 'none'; 
-                            playIcon.style.display = 'block'; 
-                            vid.style.filter = 'blur(10px) brightness(0.6)';
-                            
-                            // Select random message
-                            const randomMsg = pauseMessages[Math.floor(Math.random() * pauseMessages.length)];
-                            pauseMessageTitle.innerText = randomMsg;
-
-                            pauseOverlayText.style.opacity = '1';
-                            pauseOverlayText.style.transform = 'translate(-50%, -50%)';
-                            
-                            const nav = document.querySelector('.navbar');
-                            const heroElements = Array.from(document.getElementById('heroContentBlock').children);
-                            const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
-                            
-                            elementsToFade.forEach((el, index) => {
-                                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                                setTimeout(() => {
-                                    el.style.opacity = '1';
-                                    el.style.transform = 'translateY(0)';
-                                    if(el === nav) el.style.pointerEvents = 'auto'; // Make navbar clickable
-                                }, index * 100);
-                            });
-
+                            applyHeroVideoState(false);
                             showControls(); 
                         });
                         
