@@ -97,27 +97,6 @@ window.addEventListener("load", () => {
         }, "-=0.8");
 });
 
-// Project Details Hero Animation on load
-window.addEventListener("load", () => {
-    const projectHeroBlock = document.getElementById("heroContentBlock");
-    if (projectHeroBlock) {
-        // Only select direct children that are not hidden scripts
-        const projectHeroChildren = Array.from(projectHeroBlock.children).filter(el => el.tagName !== 'SCRIPT');
-        
-        // Hide them initially
-        gsap.set(projectHeroChildren, { y: 30, opacity: 0 });
-        
-        // Stagger them in
-        gsap.to(projectHeroChildren, {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.2,
-            ease: "power3.out",
-            delay: 0.2
-        });
-    }
-});
 
 // Scroll Animations for all sections except hero and specific staggered sections
 const sections = gsap.utils.toArray('section:not(.hero):not(.no-anim):not(.about):not(.expertise-section):not(.collaboration-section):not(.scattered-gallery-section):not(.case-overview):not(.case-gallery):not(.case-results):not(.case-reflections), .footer');

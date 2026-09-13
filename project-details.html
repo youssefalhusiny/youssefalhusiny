@@ -35,11 +35,23 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .hero-initial-hide {
+            opacity: 0 !important;
+            transform: translateY(25px) !important;
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            will-change: opacity, transform;
+        }
+
+        .hero-initial-hide.hero-revealed {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
     </style>
 </head>
 <body>
 <!-- الهيدر / النافبار -->
-<nav class="navbar">
+<nav class="navbar hero-initial-hide">
 <div class="nav-brand-group">
 <a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
 <a class="lang-switcher" href="#">EN</a>
@@ -151,16 +163,16 @@
                             else if (heroSection.webkitRequestFullscreen) heroSection.webkitRequestFullscreen();
                         }
                         
-                        // Sequence: Navbar first, then Hero elements (Title, Meta, Button)
+                        // Sequence: Staggered downward fade matching site physics (1.1s cubic-bezier)
                         const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
                         
                         elementsToFade.forEach((el, index) => {
-                            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            el.style.transition = 'opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
                             setTimeout(() => {
                                 el.style.opacity = '0';
-                                el.style.transform = 'translateY(-20px)';
+                                el.style.transform = 'translateY(25px)';
                                 el.style.pointerEvents = 'none';
-                            }, index * 150);
+                            }, index * 100);
                         });
 
                         // Unmute, clear blur, reset scale, ensure start from beginning
@@ -181,11 +193,23 @@
                             
                             // Hide the page scrollbar
                             document.body.style.overflow = 'hidden';
-                        }, (elementsToFade.length * 150) + 300);
+                        }, (elementsToFade.length * 100) + 350);
                     }
 
                     // Custom Video Controls Logic
                     document.addEventListener('DOMContentLoaded', () => {
+                        // Staggered reveal of hero elements matching homepage
+                        const nav = document.querySelector('.navbar');
+                        const heroElements = document.querySelectorAll('.hero-initial-hide');
+                        setTimeout(() => {
+                            if (nav) nav.classList.add('hero-revealed');
+                            heroElements.forEach((el, index) => {
+                                setTimeout(() => {
+                                    el.classList.add('hero-revealed');
+                                }, index * 180 + 100);
+                            });
+                        }, 80);
+
                         const vid = document.getElementById('heroInlineVideo');
                         if (vid) {
                             vid.play().then(() => {
@@ -285,12 +309,12 @@
                                 const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
                                 
                                 elementsToFade.forEach((el, index) => {
-                                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                                    el.style.transition = 'opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
                                     setTimeout(() => {
                                         el.style.opacity = '0';
-                                        el.style.transform = 'translateY(-20px)';
+                                        el.style.transform = 'translateY(25px)';
                                         el.style.pointerEvents = 'none';
-                                    }, index * 100);
+                                    }, index * 80);
                                 });
 
                                 showControls(); 
@@ -321,12 +345,12 @@
                                 const elementsToFade = [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT');
                                 
                                 elementsToFade.forEach((el, index) => {
-                                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                                    el.style.transition = 'opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1)';
                                     setTimeout(() => {
                                         el.style.opacity = '1';
                                         el.style.transform = 'translateY(0)';
                                         if(el === nav) el.style.pointerEvents = 'auto'; // Make navbar clickable
-                                    }, index * 100);
+                                    }, index * 120);
                                 });
 
                                 showControls(); 
@@ -530,11 +554,12 @@
                             const nav = document.querySelector('.navbar');
                             const heroElements = Array.from(document.getElementById('heroContentBlock').children);
                             [nav, ...heroElements].filter(el => el && el.tagName !== 'SCRIPT').forEach((el, index) => {
+                                el.style.transition = 'opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1)';
                                 setTimeout(() => {
                                     el.style.opacity = '1';
                                     el.style.transform = 'translateY(0)';
                                     el.style.pointerEvents = 'auto';
-                                }, index * 100);
+                                }, index * 120);
                             });
                         }
                     });
