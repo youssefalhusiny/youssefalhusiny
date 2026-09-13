@@ -472,78 +472,60 @@ if (inquiryForm && contactContainer) {
     });
 }
 
-// --- Internal i18n Localization ---
-document.addEventListener('DOMContentLoaded', () => {
+// --- i18n Language System ---
+(function () {
     const langBtn = document.querySelector('.lang-switcher');
-    
-    // Function to apply translation
-    const setLanguage = (lang) => {
-        document.documentElement.lang = lang;
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        
-        // Update button text
-        if (langBtn) {
-            langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
-        }
-        
-        // Apply translations from translations object (defined in translations.js)
-        if (typeof translations !== 'undefined' && translations[lang]) {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = translations[lang][key];
-                    } else {
-                        // For normal elements, keep inner HTML tags if any (like spans or imgs)
-                        // This simple approach replaces text. If you have complex HTML inside, 
-                        // you might need a more robust approach.
-                        el.innerHTML = translations[lang][key];
-                    }
-                }
-            });
-        }
-        
-        // Save preference
-        localStorage.setItem('preferredLang', lang);
-    };
 
-    if (langBtn) {
-        langBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const currentLang = document.documentElement.lang || 'ar';
-            const newLang = currentLang === 'ar' ? 'en' : 'ar';
-            // Mark as manual override so auto-detect won't overwrite it
-            localStorage.setItem('langManualOverride', 'true');
-            setLanguage(newLang);
-        });
-    }
-
-    // --- Auto Language Detection ---
     const arabicCountries = [
         'DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY',
         'MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE'
     ];
 
-    const manualOverride = localStorage.getItem('langManualOverride') === 'true';
-    const savedLang     = localStorage.getItem('preferredLang');
-
-    if (manualOverride && savedLang) {
-        // User explicitly chose a language → respect it always
-        setLanguage(savedLang);
-    } else {
-        // No manual override → detect by IP on every visit
-        fetch('https://www.cloudflare.com/cdn-cgi/trace')
-            .then(r => r.text())
-            .then(text => {
-                const match   = text.match(/loc=([A-Z]{2})/);
-                const country = match ? match[1] : '';
-                const lang    = arabicCountries.includes(country) ? 'ar' : 'en';
-                setLanguage(lang);
-            })
-            .catch(() => {
-                // Fallback: browser language
-                const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-                setLanguage(browserLang.startsWith('ar') ? 'ar' : 'en');
+    function applyLang(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        if (langBtn) langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
+        if (typeof translations !== 'undefined' && translations[lang]) {
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.innerHTML = translations[lang][key];
+                    }
+                }
             });
+        }
+        localStorage.setItem('preferredLang', lang);
     }
-});
+
+    // Manual switcher — marks override so auto-detect stops
+    if (langBtn) {
+        langBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var newLang = document.documentElement.lang === 'ar' ? 'en' : 'ar';
+            localStorage.setItem('langManualOverride', 'true');
+            applyLang(newLang);
+        });
+    }
+
+    // If user manually chose a language before → respect it
+    if (localStorage.getItem('langManualOverride') === 'true') {
+        var saved = localStorage.getItem('preferredLang');
+        if (saved) { applyLang(saved); return; }
+    }
+
+    // Auto-detect by IP on every visit (no override)
+    fetch('https://www.cloudflare.com/cdn-cgi/trace', { cache: 'no-store' })
+        .then(function(r) { return r.text(); })
+        .then(function(text) {
+            var match   = text.match(/loc=([A-Z]{2})/);
+            var country = match ? match[1] : '';
+            applyLang(arabicCountries.includes(country) ? 'ar' : 'en');
+        })
+        .catch(function() {
+            var bl = (navigator.language || '').toLowerCase();
+            applyLang(bl.startsWith('ar') ? 'ar' : 'en');
+        });
+})();
