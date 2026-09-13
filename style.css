@@ -2703,6 +2703,14 @@ html[lang="en"] .fr-image::after {
 .study-case-grid .gallery-item:nth-child(5) { grid-column: 1;     grid-row: 3; }
 .study-case-grid .gallery-item:nth-child(6) { grid-column: 2 / 4; grid-row: 3; }
 
+/* Support for 7-item grids (e.g. Beam) */
+.study-case-grid.grid-7 .gallery-item:nth-child(5),
+.study-case-grid:has(.gallery-item:nth-child(7)) .gallery-item:nth-child(5) { grid-column: 1; grid-row: 3; }
+.study-case-grid.grid-7 .gallery-item:nth-child(6),
+.study-case-grid:has(.gallery-item:nth-child(7)) .gallery-item:nth-child(6) { grid-column: 2; grid-row: 3; }
+.study-case-grid.grid-7 .gallery-item:nth-child(7),
+.study-case-grid:has(.gallery-item:nth-child(7)) .gallery-item:nth-child(7) { grid-column: 3; grid-row: 3; }
+
 .gallery-item.large {
     column-span: all;
     aspect-ratio: 21/9;
