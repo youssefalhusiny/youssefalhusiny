@@ -514,11 +514,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const newLang = currentLang === 'ar' ? 'en' : 'ar';
             setLanguage(newLang);
         });
-        
-        // Initialize from saved preference
-        const savedLang = localStorage.getItem('preferredLang');
-        if (savedLang && savedLang === 'en') {
-            setLanguage('en');
-        }
+    }
+
+    // --- Auto Language Detection ---
+    const savedLang = localStorage.getItem('preferredLang');
+
+    if (savedLang) {
+        // User has a saved preference — always honor it
+        setLanguage(savedLang);
+    } else {
+        // No preference yet → detect by IP/network country
+        const arabicCountries = [
+            'DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY',
+            'MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE'
+        ];
+
+        fetch('https://api.country.is/')
+            .then(r => r.json())
+            .then(data => {
+                const lang = arabicCountries.includes(data.country) ? 'ar' : 'en';
+                setLanguage(lang);
+            })
+            .catch(() => {
+                // Fallback: use browser language if API fails
+                const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+                const lang = browserLang.startsWith('ar') ? 'ar' : 'en';
+                setLanguage(lang);
+            });
     }
 });
