@@ -10,6 +10,7 @@
 <!-- Google Fonts: IBM Plex Sans Arabic -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
 <style>
@@ -60,20 +61,7 @@
 <!-- Hero Section -->
 <section class="case-hero no-anim" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Vids/cover.png'); background-attachment: fixed; background-size: cover; background-position: center; position: relative; overflow: hidden;">
 <!-- Inline Video that will fade in -->
-<video autoplay id="heroInlineVideo" loop muted playsinline preload="auto" poster="Vids/cover.png" src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Edios_1.mp4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: transparent; z-index: 0; opacity: 0; pointer-events: none; filter: brightness(0.45); transition: opacity 0.8s ease, filter 1.5s ease;"></video>
-<script>
-(function() {
-    const v = document.getElementById('heroInlineVideo');
-    if (!v) return;
-    const show = () => { v.style.opacity = '1'; };
-    if (v.readyState >= 2) { show(); }
-    else {
-        v.addEventListener('playing', show, { once: true });
-        v.addEventListener('loadeddata', show, { once: true });
-        v.addEventListener('canplay', show, { once: true });
-    }
-})();
-</script>
+<video autoplay id="heroInlineVideo" loop muted playsinline preload="auto" poster="Vids/cover.png" onplaying="this.style.opacity='1'" src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Edios_1.mp4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: transparent; z-index: 0; opacity: 0; pointer-events: none; filter: brightness(0.45); transition: opacity 0.8s ease, filter 1.5s ease;"></video>
 <!-- Pause Overlay Text -->
 <div id="pauseOverlayText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); opacity: 0; pointer-events: none; z-index: 20; color: white; font-family: 'IBM Plex Sans Arabic', sans-serif; text-align: center !important; transition: opacity 0.8s ease, transform 0.8s ease;">
 <h2 data-i18n="text_238" id="pauseMessageTitle" style="font-size: 3rem; font-weight: 300; letter-spacing: -1px; margin: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">لماذا توقفت؟</h2>
@@ -180,9 +168,7 @@
                             vid.style.filter = 'brightness(1)';
                             vid.style.pointerEvents = 'auto';
                             vid.style.zIndex = '10';
-                            if (vid.paused) {
-                                vid.play().catch(e => console.log(e));
-                            }
+                            if (vid.paused) vid.play().catch(() => {});
                             
                             customControls.setAttribute('data-active', 'true');
                             customControls.style.opacity = '1';
@@ -196,6 +182,11 @@
                     // Custom Video Controls Logic
                     document.addEventListener('DOMContentLoaded', () => {
                         const vid = document.getElementById('heroInlineVideo');
+                        if (vid) {
+                            vid.play().then(() => {
+                                vid.style.opacity = '1';
+                            }).catch(() => {});
+                        }
                         const playPauseBtn = document.getElementById('customPlayPauseBtn');
                         const playIcon = document.getElementById('playIcon');
                         const pauseIcon = document.getElementById('pauseIcon');
