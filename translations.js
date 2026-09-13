@@ -314,7 +314,8 @@ const translations = {
     "text_199": "الاسم",
     "text_200": "البريد",
     "text_201": "الهاتف",
-    "text_202": "موضوع المشروع"
+    "text_202": "موضوع المشروع",
+    "badge_coming_soon": "قريبًا"
   },
   en: {
     "nav.home": "Home",
@@ -631,6 +632,7 @@ const translations = {
     "text_199": "Name",
     "text_200": "Email",
     "text_201": "Phone",
-    "text_202": "Project Topic"
+    "text_202": "Project Topic",
+    "badge_coming_soon": "Coming Soon"
   }
 };

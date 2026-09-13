@@ -476,6 +476,9 @@ if (inquiryForm && contactContainer) {
                 }
             });
         }
+        document.querySelectorAll('.coming-soon-badge, .wip-label').forEach(function(badge) {
+            badge.textContent = lang === 'ar' ? 'قريبًا' : 'Coming Soon';
+        });
         localStorage.setItem('preferredLang', lang);
     }
 
