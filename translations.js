@@ -315,7 +315,17 @@ const translations = {
     "text_200": "البريد",
     "text_201": "الهاتف",
     "text_202": "موضوع المشروع",
-    "badge_coming_soon": "قريبًا"
+    "badge_coming_soon": "قريبًا",
+    "beam_title": "Beam App",
+    "beam_client": "Beam",
+    "beam_type": "برومو واستعراض حركي",
+    "beam_duration": "40 ثانية",
+    "beam_goal": "صياغة برومو تعريفي واستعراض حركي لتطبيق Beam يبرز تجربة المستخدم وجماليات الواجهة بتناغم بصري استثنائي.",
+    "beam_role": "Art Direction • Motion Designer",
+    "beam_overview_1": "فيديو برومو رسمي واستعراض حركي لتطبيق Beam، يقدّم تجربة بصرية سينمائية متقدمة تدمج بين جماليات الخط العربي والتصوير الضوئي المعاصر في تجربة تتسلل إلى الحواس بهدوء وعمق غير مباشر.",
+    "beam_overview_2": "اعتمد العمل على إيقاع حركي انسيابي وتناغم دقيق بين واجهة التطبيق والتأثيرات البصرية لتقديم منتج تقني حديث بطابع جمالي رفيع؛ يركز على سلاسة الانتقالات، وتفاعل العناصر، وإبراز تفاصيل تجربة المستخدم بأعلى درجات الأناقة والوضوح.",
+    "beam_reflections_1": "في مشروع Beam، كان التركيز الأساسي على خلق لغة حركية تعبر عن سلاسة التطبيق وتفرده؛ حيث تم دمج العناصر الرسومية والحركية مع اللمسات الفنية في إطار عصري يخدم هوية التطبيق وتجربة مستخدميه.",
+    "beam_reflections_2": "التحدي كان إيصال قيمة المنتج وسهولة استخدامه في 40 ثانية مكثفة بصرياً وإيقاعياً، مع الحفاظ على هوية بصرية متميزة تعكس الفخامة والاحترافية."
   },
   en: {
     "nav.home": "Home",
@@ -633,6 +643,16 @@ const translations = {
     "text_200": "Email",
     "text_201": "Phone",
     "text_202": "Project Topic",
-    "badge_coming_soon": "Coming Soon"
+    "badge_coming_soon": "Coming Soon",
+    "beam_title": "Beam App",
+    "beam_client": "Beam",
+    "beam_type": "Motion Walkthrough • Promo",
+    "beam_duration": "40 Seconds",
+    "beam_goal": "Crafting an official promo and kinetic walkthrough for Beam App showcasing user experience and interface aesthetics with exceptional visual harmony.",
+    "beam_role": "Art Direction • Motion Designer",
+    "beam_overview_1": "An official promo and motion walkthrough for Beam App, delivering an advanced cinematic visual experience merging Arabic calligraphy with contemporary photography that gently resonates with depth and calm.",
+    "beam_overview_2": "The execution relied on fluid kinetic rhythm and precise harmony between the app interface and visual effects to introduce a modern technological product with refined aesthetics—focusing on seamless transitions, elemental interactions, and highlighting user experience details with absolute elegance and clarity.",
+    "beam_reflections_1": "In the Beam project, the primary focus was establishing a motion language that reflects the application's fluidity and singularity—merging graphical and kinetic elements with refined artistic touches to elevate brand identity and user experience.",
+    "beam_reflections_2": "The key challenge lay in communicating product value and intuitive ease within 40 rhythmically concentrated seconds, while maintaining an uncompromising visual identity radiating luxury and professionalism."
   }
 };

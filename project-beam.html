@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+    <meta name="google" content="notranslate">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Beam App — تفاصيل المشروع</title>
+<link href="style.css?v=9" rel="stylesheet"/>
+<!-- Google Fonts: IBM Plex Sans Arabic -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
+<!-- GSAP & ScrollTrigger loaded in head for instant animation readiness -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+        .articles-4-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4.5rem 2rem;
+            margin-top: 3rem;
+        }
+        @media (max-width: 1200px) {
+            .articles-4-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 991px) {
+            .articles-4-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .articles-4-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<!-- الهيدر / النافبار -->
+<nav class="navbar">
+<div class="nav-brand-group">
+<a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
+<a class="lang-switcher" href="#">EN</a>
+</div>
+<button aria-label="Menu" class="mobile-menu-btn">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<ul class="nav-links">
+<li><a data-i18n="text_1" href="/#hero">البداية</a></li>
+<li><a class="active" data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
+<li style="display:none;"><a data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
+<li><a data-i18n="text_4" href="about">من أنا</a></li>
+<li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
+</ul>
+</nav>
+<main class="case-main">
+<!-- Hero Section -->
+<section class="case-hero" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Vids/Cover - Beam .webp'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+<!-- Inline Video that will fade in -->
+<video autoplay id="heroInlineVideo" loop muted playsinline preload="auto" poster="Vids/Cover - Beam .webp" onplaying="this.style.opacity='1'" src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Beam.mp4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: transparent; z-index: 0; opacity: 0; pointer-events: none; filter: blur(10px) brightness(0.45); transform: scale(1.06) translateZ(0); will-change: filter, transform; transition: opacity 0.8s ease, filter 1.2s ease, transform 1.2s ease;"></video>
+<!-- Bottom Velvety Melt Overlay -->
+<div id="heroBottomFade" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; background: linear-gradient(to top, var(--bg-color, #050505) 0%, rgba(5,5,5,0.6) 50%, transparent 100%); z-index: 1; pointer-events: none; transition: opacity 0.8s ease;"></div>
+<!-- Pause Overlay Text -->
+<div id="pauseOverlayText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); opacity: 0; pointer-events: none; z-index: 20; color: white; font-family: 'IBM Plex Sans Arabic', sans-serif; text-align: center !important; transition: opacity 0.8s ease, transform 0.8s ease;">
+<h2 data-i18n="text_238" id="pauseMessageTitle" style="font-size: 3rem; font-weight: 300; letter-spacing: -1px; margin: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">لماذا توقفت؟</h2>
+<p data-i18n="text_239" style="font-size: 0.95rem; opacity: 0.7; letter-spacing: 2px; font-weight: 300; margin-top: 1rem;">انقر للمواصلة</p>
+</div>
+<!-- Custom Video Controls -->
+<div id="customVideoControls" style="position: absolute; bottom: 40px; left: 5%; right: 5%; display: flex; align-items: center; gap: 1.5rem; z-index: 15; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; flex-direction: row-reverse; font-family: 'Inter', sans-serif;">
+<button id="customPlayPauseBtn" onmouseout="this.style.opacity='0.8'" onmouseover="this.style.opacity='1'" style="background: none; border: none; color: white; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; opacity: 0.8; transition: opacity 0.3s ease;">
+<svg fill="none" height="24" id="pauseIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><rect height="16" width="4" x="6" y="4"></rect><rect height="16" width="4" x="14" y="4"></rect></svg>
+<svg fill="none" height="24" id="playIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+</button>
+<!-- Time display -->
+<div style="color: white; font-size: 0.95rem; font-variant-numeric: tabular-nums; opacity: 0.8; letter-spacing: 1px; display: flex; gap: 0.4rem; direction: ltr;">
+<span id="customCurrentTime">0:00</span>
+<span style="opacity: 0.5;">/</span>
+<span id="customDurationTime">0:00</span>
+</div>
+<div id="customProgressBarContainer" style="flex: 1; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px; margin: 0 1rem;">
+<!-- Hover Tooltip -->
+<div id="progressTooltip" style="position: absolute; top: -30px; left: 0; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-variant-numeric: tabular-nums; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; white-space: nowrap;">0:00</div>
+<div id="customProgressBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #ffffff; transition: width 0.1s linear; border-radius: 2px;">
+<div style="position: absolute; right: -5px; top: -3px; width: 10px; height: 10px; background: #fff; border-radius: 50%; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>
+</div>
+</div>
+<!-- Volume Block -->
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<div id="customVolumeContainer" style="width: 80px; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px;">
+<div id="customVolumeBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: #ffffff; border-radius: 2px;">
+<div style="position: absolute; right: -4px; top: -3px; width: 10px; height: 10px; background: #fff; border-radius: 50%; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>
+</div>
+</div>
+<button id="customMuteBtn" onmouseout="this.style.opacity='0.8'" onmouseover="this.style.opacity='1'" style="background: none; border: none; color: white; cursor: pointer; padding: 0; opacity: 0.8; transition: opacity 0.3s ease;">
+<svg fill="none" height="20" id="unmuteIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+<svg fill="none" height="20" id="muteIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="20"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" x2="17" y1="9" y2="15"></line><line x1="17" x2="23" y1="9" y2="15"></line></svg>
+</button>
+</div>
+<!-- Fullscreen -->
+<button id="customFullscreenBtn" onmouseout="this.style.opacity='0.8'" onmouseover="this.style.opacity='1'" style="background: none; border: none; color: white; cursor: pointer; padding: 0; margin-right: 1.5rem; opacity: 0.8; transition: opacity 0.3s ease;">
+<svg fill="none" height="20" id="enterFullscreenIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+<svg fill="none" height="20" id="exitFullscreenIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="20"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
+</button>
+</div>
+<div class="case-hero-content" id="heroContentBlock" style="align-items: center; text-align: center !important; flex-direction: column; gap: 2.5rem; justify-content: center; z-index: 2; position: relative;">
+<!-- Title block -->
+<div class="hero-initial-hide" style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+<span class="case-kicker" data-i18n="text_240" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; opacity: 0.6; font-weight: 300; margin-bottom: 0.4rem;">تفاصيل المشروع</span>
+<h1 class="case-title" data-i18n="beam_title" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 200; font-size: 5rem; letter-spacing: -1px; margin: 0; line-height: 1;">Beam App</h1>
+</div>
+<!-- Meta strip -->
+<div class="hero-initial-hide" style="display: flex; gap: 3rem; align-items: center; justify-content: center;">
+<div style="text-align: center !important;">
+<span data-i18n="text_241" style="display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 300;">العميل</span>
+<span data-i18n="beam_client" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 300;">Beam</span>
+</div>
+<div style="width: 1px; height: 30px; background: rgba(255,255,255,0.15);"></div>
+<div style="text-align: center !important;">
+<span data-i18n="text_243" style="display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 300;">النوع</span>
+<span data-i18n="beam_type" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 300;">برومو واستعراض حركي</span>
+</div>
+<div style="width: 1px; height: 30px; background: rgba(255,255,255,0.15);"></div>
+<div style="text-align: center !important;">
+<span data-i18n="text_245" style="display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 300;">التاريخ</span>
+<span style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 300;">2026</span>
+</div>
+</div>
+<!-- Play button -->
+<a class="hero-initial-hide" href="#" id="playHeroVideo" onclick="triggerStaggeredHeroFade(); return false;" onmouseout="this.style.color='rgba(255,255,255,0.7)'" onmouseover="this.style.color='rgba(255,255,255,1)'" style="display: inline-flex; align-items: center; gap: 0.8rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s ease; margin-top: 1rem;">
+<span data-i18n="text_246" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; font-weight: 300;">تشغيل الفيديو</span>
+<span class="play-line" style="display: block; width: 30px; height: 1px; background: currentColor; transition: width 0.4s ease;"></span>
+</a>
+<script>
+                    function triggerStaggeredHeroFade() {
+                        const vid = document.getElementById('heroInlineVideo');
+                        if (vid) vid.currentTime = 0; // Rewind to start immediately
+
+                        const nav = document.querySelector('.navbar');
+                        const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
+                        const customControls = document.getElementById('customVideoControls');
+                        const bottomFade = document.getElementById('heroBottomFade');
+                        
+                        // Auto Fullscreen - MUST be synchronous with click event
+                        const heroSection = document.querySelector('.case-hero');
+                        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                            if (heroSection.requestFullscreen) heroSection.requestFullscreen().catch(e => console.log(e));
+                            else if (heroSection.webkitRequestFullscreen) heroSection.webkitRequestFullscreen();
+                        }
+                        
+                        // GSAP Smooth Cinematic Fade Out
+                        if (bottomFade) gsap.to(bottomFade, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
+                        
+                        gsap.to([nav, ...heroElements], {
+                            y: 30,
+                            opacity: 0,
+                            duration: 0.75,
+                            stagger: 0.08,
+                            ease: "power2.inOut",
+                            onComplete: () => {
+                                [nav, ...heroElements].forEach(el => el.style.pointerEvents = 'none');
+                                
+                                // Video smoothly becomes crisp, bright and unmuted
+                                if (vid) {
+                                    vid.currentTime = 0;
+                                    vid.muted = false;
+                                    vid.style.pointerEvents = 'auto';
+                                    vid.style.zIndex = '10';
+                                    gsap.to(vid, { filter: 'blur(0px) brightness(1)', scale: 1, duration: 0.9, ease: "power2.out" });
+                                    if (vid.paused) vid.play().catch(() => {});
+                                }
+                                
+                                customControls.setAttribute('data-active', 'true');
+                                customControls.style.pointerEvents = 'auto';
+                                gsap.to(customControls, { opacity: 1, duration: 0.6 });
+                                
+                                document.body.style.overflow = 'hidden';
+                            }
+                        });
+                    }
+
+                    // Custom Video Controls & Smooth GSAP Hero Logic
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const heroContent = document.getElementById('heroContentBlock');
+                        const heroElements = heroContent ? Array.from(heroContent.children).filter(el => el && el.tagName !== 'SCRIPT') : [];
+                        
+                        // 1. Staggered reveal of hero elements using GSAP (matches homepage)
+                        if (heroElements.length > 0) {
+                            gsap.fromTo(heroElements, 
+                                { y: 35, opacity: 0 },
+                                { y: 0, opacity: 1, duration: 1.4, stagger: 0.15, ease: "power3.out", delay: 0.15 }
+                            );
+                        }
+
+                        // 2. Cinematic Parallax Scroll on Hero
+                        if (typeof ScrollTrigger !== 'undefined') {
+                            gsap.to("#heroContentBlock", {
+                                scrollTrigger: {
+                                    trigger: ".case-hero",
+                                    start: "top top",
+                                    end: "bottom top",
+                                    scrub: 0.5
+                                },
+                                y: 70,
+                                opacity: 0,
+                                ease: "none"
+                            });
+
+                            gsap.to("#heroInlineVideo", {
+                                scrollTrigger: {
+                                    trigger: ".case-hero",
+                                    start: "top top",
+                                    end: "bottom top",
+                                    scrub: 0.5
+                                },
+                                y: 80,
+                                ease: "none"
+                            });
+                        }
+
+                        const vid = document.getElementById('heroInlineVideo');
+                        if (vid) {
+                            vid.play().then(() => {
+                                vid.style.opacity = '1';
+                            }).catch(() => {});
+                        }
+                        const playPauseBtn = document.getElementById('customPlayPauseBtn');
+                        const playIcon = document.getElementById('playIcon');
+                        const pauseIcon = document.getElementById('pauseIcon');
+                        const muteBtn = document.getElementById('customMuteBtn');
+                        const muteIcon = document.getElementById('muteIcon');
+                        const unmuteIcon = document.getElementById('unmuteIcon');
+                        const progressBar = document.getElementById('customProgressBar');
+                        const progressContainer = document.getElementById('customProgressBarContainer');
+                        const customControls = document.getElementById('customVideoControls');
+                        
+                        const fullscreenBtn = document.getElementById('customFullscreenBtn');
+                        const enterFullscreenIcon = document.getElementById('enterFullscreenIcon');
+                        const exitFullscreenIcon = document.getElementById('exitFullscreenIcon');
+
+                        let controlsTimeout;
+
+                        function hideControls() {
+                            if (customControls.getAttribute('data-active') !== 'true') return;
+                            if (!vid.paused) {
+                                customControls.style.opacity = '0';
+                                document.body.style.cursor = 'none'; // Optional: hide cursor for true cinematic feel
+                            }
+                        }
+
+                        function showControls() {
+                            if (customControls.getAttribute('data-active') !== 'true') return;
+                            customControls.style.opacity = '1';
+                            document.body.style.cursor = 'default';
+                            clearTimeout(controlsTimeout);
+                            if (!vid.paused) {
+                                controlsTimeout = setTimeout(hideControls, 2500);
+                            }
+                        }
+
+                        // Trigger showControls on mouse movement over the hero area
+                        document.querySelector('.case-hero').addEventListener('mousemove', showControls);
+                        document.querySelector('.case-hero').addEventListener('click', showControls);
+
+                        function togglePlayPause() {
+                            if (customControls.getAttribute('data-active') === 'true') {
+                                vid.paused ? vid.play() : vid.pause();
+                            }
+                        }
+
+                        playPauseBtn.onclick = togglePlayPause;
+                        vid.onclick = togglePlayPause; // Click screen to play/pause
+
+                        document.addEventListener('keydown', (e) => {
+                            if (customControls.getAttribute('data-active') === 'true' && e.code === 'Space') {
+                                e.preventDefault(); // Prevent page scroll
+                                togglePlayPause();
+                            }
+                        });
+                        
+                        const pauseOverlayText = document.getElementById('pauseOverlayText');
+                        const pauseMessageTitle = document.getElementById('pauseMessageTitle');
+                        const pauseMessages = {
+                            ar: [
+                                "لماذا توقفت؟",
+                                "استراحة قصيرة؟",
+                                "اللقطة القادمة أجمل!",
+                                "نحن بانتظارك...",
+                                "لحظة تأمل؟",
+                                "القصة لم تنتهِ بعد",
+                                "لا تتوقف هنا!"
+                            ],
+                            en: [
+                                "Why did you stop?",
+                                "A short break?",
+                                "The next scene is even better!",
+                                "We are waiting for you...",
+                                "A moment of reflection?",
+                                "The story hasn't ended yet",
+                                "Don't stop here!"
+                            ]
+                        };
+
+                        vid.addEventListener('play', () => { 
+                            playIcon.style.display = 'none'; 
+                            pauseIcon.style.display = 'block'; 
+                            
+                            if (customControls.getAttribute('data-active') === 'true') {
+                                gsap.to(vid, { filter: 'blur(0px) brightness(1)', scale: 1, duration: 0.8 });
+                                gsap.to(pauseOverlayText, { opacity: 0, duration: 0.4 });
+                                
+                                const nav = document.querySelector('.navbar');
+                                const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
+                                const bottomFade = document.getElementById('heroBottomFade');
+                                if (bottomFade) gsap.to(bottomFade, { opacity: 0, duration: 0.6 });
+
+                                gsap.to([nav, ...heroElements], {
+                                    y: 30,
+                                    opacity: 0,
+                                    duration: 0.7,
+                                    stagger: 0.06,
+                                    ease: "power2.inOut",
+                                    onComplete: () => {
+                                        [nav, ...heroElements].forEach(el => el.style.pointerEvents = 'none');
+                                    }
+                                });
+
+                                showControls(); 
+                            } else {
+                                gsap.to(vid, { filter: 'blur(10px) brightness(0.45)', scale: 1.06, duration: 0.8 });
+                            }
+                        });
+                        
+                        vid.addEventListener('pause', () => { 
+                            if (customControls.getAttribute('data-active') === 'true') {
+                                pauseIcon.style.display = 'none'; 
+                                playIcon.style.display = 'block'; 
+                                gsap.to(vid, { filter: 'blur(10px) brightness(0.6)', scale: 1.06, duration: 0.8 });
+                                
+                                // Select random message in current language
+                                const currentLang = (document.documentElement.lang || 'ar').toLowerCase();
+                                const msgList = pauseMessages[currentLang] || pauseMessages.ar;
+                                const randomMsg = msgList[Math.floor(Math.random() * msgList.length)];
+                                pauseMessageTitle.innerText = randomMsg;
+
+                                gsap.to(pauseOverlayText, { opacity: 1, duration: 0.6, ease: "power2.out" });
+                                
+                                const nav = document.querySelector('.navbar');
+                                const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
+                                const bottomFade = document.getElementById('heroBottomFade');
+                                if (bottomFade) gsap.to(bottomFade, { opacity: 1, duration: 0.8 });
+
+                                gsap.to([nav, ...heroElements], {
+                                    y: 0,
+                                    opacity: 1,
+                                    duration: 1.2,
+                                    stagger: 0.1,
+                                    ease: "power3.out",
+                                    onComplete: () => {
+                                        if (nav) nav.style.pointerEvents = 'auto';
+                                        heroElements.forEach(el => el.style.pointerEvents = 'auto');
+                                    }
+                                });
+
+                                showControls(); 
+                            }
+                        });
+                        
+                        muteBtn.onclick = () => { vid.muted = !vid.muted; showControls(); };
+                        vid.addEventListener('volumechange', () => {
+                            if(vid.muted || vid.volume === 0) { 
+                                muteIcon.style.display = 'block'; 
+                                unmuteIcon.style.display = 'none'; 
+                                volumeBar.style.width = '0%';
+                            } else { 
+                                unmuteIcon.style.display = 'block'; 
+                                muteIcon.style.display = 'none'; 
+                                volumeBar.style.width = (vid.volume * 100) + '%';
+                            }
+                        });
+
+                        const currentTimeEl = document.getElementById('customCurrentTime');
+                        const durationTimeEl = document.getElementById('customDurationTime');
+
+                        function formatTime(seconds) {
+                            if (isNaN(seconds)) return "0:00";
+                            const m = Math.floor(seconds / 60);
+                            const s = Math.floor(seconds % 60);
+                            return m + ":" + (s < 10 ? "0" + s : s);
+                        }
+
+                        vid.addEventListener('loadedmetadata', () => {
+                            durationTimeEl.innerText = formatTime(vid.duration);
+                        });
+
+                        vid.addEventListener('timeupdate', () => {
+                            if (!isDraggingProg) {
+                                const percentage = (vid.currentTime / vid.duration) * 100;
+                                progressBar.style.width = percentage + '%';
+                            }
+                            currentTimeEl.innerText = formatTime(vid.currentTime);
+                        });
+
+                        let isDraggingProg = false;
+                        const progressTooltip = document.getElementById('progressTooltip');
+
+                        function updateTooltipPosition(e) {
+                            const rect = progressContainer.getBoundingClientRect();
+                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                            if (clientX === undefined) return;
+                            let pos = (clientX - rect.left) / rect.width;
+                            pos = Math.max(0, Math.min(1, pos));
+                            const hoverTime = pos * vid.duration;
+                            if (!isNaN(hoverTime)) {
+                                progressTooltip.innerText = formatTime(hoverTime);
+                                progressTooltip.style.left = (pos * 100) + '%';
+                                progressTooltip.style.opacity = '1';
+                            }
+                        }
+
+                        progressContainer.addEventListener('mousemove', (e) => {
+                            if (!isDraggingProg) updateTooltipPosition(e);
+                        });
+                        progressContainer.addEventListener('mouseleave', () => {
+                            if (!isDraggingProg) progressTooltip.style.opacity = '0';
+                        });
+
+                        function updateProgress(e) {
+                            const rect = progressContainer.getBoundingClientRect();
+                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                            let pos = (clientX - rect.left) / rect.width; // LTR logic
+                            pos = Math.max(0, Math.min(1, pos));
+                            progressBar.style.width = (pos * 100) + '%';
+                            vid.currentTime = pos * vid.duration; 
+                        }
+
+                        progressContainer.addEventListener('mousedown', (e) => {
+                            e.stopPropagation();
+                            isDraggingProg = true;
+                            updateProgress(e);
+                            currentTimeEl.innerText = formatTime(vid.currentTime);
+                            showControls();
+                        });
+                        progressContainer.addEventListener('touchstart', (e) => {
+                            e.stopPropagation();
+                            isDraggingProg = true;
+                            updateProgress(e);
+                            currentTimeEl.innerText = formatTime(vid.currentTime);
+                            showControls();
+                        }, {passive: false});
+
+                        const volumeContainer = document.getElementById('customVolumeContainer');
+                        const volumeBar = document.getElementById('customVolumeBar');
+                        let isDraggingVol = false;
+
+                        function updateVolume(e) {
+                            const rect = volumeContainer.getBoundingClientRect();
+                            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                            let pos = (clientX - rect.left) / rect.width; // LTR logic
+                            pos = Math.max(0, Math.min(1, pos));
+                            volumeBar.style.width = (pos * 100) + '%';
+                            vid.volume = pos;
+                            vid.muted = (pos === 0);
+                        }
+
+                        volumeContainer.addEventListener('mousedown', (e) => {
+                            e.stopPropagation();
+                            isDraggingVol = true;
+                            updateVolume(e);
+                            showControls();
+                        });
+                        volumeContainer.addEventListener('touchstart', (e) => {
+                            e.stopPropagation();
+                            isDraggingVol = true;
+                            updateVolume(e);
+                            showControls();
+                        }, {passive: false});
+
+                        document.addEventListener('mousemove', (e) => {
+                            if (isDraggingProg) {
+                                updateProgress(e);
+                                updateTooltipPosition(e);
+                            }
+                            if (isDraggingVol) updateVolume(e);
+                        });
+                        document.addEventListener('touchmove', (e) => {
+                            if (isDraggingProg) {
+                                updateProgress(e);
+                                updateTooltipPosition(e);
+                            }
+                            if (isDraggingVol) updateVolume(e);
+                        }, {passive: false});
+
+                        document.addEventListener('mouseup', () => { 
+                            isDraggingProg = false; 
+                            isDraggingVol = false; 
+                            progressTooltip.style.opacity = '0';
+                        });
+                        document.addEventListener('touchend', () => { 
+                            isDraggingProg = false; 
+                            isDraggingVol = false; 
+                            progressTooltip.style.opacity = '0';
+                        });
+
+                        // Prevent buttons from triggering video pause when clicked
+                        [playPauseBtn, muteBtn, fullscreenBtn].forEach(btn => {
+                            btn.onmousedown = (e) => e.stopPropagation();
+                            btn.ontouchstart = (e) => e.stopPropagation();
+                            btn.onclick = (e) => {
+                                e.stopPropagation();
+                                if(btn === playPauseBtn) togglePlayPause();
+                                if(btn === muteBtn) { vid.muted = !vid.muted; showControls(); }
+                                if(btn === fullscreenBtn) toggleFullscreen();
+                            };
+                        });
+                        
+                        function toggleFullscreen() {
+                            const heroSection = document.querySelector('.case-hero');
+                            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                                if (heroSection.requestFullscreen) heroSection.requestFullscreen();
+                                else if (heroSection.webkitRequestFullscreen) heroSection.webkitRequestFullscreen();
+                            } else {
+                                if (document.exitFullscreen) document.exitFullscreen();
+                                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                            }
+                            showControls();
+                        }
+
+                        ['fullscreenchange', 'webkitfullscreenchange'].forEach(evt => {
+                            document.addEventListener(evt, () => {
+                                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                                    enterFullscreenIcon.style.display = 'none';
+                                    exitFullscreenIcon.style.display = 'block';
+                                } else {
+                                    enterFullscreenIcon.style.display = 'block';
+                                    exitFullscreenIcon.style.display = 'none';
+                                }
+                            });
+                        });
+
+                        function closeVideoMode() {
+                            vid.muted = true;
+                            vid.style.pointerEvents = 'none';
+                            vid.style.zIndex = '0';
+                            gsap.to(vid, { filter: 'blur(10px) brightness(0.45)', scale: 1.06, duration: 1 });
+                            vid.play().catch(() => {});
+
+                            customControls.setAttribute('data-active', 'false');
+                            customControls.style.pointerEvents = 'none';
+                            gsap.to(customControls, { opacity: 0, duration: 0.4 });
+                            document.body.style.cursor = 'default';
+                            document.body.style.overflow = ''; // Show page scrollbar again
+                            clearTimeout(controlsTimeout);
+                            
+                            const bottomFade = document.getElementById('heroBottomFade');
+                            if (bottomFade) gsap.to(bottomFade, { opacity: 1, duration: 1 });
+
+                            // Exit fullscreen if active
+                            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                                if (document.exitFullscreen) document.exitFullscreen();
+                                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                            }
+                            
+                            const nav = document.querySelector('.navbar');
+                            const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
+                            gsap.to([nav, ...heroElements], {
+                                y: 0,
+                                opacity: 1,
+                                duration: 1.2,
+                                stagger: 0.1,
+                                ease: "power3.out",
+                                onComplete: () => {
+                                    if (nav) nav.style.pointerEvents = 'auto';
+                                    heroElements.forEach(el => el.style.pointerEvents = 'auto');
+                                }
+                            });
+                        }
+                    });
+                </script>
+</div>
+</section>
+<!-- Overview Section -->
+<section class="case-overview">
+<div class="container">
+<div class="case-overview-grid">
+<div class="overview-text" style="text-align: start;">
+<div style="margin-bottom: 2rem;">
+<h2 data-i18n="text_247" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0.5rem 0 0 0;">نظرة عامة</h2>
+</div>
+<p data-i18n="beam_overview_1" style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); text-align: justify; margin: 0 0 1rem 0;">فيديو برومو رسمي واستعراض حركي لتطبيق Beam، يقدّم تجربة بصرية سينمائية متقدمة تدمج بين جماليات الخط العربي والتصوير الضوئي المعاصر في تجربة تتسلل إلى الحواس بهدوء وعمق غير مباشر.</p>
+<p data-i18n="beam_overview_2" style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); text-align: justify; margin: 0 0 0.8rem 0;">اعتمد العمل على إيقاع حركي انسيابي وتناغم دقيق بين واجهة التطبيق والتأثيرات البصرية لتقديم منتج تقني حديث بطابع جمالي رفيع؛ يركز على سلاسة الانتقالات، وتفاعل العناصر، وإبراز تفاصيل تجربة المستخدم بأعلى درجات الأناقة والوضوح.</p>
+</div>
+<div class="overview-meta">
+<div class="meta-item">
+<span class="meta-label" data-i18n="text_249">المدة</span>
+<span class="meta-value" data-i18n="beam_duration" style="font-size: 0.95rem; line-height: 1.9;">40 ثانية</span>
+</div>
+<div class="meta-item">
+<span class="meta-label" data-i18n="text_251">الهدف</span>
+<span class="meta-value" data-i18n="beam_goal" style="font-size: 0.95rem; line-height: 1.9;">صياغة برومو تعريفي واستعراض حركي لتطبيق Beam يبرز تجربة المستخدم وجماليات الواجهة بتناغم بصري استثنائي.</span>
+</div>
+<div class="meta-item">
+<span class="meta-label" data-i18n="text_253">الدور</span>
+<span class="meta-value" data-i18n="beam_role" style="font-size: 0.95rem; line-height: 1.9;">Art Direction • Motion Designer</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Details Gallery Section -->
+<section class="case-gallery" style="margin-top: 2.5rem;" dir="rtl">
+<div style="text-align: start; margin-bottom: 2.5rem; padding: 0 5%; max-width: 1450px; margin-left: auto; margin-right: auto;">
+<h2 data-i18n="text_254" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0;">تفاصيل بصرية</h2>
+</div>
+<div class="study-case-grid">
+<div class="gallery-item">
+<video autoplay loop muted playsinline preload="auto" poster="Vids/1.jpg">
+  <source src="Vids/1.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="gallery-item">
+<video autoplay loop muted playsinline preload="auto" poster="Vids/4.jpg">
+  <source src="Vids/4.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="gallery-item">
+<video autoplay loop muted playsinline preload="auto" poster="Vids/6.jpg">
+  <source src="Vids/6.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="gallery-item">
+<video autoplay loop muted playsinline preload="auto" poster="Vids/3.jpg">
+  <source src="Vids/3.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="gallery-item">
+<video autoplay loop muted playsinline preload="auto" poster="Vids/2.jpg">
+  <source src="Vids/2.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="gallery-item">
+<video autoplay loop muted playsinline preload="auto" poster="Vids/5.jpg">
+  <source src="Vids/5.mp4" type="video/mp4"/>
+</video>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var clips = document.querySelectorAll('.study-case-grid video');
+    if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.play().catch(function(){});
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.15 });
+        clips.forEach(function(v) { obs.observe(v); });
+    }
+});
+</script>
+</section>
+<!-- Breakdowns Section (Sticky Scroll) -->
+<style>
+            .collaboration-section {
+                padding: 10rem 0;
+                background: var(--bg-color);
+                position: relative;
+                border-top: 1px solid rgba(255,255,255,0.03);
+            }
+            .collaboration-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5rem;
+                align-items: flex-start;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 5%;
+            }
+            .collaboration-sticky {
+                flex: 1;
+                min-width: 320px;
+                position: sticky;
+                top: 35vh;
+            }
+            .collaboration-blocks {
+                flex: 1.5;
+                min-width: 320px;
+                display: flex;
+                flex-direction: column;
+            }
+            .collab-block {
+                padding: 4.5rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                display: flex;
+                gap: 2rem;
+                align-items: flex-start;
+                transition: opacity 0.4s ease;
+            }
+            .collab-block:first-child {
+                padding-top: 0;
+            }
+            .collab-block:last-child {
+                border-bottom: none;
+            }
+            .collab-num {
+                font-family: 'IBM Plex Sans Arabic', sans-serif;
+                font-size: 1.4rem;
+                color: rgba(255,255,255,0.3);
+                font-weight: 200;
+                line-height: 1.2;
+                min-width: 40px;
+                margin-top: 0.2rem;
+            }
+            .collab-content {
+                flex: 1;
+            }
+            .collab-title {
+                font-family: 'IBM Plex Sans Arabic', sans-serif;
+                font-size: 1.5rem;
+                font-weight: 200;
+                color: var(--text-primary);
+                margin-bottom: 1.2rem;
+                letter-spacing: -0.5px;
+            }
+            .collab-desc {
+                font-size: 0.95rem;
+                line-height: 2.1;
+                color: var(--text-secondary);
+                font-weight: 300;
+                margin: 0;
+            }
+            @media (max-width: 900px) {
+                .collaboration-sticky {
+                    position: static;
+                    margin-bottom: 2rem;
+                }
+                .collab-block {
+                    padding: 3rem 0;
+                    gap: 1.5rem;
+                }
+                .collab-num {
+                    font-size: 1.2rem;
+                    min-width: 30px;
+                }
+            }
+        </style>
+<section class="collaboration-section" style="z-index: 2; display: none;">
+<div class="collaboration-container">
+<!-- الجانب الأيمن: العنوان الثابت (Sticky) -->
+<div class="collaboration-sticky">
+<span data-i18n="text_255" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.75rem; letter-spacing: 3px; color: var(--text-secondary); opacity: 0.6; text-transform: uppercase;">تشريح العمل</span>
+<h2 data-i18n="text_269" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 3.5rem; font-weight: 200; color: var(--text-primary); line-height: 1.2; margin: 1.5rem 0 2rem 0;">كواليس<br/>العمل<br/>والمراحل</h2>
+<p data-i18n="text_256" style="font-size: 0.95rem; line-height: 1.9; color: var(--text-secondary); font-weight: 200; max-width: 85%;">تتطلب صناعة الأثر دقة متناهية في كل تفصيلة، من البناء الأولي وحتى خروج المشهد للنور.</p>
+</div>
+<!-- الجانب الأيسر: شبكة الصور (Grid) -->
+<div class="collaboration-blocks" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding-top: 1rem; padding-bottom: 4rem;">
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="شين.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="رشف.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="بينهم.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="Dar Al-Ula Branding.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="Poems for Life.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="_light_.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="شين.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="رشف.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(0);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="بينهم.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+<div style="border-radius: 2px; overflow: hidden; transform: translateY(4rem);">
+<img loading="lazy" alt="كواليس العمل" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)';" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)';" src="Dar Al-Ula Branding.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: all 0.4s ease;"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Results Section -->
+<section class="case-results" style="position: relative; z-index: 2; padding: 1rem 0; margin: 1.5rem 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); display: none; align-items: center; justify-content: center;">
+<!-- Video Background with Blur -->
+<video loop="" muted="" playsinline="" preload="none" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.1); width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: blur(15px);">
+<source src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Edios_1.mp4" type="video/mp4"/>
+</video>
+<div class="container" style="position: relative; z-index: 1; width: 100%;">
+<p data-i18n="text_257" style="text-align: center !important; font-size: 0.95rem; letter-spacing: 3px; color: rgba(255,255,255,0.5); font-weight: 300; margin: 0 0 2rem 0;">النتائج والأرقام</p>
+<div class="results-grid">
+<div class="result-item">
+<h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 3.5rem; font-weight: 300; color: #ffffff; margin: 0 0 0.4rem 0; line-height: 1;">+1.5M</h3>
+<p data-i18n="text_258" style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65); letter-spacing: 2px; margin: 0; text-transform: uppercase;">مشاهدة</p>
+</div>
+<div class="result-item">
+<h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 3.5rem; font-weight: 300; color: #ffffff; margin: 0 0 0.4rem 0; line-height: 1;">12%</h3>
+<p data-i18n="text_259" style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65); letter-spacing: 2px; margin: 0; text-transform: uppercase;">نسبة النقر</p>
+</div>
+<div class="result-item">
+<h3 style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 3.5rem; font-weight: 300; color: #ffffff; margin: 0 0 0.4rem 0; line-height: 1;">45K</h3>
+<p data-i18n="text_260" style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65); letter-spacing: 2px; margin: 0; text-transform: uppercase;">تفاعل حقيقي</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Reflections Section -->
+<section class="case-reflections" style="position: relative; z-index: 2; padding: 7rem 0; background-color: var(--bg-color); border-bottom: 1px solid rgba(255,255,255,0.05);">
+<div class="container" style="max-width: 800px; margin: 0 auto; text-align: center !important;">
+<h3 data-i18n="text_261" style="text-align: center !important; font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; line-height: 1.2; margin: 0 0 2rem 0;">ماذا أقول</h3>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 3.5rem;">
+<img loading="lazy" alt="يوسف الحسيني" src="ss.png" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem;"/>
+<span data-i18n="text_133" style="font-size: 0.95rem; font-weight: 300; color: var(--text-primary); margin-bottom: 1.5rem; letter-spacing: 1px; opacity: 0.9;">يوسف الحسيني</span>
+<p data-i18n="beam_reflections_1" style="font-size: 0.95rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0 0 1rem 0; opacity: 0.85; max-width: 700px; text-align: center !important;">في مشروع Beam، كان التركيز الأساسي على خلق لغة حركية تعبر عن سلاسة التطبيق وتفرده؛ حيث تم دمج العناصر الرسومية والحركية مع اللمسات الفنية في إطار عصري يخدم هوية التطبيق وتجربة مستخدميه.</p>
+<p data-i18n="beam_reflections_2" style="font-size: 0.95rem; line-height: 1.9; font-weight: 300; color: var(--text-secondary); margin: 0; opacity: 0.85; max-width: 700px; text-align: center !important;">التحدي كان إيصال قيمة المنتج وسهولة استخدامه في 40 ثانية مكثفة بصرياً وإيقاعياً، مع الحفاظ على هوية بصرية متميزة تعكس الفخامة والاحترافية.</p>
+</div>
+<div style="display: flex; justify-content: center; gap: 1rem;">
+<a class="hero-cta-btn" data-i18n="text_264" href="/contact" style="margin-top: 0;">دعنا نبني فكرتك</a>
+</div>
+</div>
+</section>
+<!-- Next Projects Section -->
+<section class="next-projects" style="display: none; position: relative; z-index: 2; padding: 6rem 0; background-color: var(--bg-color); border-top: 1px solid rgba(255,255,255,0.05);">
+<div class="container" style="max-width: 1450px; margin: 0 auto; padding: 0 5%;">
+<div style="text-align: start; margin-bottom: 3rem;">
+<h2 data-i18n="text_265" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); letter-spacing: 1px; margin: 0;">الأعمال التالية</h2>
+</div>
+<div class="next-projects-grid">
+<!-- Project 1 -->
+<a class="gallery-item" href="project-details.html">
+<img loading="lazy" alt="رشف" src="رشف.png"/>
+<div class="gallery-overlay">
+<h3 class="gallery-overlay-title" data-i18n="text_162">رشف</h3>
+<p class="gallery-overlay-desc" data-i18n="text_266">تصميم بصري يجمع بين الخط والتصوير.</p>
+</div>
+</a>
+<!-- Project 2 -->
+<a class="gallery-item" href="project-details.html">
+<img loading="lazy" alt="بينهم" src="بينهم.png"/>
+<div class="gallery-overlay">
+<h3 class="gallery-overlay-title" data-i18n="text_159">Frog - ضفدع</h3>
+<p class="gallery-overlay-desc" data-i18n="text_267">عمل بصري يتناول العلاقات الإنسانية.</p>
+</div>
+</a>
+<!-- Project 3 -->
+<a class="gallery-item" href="project-details.html">
+<img loading="lazy" alt="دار العلا" src="Dar Al-Ula Branding.jpg"/>
+<div class="gallery-overlay">
+<h3 class="gallery-overlay-title">Dar Al-Ula Branding</h3>
+<p class="gallery-overlay-desc" data-i18n="text_268">هوية بصرية تعكس روح العلا.</p>
+</div>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- فوتر الموقع المطابق -->
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<!-- العمود الأول: العلامة التجارية -->
+<div class="footer-col brand-col">
+<a class="footer-logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
+<p class="footer-about-text" data-i18n="text_134">مفكر، كاتب، ومؤسس. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
+</div>
+<!-- العمود الثاني: التنقل -->
+<div class="footer-col">
+<h4 class="footer-title" data-i18n="text_135">استكشف</h4>
+<ul class="footer-links">
+<li><a data-i18n="text_1" href="/#hero">البداية</a></li>
+<li><a data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
+<li style="display:none;"><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
+<li><a data-i18n="text_4" href="about.html">من أنا</a></li>
+<li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
+</ul>
+</div>
+<!-- العمود الثالث: مواقع التواصل -->
+<div class="footer-col">
+<h4 class="footer-title" data-i18n="text_136">تابعني</h4>
+<ul class="footer-links">
+<li><a data-i18n="text_137" href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
+<li><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
+<li><a data-i18n="text_139" href="#" target="_blank">إكس</a></li>
+<li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
+<li><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
+</ul>
+</div>
+<!-- العمود الرابع: معلومات التواصل -->
+<div class="footer-col info-col">
+<h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
+<p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
+<p class="footer-info-item">واتساب: <span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
+<p class="footer-info-item">البريد الإلكتروني: <a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+<span class="footer-note" data-i18n="text_145">مساحة للفكر</span>
+</div>
+</div>
+</footer>
+<!-- GSAP for animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal" onclick="if(event.target === this) { this.classList.remove('active'); document.getElementById('modalVideo').pause(); }">
+<div class="video-modal-close" id="closeVideoModal" onclick="document.getElementById('videoModal').classList.remove('active'); document.getElementById('modalVideo').pause();">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
+</div>
+<div class="video-modal-content">
+<video controls="" id="modalVideo" preload="none">
+<source src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Beam.mp4" type="video/mp4"/>
+</video>
+</div>
+</div>
+<!-- Main Script -->
+<script src="translations.js"></script>
+    <script src="script.js?v=3"></script>
+
+</body>
+</html>
