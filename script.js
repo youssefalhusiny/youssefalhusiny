@@ -529,14 +529,17 @@ document.addEventListener('DOMContentLoaded', () => {
             'MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE'
         ];
 
-        fetch('https://api.country.is/')
-            .then(r => r.json())
-            .then(data => {
-                const lang = arabicCountries.includes(data.country) ? 'ar' : 'en';
+        // Cloudflare trace — reliable, not blocked by privacy tools
+        fetch('https://www.cloudflare.com/cdn-cgi/trace')
+            .then(r => r.text())
+            .then(text => {
+                const match = text.match(/loc=([A-Z]{2})/);
+                const country = match ? match[1] : '';
+                const lang = arabicCountries.includes(country) ? 'ar' : 'en';
                 setLanguage(lang);
             })
             .catch(() => {
-                // Fallback: use browser language if API fails
+                // Fallback: browser language
                 const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
                 const lang = browserLang.startsWith('ar') ? 'ar' : 'en';
                 setLanguage(lang);
