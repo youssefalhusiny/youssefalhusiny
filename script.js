@@ -529,13 +529,11 @@ if (inquiryForm && contactContainer) {
                 if (playPromise !== undefined) {
                     playPromise.then(function() {
                         video.pause();
-                        video.currentTime = 0;
                     }).catch(function() {
                         video.pause();
                     });
                 } else {
                     video.pause();
-                    video.currentTime = 0;
                 }
             });
         });
