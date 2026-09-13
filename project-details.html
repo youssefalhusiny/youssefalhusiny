@@ -622,24 +622,53 @@
 </div>
 <div class="study-case-grid">
 <div class="gallery-item">
-<img loading="lazy" src="Vids/1.gif" alt="تفاصيل بصرية 1"/>
+<video autoplay loop muted playsinline preload="auto" poster="Vids/1.jpg">
+  <source src="Vids/1.mp4" type="video/mp4"/>
+</video>
 </div>
 <div class="gallery-item">
-<img loading="lazy" src="Vids/2.gif" alt="تفاصيل بصرية 2"/>
+<video autoplay loop muted playsinline preload="auto" poster="Vids/2.jpg">
+  <source src="Vids/2.mp4" type="video/mp4"/>
+</video>
 </div>
 <div class="gallery-item">
-<img loading="lazy" src="Vids/3.gif" alt="تفاصيل بصرية 3"/>
+<video autoplay loop muted playsinline preload="auto" poster="Vids/3.jpg">
+  <source src="Vids/3.mp4" type="video/mp4"/>
+</video>
 </div>
 <div class="gallery-item">
-<img loading="lazy" src="Vids/4.gif" alt="تفاصيل بصرية 4"/>
+<video autoplay loop muted playsinline preload="auto" poster="Vids/4.jpg">
+  <source src="Vids/4.mp4" type="video/mp4"/>
+</video>
 </div>
 <div class="gallery-item">
-<img loading="lazy" src="Vids/5.gif" alt="تفاصيل بصرية 5"/>
+<video autoplay loop muted playsinline preload="auto" poster="Vids/5.jpg">
+  <source src="Vids/5.mp4" type="video/mp4"/>
+</video>
 </div>
 <div class="gallery-item">
-<img loading="lazy" src="Vids/6.gif" alt="تفاصيل بصرية 6"/>
+<video autoplay loop muted playsinline preload="auto" poster="Vids/6.jpg">
+  <source src="Vids/6.mp4" type="video/mp4"/>
+</video>
 </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var clips = document.querySelectorAll('.study-case-grid video');
+    if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.play().catch(function(){});
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.15 });
+        clips.forEach(function(v) { obs.observe(v); });
+    }
+});
+</script>
 </section>
 <!-- Breakdowns Section (Sticky Scroll) -->
 <style>

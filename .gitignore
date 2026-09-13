@@ -1,1 +1,8 @@
 *.mp4
+!Vids/1.mp4
+!Vids/2.mp4
+!Vids/3.mp4
+!Vids/4.mp4
+!Vids/5.mp4
+!Vids/6.mp4
+Vids/*.gif
