@@ -137,6 +137,9 @@
 </a>
 <script>
                     function triggerStaggeredHeroFade() {
+                        const vid = document.getElementById('heroInlineVideo');
+                        if (vid) vid.currentTime = 0; // Immediately rewind to start
+
                         const nav = document.querySelector('.navbar');
                         const heroElements = Array.from(document.getElementById('heroContentBlock').children);
                         const customControls = document.getElementById('customVideoControls');
@@ -160,9 +163,10 @@
                             }, index * 150);
                         });
 
-                        // Unmute, clear blur, reset scale
+                        // Unmute, clear blur, reset scale, ensure start from beginning
                         setTimeout(() => {
                             const vid = document.getElementById('heroInlineVideo');
+                            vid.currentTime = 0;
                             vid.muted = false;
                             vid.style.opacity = '1';
                             vid.style.filter = 'blur(0px) brightness(1)';
@@ -244,15 +248,26 @@
                         
                         const pauseOverlayText = document.getElementById('pauseOverlayText');
                         const pauseMessageTitle = document.getElementById('pauseMessageTitle');
-                        const pauseMessages = [
-                            "لماذا توقفت؟",
-                            "استراحة قصيرة؟",
-                            "اللقطة القادمة أجمل!",
-                            "نحن بانتظارك...",
-                            "لحظة تأمل؟",
-                            "القصة لم تنتهِ بعد",
-                            "لا تتوقف هنا!"
-                        ];
+                        const pauseMessages = {
+                            ar: [
+                                "لماذا توقفت؟",
+                                "استراحة قصيرة؟",
+                                "اللقطة القادمة أجمل!",
+                                "نحن بانتظارك...",
+                                "لحظة تأمل؟",
+                                "القصة لم تنتهِ بعد",
+                                "لا تتوقف هنا!"
+                            ],
+                            en: [
+                                "Why did you stop?",
+                                "A short break?",
+                                "The next scene is even better!",
+                                "We are waiting for you...",
+                                "A moment of reflection?",
+                                "The story hasn't ended yet",
+                                "Don't stop here!"
+                            ]
+                        };
 
                         vid.addEventListener('play', () => { 
                             playIcon.style.display = 'none'; 
@@ -292,8 +307,10 @@
                                 vid.style.filter = 'blur(10px) brightness(0.6)';
                                 vid.style.transform = 'scale(1.06) translateZ(0)';
                                 
-                                // Select random message
-                                const randomMsg = pauseMessages[Math.floor(Math.random() * pauseMessages.length)];
+                                // Select random message in current language
+                                const currentLang = (document.documentElement.lang || 'ar').toLowerCase();
+                                const msgList = pauseMessages[currentLang] || pauseMessages.ar;
+                                const randomMsg = msgList[Math.floor(Math.random() * msgList.length)];
                                 pauseMessageTitle.innerText = randomMsg;
 
                                 pauseOverlayText.style.opacity = '1';
