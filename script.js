@@ -508,3 +508,43 @@ if (inquiryForm && contactContainer) {
             applyLang(bl.startsWith('ar') ? 'ar' : 'en');
         });
 })();
+
+// Gallery Cards: Hover to Play Video
+(function() {
+    function initHoverVideos() {
+        var hoverCards = document.querySelectorAll('.gallery-item');
+        hoverCards.forEach(function(card) {
+            var video = card.querySelector('.gallery-hover-video');
+            if (!video) return;
+
+            var playPromise;
+            card.addEventListener('mouseenter', function() {
+                playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function() {});
+                }
+            });
+
+            card.addEventListener('mouseleave', function() {
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        video.pause();
+                        video.currentTime = 0;
+                    }).catch(function() {
+                        video.pause();
+                    });
+                } else {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHoverVideos);
+    } else {
+        initHoverVideos();
+    }
+})();
+
