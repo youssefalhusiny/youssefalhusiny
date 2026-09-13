@@ -512,37 +512,38 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const currentLang = document.documentElement.lang || 'ar';
             const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            // Mark as manual override so auto-detect won't overwrite it
+            localStorage.setItem('langManualOverride', 'true');
             setLanguage(newLang);
         });
     }
 
     // --- Auto Language Detection ---
-    const savedLang = localStorage.getItem('preferredLang');
+    const arabicCountries = [
+        'DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY',
+        'MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE'
+    ];
 
-    if (savedLang) {
-        // User has a saved preference — always honor it
+    const manualOverride = localStorage.getItem('langManualOverride') === 'true';
+    const savedLang     = localStorage.getItem('preferredLang');
+
+    if (manualOverride && savedLang) {
+        // User explicitly chose a language → respect it always
         setLanguage(savedLang);
     } else {
-        // No preference yet → detect by IP/network country
-        const arabicCountries = [
-            'DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY',
-            'MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE'
-        ];
-
-        // Cloudflare trace — reliable, not blocked by privacy tools
+        // No manual override → detect by IP on every visit
         fetch('https://www.cloudflare.com/cdn-cgi/trace')
             .then(r => r.text())
             .then(text => {
-                const match = text.match(/loc=([A-Z]{2})/);
+                const match   = text.match(/loc=([A-Z]{2})/);
                 const country = match ? match[1] : '';
-                const lang = arabicCountries.includes(country) ? 'ar' : 'en';
+                const lang    = arabicCountries.includes(country) ? 'ar' : 'en';
                 setLanguage(lang);
             })
             .catch(() => {
                 // Fallback: browser language
                 const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-                const lang = browserLang.startsWith('ar') ? 'ar' : 'en';
-                setLanguage(lang);
+                setLanguage(browserLang.startsWith('ar') ? 'ar' : 'en');
             });
     }
 });
