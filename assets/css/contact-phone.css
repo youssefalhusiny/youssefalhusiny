@@ -1,0 +1,14 @@
+
+#inquiryForm .iti { width:100%; --iti-border-color:#292929; --iti-dropdown-bg:#111; --iti-hover-color:#222; --iti-text-color:#ddd; --iti-dialcode-color:#999; }
+#inquiryForm .iti input { width:100%; }
+#inquiryForm .iti__selected-country { color:#ccc; font:inherit; }
+#inquiryForm .iti__country-list { color:#ddd; text-align:right; }
+#inquiryForm .iti__dropdown-content { background:#111; border:1px solid #333; color:#ddd; }
+#inquiryForm .iti__search-input { background:#111; color:#ddd; border-color:#333; }
+#inquiryForm .iti__country-name { color:#ddd; }
+#inquiryForm .iti__dial-code { color:#aaa; }
+#inquiryForm .iti__country:hover,#inquiryForm .iti__country.iti__highlight { background:#222; }
+#inquiryForm .iti + .form-label-luxury { top:-12px; font-size:.75rem; }
+#inquiryStatus { font-size:.9rem; font-weight:300; color:rgba(255,255,255,.65); }
+#inquiryStatus[data-error="true"] { color:#c88; }
+@media(max-width:600px){#inquiryForm .form-row { flex-direction:column; gap:0!important; }}

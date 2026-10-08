@@ -6,7 +6,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>تواصل معي - يوسف الحسيني</title>
-<link href="style.css" rel="stylesheet"/>
+<link href="assets/css/style.css" rel="stylesheet"/>
 <!-- Google Fonts: IBM Plex Sans Arabic -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -59,6 +59,8 @@
         }
     </style>
 <link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
+<link rel="stylesheet" href="vendor/intl-tel-input/css/intlTelInput.css">
+<link rel="stylesheet" href="assets/css/contact-phone.css?v=1">
 </head>
 <body>
 <!-- الهيدر / النافبار -->
@@ -92,29 +94,29 @@
                         دعنا نصنع أثراً معاً. إذا كانت لديك رؤية تبحث عن تجسيد حقيقي، أو أفكار مبدئية تنتظر من يمنحها الحياة، يسعدني أن نستكشف آفاقها ونصيغها في واقع ملموس.
                     </p>
 <div class="contact-form-wrapper" style="width: 100%; max-width: 600px;">
-<form class="contact-inquiry-form" id="inquiryForm" style="text-align: start;">
+<form class="contact-inquiry-form" id="inquiryForm" data-public-site-url="https://youssefalhusiny.com/" style="text-align: start;">
 <!-- 1. الإسم -->
 <div class="form-group-floating">
-<input class="form-input-luxury" data-i18n="text_199" id="userName" placeholder="الاسم" required="" type="text"/>
+<input class="form-input-luxury" data-i18n="text_199" id="userName" name="name" autocomplete="name" maxlength="200" placeholder="الاسم" required="" type="text"/>
 <label class="form-label-luxury" data-i18n="text_191" for="userName">الإسم الكامل</label>
 <span class="input-focus-line"></span>
 </div>
 <!-- 2. وسيلة التواصل -->
 <div class="form-row" style="display: flex; gap: 1.5rem;">
 <div class="form-group-floating" style="flex: 1;">
-<input class="form-input-luxury" data-i18n="text_200" id="userEmail" placeholder="البريد" required="" type="email"/>
+<input class="form-input-luxury" data-i18n="text_200" id="userEmail" name="email" autocomplete="email" maxlength="254" placeholder="البريد" required="" type="email"/>
 <label class="form-label-luxury" data-i18n="text_192" for="userEmail">البريد الإلكتروني</label>
 <span class="input-focus-line"></span>
 </div>
 <div class="form-group-floating" style="flex: 1;">
-<input class="form-input-luxury" data-i18n="text_201" id="userPhone" placeholder="الهاتف" required="" style="direction: ltr;" type="tel"/>
+<input class="form-input-luxury" data-i18n="text_201" id="userPhone" name="phone" autocomplete="tel" maxlength="32" placeholder="الهاتف" required="" style="direction: ltr;" type="tel"/>
 <label class="form-label-luxury" data-i18n="text_193" for="userPhone">رقم الهاتف</label>
 <span class="input-focus-line"></span>
 </div>
 </div>
 <!-- 3. موضوع المشروع -->
 <div class="form-group-floating">
-<textarea class="form-textarea-luxury" data-i18n="text_202" id="projectTopic" placeholder="موضوع المشروع" required="" rows="3"></textarea>
+<textarea class="form-textarea-luxury" data-i18n="text_202" id="projectTopic" name="topic" maxlength="6000" placeholder="موضوع المشروع" required="" rows="3"></textarea>
 <label class="form-label-luxury" data-i18n="text_194" for="projectTopic">موضوع المشروع وتفاصيله</label>
 <span class="input-focus-line"></span>
 </div>
@@ -123,6 +125,8 @@
                                     إرسال الطلب
                                 </button>
 </div>
+<div aria-hidden="true" style="position:absolute;left:-10000px"><label for="inquiryWebsite">Website</label><input id="inquiryWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+<p id="inquiryStatus" role="status" aria-live="polite" style="text-align:center;line-height:1.8;margin-top:16px"></p>
 </form>
 </div>
 </div>
@@ -194,7 +198,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <!-- Lenis Smooth Scroll -->
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-<script src="translations.js"></script>
-    <script src="script.js?v=3"></script>
+<script src="assets/js/translations.js"></script>
+    <script src="assets/js/script.js?v=4"></script>
+<script src="vendor/intl-tel-input/js/intlTelInputWithUtils.min.js"></script>
+<script src="lib/inquiry-payload.js?v=1"></script>
+<script src="assets/js/contact-inquiry.js?v=documents1"></script>
 </body>
 </html>
+
