@@ -27,3 +27,19 @@
  .contact-channels { margin-top:24px !important; gap:24px !important; padding-top:24px !important; }
  .contact-channels a { overflow-wrap:anywhere; }
 }
+
+/* The current phone widget uses country-selector, including its detached popup. */
+.iti { --iti-country-selector-bg:#111; --iti-border-color:#303030; --iti-hover-color:#222; --iti-icon-color:#999; color-scheme:dark; }
+.iti .iti__country-selector { background:#111; color:#ddd; border:1px solid #303030; border-radius:8px; overflow:hidden; box-shadow:0 16px 40px rgba(0,0,0,.55); }
+.iti .iti__search-input-wrapper { background:#161616; border-bottom:1px solid #303030; }
+.iti .iti__search-input { background:transparent; color:#eee; border:0; border-radius:0; font:inherit; font-size:.85rem; font-weight:300; min-height:48px; padding-inline:38px; outline:none; }
+.iti .iti__search-input:focus { box-shadow:inset 0 -1px #888; }
+.iti .iti__search-input::placeholder { color:#888; }
+.iti .iti__country-list { background:#111; color:#ddd; padding:6px; scrollbar-width:thin; scrollbar-color:#444 #111; }
+.iti .iti__country { min-height:44px; padding:10px 12px; gap:8px; border-radius:4px; font-size:.85rem; font-weight:300; line-height:1.5; white-space:normal; }
+.iti .iti__country-name { color:#ddd; }
+.iti .iti__dial-code { color:#888; direction:ltr; unicode-bidi:isolate; }
+.iti .iti__country.iti__highlight,.iti .iti__country:hover { background:#242424; }
+.iti .iti__country[aria-selected="true"] { background:#1d1d1d; }
+.iti .iti__country-check { color:#bbb; }
+.iti .iti__no-results { background:#111; color:#999; font-size:.85rem; }

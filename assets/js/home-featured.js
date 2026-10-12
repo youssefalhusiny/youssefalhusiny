@@ -130,6 +130,37 @@
 
                         playPauseBtn.onclick = togglePlayPause;
                         vid.onclick = togglePlayPause; // Click screen to play/pause
+                        // Touch taps use film coordinates, including the portrait fullscreen rotation.
+                        const tapSurface = vid.closest('.case-hero');
+                        let tapTimer = null, lastTap = null, touchStart = null;
+                        tapSurface.addEventListener('pointerdown', e => {
+                            if(e.pointerType === 'touch') touchStart = {x:e.clientX,y:e.clientY};
+                        });
+                        tapSurface.addEventListener('pointerup', e => {
+                            if(e.pointerType !== 'touch' || tapSurface.dataset.playerMode !== 'playback') return;
+                            if(e.target.closest('[id$="customVideoControls"],a,button,input')) return;
+                            if(!touchStart || Math.hypot(e.clientX-touchStart.x,e.clientY-touchStart.y)>20) return;
+                            const rect = tapSurface.getBoundingClientRect();
+                            const rotated = Math.abs(new DOMMatrixReadOnly(getComputedStyle(vid).transform).b) > .5;
+                            const fraction = rotated ? (e.clientY-rect.top)/rect.height : (e.clientX-rect.left)/rect.width;
+                            const side = fraction < .4 ? -1 : fraction > .6 ? 1 : 0;
+                            const now = performance.now();
+                            if(lastTap && now-lastTap.time<300 && side && side===lastTap.side) {
+                                clearTimeout(tapTimer); tapTimer=null; lastTap=null;
+                                if(Number.isFinite(vid.duration)) vid.currentTime=Math.max(0,Math.min(vid.duration,vid.currentTime+side*5));
+                                showControls();
+                            } else {
+                                clearTimeout(tapTimer);
+                                lastTap={time:now,side};
+                                tapTimer=setTimeout(()=>{lastTap=null;togglePlayPause();showControls();},300);
+                            }
+                        });
+                        tapSurface.addEventListener('click', e => {
+                            if(e.pointerType==='touch' && tapSurface.dataset.playerMode==='playback' && !e.target.closest('[id$="customVideoControls"],a,button,input')) {
+                                e.preventDefault(); e.stopImmediatePropagation();
+                            }
+                        },true);
+
 
                         document.addEventListener('keydown', (e) => {
                             if (customControls.getAttribute('data-active') !== 'true') return;
