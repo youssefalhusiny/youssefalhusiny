@@ -34,30 +34,34 @@
   const newId=()=>typeof crypto.randomUUID==='function'?crypto.randomUUID():'inquiry-'+Date.now()+'-'+Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,'0')).join('');
   let submissionId=newId();
   const ar=()=>document.documentElement.lang!=='en';
-  let feedbackState='idle';
+  let feedbackState='idle', submittedEmail='';
   const label=button.querySelector('.inquiry-submit-label');
   const copy={
-    ar:{idle:'إرسال الطلب',sending:'جارٍ الإرسال…',sent:'تم إرسال الطلب',pending:'نرسل طلبك الآن. ستصلك رسالة على بريدك توضّح الخطوات التالية.',title:'تم استلام طلبك بنجاح',email:'ستصلك رسالة تأكيد على',hint:'راجع البريد الوارد، ومجلد الرسائل غير المرغوب فيها إذا لم تجدها.',steps:['تحديد موعد المكالمة الاستكشافية','مناقشة الفكرة والمتطلبات ونطاق العمل','الاتفاق على خطة التنفيذ والجدول الزمني']},
-    en:{idle:'Send request',sending:'Sending…',sent:'Request sent',pending:'We’re sending your request. You’ll receive an email with the next steps.',title:'Your request has been received',email:'A confirmation email will arrive at',hint:'Check your inbox, and your spam folder if you don’t see it.',steps:['Schedule a discovery call','Discuss your idea, requirements and project scope','Agree on the execution plan and timeline']}
+    ar:{idle:'إرسال الطلب',sending:'جارٍ الإرسال…',sent:'تم إرسال الطلب',pending:'نرسل طلبك الآن. ستصلك رسالة على بريدك توضّح الخطوات التالية.',title:'تم استلام طلبك بنجاح',email:'ستصلك رسالة تأكيد على',hint:'راجع البريد الوارد، ومجلد الرسائل غير المرغوب فيها إذا لم تجدها.',steps:['المكالمة الاستكشافية','تحديد نطاق العمل','خطة التنفيذ'],notes:['نحدد موعدًا لمناقشة فكرتك','نراجع المتطلبات والأهداف','نتفق على الخطوات والجدول الزمني']},
+    en:{idle:'Send request',sending:'Sending…',sent:'Request sent',pending:'We’re sending your request. You’ll receive an email with the next steps.',title:'Your request has been received',email:'A confirmation email will arrive at',hint:'Check your inbox, and your spam folder if you don’t see it.',steps:['Discovery call','Project scope','Execution plan'],notes:['Schedule a call to discuss your idea','Review requirements and goals','Agree on next steps and timing']}
   };
   function renderFeedback(state){
-    feedbackState=state;button.dataset.state=state;status.dataset.state=state;status.dataset.error='false';
+    if(state==='sending' && feedbackState!=='sending')form.style.setProperty('--inquiry-state-height',Math.max(380,form.getBoundingClientRect().height)+'px');
+    feedbackState=state;form.dataset.state=state;form.setAttribute('aria-busy',String(state==='sending'));button.dataset.state=state;status.dataset.state=state;status.dataset.error='false';
     const text=copy[ar()?'ar':'en'];label.textContent=text[state==='success'?'sent':state==='sending'?'sending':'idle'];
     status.replaceChildren();
     if(state==='idle')return;
     if(state==='sending'){
-      const message=document.createElement('p');message.textContent=text.pending;status.appendChild(message);return;
+      const icon=document.createElement('div');icon.className='inquiry-loading-mark';icon.setAttribute('aria-hidden','true');icon.innerHTML='<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><rect x="6" y="12" width="36" height="25" rx="3"/><path d="m6 14 18 13 18-13"/></svg>';
+      const title=document.createElement('h3');title.textContent=text.sending;
+      const message=document.createElement('p');message.textContent=text.pending;status.append(icon,title,message);return;
     }
+    const mark=document.createElement('div');mark.className='inquiry-confirmation-mark';mark.setAttribute('aria-hidden','true');mark.innerHTML='<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="16" cy="16" r="14"/><path d="m10 16 4 4 8-9"/></svg>';
     const title=document.createElement('h3');title.textContent=text.title;
     const emailLine=document.createElement('p');emailLine.append(text.email+' ');
-    const email=document.createElement('strong');email.dir='ltr';email.textContent=document.getElementById('userEmail').value.trim();emailLine.appendChild(email);
+    const email=document.createElement('strong');email.dir='ltr';email.textContent=submittedEmail;emailLine.appendChild(email);
     const steps=document.createElement('ol');steps.className='inquiry-next-steps';
-    text.steps.forEach(step=>{const item=document.createElement('li');item.textContent=step;steps.appendChild(item)});
+    text.steps.forEach((step,index)=>{const item=document.createElement('li');const name=document.createElement('h4');name.textContent=step;const note=document.createElement('p');note.textContent=text.notes[index];item.append(name,note);steps.appendChild(item)});
     const hint=document.createElement('p');hint.className='inquiry-email-hint';hint.textContent=text.hint;
-    status.append(title,emailLine,steps,hint);
+    status.append(mark,title,emailLine,steps,hint);
   }
   new MutationObserver(()=>{if(feedbackState==='sending'||feedbackState==='success')renderFeedback(feedbackState)}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-  function report(text,error=false){feedbackState='idle';button.dataset.state='idle';label.textContent=copy[ar()?'ar':'en'].idle;status.dataset.state=error?'error':'idle';status.textContent=text;status.dataset.error=String(error);}
+  function report(text,error=false){feedbackState='idle';form.dataset.state='idle';form.removeAttribute('aria-busy');form.style.removeProperty('--inquiry-state-height');button.dataset.state='idle';label.textContent=copy[ar()?'ar':'en'].idle;status.dataset.state=error?'error':'idle';status.textContent=text;status.dataset.error=String(error);}
   form.addEventListener('input',()=>{document.getElementById('userPhone').setCustomValidity('');if(completed){completed=false;submissionId=newId();button.disabled=false;report('');}});
   async function request(url,options){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);try{return await fetch(url,{...options,signal:controller.signal});}finally{clearTimeout(timer);}}
   async function direct(payload){const data=new FormData();for(const [key,value]of Object.entries(payload))data.set(key,value);const response=await request('https://hook.us2.make.com/xnsgngx4heav24xjbzrfuti290p1bwtx',{method:'POST',body:data});if(!response.ok)throw Error('send_failed');}
@@ -83,6 +87,7 @@
     let payload;
     try{payload=InquiryPayload.build({name:document.getElementById('userName').value,email:document.getElementById('userEmail').value,phone:internationalPhone,topic:document.getElementById('projectTopic').value,submissionId});}
     catch(_){report(ar()?'تعذّر تجهيز الطلب. افتح النموذج من رابط الموقع المنشور وتحقق من البيانات.':'Open the form from the published website and check your details.',true);return;}
+    submittedEmail=payload.clientEmail;
     pending=true;button.disabled=true;button.setAttribute('aria-busy','true');
     renderFeedback('sending');
     try{await send(payload);completed=true;renderFeedback('success');
