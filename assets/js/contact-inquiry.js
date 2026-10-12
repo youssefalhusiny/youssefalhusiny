@@ -34,7 +34,30 @@
   const newId=()=>typeof crypto.randomUUID==='function'?crypto.randomUUID():'inquiry-'+Date.now()+'-'+Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,'0')).join('');
   let submissionId=newId();
   const ar=()=>document.documentElement.lang!=='en';
-  function report(text,error=false){status.textContent=text;status.dataset.error=String(error);}
+  let feedbackState='idle';
+  const label=button.querySelector('.inquiry-submit-label');
+  const copy={
+    ar:{idle:'إرسال الطلب',sending:'جارٍ الإرسال…',sent:'تم إرسال الطلب',pending:'نرسل طلبك الآن. ستصلك رسالة على بريدك توضّح الخطوات التالية.',title:'تم استلام طلبك بنجاح',email:'ستصلك رسالة تأكيد على',hint:'راجع البريد الوارد، ومجلد الرسائل غير المرغوب فيها إذا لم تجدها.',steps:['تحديد موعد المكالمة الاستكشافية','مناقشة الفكرة والمتطلبات ونطاق العمل','الاتفاق على خطة التنفيذ والجدول الزمني']},
+    en:{idle:'Send request',sending:'Sending…',sent:'Request sent',pending:'We’re sending your request. You’ll receive an email with the next steps.',title:'Your request has been received',email:'A confirmation email will arrive at',hint:'Check your inbox, and your spam folder if you don’t see it.',steps:['Schedule a discovery call','Discuss your idea, requirements and project scope','Agree on the execution plan and timeline']}
+  };
+  function renderFeedback(state){
+    feedbackState=state;button.dataset.state=state;status.dataset.state=state;status.dataset.error='false';
+    const text=copy[ar()?'ar':'en'];label.textContent=text[state==='success'?'sent':state==='sending'?'sending':'idle'];
+    status.replaceChildren();
+    if(state==='idle')return;
+    if(state==='sending'){
+      const message=document.createElement('p');message.textContent=text.pending;status.appendChild(message);return;
+    }
+    const title=document.createElement('h3');title.textContent=text.title;
+    const emailLine=document.createElement('p');emailLine.append(text.email+' ');
+    const email=document.createElement('strong');email.dir='ltr';email.textContent=document.getElementById('userEmail').value.trim();emailLine.appendChild(email);
+    const steps=document.createElement('ol');steps.className='inquiry-next-steps';
+    text.steps.forEach(step=>{const item=document.createElement('li');item.textContent=step;steps.appendChild(item)});
+    const hint=document.createElement('p');hint.className='inquiry-email-hint';hint.textContent=text.hint;
+    status.append(title,emailLine,steps,hint);
+  }
+  new MutationObserver(()=>{if(feedbackState==='sending'||feedbackState==='success')renderFeedback(feedbackState)}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  function report(text,error=false){feedbackState='idle';button.dataset.state='idle';label.textContent=copy[ar()?'ar':'en'].idle;status.dataset.state=error?'error':'idle';status.textContent=text;status.dataset.error=String(error);}
   form.addEventListener('input',()=>{document.getElementById('userPhone').setCustomValidity('');if(completed){completed=false;submissionId=newId();button.disabled=false;report('');}});
   async function request(url,options){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);try{return await fetch(url,{...options,signal:controller.signal});}finally{clearTimeout(timer);}}
   async function direct(payload){const data=new FormData();for(const [key,value]of Object.entries(payload))data.set(key,value);const response=await request('https://hook.us2.make.com/xnsgngx4heav24xjbzrfuti290p1bwtx',{method:'POST',body:data});if(!response.ok)throw Error('send_failed');}
@@ -61,8 +84,8 @@
     try{payload=InquiryPayload.build({name:document.getElementById('userName').value,email:document.getElementById('userEmail').value,phone:internationalPhone,topic:document.getElementById('projectTopic').value,submissionId});}
     catch(_){report(ar()?'تعذّر تجهيز الطلب. افتح النموذج من رابط الموقع المنشور وتحقق من البيانات.':'Open the form from the published website and check your details.',true);return;}
     pending=true;button.disabled=true;button.setAttribute('aria-busy','true');
-    report(ar()?'جارٍ إرسال طلبك…':'Sending your request…');
-    try{await send(payload);completed=true;report(ar()?'تم استلام طلبك. سأتواصل معك بشأن الخطوات التالية.':'Your request has been received. I will contact you about the next steps.');
+    renderFeedback('sending');
+    try{await send(payload);completed=true;renderFeedback('success');
     }catch(error){report(error.name==='AbortError'||error.message==='delivery_unconfirmed'?(ar()?'لم يصل تأكيد الاستلام بعد. تحقق من الاستلام قبل إعادة الإرسال.':'Receipt is not confirmed. Check before resubmitting.'):(ar()?'تعذّر إرسال الطلب. يرجى المحاولة لاحقًا.':'Your request could not be sent. Please try again later.'),true);}
     finally{pending=false;button.disabled=completed;button.removeAttribute('aria-busy');}
   });

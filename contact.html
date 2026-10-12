@@ -60,7 +60,7 @@
     </style>
 <link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
 <link rel="stylesheet" href="vendor/intl-tel-input/css/intlTelInput.css">
-<link rel="stylesheet" href="assets/css/contact-phone.css?v=scroll19">
+<link rel="stylesheet" href="assets/css/contact-phone.css?v=send21">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"/>
 <link rel="stylesheet" href="assets/css/english-typography.css?v=2"/>
 </head>
@@ -119,12 +119,12 @@
 <span class="input-focus-line"></span>
 </div>
 <div style="text-align: center; margin-top: 1rem;">
-<button class="hero-cta-btn" data-i18n="text_195" style="margin: 0; border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); cursor: pointer; padding: 1rem 3.5rem; background: transparent;" type="submit">
-                                    إرسال الطلب
+<button class="hero-cta-btn inquiry-submit-btn" style="margin: 0; border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); cursor: pointer; padding: 1rem 3.5rem; background: transparent;" type="submit">
+<span class="inquiry-send-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></span><span class="inquiry-submit-label" data-i18n="text_195">إرسال الطلب</span>
                                 </button>
 </div>
 <div aria-hidden="true" class="inquiry-honeypot"><label for="inquiryWebsite">Website</label><input id="inquiryWebsite" name="website" tabindex="-1" autocomplete="off"></div>
-<p id="inquiryStatus" role="status" aria-live="polite" style="text-align:center;line-height:1.8;margin-top:16px"></p>
+<div id="inquiryStatus" role="status" aria-live="polite" aria-atomic="true"></div>
 </form>
 </div>
 </div>
@@ -200,7 +200,7 @@
     <script src="assets/js/script.js?v=defaulten8"></script>
 <script src="vendor/intl-tel-input/js/intlTelInputWithUtils.min.js"></script>
 <script src="lib/inquiry-payload.js?v=1"></script>
-<script src="assets/js/contact-inquiry.js?v=scroll19"></script>
+<script src="assets/js/contact-inquiry.js?v=send21"></script>
 </body>
 </html>
 
