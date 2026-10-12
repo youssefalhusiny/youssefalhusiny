@@ -133,6 +133,25 @@
                         // Touch taps use film coordinates, including the portrait fullscreen rotation.
                         const tapSurface = vid.closest('.case-hero');
                         let tapTimer = null, lastTap = null, touchStart = null;
+
+                        function seekByFive(delta) {
+                            if(!Number.isFinite(vid.duration)) return;
+                            const next=Math.max(0,Math.min(vid.duration,vid.currentTime+delta));
+                            if(next===vid.currentTime) return;
+                            vid.currentTime=next;
+                            let layer=tapSurface.querySelector('.seek-feedback-layer');
+                            if(!layer) {
+                                layer=document.createElement('div');layer.className='seek-feedback-layer';
+                                layer.innerHTML='<div class="seek-feedback" role="status"><span class="seek-motion" aria-hidden="true"></span><span class="seek-description"></span></div>';
+                                tapSurface.appendChild(layer);
+                            }
+                            const item=layer.firstElementChild;
+                            layer.dataset.direction=delta>0?'forward':'backward';
+                            const arabic=document.documentElement.lang==='ar';
+                            item.querySelector('.seek-description').textContent=arabic?(delta>0?'تقديم 5 ثوانٍ':'تأخير 5 ثوانٍ'):(delta>0?'Forward 5 seconds':'Back 5 seconds');
+                            item.animate([{opacity:0,transform:'translateX('+(-Math.sign(delta)*10)+'px)'},{opacity:1,transform:'translateX(0)',offset:.18},{opacity:1,transform:'translateX(0)',offset:.7},{opacity:0,transform:'translateX('+(Math.sign(delta)*10)+'px)'}],{duration:750,easing:'ease-out'});
+                            showControls();
+                        }
                         tapSurface.addEventListener('pointerdown', e => {
                             if(e.pointerType === 'touch') touchStart = {x:e.clientX,y:e.clientY};
                         });
@@ -147,7 +166,7 @@
                             const now = performance.now();
                             if(lastTap && now-lastTap.time<300 && side && side===lastTap.side) {
                                 clearTimeout(tapTimer); tapTimer=null; lastTap=null;
-                                if(Number.isFinite(vid.duration)) vid.currentTime=Math.max(0,Math.min(vid.duration,vid.currentTime+side*5));
+                                seekByFive(side*5);
                                 showControls();
                             } else {
                                 clearTimeout(tapTimer);
@@ -170,7 +189,7 @@
                             } else if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
                                 e.preventDefault();
                                 if (!Number.isFinite(vid.duration)) return;
-                                vid.currentTime = Math.max(0, Math.min(vid.duration, vid.currentTime + (e.code === 'ArrowRight' ? 5 : -5)));
+                                seekByFive(e.code === 'ArrowRight' ? 5 : -5);
                                 showControls();
                             }
                         });

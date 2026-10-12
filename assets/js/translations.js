@@ -920,3 +920,7 @@ const translations = {
     "brief_sum_edit": "Edit Answers"
   }
 };
+
+Object.assign(translations.ar, {"reference_name_1": "ساندر فان دايك", "reference_name_3": "ألبرتو كولومبو", "reference_name_4": "آش ثورب"});
+
+Object.assign(translations.en, {"reference_name_1": "Sander van Dijk", "reference_name_3": "Alberto Colombo", "reference_name_4": "Ash Thorp"});

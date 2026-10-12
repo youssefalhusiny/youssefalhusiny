@@ -1237,15 +1237,28 @@
 </div>
 </div>
 <!-- بعثرة بدون ميلان -->
+<style>
+.scattered-images-container .reference-card { margin-inline:0; margin-bottom:0; height:auto; filter:none; }
+.reference-card .scatter-img { display:block; width:100%; height:var(--portrait-height); object-fit:cover; }
+.reference-card.img-1 { --portrait-height:280px; }
+.reference-card.img-3 { --portrait-height:320px; }
+.reference-card.img-4 { --portrait-height:175px; }
+.reference-card figcaption { padding-top:12px; text-align:center; font-size:.85rem; line-height:1.6; font-weight:300; color:#aaa; }
+@media(max-width:900px) {
+ .reference-card .scatter-img { height:auto; aspect-ratio:4/5; }
+ .reference-card.img-3 .scatter-img { aspect-ratio:16/9; }
+ .scattered-images-container .reference-card { aspect-ratio:auto; margin-top:0; }
+}
+</style>
 <div class="scattered-images-container">
 <!-- صورة 1: Sander van Dijk -->
-<img loading="lazy" class="scatter-img img-1" alt="Sander van Dijk" src="Pics/sander_van_dijk_08-0-03-02-22.png"/>
+<figure class="reference-card img-1"><img loading="lazy" class="scatter-img" alt="Sander van Dijk" src="Pics/sander_van_dijk_08-0-03-02-22.png"/><figcaption data-i18n="reference_name_1">Sander van Dijk</figcaption></figure>
 <!-- صورة 2 -->
 <img loading="lazy" class="scatter-img img-2" alt="Visual Artist" src="Pics/a64726_ce7a64e6ade34b549d0b3d069.png"/>
 <!-- صورة 3: Alberto Colombo -->
-<img loading="lazy" class="scatter-img img-3" alt="Alberto Colombo" src="Pics/colombo-profile.png"/>
+<figure class="reference-card img-3"><img loading="lazy" class="scatter-img" alt="Alberto Colombo" src="Pics/colombo-profile.png"/><figcaption data-i18n="reference_name_3">Alberto Colombo</figcaption></figure>
 <!-- صورة 4: Ash Thorp -->
-<img loading="lazy" class="scatter-img img-4" alt="Ash Thorp" src="Pics/AIP-37-Speaker-Ash-Thorp-scaled.png"/>
+<figure class="reference-card img-4"><img loading="lazy" class="scatter-img" alt="Ash Thorp" src="Pics/AIP-37-Speaker-Ash-Thorp-scaled.png"/><figcaption data-i18n="reference_name_4">Ash Thorp</figcaption></figure>
 <!-- صورة 5 -->
 <img loading="lazy" class="scatter-img img-5" alt="Creative Director" src="Pics/18hp5t5FAIBke4FeTSpmgIg.png"/>
 </div>
@@ -1314,7 +1327,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <!-- Lenis Smooth Scroll -->
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-<script src="assets/js/translations.js?v=mobile9"></script>
+<script src="assets/js/translations.js?v=names17"></script>
     <script src="assets/js/script.js?v=defaulten8"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
   phoneInput.addEventListener('input',()=>{countryTouched=true;});
   const phoneWidget=typeof window.intlTelInput==='function'?window.intlTelInput(phoneInput,{
     separateDialCode:true,
+    countrySelectorMode:"DROPDOWN",
     countryNameLocale:document.documentElement.lang==='en'?'en':'ar',
     uiTranslations:{searchPlaceholder:'ابحث عن بلد',searchEmptyState:'لا توجد نتائج',countryListAriaLabel:'قائمة البلدان',noCountrySelected:'اختر البلد',clearSearchAriaLabel:'مسح البحث',closeCountrySelectorAriaLabel:'إغلاق'},
     initialCountryLookup:async()=>{

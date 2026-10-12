@@ -43,3 +43,8 @@
 .iti .iti__country[aria-selected="true"] { background:#1d1d1d; }
 .iti .iti__country-check { color:#bbb; }
 .iti .iti__no-results { background:#111; color:#999; font-size:.85rem; }
+
+/* Keep country selection attached to the field even on touch-enabled desktops. */
+#inquiryForm .iti__country-selector { width:min(360px,calc(100vw - 48px)) !important; max-width:calc(100vw - 48px); }
+#inquiryForm .iti__country-list { max-height:260px !important; }
+[dir="rtl"] #inquiryForm .iti__country-selector { left:0; right:auto; }

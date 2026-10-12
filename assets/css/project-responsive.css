@@ -57,3 +57,16 @@
 
 /* Keep the project booking label light in both languages. */
 .case-reflections .hero-cta-btn[data-i18n="project_start_cta"] { font-weight: 300 !important; }
+
+/* A brief directional cue follows the same film orientation as the pause overlay. */
+.seek-feedback-layer { position:absolute; left:50%; top:50%; width:100%; height:100%; transform:translate(-50%,-50%); z-index:35; pointer-events:none; display:flex; align-items:center; box-sizing:border-box; padding:24px; direction:ltr; }
+.seek-feedback-layer[data-direction="forward"] { justify-content:flex-end; }
+.seek-feedback-layer[data-direction="backward"] { justify-content:flex-start; }
+.seek-feedback { opacity:0; color:#eee; background:rgba(10,10,10,.7); border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:14px 18px; display:flex; flex-direction:column; align-items:center; gap:10px; font-size:.8rem; font-weight:300; text-align:center; }
+.seek-description { unicode-bidi:plaintext; }
+.seek-motion { width:36px; height:2px; background:linear-gradient(90deg,transparent,#eee); }
+[data-direction="backward"] .seek-motion { transform:scaleX(-1); }
+@media(max-width:700px) and (orientation:portrait) {
+ .case-hero[data-player-orientation="landscape"]:fullscreen .seek-feedback-layer { width:100dvh; height:100dvw; transform:translate(-50%,-50%) rotate(90deg); }
+}
+@media(prefers-reduced-motion:reduce) { .seek-motion { background:#aaa; } }
