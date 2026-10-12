@@ -41,7 +41,6 @@
     en:{idle:'Send request',sending:'Sending…',sent:'Request sent',pending:'We’re sending your request. You’ll receive an email with the next steps.',title:'Your request has been received',email:'A confirmation email will arrive at',hint:'Check your inbox, and your spam folder if you don’t see it.',steps:['Discovery call','Project scope','Execution plan'],notes:['Schedule a call to discuss your idea','Review requirements and goals','Agree on next steps and timing']}
   };
   function renderFeedback(state){
-    if(state==='sending' && feedbackState!=='sending')form.style.setProperty('--inquiry-state-height',Math.max(380,form.getBoundingClientRect().height)+'px');
     feedbackState=state;form.dataset.state=state;form.setAttribute('aria-busy',String(state==='sending'));button.dataset.state=state;status.dataset.state=state;status.dataset.error='false';
     const text=copy[ar()?'ar':'en'];label.textContent=text[state==='success'?'sent':state==='sending'?'sending':'idle'];
     status.replaceChildren();
@@ -59,6 +58,14 @@
     text.steps.forEach((step,index)=>{const item=document.createElement('li');const name=document.createElement('h4');name.textContent=step;const note=document.createElement('p');note.textContent=text.notes[index];item.append(name,note);steps.appendChild(item)});
     const hint=document.createElement('p');hint.className='inquiry-email-hint';hint.textContent=text.hint;
     status.append(mark,title,emailLine,steps,hint);
+  }
+  const motionReduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+  async function transitionFeedback(state){
+    const previous=state==='sending'?form.querySelector('.inquiry-fields'):status;
+    if(state==='sending')form.style.setProperty('--inquiry-state-height',Math.max(380,form.offsetHeight)+'px');
+    if(!motionReduced())await previous.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-8px)'}],{duration:state==='sending'?450:400,easing:'cubic-bezier(.4,0,.2,1)'}).finished.catch(()=>{});
+    renderFeedback(state);
+    if(!motionReduced())await status.animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:800,easing:'cubic-bezier(.16,1,.3,1)'}).finished.catch(()=>{});
   }
   new MutationObserver(()=>{if(feedbackState==='sending'||feedbackState==='success')renderFeedback(feedbackState)}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   function report(text,error=false){feedbackState='idle';form.dataset.state='idle';form.removeAttribute('aria-busy');form.style.removeProperty('--inquiry-state-height');button.dataset.state='idle';label.textContent=copy[ar()?'ar':'en'].idle;status.dataset.state=error?'error':'idle';status.textContent=text;status.dataset.error=String(error);}
@@ -89,9 +96,12 @@
     catch(_){report(ar()?'تعذّر تجهيز الطلب. افتح النموذج من رابط الموقع المنشور وتحقق من البيانات.':'Open the form from the published website and check your details.',true);return;}
     submittedEmail=payload.clientEmail;
     pending=true;button.disabled=true;button.setAttribute('aria-busy','true');
-    renderFeedback('sending');
-    try{await send(payload);completed=true;renderFeedback('success');
-    }catch(error){report(error.name==='AbortError'||error.message==='delivery_unconfirmed'?(ar()?'لم يصل تأكيد الاستلام بعد. تحقق من الاستلام قبل إعادة الإرسال.':'Receipt is not confirmed. Check before resubmitting.'):(ar()?'تعذّر إرسال الطلب. يرجى المحاولة لاحقًا.':'Your request could not be sent. Please try again later.'),true);}
+    const sendingReady=transitionFeedback('sending');
+    const delivery=send(payload);
+    try{await Promise.all([delivery,sendingReady]);
+      if(!motionReduced())await new Promise(resolve=>setTimeout(resolve,1100));
+      completed=true;await transitionFeedback('success');
+    }catch(error){await sendingReady;report(error.name==='AbortError'||error.message==='delivery_unconfirmed'?(ar()?'لم يصل تأكيد الاستلام بعد. تحقق من الاستلام قبل إعادة الإرسال.':'Receipt is not confirmed. Check before resubmitting.'):(ar()?'تعذّر إرسال الطلب. يرجى المحاولة لاحقًا.':'Your request could not be sent. Please try again later.'),true);}
     finally{pending=false;button.disabled=completed;button.removeAttribute('aria-busy');}
   });
 })();
