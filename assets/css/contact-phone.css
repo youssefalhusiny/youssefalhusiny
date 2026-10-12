@@ -48,3 +48,5 @@
 #inquiryForm .iti__country-selector { width:min(360px,calc(100vw - 48px)) !important; max-width:calc(100vw - 48px); }
 #inquiryForm .iti__country-list { max-height:260px !important; }
 [dir="rtl"] #inquiryForm .iti__country-selector { left:0; right:auto; }
+
+.iti .iti__country-list { overscroll-behavior:contain; touch-action:pan-y; }

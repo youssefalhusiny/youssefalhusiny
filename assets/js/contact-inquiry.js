@@ -22,6 +22,12 @@
       if(!region)throw Error('country_unknown');return region;
     }
   }):null;
+  // Let the country list scroll natively instead of bubbling to the page's Lenis listener.
+  form.querySelectorAll('.iti__country-selector').forEach(selector=>{
+    selector.setAttribute('data-lenis-prevent','');
+    selector.addEventListener('wheel',event=>event.stopPropagation(),{passive:true});
+    selector.addEventListener('touchmove',event=>event.stopPropagation(),{passive:true});
+  });
   phoneInput.addEventListener('countrychange',()=>{phoneInput.setCustomValidity('');});
 
   let completed=false, pending=false;
