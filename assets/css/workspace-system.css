@@ -1,0 +1,40 @@
+.workspace-container{max-width:1200px}
+.workspace-page{padding-top:150px}
+.workspace-page-header{margin-bottom:2rem}
+.crm-tabs{display:flex;gap:2rem;border-bottom:1px solid #262626;margin-bottom:3rem;flex-wrap:wrap}
+.crm-tabs button{border:0;border-bottom:2px solid transparent;background:none;color:#999;padding:1rem 0;font:inherit;cursor:pointer}
+.crm-tabs button[aria-selected=true]{color:#fff;border-bottom-color:#fff}
+.crm-tabs button:focus-visible,.crm-outline a:focus-visible{outline:2px solid #ddd;outline-offset:5px}
+[role=tabpanel][hidden]{display:none!important}
+.crm-plan{font-size:14px;line-height:1.9;color:#ccc}
+.crm-intro{max-width:760px;margin-bottom:2rem}
+.crm-intro h2{font-size:clamp(23px,3vw,34px);font-weight:400;line-height:1.6;color:#fff;margin:0 0 1rem}
+.crm-intro p{color:#aaa;margin:0}
+.crm-outline{display:flex;gap:.7rem 1.7rem;flex-wrap:wrap;margin-bottom:3.5rem;padding:1.1rem 0;border-bottom:1px solid #222}
+.crm-outline a{color:#bbb;text-decoration:none;font-size:13px}
+.crm-outline a:hover{color:#fff}
+.crm-section{margin-bottom:4rem;scroll-margin-top:120px}
+.crm-number{display:block;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1.4px;color:#777;margin-bottom:.6rem;direction:ltr;text-align:right}
+.crm-section h3{font-size:23px;line-height:1.6;color:#eee;font-weight:400;margin:0 0 1rem}
+.crm-section h4{font-size:17px;color:#eee;font-weight:400;margin:2rem 0 1rem}
+.crm-description{color:#999;margin:0 0 1.4rem}
+.crm-table-wrap{overflow:auto;border-top:1px solid #333;max-width:100%;margin-bottom:1.3rem}
+.crm-table{width:100%;border-collapse:collapse;font-size:13px;min-width:680px;text-align:right}
+.crm-table th{font-weight:400;color:#8e8e8e;font-size:12px;padding:13px 16px;background:#090909;border-bottom:1px solid #333;white-space:nowrap}
+.crm-table td{padding:15px 16px;border-bottom:1px solid #232323;vertical-align:top;line-height:1.85}
+.crm-table td:first-child{direction:ltr;text-align:right;color:#efefef;font-family:'Space Grotesk','IBM Plex Sans Arabic',sans-serif;min-width:190px;width:24%}
+.crm-table td:nth-child(2){color:#aaa;min-width:180px;width:25%}
+.crm-table tr:hover td{background:#0b0b0b}
+.crm-note{border-inline-start:2px solid #555;padding:.5rem 1.2rem;color:#aaa;margin:1.5rem 0;font-size:13px;line-height:2}
+.crm-note strong{font-weight:500;color:#ddd}
+.crm-formula{padding:0 0 1rem;border-bottom:1px solid #262626}
+.crm-formula h4{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.crm-formula small{color:#888;font-size:12px;font-weight:400}
+.crm-formula pre{background:#0e0e0e;padding:1.2rem 1.4rem;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;line-height:1.7;font-size:13px;color:#dedede;border:1px solid #252525}
+.crm-formula p{font-size:13px;color:#aaa}
+.crm-setup{padding-inline-start:1.5rem;max-width:930px}
+.crm-setup li{padding-inline-start:.5rem;margin-bottom:1rem;color:#bbb}
+.crm-sources{font-size:12px;color:#777}
+.crm-sources a{color:#bbb;text-underline-offset:4px}
+@media(max-width:750px){.workspace-page{padding-top:115px}.crm-tabs{gap:1.3rem;margin-bottom:2rem}.crm-tabs button{font-size:12px}.crm-outline{gap:.6rem 1.3rem;margin-bottom:2.5rem}.crm-section{margin-bottom:3rem}.crm-section h3{font-size:21px}.crm-intro h2{font-size:24px}.crm-table td,.crm-table th{padding:12px}.crm-plan{font-size:13px}.crm-formula pre{padding:1rem;font-size:12px}}
+@media print{.navbar,.crm-tabs,.crm-outline,.workspace-page-meta,#crm-documents-panel{display:none!important}.workspace-page{padding:0;background:#fff;color:#111}.workspace-container{max-width:none;padding:0}.crm-plan,.crm-plan p,.crm-plan h2,.crm-plan h3,.crm-plan h4,.crm-table td,.crm-table th{color:#111;background:#fff}.crm-section{break-inside:auto;scroll-margin-top:0;margin-bottom:2rem}.crm-table-wrap{overflow:visible}.crm-table{min-width:0;font-size:10pt}.crm-table td,.crm-table th{min-width:0!important;padding:7px}.crm-table tr,.crm-formula{break-inside:avoid}.crm-formula pre{background:#fff;color:#111}.crm-table thead{display:table-header-group}}

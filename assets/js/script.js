@@ -412,6 +412,7 @@ gsap.from(".contact-form-wrapper", {
 
 // --- i18n Language System ---
 (function () {
+    if (document.querySelector('.document-header')) return;
     const langBtn = document.querySelector('.lang-switcher');
 
     const arabicCountries = [

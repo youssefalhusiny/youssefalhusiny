@@ -1,0 +1,403 @@
+{
+  "databases": [
+    {
+      "key": "clients",
+      "name": "Clients & Leads Directory",
+      "fields": [
+        {
+          "name": "Client Name",
+          "type": "Title / Primary text",
+          "description": "اسم الشركة أو العميل؛ جهة واحدة لكل سجل."
+        },
+        {
+          "name": "Client ID",
+          "type": "Unique ID / Autonumber",
+          "description": "معرّف ثابت للربط؛ لا تعتمد على تطابق الأسماء."
+        },
+        {
+          "name": "Client Type",
+          "type": "Select",
+          "description": "Direct Client · Agency · Production House"
+        },
+        {
+          "name": "Acquisition Stage",
+          "type": "Select",
+          "description": "Outreach · Discovery Call · Proposal Sent · Won · Lost · Inactive"
+        },
+        {
+          "name": "Contact Name",
+          "type": "Text",
+          "description": "الشخص المسؤول عن التواصل والاعتماد."
+        },
+        {
+          "name": "Email",
+          "type": "Email",
+          "description": "البريد الرسمي للمراسلات والفواتير."
+        },
+        {
+          "name": "Contact Link",
+          "type": "URL",
+          "description": "رابط واتساب أو Slack؛ اختياري."
+        },
+        {
+          "name": "Next Follow-up",
+          "type": "Date",
+          "description": "موعد الخطوة القادمة؛ مطلوب للفرص المفتوحة."
+        },
+        {
+          "name": "Next Action",
+          "type": "Text",
+          "description": "خطوة عملية قصيرة، مثل: إرسال العرض أو الاتصال."
+        },
+        {
+          "name": "Projects",
+          "type": "Relation → Projects",
+          "description": "العلاقة العكسية لحقل Client في المشاريع؛ عميل واحد له مشاريع متعددة."
+        },
+        {
+          "name": "Project Count",
+          "type": "Rollup",
+          "description": "Projects → Project Name → Count all؛ عدد المشاريع المرتبطة."
+        },
+        {
+          "name": "Notes",
+          "type": "Long text",
+          "description": "سياق مفيد فقط؛ السبب عند Lost أو Inactive."
+        }
+      ]
+    },
+    {
+      "key": "projects",
+      "name": "Motion Design Projects",
+      "fields": [
+        {
+          "name": "Project Name",
+          "type": "Title / Primary text",
+          "description": "اسم واضح للعمل المطلوب."
+        },
+        {
+          "name": "Project ID",
+          "type": "Unique ID / Autonumber",
+          "description": "معرّف ثابت للمشروع والمستندات."
+        },
+        {
+          "name": "Client",
+          "type": "Relation → Clients",
+          "description": "جهة واحدة لكل مشروع؛ ينشئ Projects عكسيًا في العملاء."
+        },
+        {
+          "name": "Project Type",
+          "type": "Multi-select",
+          "description": "2D · 3D · Promo · SaaS UI · Explainer · Social؛ يسمح بالتداخل."
+        },
+        {
+          "name": "Status",
+          "type": "Select",
+          "description": "Planned · Active · On Hold · Completed · Cancelled"
+        },
+        {
+          "name": "Production Stage",
+          "type": "Select",
+          "description": "Scripting · Storyboard/Styleframes · Voiceover/Audio · Animation · Revisions/Rendering · Final Delivery"
+        },
+        {
+          "name": "Start Date",
+          "type": "Date",
+          "description": "بداية العمل المتفق عليها."
+        },
+        {
+          "name": "Delivery Date",
+          "type": "Date",
+          "description": "موعد التسليم النهائي؛ يظهر في تقويم التسليمات."
+        },
+        {
+          "name": "Contract Value",
+          "type": "Number / Currency",
+          "description": "إجمالي قيمة المشروع المتفق عليها، مستقلة عن قيمة كل فاتورة."
+        },
+        {
+          "name": "Currency",
+          "type": "Select",
+          "description": "SAR · USD · EUR · GBP؛ عملة واحدة لكل مشروع ومعاملاته."
+        },
+        {
+          "name": "Revision Rounds Allowed",
+          "type": "Number / Integer",
+          "description": "عدد جولات التعديل المتفق عليها."
+        },
+        {
+          "name": "Revision Rounds Used",
+          "type": "Number / Integer",
+          "description": "يزاد مرة واحدة لكل جولة مجمعة، لا لكل ملاحظة أو مهمة."
+        },
+        {
+          "name": "Revision Alert",
+          "type": "Formula",
+          "description": "تنبيه عند استنفاد الجولات أو تجاوزها؛ الصيغة أدناه."
+        },
+        {
+          "name": "Drive URL",
+          "type": "URL",
+          "description": "مجلد المصدر والأصول والتسليمات."
+        },
+        {
+          "name": "Frame.io URL",
+          "type": "URL",
+          "description": "رابط المراجعات البصرية واعتماد النسخ."
+        },
+        {
+          "name": "Tasks",
+          "type": "Relation → Tasks",
+          "description": "العلاقة العكسية لحقل Project في المهام."
+        },
+        {
+          "name": "Transactions",
+          "type": "Relation → Finance",
+          "description": "العلاقة العكسية لحقل Project في المعاملات."
+        },
+        {
+          "name": "Received Total",
+          "type": "Conditional Rollup",
+          "description": "Transactions → Amount → SUM؛ Type = Payment و Status = Confirmed فقط."
+        },
+        {
+          "name": "Expense Total",
+          "type": "Conditional Rollup",
+          "description": "Transactions → Amount → SUM؛ Type = Expense و Status = Confirmed فقط."
+        },
+        {
+          "name": "Balance Due",
+          "type": "Formula",
+          "description": "Contract Value − Received Total؛ المتبقي الحقيقي بعد جميع الدفعات."
+        }
+      ]
+    },
+    {
+      "key": "tasks",
+      "name": "Tasks & Asset Pipeline",
+      "fields": [
+        {
+          "name": "Task Name",
+          "type": "Title / Primary text",
+          "description": "مخرج محدد: كتابة السكربت، اعتماد ستايل فريمز، تحريك مشهد 03."
+        },
+        {
+          "name": "Project",
+          "type": "Relation → Projects",
+          "description": "مشروع واحد لكل مهمة؛ يظهر Tasks عكسيًا."
+        },
+        {
+          "name": "Production Stage",
+          "type": "Select",
+          "description": "نفس مراحل إنتاج المشاريع؛ لتصنيف المهمة داخل المشروع."
+        },
+        {
+          "name": "Status",
+          "type": "Select",
+          "description": "To Do · In Progress · In Review · Blocked · Done"
+        },
+        {
+          "name": "Due Date",
+          "type": "Date",
+          "description": "موعد إنجاز المهمة أو إرسال الأصل للمراجعة."
+        },
+        {
+          "name": "Priority",
+          "type": "Select",
+          "description": "High · Normal · Low؛ الافتراضي Normal."
+        },
+        {
+          "name": "Depends On",
+          "type": "Relation → Tasks",
+          "description": "مهام يجب إغلاقها قبل البدء؛ اختياري."
+        },
+        {
+          "name": "Asset URL",
+          "type": "URL",
+          "description": "رابط ملف Drive أو نسخة Frame.io الخاصة بالمهمة."
+        },
+        {
+          "name": "Notes",
+          "type": "Long text",
+          "description": "معيار إنجاز أو سبب تعطّل مختصر؛ تفاصيل الملاحظات داخل Frame.io."
+        }
+      ]
+    },
+    {
+      "key": "finance",
+      "name": "Invoices & Cashflow",
+      "fields": [
+        {
+          "name": "Transaction Name",
+          "type": "Title / Primary text",
+          "description": "اسم الفاتورة أو الدفعة أو المصروف."
+        },
+        {
+          "name": "Transaction ID",
+          "type": "Unique ID / Autonumber",
+          "description": "معرّف السجل؛ يستخدم رقمًا ثابتًا للفاتورة عند الإصدار."
+        },
+        {
+          "name": "Project",
+          "type": "Relation → Projects",
+          "description": "مشروع واحد؛ العميل يُستدعى من المشروع."
+        },
+        {
+          "name": "Client",
+          "type": "Lookup / Derived relation",
+          "description": "Project → Client؛ لا تكتب اسم العميل مجددًا."
+        },
+        {
+          "name": "Type",
+          "type": "Select",
+          "description": "Invoice · Payment · Expense"
+        },
+        {
+          "name": "Status",
+          "type": "Select",
+          "description": "Draft · Issued · Confirmed · Cancelled؛ Issued للفواتير و Confirmed للحركات النقدية."
+        },
+        {
+          "name": "Invoice Tag",
+          "type": "Select",
+          "description": "invoice_1 · invoice_2 · invoice_3 · extra؛ للفواتير فقط، فريد داخل المشروع."
+        },
+        {
+          "name": "Amount",
+          "type": "Number / Currency",
+          "description": "القيمة الموجبة الفعلية؛ مبلغ كل فاتورة يُدخل مستقلًا."
+        },
+        {
+          "name": "Currency",
+          "type": "Lookup",
+          "description": "Project → Currency؛ مطابق لعملة المشروع."
+        },
+        {
+          "name": "Transaction Date",
+          "type": "Date",
+          "description": "تاريخ إصدار الفاتورة أو تاريخ قبض/دفع الحركة."
+        },
+        {
+          "name": "Due Date",
+          "type": "Date",
+          "description": "موعد استحقاق الفاتورة فقط."
+        },
+        {
+          "name": "Invoice",
+          "type": "Self Relation → Finance",
+          "description": "في سجل Payment: الفاتورة المسددة؛ فاتورة واحدة لكل دفعة."
+        },
+        {
+          "name": "Payments",
+          "type": "Inverse Self Relation",
+          "description": "في سجل Invoice: الدفعات المرتبطة عبر Invoice؛ لا تدخلها مرتين."
+        },
+        {
+          "name": "Paid Total",
+          "type": "Conditional Rollup",
+          "description": "Payments → Amount → SUM؛ Type = Payment و Status = Confirmed."
+        },
+        {
+          "name": "Invoice Balance",
+          "type": "Formula",
+          "description": "Amount − Paid Total للفواتير غير الملغاة؛ لا يعامل إصدار الفاتورة كدخل."
+        },
+        {
+          "name": "Document URL",
+          "type": "URL",
+          "description": "ملف الفاتورة أو إيصال القبض أو المصروف."
+        }
+      ]
+    }
+  ],
+  "views": [
+    [
+      "Production Pipeline",
+      "Projects / Kanban",
+      "Status = Active؛ تجميع حسب Production Stage",
+      "اسم المشروع، العميل، Delivery Date، Revision Alert؛ الفرز بالأقرب تسليمًا."
+    ],
+    [
+      "CRM Follow-up",
+      "Clients / Kanban",
+      "Acquisition Stage = Outreach أو Discovery Call أو Proposal Sent",
+      "تجميع حسب Acquisition Stage؛ الفرز حسب Next Follow-up؛ عرض Next Action."
+    ],
+    [
+      "Client Directory",
+      "Clients / Table",
+      "كل الجهات؛ بحث بالاسم، فلتر Client Type",
+      "صفحة العميل تعرض المشاريع ومعاملاتها؛ الملخص المالي منفصل لكل Currency."
+    ],
+    [
+      "Delivery Calendar",
+      "Projects / Calendar",
+      "Status = Active؛ حقل التقويم Delivery Date",
+      "عرض شهري/أسبوعي؛ المشاريع On Hold تظهر في عرض مستقل."
+    ],
+    [
+      "Project Tasks",
+      "Tasks / Board + List",
+      "Project = المشروع المفتوح؛ تجميع حسب Status",
+      "ترتيب حسب Production Stage ثم Due Date؛ روابط الأصول داخل المهام."
+    ],
+    [
+      "Pending Invoices",
+      "Finance / Filtered Table",
+      "Type = Invoice؛ Status = Issued؛ Invoice Balance > 0",
+      "الأقدم Due Date أولًا؛ المتأخر: Due Date قبل اليوم؛ التجميع حسب Currency."
+    ],
+    [
+      "Cashflow",
+      "Finance / Table",
+      "Type = Payment أو Expense؛ Status = Confirmed",
+      "التجميع حسب شهر Transaction Date ثم Currency؛ الوارد والمصروف منفصلان."
+    ]
+  ],
+  "dashboard": [
+    [
+      "Open Projects",
+      "Projects",
+      "Status = Active أو On Hold",
+      "عدد المشاريع + قائمة العميل والمرحلة وموعد التسليم."
+    ],
+    [
+      "This Week Deliveries",
+      "Projects",
+      "Status = Active؛ Delivery Date داخل أسبوع العمل الحالي",
+      "قائمة يومية بالتسليمات، مع فصل المتأخرات السابقة."
+    ],
+    [
+      "Pending Invoices",
+      "Finance",
+      "Type = Invoice؛ Status = Issued؛ Invoice Balance > 0",
+      "قيمة المستحقات حسب العملة + الفواتير المتأخرة."
+    ],
+    [
+      "Today Tasks",
+      "Tasks",
+      "Status ليس Done؛ Due Date اليوم أو قبله؛ Project.Status = Active",
+      "قائمة مرتبة حسب Priority و Due Date؛ Blocked ظاهرة بوضوح."
+    ]
+  ],
+  "formulas": [
+    {
+      "name": "Balance Due",
+      "table": "Projects",
+      "airtable": "{Contract Value} - {Received Total}",
+      "description": "مثال: 20,000 − 5,000 دفعة أولى − 7,000 دفعة ثانية = 8,000 متبقية. القيمة السالبة تعني زيادة في القبض وتحتاج مراجعة؛ لا تُخفَ تلقائيًا."
+    },
+    {
+      "name": "Revision Alert",
+      "table": "Projects",
+      "airtable": "IF({Revision Rounds Used} > {Revision Rounds Allowed}, \"Exceeded\", IF({Revision Rounds Used} = {Revision Rounds Allowed}, \"Limit reached\", \"Within limit\"))",
+      "description": "Allowed = 2 و Used = 3 → Exceeded. المرحلة Animation لا تتغير تلقائيًا بسبب استهلاك جولة."
+    },
+    {
+      "name": "Invoice Balance",
+      "table": "Finance",
+      "airtable": "IF(AND({Type} = \"Invoice\", {Status} != \"Cancelled\"), {Amount} - {Paid Total}, 0)",
+      "description": "فاتورة بقيمة 9,250 ودفعة مؤكدة 4,000 → متبقي 5,250. وجود الفاتورة وحده لا يثبت استلام المال."
+    }
+  ]
+}
