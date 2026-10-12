@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
+
 <head>
     <meta name="google" content="notranslate">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>المعرض - يوسف الحسيني</title>
-<link href="assets/css/style.css" rel="stylesheet"/>
-<!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>المعرض - يوسف الحسيني</title>
+    <link href="assets/css/style.css?v=herolabels7" rel="stylesheet" />
+    <!-- Google Fonts: IBM Plex Sans Arabic & Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
         /* override body for dark theme matching the rest of the site */
         body {
             background-color: #050505 !important;
@@ -27,11 +30,13 @@
             max-width: 1600px;
             margin: 0 auto;
         }
+
         .museum-column {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 5.5rem; /* Enforces equal vertical spacing inside all columns */
+            gap: 5.5rem;
+            /* Enforces equal vertical spacing inside all columns */
         }
 
         /* Museum Item Card */
@@ -43,8 +48,10 @@
             cursor: pointer;
             text-decoration: none;
             position: relative;
-            opacity: 0; /* يمنع ظهور البطاقات فجأة قبل بدء الأنيميشن */
+            opacity: 0;
+            /* يمنع ظهور البطاقات فجأة قبل بدء الأنيميشن */
         }
+
         .museum-img-wrapper {
             width: 100%;
             overflow: hidden;
@@ -52,7 +59,7 @@
             background-color: #111111;
             /* Ultra-smooth transition for the scale and shadow */
             transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1),
-                        box-shadow 2.5s cubic-bezier(0.15, 1, 0.3, 1);
+                box-shadow 2.5s cubic-bezier(0.15, 1, 0.3, 1);
             position: relative;
             z-index: 1;
         }
@@ -61,17 +68,21 @@
         .museum-img-wrapper.tall {
             aspect-ratio: 2 / 3;
         }
+
         .museum-img-wrapper.medium {
             aspect-ratio: 4 / 5;
         }
+
         .museum-img-wrapper.short {
             aspect-ratio: 5 / 4;
         }
 
         /* The morphing hover animation: Grows to a perfect square aspect ratio (1 / 1) */
         .museum-item:hover .museum-img-wrapper {
-            transform: scale(1.02); /* Expands/grows the size slightly and elegantly */
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6); /* Premium deep dark shadow on active item */
+            transform: scale(1.02);
+            /* Expands/grows the size slightly and elegantly */
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+            /* Premium deep dark shadow on active item */
             z-index: 10;
         }
 
@@ -82,11 +93,12 @@
             object-fit: cover;
             transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);
         }
-        
+
         .museum-item:hover .museum-img-wrapper img {
-            transform: scale(1.08); /* Slow majestic luxury cinematic zoom */
+            transform: scale(1.08);
+            /* Slow majestic luxury cinematic zoom */
         }
-        
+
         .museum-caption {
             font-size: 0.72rem;
             font-weight: 300;
@@ -97,6 +109,7 @@
             font-family: 'IBM Plex Sans Arabic', sans-serif;
             transition: color 0.8s cubic-bezier(0.15, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.15, 1, 0.3, 1);
         }
+
         .museum-item:hover .museum-caption {
             color: var(--text-primary);
             opacity: 1;
@@ -110,28 +123,38 @@
                 gap: 2.5rem;
                 padding: 4rem 5%;
             }
+
             .museum-column {
                 gap: 2.5rem;
             }
-            .museum-img-wrapper.tall, .museum-img-wrapper.medium, .museum-img-wrapper.short {
-                aspect-ratio: 1 / 1; /* Standardize on smaller tablets for layout stability */
+
+            .museum-img-wrapper.tall,
+            .museum-img-wrapper.medium,
+            .museum-img-wrapper.short {
+                aspect-ratio: 1 / 1;
+                /* Standardize on smaller tablets for layout stability */
             }
         }
+
         @media (max-width: 768px) {
             .museum-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
                 padding: 2.5rem 4%;
             }
+
             .museum-img-wrapper.tall {
                 aspect-ratio: 2 / 3;
             }
+
             .museum-img-wrapper.medium {
                 aspect-ratio: 4 / 5;
             }
+
             .museum-img-wrapper.short {
                 aspect-ratio: 5 / 4;
             }
+
             /* Disable morph animation on mobile to prevent layout shifts */
             .museum-item:hover .museum-img-wrapper {
                 aspect-ratio: inherit !important;
@@ -139,308 +162,352 @@
                 box-shadow: none;
             }
         }
+
         @media (max-width: 480px) {
             .museum-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
                 padding: 2rem 3%;
             }
+
             .museum-column {
                 gap: 1rem;
             }
+
             .museum-img-wrapper.tall {
                 aspect-ratio: 2 / 3;
             }
+
             .museum-img-wrapper.medium {
                 aspect-ratio: 4 / 5;
             }
+
             .museum-img-wrapper.short {
                 aspect-ratio: 5 / 4;
             }
+
             .museum-caption {
                 font-size: 0.65rem;
                 letter-spacing: 0;
             }
         }
     </style>
-<link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
+    <link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"/>
+<link rel="stylesheet" href="assets/css/english-typography.css?v=2"/>
 </head>
+
 <body class="portfolio-page">
-<!-- الهيدر / النافبار الموحد -->
-<nav class="navbar scrolled">
-<div class="nav-brand-group">
-<a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
-<a class="lang-switcher" href="#">EN</a>
-</div>
-<button aria-label="Menu" class="mobile-menu-btn">
-<span></span>
-<span></span>
-<span></span>
-</button>
-<ul class="nav-links">
-<li><a data-i18n="text_1" href="/#home">البداية</a></li>
-<li><a class="active" data-i18n="text_2" href="portfolio.html">الأعمال</a></li>
-<li style="display:none;"><a data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
-<li><a data-i18n="text_4" href="about">من أنا</a></li>
-<li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
-</ul>
-</nav>
-<main style="padding-top: 90px; padding-bottom: 6rem; box-sizing: border-box;">
-<!-- Pre-production Gallery Section (Active) -->
-<section class="no-anim" style="width: 100%; padding: 0;">
+    <!-- الهيدر / النافبار الموحد -->
+    <nav class="navbar scrolled">
+        <div class="nav-brand-group">
+            <a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png" /></a>
+            <a class="lang-switcher" href="#">EN</a>
+        </div>
+        <button aria-label="Menu" class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a data-i18n="text_1" href="/#home">البداية</a></li>
+            <li><a class="active" href="portfolio.html" data-i18n="nav_work">الأعمال</a></li>
+            <li style="display:none;"><a data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
+            <li><a data-i18n="text_4" href="about">من أنا</a></li>
+            <li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
+        </ul>
+    </nav>
+    <main
+        style="min-height: calc(100vh + 100px); display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 90px; padding-bottom: 2rem; box-sizing: border-box;">
+        <!-- Pre-production Gallery Section (Active) -->
+        <section class="no-anim" style="width: 100%; padding: 0;">
 
-<!-- عنوان القسم -->
-<div class="section-header-minimal" style="margin-bottom: 4rem; margin-top: 3rem; text-align: center;">
-  <span class="section-kicker-small">مشاريع مختارة</span>
-  <h2 class="section-title-medium">عمل مختار</h2>
-</div>
+            <!-- عنوان القسم -->
+            <div class="section-header-minimal" style="margin-bottom: 4rem; margin-top: 3rem; text-align: center;">
+                <span class="section-kicker-small" data-i18n="text_204">مشاريع مختارة</span>
+                <h2 class="section-title-medium" data-i18n="portfolio_featured_title">عمل مختار</h2>
+            </div>
 
-<!-- البطاقة مع الزخارف الجانبية -->
-<div style="display: flex; justify-content: center; width: 100%; padding: 0 2rem; box-sizing: border-box;">
-  <div style="width: min(600px, 80vw);">
-    <a class="gallery-item" href="eidos.html" style="display:none;">
-      <img loading="lazy" alt="Eidos" src="Vids/Porty.webp"/>
-      <video class="gallery-hover-video" muted loop playsinline preload="metadata"><source src="Vids/Edios_preview.mp4" type="video/mp4"/></video>
-      <div class="gallery-overlay">
-        <h3 class="gallery-overlay-title" data-i18n="text_168">Eidos — Brand Film</h3>
-        <p class="gallery-overlay-desc" data-i18n="text_205">فيديو تعريفي لمنصة Eidos.</p>
-      </div>
-    </a>
-    <a class="gallery-item" href="beam.html" style="display:block;">
-      <img loading="lazy" alt="Beam App" src="Vids/Cover - Beam .webp"/>
-      <video class="gallery-hover-video" muted loop playsinline preload="metadata"><source src="Vids/Beam_preview.mp4" type="video/mp4"/></video>
-      <div class="gallery-overlay">
-        <h3 class="gallery-overlay-title" data-i18n="text_162">Beam App — Official Promo</h3>
-        <p class="gallery-overlay-desc" data-i18n="text_206">فيديو تعريفي سريع الإيقاع صُمم لمنصة التواصل الاجتماعي Beam، يُترجم منظومتها التفاعلية متعددة الطبقات إلى عمل حركي متدفق ومضبوط الإيقاع.</p>
-      </div>
-    </a>
-    <a class="gallery-item coming-soon-wrapper" href="project-details.html" style="display:none;">
-      <img loading="lazy" alt="Frog" src="Vids/Cover- Frog.png"/>
-      <div class="gallery-overlay">
-        <h3 class="gallery-overlay-title" data-i18n="text_159">Frog - ضفدع</h3>
-      </div>
-      <div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
-    </a>
-  </div>
-</div>
-</section>
+            <!-- العمل المختار -->
+            <div
+                style="display: flex; align-items: center; justify-content: center; gap: 2.5rem; width: 100%; padding: 0 2rem; box-sizing: border-box;">
 
-<!-- معرض الأعمال (مخفي) -->
-<section class="gallery" id="gallery" style="display: none !important; width: 100%; padding: 0;">
-<div class="container">
-<div class="section-header-minimal" style="display: none !important; margin-bottom: 4rem; margin-top: 2rem;">
-<span class="section-kicker-small" data-i18n="text_214">أحدث المشاريع</span>
-<h2 class="section-title-medium" data-i18n="text_2">معرض الأعمال</h2>
-</div>
-<div class="elegant-gallery-grid">
-<!-- Project 1 -->
-<a class="elegant-gallery-card" href="project-details.html">
-<div class="eg-image-wrapper">
-<video autoplay="" loop="" muted="" playsinline="" src="Written.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
-</div>
-<div class="eg-content">
-<span class="eg-category" data-i18n="text_215" style="font-size: 0.75rem;">سينماتوغرافيا تجريدية</span>
-<h3 class="eg-title" data-i18n="text_216" style="font-size: 0.95rem; font-weight: 300;">طيف أزرق</h3>
-</div>
-</a>
-<!-- Project 2 -->
-<a class="elegant-gallery-card" href="project">
-<div class="eg-image-wrapper">
-<video autoplay="" loop="" muted="" playsinline="" src="Motion Design.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
-</div>
-<div class="eg-content">
-<span class="eg-category" data-i18n="text_217" style="font-size: 0.75rem;">توجيه إبداعي</span>
-<h3 class="eg-title" data-i18n="text_218" style="font-size: 0.95rem; font-weight: 300;">تناغم الحواس</h3>
-</div>
-</a>
-<!-- Project 3 -->
-<a class="elegant-gallery-card" href="project">
-<div class="eg-image-wrapper">
-<video autoplay="" loop="" muted="" playsinline="" src="3D.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
-</div>
-<div class="eg-content">
-<span class="eg-category" data-i18n="text_219" style="font-size: 0.75rem;">تصميم مرئي</span>
-<h3 class="eg-title" data-i18n="text_220" style="font-size: 0.95rem; font-weight: 300;">انعكاس الروح</h3>
-</div>
-</a>
-<!-- Project 4 -->
-<a class="elegant-gallery-card" href="project">
-<div class="eg-image-wrapper">
-<video autoplay="" loop="" muted="" playsinline="" src="Sounds.mp4" style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
-</div>
-<div class="eg-content">
-<span class="eg-category" data-i18n="text_221" style="font-size: 0.75rem;">إنتاج فني</span>
-<h3 class="eg-title" data-i18n="text_222" style="font-size: 0.95rem; font-weight: 300;">ظل النور</h3>
-</div>
-</a>
-</div>
-</div>
-</section>
-<!-- شبكة المتاحف (مخفية) -->
-<div class="museum-grid" style="display: none !important;">
-<!-- العمود الأول -->
-<div class="museum-column">
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper tall">
-<img loading="lazy" alt="مارتين إمدور" src="Martine Emdur.jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_223">مارتين إمدور — لوحة مائية تشكيلية</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper short">
-<img loading="lazy" alt="رجل في المحيط" src="Man in the Ocean.jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_224">رجل في المحيط — سكون الأعماق</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper medium">
-<img loading="lazy" alt="تأمل عميق" src="download (78).jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_225">تأمل عميق — زوايا الضوء الشارد</span>
-</a>
-</div>
-<!-- العمود الثاني -->
-<div class="museum-column">
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper short">
-<img loading="lazy" alt="صمت مطبق" src="download (77).jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_226">صمت مطبق — درجات الرمادي</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper medium">
-<img loading="lazy" alt="غموض المياه" src="download (76).jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_227">غموض المياه — انسيابية الكتل</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper tall">
-<img loading="lazy" alt="انعكاس الضوء" src="download (74).jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_228">انعكاس الضوء — حوار الظلال</span>
-</a>
-</div>
-<!-- العمود الثالث -->
-<div class="museum-column">
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper medium">
-<img loading="lazy" alt="أفق بعيد" src="download (73).jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_229">أفق بعيد — تجريد معاصر</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper tall">
-<img loading="lazy" alt="حوار ملهم" src="download (733).jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_230">حوار ملهم — فلسفة الفراغ</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper short">
-<img loading="lazy" alt="أبعاد تشكيلية" src="58256943279491678   ةة32.png"/>
-</div>
-<span class="museum-caption" data-i18n="text_231">أبعاد تشكيلية — هندسة حركية صامتة</span>
-</a>
-</div>
-<!-- العمود الرابع -->
-<div class="museum-column">
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper tall">
-<img loading="lazy" alt="أحلام معمارية" src="Kingdom of dreams and madness.jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_232">أحلام معمارية — مملكة الشغف</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper short">
-<img loading="lazy" alt="زوايا حادة" src="ثثثث.jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_233">زوايا حادة — انعطافات حرة</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper medium">
-<img loading="lazy" alt="تبادلات حسية" src="6fcc57d0d4d79dc5fda1a5b0e76c11f4.jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_234">تبادلات حسية — ظلال متباينة</span>
-</a>
-</div>
-<!-- العمود الخامس -->
-<div class="museum-column">
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper short">
-<img loading="lazy" alt="خطوط الأفق" src="download.jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_235">خطوط الأفق — موازين بصرية</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper medium">
-<img loading="lazy" alt="حوار الماء والجسد" src="Martine Emdur.jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_236">حوار الماء والجسد — أثر جمالي</span>
-</a>
-<a class="museum-item" href="project">
-<div class="museum-img-wrapper tall">
-<img loading="lazy" alt="لحظة تأمل" src="download (78).jpg"/>
-</div>
-<span class="museum-caption" data-i18n="text_237">لحظة تأمل — السكون المطلق</span>
-</a>
-</div>
-</div>
-</main>
-<!-- الفوتر مخفي بناء على طلب العميل لمنع التمرير -->
-<footer class="footer" style="display: none !important;">
-<div class="container">
-<div class="footer-grid">
-<!-- العمود الأول: العلامة التجارية -->
-<div class="footer-col brand-col">
-<a class="footer-logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
-<p class="footer-about-text" data-i18n="text_134">مفكر، كاتب، و مصمم موشن. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
-</div>
-<!-- العمود الثاني: التنقل -->
-<div class="footer-col">
-<h4 class="footer-title" data-i18n="text_135">استكشف</h4>
-<ul class="footer-links">
-<li><a data-i18n="text_1" href="/#home">البداية</a></li>
-<li><a data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
-<li style="display:none;"><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
-<li><a data-i18n="text_4" href="about.html">من أنا</a></li>
-<li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
-</ul>
-</div>
-<!-- العمود الثالث: مواقع التواصل -->
-<div class="footer-col">
-<h4 class="footer-title" data-i18n="text_136">تابعني</h4>
-<ul class="footer-links">
-<li><a data-i18n="text_137" href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
-<li><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
-<li><a data-i18n="text_139" href="#" target="_blank">إكس</a></li>
-<li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
-<li><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
-</ul>
-</div>
-<!-- العمود الرابع: معلومات التواصل -->
-<div class="footer-col info-col">
-<h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
-<p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
-<p class="footer-info-item"><span data-i18n="footer.whatsapp">واتساب: </span><span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
-<p class="footer-info-item"><span data-i18n="footer.email">البريد الإلكتروني: </span><a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
-</div>
-</div>
-<div class="footer-bottom" style="margin-top: 3rem; padding-top: 2rem;">
-<p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
-<span class="footer-note" data-i18n="text_145">مساحة للفكر</span>
 
-</div>
-</div></footer>
-<!-- GSAP for animations -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-<script src="assets/js/translations.js"></script>
-    <script src="assets/js/script.js?v=3"></script>
-<script>
+                <!-- البطاقة -->
+                <div style="flex: 0 0 auto; width: min(600px, 80vw);">
+                    <a class="gallery-item" href="eidos.html" style="display:none;">
+                        <img loading="lazy" alt="Eidos" src="Vids/Porty.webp" />
+                        <video class="gallery-hover-video" muted loop playsinline preload="metadata">
+                            <source src="Vids/Edios_preview.mp4" type="video/mp4" />
+                        </video>
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-overlay-title" data-i18n="text_168">Eidos — Brand Film</h3>
+                            <p class="gallery-overlay-desc" data-i18n="text_205">فيديو تعريفي لمنصة Eidos.</p>
+                        </div>
+                    </a>
+                    <a class="gallery-item" href="beam.html" style="display:block;">
+                        <img loading="lazy" alt="Beam App" src="Vids/Cover - Beam .webp" />
+                        <video class="gallery-hover-video" muted loop playsinline preload="metadata">
+                            <source src="Vids/Beam_preview.mp4" type="video/mp4" />
+                        </video>
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-overlay-title" data-i18n="text_162">Beam App — Official Promo</h3>
+                            <p class="gallery-overlay-desc" data-i18n="text_206">فيديو تعريفي سريع الإيقاع صُمم لمنصة
+                                التواصل الاجتماعي Beam، يُترجم منظومتها التفاعلية متعددة الطبقات إلى عمل حركي متدفق
+                                ومضبوط الإيقاع.</p>
+                        </div>
+                    </a>
+                    <a class="gallery-item coming-soon-wrapper" href="project-details.html" style="display:none;">
+                        <img loading="lazy" alt="Frog" src="Vids/Cover- Frog.png" />
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-overlay-title" data-i18n="text_159">Frog - ضفدع</h3>
+                        </div>
+                        <div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
+                    </a>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- معرض الأعمال (مخفي) -->
+        <section class="gallery" id="gallery" style="display: none !important; width: 100%; padding: 0;">
+            <div class="container">
+                <div class="section-header-minimal"
+                    style="display: none !important; margin-bottom: 4rem; margin-top: 2rem;">
+                    <span class="section-kicker-small" data-i18n="text_214">أحدث المشاريع</span>
+                    <h2 class="section-title-medium" data-i18n="text_2">معرض الأعمال</h2>
+                </div>
+                <div class="elegant-gallery-grid">
+                    <!-- Project 1 -->
+                    <a class="elegant-gallery-card" href="project-details.html">
+                        <div class="eg-image-wrapper">
+                            <video autoplay="" loop="" muted="" playsinline="" src="Written.mp4"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" data-i18n="text_215" style="font-size: 0.75rem;">سينماتوغرافيا
+                                تجريدية</span>
+                            <h3 class="eg-title" data-i18n="text_216" style="font-size: 0.95rem; font-weight: 300;">طيف
+                                أزرق</h3>
+                        </div>
+                    </a>
+                    <!-- Project 2 -->
+                    <a class="elegant-gallery-card" href="project">
+                        <div class="eg-image-wrapper">
+                            <video autoplay="" loop="" muted="" playsinline="" src="Motion Design.mp4"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" data-i18n="text_217" style="font-size: 0.75rem;">توجيه
+                                إبداعي</span>
+                            <h3 class="eg-title" data-i18n="text_218" style="font-size: 0.95rem; font-weight: 300;">
+                                تناغم الحواس</h3>
+                        </div>
+                    </a>
+                    <!-- Project 3 -->
+                    <a class="elegant-gallery-card" href="project">
+                        <div class="eg-image-wrapper">
+                            <video autoplay="" loop="" muted="" playsinline="" src="3D.mp4"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" data-i18n="text_219" style="font-size: 0.75rem;">تصميم مرئي</span>
+                            <h3 class="eg-title" data-i18n="text_220" style="font-size: 0.95rem; font-weight: 300;">
+                                انعكاس الروح</h3>
+                        </div>
+                    </a>
+                    <!-- Project 4 -->
+                    <a class="elegant-gallery-card" href="project">
+                        <div class="eg-image-wrapper">
+                            <video autoplay="" loop="" muted="" playsinline="" src="Sounds.mp4"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 2.5s cubic-bezier(0.15, 1, 0.3, 1);"></video>
+                        </div>
+                        <div class="eg-content">
+                            <span class="eg-category" data-i18n="text_221" style="font-size: 0.75rem;">إنتاج فني</span>
+                            <h3 class="eg-title" data-i18n="text_222" style="font-size: 0.95rem; font-weight: 300;">ظل
+                                النور</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- شبكة المتاحف (مخفية) -->
+        <div class="museum-grid" style="display: none !important;">
+            <!-- العمود الأول -->
+            <div class="museum-column">
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper tall">
+                        <img loading="lazy" alt="مارتين إمدور" src="Martine Emdur.jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_223">مارتين إمدور — لوحة مائية تشكيلية</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper short">
+                        <img loading="lazy" alt="رجل في المحيط" src="Man in the Ocean.jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_224">رجل في المحيط — سكون الأعماق</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper medium">
+                        <img loading="lazy" alt="تأمل عميق" src="download (78).jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_225">تأمل عميق — زوايا الضوء الشارد</span>
+                </a>
+            </div>
+            <!-- العمود الثاني -->
+            <div class="museum-column">
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper short">
+                        <img loading="lazy" alt="صمت مطبق" src="download (77).jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_226">صمت مطبق — درجات الرمادي</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper medium">
+                        <img loading="lazy" alt="غموض المياه" src="download (76).jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_227">غموض المياه — انسيابية الكتل</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper tall">
+                        <img loading="lazy" alt="انعكاس الضوء" src="download (74).jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_228">انعكاس الضوء — حوار الظلال</span>
+                </a>
+            </div>
+            <!-- العمود الثالث -->
+            <div class="museum-column">
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper medium">
+                        <img loading="lazy" alt="أفق بعيد" src="download (73).jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_229">أفق بعيد — تجريد معاصر</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper tall">
+                        <img loading="lazy" alt="حوار ملهم" src="download (733).jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_230">حوار ملهم — فلسفة الفراغ</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper short">
+                        <img loading="lazy" alt="أبعاد تشكيلية" src="58256943279491678   ةة32.png" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_231">أبعاد تشكيلية — هندسة حركية صامتة</span>
+                </a>
+            </div>
+            <!-- العمود الرابع -->
+            <div class="museum-column">
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper tall">
+                        <img loading="lazy" alt="أحلام معمارية" src="Kingdom of dreams and madness.jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_232">أحلام معمارية — مملكة الشغف</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper short">
+                        <img loading="lazy" alt="زوايا حادة" src="ثثثث.jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_233">زوايا حادة — انعطافات حرة</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper medium">
+                        <img loading="lazy" alt="تبادلات حسية" src="6fcc57d0d4d79dc5fda1a5b0e76c11f4.jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_234">تبادلات حسية — ظلال متباينة</span>
+                </a>
+            </div>
+            <!-- العمود الخامس -->
+            <div class="museum-column">
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper short">
+                        <img loading="lazy" alt="خطوط الأفق" src="download.jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_235">خطوط الأفق — موازين بصرية</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper medium">
+                        <img loading="lazy" alt="حوار الماء والجسد" src="Martine Emdur.jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_236">حوار الماء والجسد — أثر جمالي</span>
+                </a>
+                <a class="museum-item" href="project">
+                    <div class="museum-img-wrapper tall">
+                        <img loading="lazy" alt="لحظة تأمل" src="download (78).jpg" />
+                    </div>
+                    <span class="museum-caption" data-i18n="text_237">لحظة تأمل — السكون المطلق</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    <!-- الفوتر مخفي بناء على طلب العميل لمنع التمرير -->
+    <footer class="footer" style="display: none !important;">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- العمود الأول: العلامة التجارية -->
+                <div class="footer-col brand-col">
+                    <a class="footer-logo" href="/"><img loading="lazy" alt="يوسف الحسيني"
+                            src="Pics/Alhusiny- W logoai.png" /></a>
+                    <p class="footer-about-text" data-i18n="text_134">مفكر، كاتب، و مصمم موشن. يسعى لصناعة أثرٍ حقيقي في
+                        هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض
+                        الواقع.</p>
+                </div>
+                <!-- العمود الثاني: التنقل -->
+                <div class="footer-col">
+                    <h4 class="footer-title" data-i18n="text_135">استكشف</h4>
+                    <ul class="footer-links">
+                        <li><a data-i18n="text_1" href="/#home">البداية</a></li>
+                        <li><a data-i18n="nav_work" href="portfolio.html">الأعمال</a></li>
+                        <li style="display:none;"><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
+                        <li><a data-i18n="text_4" href="about.html">من أنا</a></li>
+                        <li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
+                    </ul>
+                </div>
+                <!-- العمود الثالث: مواقع التواصل -->
+                <div class="footer-col">
+                    <h4 class="footer-title" data-i18n="text_136">تابعني</h4>
+                    <ul class="footer-links">
+                        <li><a data-i18n="text_137" href="https://www.linkedin.com/in/youssef-alhusiny-9b63a7267" target="_blank">لينكدإن</a>
+                        </li>
+                        <li hidden style="display: none !important;"><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi"
+                                target="_blank">بيهانس</a></li>
+                        <li><a data-i18n="text_139" href="https://x.com/youssefalhusiny" target="_blank">إكس</a></li>
+                        <li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en"
+                                target="_blank">إنستغرام</a></li>
+                        <li hidden style="display: none !important;"><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny"
+                                target="_blank">يوتيوب</a></li>
+                    </ul>
+                </div>
+                <!-- العمود الرابع: معلومات التواصل -->
+                <div class="footer-col info-col">
+                    <h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
+                    <p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
+                    <p class="footer-info-item"><span data-i18n="footer.phone">الهاتف: </span><span dir="ltr"
+                            style="direction: ltr; display: inline-block;">+20 1033947717</span></p>
+                    <p class="footer-info-item"><span data-i18n="footer.email">البريد الإلكتروني: </span><a
+                            href="mailto:youssefalhusiny@gmail.com"
+                            style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom" style="margin-top: 3rem; padding-top: 2rem;">
+                <p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+                <span class="footer-note" data-i18n="text_145">أفكار تتحرك</span>
+
+            </div>
+        </div>
+    </footer>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="assets/js/translations.js?v=mobile9"></script>
+    <script src="assets/js/script.js?v=defaulten8"></script>
+    <script>
         // تأثير تدرج ظهور بطاقات المعرض المدهش عند تحميل الصفحة
         document.addEventListener("DOMContentLoaded", () => {
-            gsap.fromTo(".museum-item", 
+            gsap.fromTo(".museum-item",
                 { opacity: 0, y: 50 },
                 {
                     opacity: 1,
@@ -454,6 +521,5 @@
         });
     </script>
 </body>
+
 </html>
-
-

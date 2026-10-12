@@ -1,0 +1,26 @@
+/* Apply Inter only while the page is displaying its English version. */
+html[lang="en"] body,
+html[lang="en"] body *,
+html[lang="en"] body::before,
+html[lang="en"] body::after,
+html[lang="en"] body *::before,
+html[lang="en"] body *::after {
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Lighter Inter body copy balances the Arabic type without thinning headings. */
+html[lang="en"] body { font-weight: 300; }
+html[lang="en"] p { font-weight: 300 !important; }
+html[lang="en"] .about-details p,
+html[lang="en"] .case-overview p,
+html[lang="en"] .case-reflections-copy p,
+html[lang="en"] .hero-subtitle,
+html[lang="en"] .footer-about-text,
+html[lang="en"] #contact [data-i18n="text_190"] { font-weight: 250 !important; }
+html[lang="en"] .navbar a,
+html[lang="en"] .footer-links a,
+html[lang="en"] .footer-info-item,
+html[lang="en"] .meta-label,
+html[lang="en"] .form-label-luxury { font-weight: 300 !important; }
+html[lang="en"] .hero-cta-btn { font-weight: 400 !important; }
+html[lang="en"] p :is(strong,b) { font-weight: 500 !important; }

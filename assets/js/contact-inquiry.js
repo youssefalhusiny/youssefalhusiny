@@ -46,17 +46,16 @@
       if(pending||completed)return;
       try{internationalPhone=phoneWidget.getNumber();validPhone=phoneWidget.isValidNumber()&&Boolean(InquiryPayload.phone(internationalPhone));}catch(_){validPhone=false;}
     }
-    phone.setCustomValidity(validPhone?'':ar()?'اختر البلد وأدخل رقم واتساب صحيحًا.':'Select your country and enter a valid WhatsApp number.');
+    phone.setCustomValidity(validPhone?'':ar()?'اختر البلد وأدخل رقم هاتف صحيحًا.':'Select your country and enter a valid phone number.');
     if(!form.reportValidity())return;
     if(document.getElementById('inquiryWebsite').value)return;
     const site=location.protocol==='file:'?form.dataset.publicSiteUrl:location.href;
     let payload;
-    try{payload=InquiryPayload.build({name:document.getElementById('userName').value,email:document.getElementById('userEmail').value,phone:internationalPhone,topic:document.getElementById('projectTopic').value,submissionId,questionnaireUrl:new URL('documents/brief.html',site).href});}
+    try{payload=InquiryPayload.build({name:document.getElementById('userName').value,email:document.getElementById('userEmail').value,phone:internationalPhone,topic:document.getElementById('projectTopic').value,submissionId});}
     catch(_){report(ar()?'تعذّر تجهيز الطلب. افتح النموذج من رابط الموقع المنشور وتحقق من البيانات.':'Open the form from the published website and check your details.',true);return;}
     pending=true;button.disabled=true;button.setAttribute('aria-busy','true');
     report(ar()?'جارٍ إرسال طلبك…':'Sending your request…');
-    try{await send(payload);completed=true;report(ar()?'تم استلام طلبك. يمكنك الآن ملء الاستبيان من الرابط أدناه.':'Your request has been received. You can complete the questionnaire below.');
-      const link=document.createElement('a');link.href=payload.questionnaireUrl;link.textContent=ar()?'ملء الاستبيان':'Complete the questionnaire';link.style.display='block';link.style.marginTop='12px';status.appendChild(link);
+    try{await send(payload);completed=true;report(ar()?'تم استلام طلبك. سأتواصل معك بشأن الخطوات التالية.':'Your request has been received. I will contact you about the next steps.');
     }catch(error){report(error.name==='AbortError'||error.message==='delivery_unconfirmed'?(ar()?'لم يصل تأكيد الاستلام بعد. تحقق من الاستلام قبل إعادة الإرسال.':'Receipt is not confirmed. Check before resubmitting.'):(ar()?'تعذّر إرسال الطلب. يرجى المحاولة لاحقًا.':'Your request could not be sent. Please try again later.'),true);}
     finally{pending=false;button.disabled=completed;button.removeAttribute('aria-busy');}
   });

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
 <head>
     <meta name="google" content="notranslate">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Eidos — تفاصيل المشروع</title>
-<link href="assets/css/style.css?v=10" rel="stylesheet"/>
+<link href="assets/css/style.css?v=herolabels7" rel="stylesheet"/>
 <!-- Google Fonts: IBM Plex Sans Arabic -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -41,6 +41,9 @@
 
     </style>
 <link rel="stylesheet" href="assets/css/project-reflections.css?v=2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"/>
+<link rel="stylesheet" href="assets/css/english-typography.css?v=2"/>
+<link rel="stylesheet" href="assets/css/project-responsive.css?v=flip14"/>
 </head>
 <body>
 <!-- الهيدر / النافبار -->
@@ -56,7 +59,7 @@
 </button>
 <ul class="nav-links">
 <li><a data-i18n="text_1" href="/#home">البداية</a></li>
-<li><a class="active" data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
+<li><a class="active" href="portfolio.html" data-i18n="nav_work">الأعمال</a></li>
 <li style="display:none;"><a data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
 <li><a data-i18n="text_4" href="about">من أنا</a></li>
 <li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
@@ -70,7 +73,7 @@
 <!-- Bottom Velvety Melt Overlay -->
 <div id="heroBottomFade" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; background: linear-gradient(to top, var(--bg-color, #050505) 0%, rgba(5,5,5,0.6) 50%, transparent 100%); z-index: 1; pointer-events: none; transition: opacity 0.8s ease;"></div>
 <!-- Pause Overlay Text -->
-<div id="pauseOverlayText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); opacity: 0; pointer-events: none; z-index: 20; color: white; font-family: 'IBM Plex Sans Arabic', sans-serif; text-align: center !important; transition: opacity 0.8s ease, transform 0.8s ease;">
+<div id="pauseOverlayText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); opacity: 0; pointer-events: none; z-index: 20; color: white; font-family: 'IBM Plex Sans Arabic', sans-serif; text-align: center !important; transition: none;">
 <h2 data-i18n="text_238" id="pauseMessageTitle" style="font-size: 3rem; font-weight: 300; letter-spacing: -1px; margin: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">لماذا توقفت؟</h2>
 <p data-i18n="text_239" style="font-size: 0.95rem; opacity: 0.7; letter-spacing: 2px; font-weight: 300; margin-top: 1rem;">انقر للمواصلة</p>
 </div>
@@ -114,7 +117,7 @@
 <div class="case-hero-content" id="heroContentBlock" style="align-items: center; text-align: center !important; flex-direction: column; gap: 2.5rem; justify-content: center; z-index: 2; position: relative;">
 <!-- Title block -->
 <div class="hero-initial-hide" style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
-<span class="case-kicker" data-i18n="text_240" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; opacity: 0.6; font-weight: 300; margin-bottom: 0.4rem;">تفاصيل المشروع</span>
+<span class="case-kicker" data-i18n="eidos_hero_category" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; opacity: 0.6; font-weight: 300; margin-bottom: 0.4rem;">برومو المنصة</span>
 <h1 class="case-title" data-i18n="eidos_title" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 200; font-size: 5rem; letter-spacing: -1px; margin: 0; line-height: 1;">Eidos</h1>
 </div>
 <!-- Meta strip -->
@@ -141,10 +144,12 @@
 </a>
 <script>
                     function triggerStaggeredHeroFade() {
+                        document.querySelector('.case-hero').setAttribute('data-player-mode', 'playback');
                         const vid = document.getElementById('heroInlineVideo');
+                        if (vid) vid.style.transition = 'opacity .2s ease';
                         if (vid) vid.currentTime = 0; // Rewind to start immediately
 
-                        const nav = document.querySelector('.navbar');
+                        const nav = null;
                         const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
                         const customControls = document.getElementById('customVideoControls');
                         const bottomFade = document.getElementById('heroBottomFade');
@@ -159,22 +164,23 @@
                         // GSAP Smooth Cinematic Fade Out
                         if (bottomFade) gsap.to(bottomFade, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
                         
-                        gsap.to([nav, ...heroElements], {
+                        gsap.to(heroElements, {
                             y: 30,
                             opacity: 0,
-                            duration: 0.75,
-                            stagger: 0.08,
+                            duration: 0.25,
+                            stagger: 0.025,
                             ease: "power2.inOut",
                             onComplete: () => {
-                                [nav, ...heroElements].forEach(el => el.style.pointerEvents = 'none');
+                                heroElements.forEach(el => el.style.pointerEvents = 'none');
                                 
                                 // Video smoothly becomes crisp, bright and unmuted
                                 if (vid) {
                                     vid.currentTime = 0;
                                     vid.muted = false;
+                                    vid.loop = false;
                                     vid.style.pointerEvents = 'auto';
                                     vid.style.zIndex = '10';
-                                    gsap.to(vid, { filter: 'blur(0px) brightness(1)', scale: 1, duration: 0.9, ease: "power2.out" });
+                                    gsap.to(vid, { filter: 'blur(0px) brightness(1)', scale: 1, duration: 0.2, overwrite: true, ease: "power2.out" });
                                     if (vid.paused) vid.play().catch(() => {});
                                 }
                                 
@@ -216,6 +222,7 @@
                         }
 
                         const vid = document.getElementById('heroInlineVideo');
+                        if (vid) vid.style.transition = 'opacity .2s ease';
                         if (vid) {
                             vid.play().then(() => {
                                 vid.style.opacity = '1';
@@ -269,9 +276,15 @@
                         vid.onclick = togglePlayPause; // Click screen to play/pause
 
                         document.addEventListener('keydown', (e) => {
-                            if (customControls.getAttribute('data-active') === 'true' && e.code === 'Space') {
-                                e.preventDefault(); // Prevent page scroll
-                                togglePlayPause();
+                            if (customControls.getAttribute('data-active') !== 'true') return;
+                            if (e.target instanceof Element && e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+                            if (e.code === 'Space') {
+                                e.preventDefault(); togglePlayPause();
+                            } else if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
+                                e.preventDefault();
+                                if (!Number.isFinite(vid.duration)) return;
+                                vid.currentTime = Math.max(0, Math.min(vid.duration, vid.currentTime + (e.code === 'ArrowRight' ? 5 : -5)));
+                                showControls();
                             }
                         });
                         
@@ -303,28 +316,28 @@
                             pauseIcon.style.display = 'block'; 
                             
                             if (customControls.getAttribute('data-active') === 'true') {
-                                gsap.to(vid, { filter: 'blur(0px) brightness(1)', scale: 1, duration: 0.8 });
-                                gsap.to(pauseOverlayText, { opacity: 0, duration: 0.4 });
+                                gsap.to(vid, { filter: 'blur(0px) brightness(1)', scale: 1, duration: 0.2, overwrite: true });
+                                gsap.to(pauseOverlayText, { opacity: 0, duration: 0.18, overwrite: true });
                                 
-                                const nav = document.querySelector('.navbar');
+                                const nav = null;
                                 const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
                                 const bottomFade = document.getElementById('heroBottomFade');
                                 if (bottomFade) gsap.to(bottomFade, { opacity: 0, duration: 0.6 });
 
-                                gsap.to([nav, ...heroElements], {
+                                gsap.to(heroElements, {
                                     y: 30,
                                     opacity: 0,
-                                    duration: 0.7,
-                                    stagger: 0.06,
+                                    duration: 0.25,
+                                    stagger: 0.02,
                                     ease: "power2.inOut",
                                     onComplete: () => {
-                                        [nav, ...heroElements].forEach(el => el.style.pointerEvents = 'none');
+                                        heroElements.forEach(el => el.style.pointerEvents = 'none');
                                     }
                                 });
 
                                 showControls(); 
                             } else {
-                                gsap.to(vid, { filter: 'blur(10px) brightness(0.45)', scale: 1.06, duration: 0.8 });
+                                gsap.to(vid, { filter: 'blur(10px) brightness(0.45)', scale: 1.06, duration: 0.2, overwrite: true });
                             }
                         });
                         
@@ -332,7 +345,7 @@
                             if (customControls.getAttribute('data-active') === 'true') {
                                 pauseIcon.style.display = 'none'; 
                                 playIcon.style.display = 'block'; 
-                                gsap.to(vid, { filter: 'blur(10px) brightness(0.6)', scale: 1.06, duration: 0.8 });
+                                gsap.to(vid, { filter: 'blur(10px) brightness(0.6)', scale: 1.06, duration: 0.2, overwrite: true });
                                 
                                 // Select random message in current language
                                 const currentLang = (document.documentElement.lang || 'ar').toLowerCase();
@@ -340,24 +353,14 @@
                                 const randomMsg = msgList[Math.floor(Math.random() * msgList.length)];
                                 pauseMessageTitle.innerText = randomMsg;
 
-                                gsap.to(pauseOverlayText, { opacity: 1, duration: 0.6, ease: "power2.out" });
+                                gsap.to(pauseOverlayText, { opacity: 1, duration: 0.18, overwrite: true, ease: "power2.out" });
                                 
-                                const nav = document.querySelector('.navbar');
+                                const nav = null;
                                 const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
                                 const bottomFade = document.getElementById('heroBottomFade');
                                 if (bottomFade) gsap.to(bottomFade, { opacity: 1, duration: 0.8 });
 
-                                gsap.to([nav, ...heroElements], {
-                                    y: 0,
-                                    opacity: 1,
-                                    duration: 1.2,
-                                    stagger: 0.1,
-                                    ease: "power3.out",
-                                    onComplete: () => {
-                                        if (nav) nav.style.pointerEvents = 'auto';
-                                        heroElements.forEach(el => el.style.pointerEvents = 'auto');
-                                    }
-                                });
+                                gsap.set(heroElements, { opacity: 0, pointerEvents: 'none' });
 
                                 showControls(); 
                             }
@@ -401,11 +404,17 @@
                         let isDraggingProg = false;
                         const progressTooltip = document.getElementById('progressTooltip');
 
+                        function trackFraction(event, rect) {
+                            const point = event.touches ? event.touches[0] : event;
+                            const player = document.querySelector('.case-hero');
+                            const rotated = document.fullscreenElement === player && player.getAttribute('data-player-orientation') === 'landscape' && matchMedia('(max-width:700px) and (orientation:portrait)').matches;
+                            return rotated ? (point.clientY - rect.top) / rect.height : (point.clientX - rect.left) / rect.width;
+                        }
                         function updateTooltipPosition(e) {
                             const rect = progressContainer.getBoundingClientRect();
                             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                             if (clientX === undefined) return;
-                            let pos = (clientX - rect.left) / rect.width;
+                            let pos = trackFraction(e, rect);
                             pos = Math.max(0, Math.min(1, pos));
                             const hoverTime = pos * vid.duration;
                             if (!isNaN(hoverTime)) {
@@ -425,7 +434,7 @@
                         function updateProgress(e) {
                             const rect = progressContainer.getBoundingClientRect();
                             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                            let pos = (clientX - rect.left) / rect.width; // LTR logic
+                            let pos = trackFraction(e, rect); // LTR logic
                             pos = Math.max(0, Math.min(1, pos));
                             progressBar.style.width = (pos * 100) + '%';
                             vid.currentTime = pos * vid.duration; 
@@ -453,7 +462,7 @@
                         function updateVolume(e) {
                             const rect = volumeContainer.getBoundingClientRect();
                             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                            let pos = (clientX - rect.left) / rect.width; // LTR logic
+                            let pos = trackFraction(e, rect); // LTR logic
                             pos = Math.max(0, Math.min(1, pos));
                             volumeBar.style.width = (pos * 100) + '%';
                             vid.volume = pos;
@@ -523,23 +532,41 @@
                             showControls();
                         }
 
+                        function lockFilmOrientation() {
+                            document.querySelector('.case-hero').setAttribute('data-player-orientation', 'landscape');
+                            if (screen.orientation && screen.orientation.lock && matchMedia('(max-width: 900px)').matches) {
+                                screen.orientation.lock('landscape-secondary').catch(() => {});
+                            }
+                        }
                         ['fullscreenchange', 'webkitfullscreenchange'].forEach(evt => {
                             document.addEventListener(evt, () => {
                                 if (document.fullscreenElement || document.webkitFullscreenElement) {
+                                    lockFilmOrientation();
                                     enterFullscreenIcon.style.display = 'none';
                                     exitFullscreenIcon.style.display = 'block';
                                 } else {
+                                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                                    document.querySelector('.case-hero').removeAttribute('data-player-orientation');
                                     enterFullscreenIcon.style.display = 'block';
                                     exitFullscreenIcon.style.display = 'none';
+                                    if (customControls.getAttribute('data-active') === 'true') {
+                                        // Exiting fullscreen only changes the player size.
+                                        // Preserve playback position, pause state and sound.
+                                        document.body.style.overflow = '';
+                                        showControls();
+                                    }
                                 }
                             });
                         });
 
                         function closeVideoMode() {
+                            document.querySelector('.case-hero').removeAttribute('data-player-mode');
+                            gsap.killTweensOf(pauseOverlayText);
+                            gsap.set(pauseOverlayText, {opacity: 0});
                             vid.muted = true;
                             vid.style.pointerEvents = 'none';
                             vid.style.zIndex = '0';
-                            gsap.to(vid, { filter: 'blur(10px) brightness(0.45)', scale: 1.06, duration: 1 });
+                            gsap.to(vid, { filter: 'blur(10px) brightness(0.45)', scale: 1.06, duration: 0.2, overwrite: true });
                             vid.play().catch(() => {});
 
                             customControls.setAttribute('data-active', 'false');
@@ -558,9 +585,9 @@
                                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
                             }
                             
-                            const nav = document.querySelector('.navbar');
+                            const nav = null;
                             const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
-                            gsap.to([nav, ...heroElements], {
+                            gsap.to(heroElements, {
                                 y: 0,
                                 opacity: 1,
                                 duration: 1.2,
@@ -594,7 +621,7 @@
 </div>
 <div class="meta-item">
 <span class="meta-label" data-i18n="text_251">الهدف</span>
-<span class="meta-value" data-i18n="text_252" style="font-size: 0.95rem; line-height: 1.9;">صياغة هوية بصرية حركية لمنصة فكرية تُترجم تاريخ الأفكار الكبرى والتفكير النقدي إلى سرد تحريري نيو-كلاسيكي مكثف ومتماسك.</span>
+<span class="meta-value" data-i18n="text_252" style="font-size: 0.95rem; line-height: 1.9;">تقديم هوية Eidos وأفكارها بسرد بصري متماسك.</span>
 </div>
 <div class="meta-item">
 <span class="meta-label" data-i18n="text_253">الدور</span>
@@ -821,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="case-reflections-copy"><p><span data-i18n="text_262">كان هذا المشروع محاولة مباشرة لاختبار أسلوب النيو-كلاسيك (Neo-Classic) داخل وسيط الموشن جرافيك؛ تفكيك اللوحات التاريخية وإعادة توظيف صرامة التكوين الكلاسيكي ضمن حركة حديثة ومضبوطة الإيقاع. لم يكن الهدف استعراض عناصر قديمة، بل فحص قدرة هذا الطراز على حمل أفكار نقدية وفلسفية جادة دون السقوط في فخ الزخرفة المجانية.</span> <span data-i18n="text_263">التحدي الحقيقي تمحور حول ضبط الوزن البصري: كيف تجمع بين تيبوغرافي تحريري صارم وكتل بصرية كلاسيكية ثقيلة دون أن تفقد الحركة حدّتها وانسيابيتها. هذه التجربة خطوة أولى لتأسيس لغة بصرية أكثر نضجًا في هذا الاتجاه، ولن تكون المحاولة الأخيرة لاختبار حدود هذا النمط وتطويره في مشاريع قادمة.</span></p></div>
 <div style="display: flex; justify-content: center; gap: 1rem;">
-<a class="hero-cta-btn" data-i18n="project_start_cta" href="https://wa.me/966577545142" target="_blank" rel="noopener noreferrer" style="margin-top: 0;">لـ نبدأ مشروعك</a>
+<a class="hero-cta-btn" data-i18n="project_start_cta" href="https://calendly.com/youssefalhusiny/30min" target="_blank" rel="noopener noreferrer" style="margin-top: 0;">لـ نبدأ مشروعك</a>
 </div>
 </div>
 </section>
@@ -874,7 +901,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <h4 class="footer-title" data-i18n="text_135">استكشف</h4>
 <ul class="footer-links">
 <li><a data-i18n="text_1" href="/#home">البداية</a></li>
-<li><a data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
+<li><a data-i18n="nav_work" href="portfolio.html">الأعمال</a></li>
 <li style="display:none;"><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
 <li><a data-i18n="text_4" href="about.html">من أنا</a></li>
 <li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
@@ -884,24 +911,24 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="footer-col">
 <h4 class="footer-title" data-i18n="text_136">تابعني</h4>
 <ul class="footer-links">
-<li><a data-i18n="text_137" href="https://www.linkedin.com/feed/" target="_blank">لينكدإن</a></li>
-<li><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
-<li><a data-i18n="text_139" href="#" target="_blank">إكس</a></li>
+<li><a data-i18n="text_137" href="https://www.linkedin.com/in/youssef-alhusiny-9b63a7267" target="_blank">لينكدإن</a></li>
+<li hidden style="display: none !important;"><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank">بيهانس</a></li>
+<li><a data-i18n="text_139" href="https://x.com/youssefalhusiny" target="_blank">إكس</a></li>
 <li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank">إنستغرام</a></li>
-<li><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
+<li hidden style="display: none !important;"><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank">يوتيوب</a></li>
 </ul>
 </div>
 <!-- العمود الرابع: معلومات التواصل -->
 <div class="footer-col info-col">
 <h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
 <p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
-<p class="footer-info-item"><span data-i18n="footer.whatsapp">واتساب: </span><span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
+<p class="footer-info-item"><span data-i18n="footer.phone">الهاتف: </span><span dir="ltr" style="direction: ltr; display: inline-block;">+20 1033947717</span></p>
 <p class="footer-info-item"><span data-i18n="footer.email">البريد الإلكتروني: </span><a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
 </div>
 </div>
 <div class="footer-bottom">
 <p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
-<span class="footer-note" data-i18n="text_145">مساحة للفكر</span>
+<span class="footer-note" data-i18n="text_145">أفكار تتحرك</span>
 </div>
 </div>
 </footer>
@@ -922,8 +949,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 <!-- Main Script -->
-<script src="assets/js/translations.js?v=reflection1"></script>
-    <script src="assets/js/script.js?v=reflection1"></script>
+<script src="assets/js/translations.js?v=mobile9"></script>
+    <script src="assets/js/script.js?v=defaulten8"></script>
 
 </body>
 </html>

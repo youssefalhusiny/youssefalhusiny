@@ -12,3 +12,18 @@
 #inquiryStatus { font-size:.9rem; font-weight:300; color:rgba(255,255,255,.65); }
 #inquiryStatus[data-error="true"] { color:#c88; }
 @media(max-width:600px){#inquiryForm .form-row { flex-direction:column; gap:0!important; }}
+
+/* Clip the spam trap locally: an offscreen negative position expands RTL mobile viewports. */
+.inquiry-honeypot { position:absolute; width:1px; height:1px; padding:0; margin:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; inset-inline-start:0; }
+#inquiryForm .form-group-floating { min-width:0; }
+@media(max-width:700px) {
+ .contact-section { padding-top:32px !important; padding-bottom:48px; }
+ .contact-section > .container { padding-inline:24px; }
+ #contactFormContainer { width:100%; min-width:0; padding-bottom:24px !important; }
+ #contactFormContainer > p { margin-bottom:32px !important; }
+ #inquiryForm .form-group-floating { margin-bottom:32px; }
+ #inquiryForm .form-row { flex-direction:column; gap:0 !important; }
+ #inquiryForm .iti, #inquiryForm input, #inquiryForm textarea { max-width:100%; min-width:0; }
+ .contact-channels { margin-top:24px !important; gap:24px !important; padding-top:24px !important; }
+ .contact-channels a { overflow-wrap:anywhere; }
+}

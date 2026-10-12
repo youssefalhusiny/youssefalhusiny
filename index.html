@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
+
 <head>
     <meta name="google" content="notranslate">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>يوسف الحسيني</title>
-<link href="assets/css/style.css" rel="stylesheet"/>
-<!-- Google Fonts: IBM Plex Sans Arabic -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>يوسف الحسيني</title>
+    <link href="assets/css/style.css?v=herolabels7" rel="stylesheet" />
+    <!-- Google Fonts: IBM Plex Sans Arabic -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="Pics/Alhusiny- W logoai.png" rel="icon" type="image/png" />
+<link rel="stylesheet" href="assets/css/home-featured.css?v=playerstate5"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"/>
+<link rel="stylesheet" href="assets/css/english-typography.css?v=2"/>
+<link rel="stylesheet" href="assets/css/project-responsive.css?v=flip14"/>
 </head>
+
 <body>
-<!-- Cinematic Preloader -->
-<div id="cinematic-preloader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--bg-color, #0a0a0a); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), visibility 2s cubic-bezier(0.4, 0, 0.2, 1);">
-<img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png" style="width: 100px; -webkit-mask-image: linear-gradient(to bottom right, transparent 35%, black 65%); -webkit-mask-size: 300% 300%; mask-image: linear-gradient(to bottom right, transparent 35%, black 65%); mask-size: 300% 300%; animation: cinematicEntrance 3.5s ease-out forwards;"/>
-</div>
-<style>
+    <!-- Cinematic Preloader -->
+    <div id="cinematic-preloader"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--bg-color, #0a0a0a); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), visibility 2s cubic-bezier(0.4, 0, 0.2, 1);">
+        <img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"
+            style="width: 100px; -webkit-mask-image: linear-gradient(to bottom right, transparent 35%, black 65%); -webkit-mask-size: 300% 300%; mask-image: linear-gradient(to bottom right, transparent 35%, black 65%); mask-size: 300% 300%; animation: cinematicEntrance 3.5s ease-out forwards;" />
+    </div>
+    <style>
         @keyframes cinematicEntrance {
-            0% { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; opacity: 1; transform: scale(1); filter: blur(0px); }
-            50% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; opacity: 1; transform: scale(1.01); filter: blur(0px); }
-            75% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; opacity: 1; transform: scale(1.03); filter: blur(0px); }
-            100% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; opacity: 0; transform: scale(1.15); filter: blur(6px); }
+            0% {
+                -webkit-mask-position: 0% 0%;
+                mask-position: 0% 0%;
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0px);
+            }
+
+            50% {
+                -webkit-mask-position: 100% 100%;
+                mask-position: 100% 100%;
+                opacity: 1;
+                transform: scale(1.01);
+                filter: blur(0px);
+            }
+
+            75% {
+                -webkit-mask-position: 100% 100%;
+                mask-position: 100% 100%;
+                opacity: 1;
+                transform: scale(1.03);
+                filter: blur(0px);
+            }
+
+            100% {
+                -webkit-mask-position: 100% 100%;
+                mask-position: 100% 100%;
+                opacity: 0;
+                transform: scale(1.15);
+                filter: blur(6px);
+            }
         }
 
 
@@ -33,31 +69,38 @@
         }
 
         @keyframes heroFadeUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-animate-in {
             animation: heroFadeUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
     </style>
-<script>
+    <script>
         document.addEventListener("DOMContentLoaded", () => {
             const preloader = document.getElementById('cinematic-preloader');
             const heroElements = document.querySelectorAll('.hero-initial-hide');
-            
+
             if (!sessionStorage.getItem('siteLoadedCinematic')) {
                 // Start fading out the background slowly right before the logo fully disappears
                 setTimeout(() => {
                     preloader.style.opacity = '0';
                     preloader.style.visibility = 'hidden';
-                    
+
                     // Staggered reveal of hero elements
                     heroElements.forEach((el, index) => {
                         setTimeout(() => {
                             el.classList.remove('hero-initial-hide');
                             el.classList.add('hero-animate-in');
-                            
+
                             // Clean up animation class after it finishes to restore hover transitions
                             setTimeout(() => {
                                 el.classList.remove('hero-animate-in');
@@ -73,240 +116,268 @@
             }
         });
     </script>
-<nav class="navbar hero-initial-hide">
-<div class="nav-brand-group">
-<a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
-<a class="lang-switcher" href="#">EN</a>
+    <nav class="navbar hero-initial-hide">
+        <div class="nav-brand-group">
+            <a class="logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png" /></a>
+            <a class="lang-switcher" href="#">EN</a>
+        </div>
+        <button aria-label="Menu" class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a class="active" data-i18n="text_1" href="#home">البداية</a></li>
+            <li><a href="portfolio.html" data-i18n="nav_work">الأعمال</a></li>
+            <li style="display:none;"><a data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
+            <li><a data-i18n="text_4" href="about">من أنا</a></li>
+            <li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
+        </ul>
+    </nav>
+    <main>
+        <!-- الهيرو -->
+        <section class="hero" id="home" style="background-image: url('ؤؤؤؤ.png');">
+            <div id="hero" style="position: absolute; top: 0; left: 0;"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title hero-initial-hide">
+                    <img loading="lazy" alt="يوسف الحسيني" class="hero-logo" src="Pics/Alhusiny- W logoai.png" />
+                </h1>
+                <p class="hero-subtitle hero-initial-hide" data-i18n="text_134">مفكر، كاتب، و مصمم موشن. يسعى لصناعة
+                    أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة
+                    على أرض الواقع.</p>
+                <a class="hero-cta-btn hero-initial-hide" data-i18n="text_203" href="#portfolio"
+                   >استعرض الأعمال</a>
+            </div>
+        </section>
+        <!-- عني -->
+        <section class="about" id="about">
+            <div class="container about-container">
+                <!-- الجانب الأيمن: الشعار أو العلامة -->
+                <div class="about-brand">
+                    <div class="brand-logo" data-i18n="text_133">يوسف الحسيني</div>
+                    <div class="brand-sub" data-i18n="text_133_sub">Youssef Al Husseini</div>
+                    <div class="brand-est" data-i18n="text_6">مفكر، كاتب، ومصمم موشن</div>
+                </div>
+                <!-- الجانب الأيسر: التفاصيل / النص -->
+                <div class="about-details">
+                    <p data-i18n="text_7">أعمل مع الشركات التقنية والمنتجات الرقمية؛ آخذ الأنظمة والواجهات المعقدة، وأبني لها سردًا حركيًا واضحًا يبرز قيمتها ويسهل استيعابها. النتيجة هي أصول بصرية مؤثرة تُبنى حول سلوك المستخدم واهتمامه، لتجعل المنتج مقنعًا وواضح الوظيفة في واجهة إطلاقك وموقعك.</p>
+                    <p data-i18n="text_8">يقوم منهجي على التوازن الحاسم بين جماليات الحركة واستراتيجية الاتصال. أتعامل
+                        مع المشاريع بعين محايدة متحررة من القوالب المستهلكة؛ لا أنحاز لأسلوب أو &quot;تريند&quot; عابر،
+                        بل لما تفرضه طبيعة الرسالة وسياقها الحقيقي. غايتي ليست مجرد تحريك العناصر على الشاشة، بل بناء
+                        سرد بصري متماسك يترك أثراً واضحاً وعميقاً—أثراً يؤدي وظيفته بدقة، ويمنح العمل ثقلاً يتجاوز مدة
+                        عرضه العابرة.</p>
+                    <p data-i18n="text_9"></p>
+                </div>
+            </div>
+        </section>
+        <!-- عمل مختار: هيرو Beam بعرض الصفحة -->
+        <section class="home-featured" id="portfolio">
+            <div class="container">
+                <div class="section-header-minimal">
+                    <h2 class="section-title-medium" data-i18n="home_featured_heading">أعمال مختارة</h2>
+                </div>
+            </div>
+<div class="home-featured-banner case-hero" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Vids/Cover - Beam .webp'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+<!-- Inline Video that will fade in -->
+<video autoplay id="homeBeam_heroInlineVideo" loop muted playsinline preload="auto" poster="Vids/Cover - Beam .webp" onplaying="this.style.opacity='1'" src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Beam.mp4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: transparent; z-index: 0; opacity: 0; pointer-events: none; filter: blur(10px) brightness(0.45); transform: scale(1.06) translateZ(0); will-change: filter, transform; transition: opacity 0.8s ease, filter 1.2s ease;"></video>
+<!-- Bottom Velvety Melt Overlay -->
+<div id="homeBeam_heroBottomFade" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; background: linear-gradient(to top, var(--bg-color, #050505) 0%, rgba(5,5,5,0.6) 50%, transparent 100%); z-index: 1; pointer-events: none; transition: opacity 0.8s ease;"></div>
+<!-- Pause Overlay Text -->
+<div id="homeBeam_pauseOverlayText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); opacity: 0; pointer-events: none; z-index: 20; color: white; font-family: 'IBM Plex Sans Arabic', sans-serif; text-align: center !important; transition: none;">
+<h2 data-i18n="text_238" id="homeBeam_pauseMessageTitle" style="font-size: 3rem; font-weight: 300; letter-spacing: -1px; margin: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">لماذا توقفت؟</h2>
+<p data-i18n="text_239" style="font-size: 0.95rem; opacity: 0.7; letter-spacing: 2px; font-weight: 300; margin-top: 1rem;">انقر للمواصلة</p>
 </div>
-<button aria-label="Menu" class="mobile-menu-btn">
-<span></span>
-<span></span>
-<span></span>
+<!-- Custom Video Controls -->
+<div id="homeBeam_customVideoControls" style="position: absolute; bottom: 40px; left: 5%; right: 5%; display: flex; align-items: center; gap: 1.5rem; z-index: 15; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; flex-direction: row-reverse; font-family: 'Inter', sans-serif;">
+<button id="homeBeam_customPlayPauseBtn" onmouseout="this.style.opacity='0.8'" onmouseover="this.style.opacity='1'" style="background: none; border: none; color: white; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; opacity: 0.8; transition: opacity 0.3s ease;">
+<svg fill="none" height="24" id="homeBeam_pauseIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><rect height="16" width="4" x="6" y="4"></rect><rect height="16" width="4" x="14" y="4"></rect></svg>
+<svg fill="none" height="24" id="homeBeam_playIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
 </button>
-<ul class="nav-links">
-<li><a class="active" data-i18n="text_1" href="#home">البداية</a></li>
-<li><a data-i18n="text_2" href="portfolio.html">الأعمال</a></li>
-<li style="display:none;"><a data-i18n="text_3" href="case-studies">دراسات حالة</a></li>
-<li><a data-i18n="text_4" href="about">من أنا</a></li>
-<li><a data-i18n="text_5" href="contact">تواصل معي</a></li>
-</ul>
-</nav>
-<main>
-<!-- الهيرو -->
-<section class="hero" id="home" style="background-image: url('ؤؤؤؤ.png');">
-<div id="hero" style="position: absolute; top: 0; left: 0;"></div>
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<h1 class="hero-title hero-initial-hide">
-<img loading="lazy" alt="يوسف الحسيني" class="hero-logo" src="Pics/Alhusiny- W logoai.png"/>
-</h1>
-<p class="hero-subtitle hero-initial-hide" data-i18n="text_134">مفكر، كاتب، و مصمم موشن. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
-<a class="hero-cta-btn hero-initial-hide" data-i18n="text_203" href="https://wa.me/966577545142" target="_blank">تحدث معي</a>
+<!-- Time display -->
+<div style="color: white; font-size: 0.95rem; font-variant-numeric: tabular-nums; opacity: 0.8; letter-spacing: 1px; display: flex; gap: 0.4rem; direction: ltr;">
+<span id="homeBeam_customCurrentTime">0:00</span>
+<span style="opacity: 0.5;">/</span>
+<span id="homeBeam_customDurationTime">0:00</span>
 </div>
-</section>
-<!-- عني -->
-<section class="about" id="about">
-<div class="container about-container">
-<!-- الجانب الأيمن: الشعار أو العلامة -->
-<div class="about-brand">
-<div class="brand-logo" data-i18n="text_133">يوسف الحسيني</div>
-<div class="brand-sub" data-i18n="text_133_sub">Youssef Al Husseini</div>
-<div class="brand-est" data-i18n="text_6">مفكر، كاتب، ومصمم موشن</div>
-</div>
-<!-- الجانب الأيسر: التفاصيل / النص -->
-<div class="about-details">
-<p data-i18n="text_7">أتعامل مع التصميم الحركي كعملية اختزال صارمة؛ تفكيك المشهد للوصول إلى جوهره وتجريده من الحشو البصري الذي يعيق وضوح الفكرة. في وسيط بطبيعته سريع الزوال ويتلاشى في ثوانٍ، لا أؤمن بالحركة المجانية أو المؤثرات الاستعراضية، بل بالبناء الإيقاعي الدقيق الذي يمنح كل إطار هدفه الوظيفي وقيمته التعبيرية.</p>
-<p data-i18n="text_8">يقوم منهجي على التوازن الحاسم بين جماليات الحركة واستراتيجية الاتصال. أتعامل مع المشاريع بعين محايدة متحررة من القوالب المستهلكة؛ لا أنحاز لأسلوب أو &quot;تريند&quot; عابر، بل لما تفرضه طبيعة الرسالة وسياقها الحقيقي. غايتي ليست مجرد تحريك العناصر على الشاشة، بل بناء سرد بصري متماسك يترك أثراً واضحاً وعميقاً—أثراً يؤدي وظيفته بدقة، ويمنح العمل ثقلاً يتجاوز مدة عرضه العابرة.</p>
-<p data-i18n="text_9"></p>
+<div id="homeBeam_customProgressBarContainer" style="flex: 1; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px; margin: 0 1rem;">
+<!-- Hover Tooltip -->
+<div id="homeBeam_progressTooltip" style="position: absolute; top: -30px; left: 0; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-variant-numeric: tabular-nums; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; white-space: nowrap;">0:00</div>
+<div id="homeBeam_customProgressBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #ffffff; transition: width 0.1s linear; border-radius: 2px;">
+<div style="position: absolute; right: -5px; top: -3px; width: 10px; height: 10px; background: #fff; border-radius: 50%; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>
 </div>
 </div>
-</section>
-<!-- المعرض -->
-<section class="gallery" id="portfolio">
-<div class="container">
-<div class="section-header-minimal" style="margin-bottom: 4rem; margin-top: 6rem;">
-<span class="section-kicker-small" data-i18n="text_204">مشاريع مختارة</span>
-<h2 class="section-title-medium">عمل مختار</h2>
+<!-- Volume Block -->
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<div id="homeBeam_customVolumeContainer" style="width: 80px; height: 4px; background: rgba(255,255,255,0.15); cursor: pointer; position: relative; border-radius: 2px;">
+<div id="homeBeam_customVolumeBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: #ffffff; border-radius: 2px;">
+<div style="position: absolute; right: -4px; top: -3px; width: 10px; height: 10px; background: #fff; border-radius: 50%; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>
 </div>
-<div style="display: flex; justify-content: center; width: 100%;">
-<div style="width: min(600px, 80vw);">
-<a class="gallery-item" href="eidos.html" style="display: none !important;">
-<img loading="lazy" alt="Eidos" src="Vids/Porty.webp"/>
-<video class="gallery-hover-video" muted loop playsinline preload="metadata"><source src="Vids/Edios_preview.mp4" type="video/mp4"/></video>
-<div class="gallery-overlay">
-<h3 class="gallery-overlay-title" data-i18n="text_168">Eidos — Brand Film</h3>
-<p class="gallery-overlay-desc" data-i18n="text_205">فيديو تعريفي لمنصة Eidos، يطرح الهوية البصرية لمشروع فكري قائم على التفكير النقدي وتفكيك الأفكار الإنسانية عبر سرد بصري تحريري متماسك.</p>
 </div>
+<button id="homeBeam_customMuteBtn" onmouseout="this.style.opacity='0.8'" onmouseover="this.style.opacity='1'" style="background: none; border: none; color: white; cursor: pointer; padding: 0; opacity: 0.8; transition: opacity 0.3s ease;">
+<svg fill="none" height="20" id="homeBeam_unmuteIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+<svg fill="none" height="20" id="homeBeam_muteIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="20"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" x2="17" y1="9" y2="15"></line><line x1="17" x2="23" y1="9" y2="15"></line></svg>
+</button>
+</div>
+<!-- Fullscreen -->
+<button id="homeBeam_customFullscreenBtn" onmouseout="this.style.opacity='0.8'" onmouseover="this.style.opacity='1'" style="background: none; border: none; color: white; cursor: pointer; padding: 0; margin-right: 1.5rem; opacity: 0.8; transition: opacity 0.3s ease;">
+<svg fill="none" height="20" id="homeBeam_enterFullscreenIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+<svg fill="none" height="20" id="homeBeam_exitFullscreenIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="display: none;" viewbox="0 0 24 24" width="20"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
+</button>
+</div>
+<div class="case-hero-content" id="homeBeam_heroContentBlock" style="align-items: center; text-align: center !important; flex-direction: column; gap: 2.5rem; justify-content: center; z-index: 2; position: relative;">
+<!-- Title block -->
+<div class="hero-initial-hide" style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+<span class="case-kicker" data-i18n="beam_hero_category" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; opacity: 0.6; font-weight: 300; margin-bottom: 0.4rem;">برومو التطبيق</span>
+<h1 class="case-title" data-i18n="beam_title" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 200; font-size: 5rem; letter-spacing: -1px; margin: 0; line-height: 1;">Beam App</h1>
+</div>
+<!-- Play button -->
+<a class="hero-initial-hide" href="#" id="homeBeam_playHeroVideo" onclick="triggerHomeBeamFade(); return false;" onmouseout="this.style.color='rgba(255,255,255,0.7)'" onmouseover="this.style.color='rgba(255,255,255,1)'" style="display: inline-flex; align-items: center; gap: 0.8rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s ease; margin-top: 1rem;">
+<span data-i18n="text_246" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; font-weight: 300;">تشغيل الفيديو</span>
+<span class="play-line" style="display: block; width: 30px; height: 1px; background: currentColor; transition: width 0.4s ease;"></span>
 </a>
-<a class="gallery-item" href="beam.html" style="display: block;">
-<img loading="lazy" alt="Beam App" src="Vids/Cover - Beam .webp"/>
-<video class="gallery-hover-video" muted loop playsinline preload="metadata"><source src="Vids/Beam_preview.mp4" type="video/mp4"/></video>
-<div class="gallery-overlay">
-<h3 class="gallery-overlay-title" data-i18n="text_162">Beam App — Official Promo</h3>
-<p class="gallery-overlay-desc" data-i18n="text_206">فيديو تعريفي سريع الإيقاع صُمم لمنصة التواصل الاجتماعي Beam، يُترجم منظومتها التفاعلية متعددة الطبقات إلى عمل حركي متدفق ومضبوط الإيقاع.</p>
-</div>
-</a>
-</div>
-</div>
-<a class="gallery-item coming-soon-wrapper" href="project-details.html" style="display: none !important;">
-<img loading="lazy" alt="Frog - ضفدع" src="Vids/Cover- Frog.png"/>
-<div class="gallery-overlay">
-<h3 class="gallery-overlay-title" data-i18n="text_159">Frog - ضفدع</h3>
-<p class="gallery-overlay-desc" data-i18n="text_207">عمل بصري يتناول العلاقات الإنسانية وما يسكن المساحات الصامتة بين الناس من توتر ودفء وغموض لا يُقال.</p>
-</div>
 
-<div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
-</a>
-<a class="gallery-item coming-soon-wrapper" href="project-details.html" style="display: none !important;">
-<img loading="lazy" alt="Dar Al-Ula Branding" src="Dar Al-Ula Branding.jpg"/>
-<div class="gallery-overlay">
-<h3 class="gallery-overlay-title" data-i18n="proj.dar.title">Dar Al-Ula Branding</h3>
-<p class="gallery-overlay-desc" data-i18n="text_208">هوية بصرية متكاملة تجمع بين عراقة المكان وحداثة التصميم في منظومة بصرية تعكس روح العلا وعمقها الحضاري.</p>
 </div>
+</div>
+        </section>
+        <!-- مقالات مختارة -->
+        <section class="articles" id="articles" style="display: none;">
+            <div class="container">
+                <div class="section-header-minimal" style="margin-bottom: 3.5rem;">
+                    <span class="section-kicker-small" data-i18n="text_211">تحليل وتفكيك</span>
+                    <h2 class="section-title-medium" data-i18n="text_3">دراسات حالة</h2>
+                </div>
+                <div class="articles-4-grid">
+                    <a class="inspired-card" href="project-details.html">
+                        <div class="inspired-img-wrapper">
+                            <img loading="lazy" alt="التفكير الفردي أمام التفكير المؤسسي" src="بينهم.png" />
+                        </div>
+                        <div class="inspired-card-content">
+                            <div class="inspired-card-header">
+                                <h3 class="inspired-card-title" data-i18n="text_159">Frog - ضفدع</h3>
+                                <span class="inspired-card-kicker" data-i18n="text_160">حوار الفردية والمنظومة</span>
+                            </div>
+                            <p class="inspired-card-desc" data-i18n="text_161">تحليل فلسفي يبحث في المقارنة والدمج بين
+                                التفكير الفردي الإبداعي والتفكير المؤسسي المستدام، وكيف يمكن للمنظومات الناجحة أن تحتضن
+                                فرادة المبتكرين دون خسارة تماسك الكيان.</p>
+                        </div>
+                    </a>
+                    <a class="inspired-card coming-soon-wrapper" href="project-details.html">
+                        <div class="inspired-img-wrapper">
+                            <img loading="lazy" alt="فريدريش نيتشه" src="رشف.png" />
+                        </div>
+                        <div class="inspired-card-content">
+                            <div class="inspired-card-header">
+                                <h3 class="inspired-card-title" data-i18n="text_162">رشف</h3>
+                                <span class="inspired-card-kicker" data-i18n="text_48">إرادة القوة والفرادة</span>
+                            </div>
+                            <p class="inspired-card-desc" data-i18n="text_163">أحترم فيه تقديسه للفرادة الفردية، ورفضه
+                                لـ "عقلية القطيع"، وقدرة الإنسان المستقل على صياغة قيمه الخاصة. لكنني لم أتبعه في عدميته
+                                القاسية؛ بل أختار تسخير تلك الإرادة في بناء هياكل جمالية منظمة.</p>
+                        </div>
 
-<div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
-</a>
-<a class="gallery-item coming-soon-wrapper" href="project-details.html" style="display: none !important;">
-<img loading="lazy" alt="Poems for Life" src="Poems for Life.jpg"/>
-<div class="gallery-overlay">
-<h3 class="gallery-overlay-title" data-i18n="proj.poems.title">Poems for Life</h3>
-<p class="gallery-overlay-desc" data-i18n="text_209">مشروع بصري شعري يترجم النصوص الأدبية إلى تجارب مرئية تأملية تقف عند حدود ما بين الكلمة والصورة والمعنى.</p>
-</div>
+                        <div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
+                    </a>
+                    <a class="inspired-card coming-soon-wrapper" href="project-details.html">
+                        <div class="inspired-img-wrapper">
+                            <img loading="lazy" alt="راي داليو" src="Poems for Life.jpg" />
+                        </div>
+                        <div class="inspired-card-content">
+                            <div class="inspired-card-header">
+                                <h3 class="inspired-card-title" data-i18n="text_164">بايومي</h3>
+                                <span class="inspired-card-kicker" data-i18n="text_57">المبادئ والأنظمة</span>
+                            </div>
+                            <p class="inspired-card-desc" data-i18n="text_165">أحترم فيه عقلانيته المفرطة وقدرته على
+                                نمذجة الحياة والعمل في هيئة نظام متسق مبني على مبادئ وحلقات تغذية راجعة واضحة. لكنني لم
+                                أتبعه في محاولته مكننة المشاعر؛ فالفن والعفوية لا يمكن قياسها.</p>
+                        </div>
 
-<div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
-</a>
-<a class="gallery-item coming-soon-wrapper" href="project-details.html" style="display: none !important;">
-<img loading="lazy" alt="Light" src="_light_.jpg"/>
-<div class="gallery-overlay">
-<h3 class="gallery-overlay-title" data-i18n="proj.light.title">Light</h3>
-<p class="gallery-overlay-desc" data-i18n="text_210">دراسة بصرية في الضوء وتأثيره على الفضاء والمزاج، تُسجَّل عبر لقطات دقيقة وتكوينات هادئة تجعل من الإضاءة لغةً قائمة بذاتها.</p>
-</div>
-
-<div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
-</a>
-</div>
-</div>
-</section>
-<!-- مقالات مختارة -->
-<section class="articles" id="articles" style="display: none;">
-<div class="container">
-<div class="section-header-minimal" style="margin-bottom: 3.5rem;">
-<span class="section-kicker-small" data-i18n="text_211">تحليل وتفكيك</span>
-<h2 class="section-title-medium" data-i18n="text_3">دراسات حالة</h2>
-</div>
-<div class="articles-4-grid">
-<a class="inspired-card" href="project-details.html">
-<div class="inspired-img-wrapper">
-<img loading="lazy" alt="التفكير الفردي أمام التفكير المؤسسي" src="بينهم.png"/>
-</div>
-<div class="inspired-card-content">
-<div class="inspired-card-header">
-<h3 class="inspired-card-title" data-i18n="text_159">Frog - ضفدع</h3>
-<span class="inspired-card-kicker" data-i18n="text_160">حوار الفردية والمنظومة</span>
-</div>
-<p class="inspired-card-desc" data-i18n="text_161">تحليل فلسفي يبحث في المقارنة والدمج بين التفكير الفردي الإبداعي والتفكير المؤسسي المستدام، وكيف يمكن للمنظومات الناجحة أن تحتضن فرادة المبتكرين دون خسارة تماسك الكيان.</p>
-</div>
-</a>
-<a class="inspired-card coming-soon-wrapper" href="project-details.html">
-<div class="inspired-img-wrapper">
-<img loading="lazy" alt="فريدريش نيتشه" src="رشف.png"/>
-</div>
-<div class="inspired-card-content">
-<div class="inspired-card-header">
-<h3 class="inspired-card-title" data-i18n="text_162">رشف</h3>
-<span class="inspired-card-kicker" data-i18n="text_48">إرادة القوة والفرادة</span>
-</div>
-<p class="inspired-card-desc" data-i18n="text_163">أحترم فيه تقديسه للفرادة الفردية، ورفضه لـ "عقلية القطيع"، وقدرة الإنسان المستقل على صياغة قيمه الخاصة. لكنني لم أتبعه في عدميته القاسية؛ بل أختار تسخير تلك الإرادة في بناء هياكل جمالية منظمة.</p>
-</div>
-
-<div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
-</a>
-<a class="inspired-card coming-soon-wrapper" href="project-details.html">
-<div class="inspired-img-wrapper">
-<img loading="lazy" alt="راي داليو" src="Poems for Life.jpg"/>
-</div>
-<div class="inspired-card-content">
-<div class="inspired-card-header">
-<h3 class="inspired-card-title" data-i18n="text_164">بايومي</h3>
-<span class="inspired-card-kicker" data-i18n="text_57">المبادئ والأنظمة</span>
-</div>
-<p class="inspired-card-desc" data-i18n="text_165">أحترم فيه عقلانيته المفرطة وقدرته على نمذجة الحياة والعمل في هيئة نظام متسق مبني على مبادئ وحلقات تغذية راجعة واضحة. لكنني لم أتبعه في محاولته مكننة المشاعر؛ فالفن والعفوية لا يمكن قياسها.</p>
-</div>
-
-<div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
-</a>
-</div>
-<div style="display: flex; justify-content: center; margin-top: 4rem;">
-<a class="hero-cta-btn" data-i18n="text_212" href="articles.html" style="margin-top: 0; border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);" data-i18n="articles.more">اطلع على المزيد</a>
-</div>
-</div>
-</section>
-<!-- تواصل معي (Centered Minimal CTA) -->
-<section id="contact" style="padding: 8rem 0; text-align: center; position: relative; border-top: 1px solid rgba(255,255,255,0.05);">
-<div class="container" style="max-width: 800px; display: flex; flex-direction: column; align-items: center; margin: 0 auto;">
-<h2 class="section-title-medium" data-i18n="text_189" style="margin: 0;">
-                    <span data-i18n="contact.title">هل لديك فكرة تود تجسيدها؟</span>
-                </h2>
-<p data-i18n="text_190" style="text-align: center !important; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.4); font-weight: 300; margin: 1.5rem 0 3rem 0; max-width: 500px;">
-                    <span data-i18n="contact.desc">دعنا نصنع أثراً معاً. إذا كانت لديك رؤية تبحث عن تجسيد حقيقي، أو أفكار مبدئية تنتظر من يمنحها الحياة، يسعدني أن نستكشف آفاقها ونصيغها في واقع ملموس.</span>
-                </p>
-<a class="hero-cta-btn" data-i18n="text_213" href="contact.html" style="margin: 0; border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);" data-i18n="contact.btn">ابدأ المحادثة</a>
-</div>
-</section>
-</main>
-<!-- فوتر الموقع -->
-<footer class="footer">
-<div class="container">
-<div class="footer-grid">
-<!-- العمود الأول: العلامة التجارية -->
-<div class="footer-col brand-col">
-<a class="footer-logo" href="/"><img loading="lazy" alt="يوسف الحسيني" src="Pics/Alhusiny- W logoai.png"/></a>
-<p class="footer-about-text" data-i18n="text_134">مفكر، كاتب، و مصمم موشن. يسعى لصناعة أثرٍ حقيقي في هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض الواقع.</p>
-</div>
-<!-- العمود الثاني: التنقل -->
-<div class="footer-col">
-<h4 class="footer-title" data-i18n="text_135">استكشف</h4>
-<ul class="footer-links">
-<li><a data-i18n="text_1" href="/#home">البداية</a></li>
-<li><a data-i18n="text_2" href="portfolio.html">معرض الأعمال</a></li>
-<li style="display:none;"><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
-<li><a data-i18n="text_4" href="about.html">من أنا</a></li>
-<li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
-</ul>
-</div>
-<!-- العمود الثالث: مواقع التواصل -->
-<div class="footer-col">
-<h4 class="footer-title" data-i18n="text_136">تابعني</h4>
-<ul class="footer-links">
-<li><a data-i18n="text_137" href="https://www.linkedin.com/feed/" target="_blank" data-i18n="footer.linkedin">لينكدإن</a></li>
-<li><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank" data-i18n="footer.behance">بيهانس</a></li>
-<li><a data-i18n="text_139" href="#" target="_blank" data-i18n="footer.x">إكس</a></li>
-<li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en" target="_blank" data-i18n="footer.insta">إنستغرام</a></li>
-<li><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank" data-i18n="footer.youtube">يوتيوب</a></li>
-</ul>
-</div>
-<!-- العمود الرابع: معلومات التواصل -->
-<div class="footer-col info-col">
-<h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
-<p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
-<p class="footer-info-item"><span data-i18n="footer.whatsapp">واتساب: </span><span dir="ltr" style="direction: ltr; display: inline-block;">+966 57 754 5142</span></p>
-<p class="footer-info-item"><span data-i18n="footer.email">البريد الإلكتروني: </span><a href="mailto:youssefalhusiny@gmail.com" style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
-</div>
-</div>
-<div class="footer-bottom">
-<p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
-<span class="footer-note" data-i18n="text_145">مساحة للفكر</span>
-</div>
-</div>
-</footer>
-<!-- GSAP for animations -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-<script src="assets/js/translations.js"></script>
-    <script src="assets/js/script.js?v=3"></script>
+                        <div class="coming-soon-badge" data-i18n="badge_coming_soon">قريبًا</div>
+                    </a>
+                </div>
+                <div style="display: flex; justify-content: center; margin-top: 4rem;">
+                    <a class="hero-cta-btn" data-i18n="text_212" href="articles.html"
+                        style="margin-top: 0; border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);"
+                        data-i18n="articles.more">اطلع على المزيد</a>
+                </div>
+            </div>
+        </section>
+        <!-- تواصل معي (Centered Minimal CTA) -->
+        <section id="contact"
+            style="padding: 8rem 0; text-align: center; position: relative; border-top: 1px solid rgba(255,255,255,0.05);">
+            <div class="container"
+                style="max-width: 800px; display: flex; flex-direction: column; align-items: center; margin: 0 auto;">
+                <h2 class="section-title-medium" data-i18n="text_189" style="margin: 0;">جاهز للعمل على مشروعك؟</h2>
+                <p data-i18n="text_190"
+                    style="text-align: center !important; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.4); font-weight: 300; margin: 1.5rem 0 3rem 0; max-width: 500px;">شاركني فكرة العمل أو المتطلبات، ودعنا نناقش التنفيذ مباشرة.</p>
+                <a class="hero-cta-btn" data-i18n="contact.btn" href="contact.html"
+                    style="margin: 0; border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);">ابدأ المحادثة</a>
+            </div>
+        </section>
+    </main>
+    <!-- فوتر الموقع -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- العمود الأول: العلامة التجارية -->
+                <div class="footer-col brand-col">
+                    <a class="footer-logo" href="/"><img loading="lazy" alt="يوسف الحسيني"
+                            src="Pics/Alhusiny- W logoai.png" /></a>
+                    <p class="footer-about-text" data-i18n="text_134">مفكر، كاتب، و مصمم موشن. يسعى لصناعة أثرٍ حقيقي في
+                        هذا العالم؛ يشقّ طريقه بالبحث والسير، ويُجسد أفكاره ورؤاه في أعمالٍ وتجسيدات ملموسة على أرض
+                        الواقع.</p>
+                </div>
+                <!-- العمود الثاني: التنقل -->
+                <div class="footer-col">
+                    <h4 class="footer-title" data-i18n="text_135">استكشف</h4>
+                    <ul class="footer-links">
+                        <li><a data-i18n="text_1" href="/#home">البداية</a></li>
+                        <li><a data-i18n="nav_work" href="portfolio.html">الأعمال</a></li>
+                        <li style="display:none;"><a data-i18n="text_3" href="case-studies.html">دراسات حالة</a></li>
+                        <li><a data-i18n="text_4" href="about.html">من أنا</a></li>
+                        <li><a data-i18n="text_5" href="contact.html">تواصل معي</a></li>
+                    </ul>
+                </div>
+                <!-- العمود الثالث: مواقع التواصل -->
+                <div class="footer-col">
+                    <h4 class="footer-title" data-i18n="text_136">تابعني</h4>
+                    <ul class="footer-links">
+                        <li><a data-i18n="text_137" href="https://www.linkedin.com/in/youssef-alhusiny-9b63a7267" target="_blank"
+                                data-i18n="footer.linkedin">لينكدإن</a></li>
+                        <li hidden style="display: none !important;"><a data-i18n="text_138" href="https://www.behance.net/youssefal-husi" target="_blank"
+                                data-i18n="footer.behance">بيهانس</a></li>
+                        <li><a data-i18n="text_139" href="https://x.com/youssefalhusiny" target="_blank" data-i18n="footer.x">إكس</a></li>
+                        <li><a data-i18n="text_140" href="https://www.instagram.com/youssefalhusiny/?hl=en"
+                                target="_blank" data-i18n="footer.insta">إنستغرام</a></li>
+                        <li hidden style="display: none !important;"><a data-i18n="text_141" href="https://www.youtube.com/@youssefalhusiny" target="_blank"
+                                data-i18n="footer.youtube">يوتيوب</a></li>
+                    </ul>
+                </div>
+                <!-- العمود الرابع: معلومات التواصل -->
+                <div class="footer-col info-col">
+                    <h4 class="footer-title" data-i18n="text_142">معلومات الاتصال</h4>
+                    <p class="footer-info-item" data-i18n="text_143">القاهرة، جمهورية مصر العربية</p>
+                    <p class="footer-info-item"><span data-i18n="footer.phone">الهاتف: </span><span dir="ltr"
+                            style="direction: ltr; display: inline-block;">+20 1033947717</span></p>
+                    <p class="footer-info-item"><span data-i18n="footer.email">البريد الإلكتروني: </span><a
+                            href="mailto:youssefalhusiny@gmail.com"
+                            style="color: inherit; text-decoration: none;">youssefalhusiny@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright" data-i18n="text_144">© ٢٠٢٦ يوسف الحسيني. جميع الحقوق محفوظة.</p>
+                <span class="footer-note" data-i18n="text_145">أفكار تتحرك</span>
+            </div>
+        </div>
+    </footer>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="assets/js/translations.js?v=mobile9"></script>
+    <script src="assets/js/script.js?v=defaulten8"></script>
+<script src="assets/js/home-featured.js?v=flip14" defer></script>
 </body>
+
 </html>
-
-

@@ -43,6 +43,19 @@ const lenis = new Lenis({
     smoothTouch: false
 });
 
+window.scrollToSiteWork = target => {
+    lenis.stop();
+    const startY = window.scrollY, started = performance.now();
+    function step(now) {
+        const progress = Math.min(1, (now - started) / 450);
+        const endY = target.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({top: startY + (endY - startY) * (1 - Math.pow(1 - progress, 3)), behavior: 'instant'});
+        if (progress < 1) requestAnimationFrame(step);
+        else { lenis.start(); lenis.scrollTo(window.scrollY, {immediate: true, force: true}); }
+    }
+    requestAnimationFrame(step);
+};
+
 // Register GSAP ScrollTrigger and sync with Lenis
 gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);
@@ -415,10 +428,6 @@ gsap.from(".contact-form-wrapper", {
     if (document.querySelector('.document-header')) return;
     const langBtn = document.querySelector('.lang-switcher');
 
-    const arabicCountries = [
-        'DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY',
-        'MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE'
-    ];
 
     function applyLang(lang) {
         document.documentElement.lang = lang;
@@ -452,24 +461,14 @@ gsap.from(".contact-form-wrapper", {
         });
     }
 
-    // If user manually chose a language before → respect it
+    // English is the default for every visitor; keep deliberate language choices.
+    var initialLang = 'en';
     if (localStorage.getItem('langManualOverride') === 'true') {
         var saved = localStorage.getItem('preferredLang');
-        if (saved) { applyLang(saved); return; }
+        if (saved === 'ar' || saved === 'en') initialLang = saved;
     }
+    applyLang(initialLang);
 
-    // Auto-detect by IP on every visit (no override)
-    fetch('https://www.cloudflare.com/cdn-cgi/trace', { cache: 'no-store' })
-        .then(function(r) { return r.text(); })
-        .then(function(text) {
-            var match   = text.match(/loc=([A-Z]{2})/);
-            var country = match ? match[1] : '';
-            applyLang(arabicCountries.includes(country) ? 'ar' : 'en');
-        })
-        .catch(function() {
-            var bl = (navigator.language || '').toLowerCase();
-            applyLang(bl.startsWith('ar') ? 'ar' : 'en');
-        });
 })();
 
 // Gallery Cards: Hover to Play Video

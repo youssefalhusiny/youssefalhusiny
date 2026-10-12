@@ -309,7 +309,7 @@ h1, h2, h3 {
 }
 
 .hero-logo {
-    height: clamp(38px, 6vw, 68px);
+    height: clamp(34px, 5.3vw, 60px);
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
@@ -3651,3 +3651,21 @@ html[lang="en"] .coming-soon-wrapper .case-overlay::after {
 
 
 
+
+/* The cover and the pause overlay belong to separate playback states. */
+.case-hero[data-player-mode="playback"] .case-hero-content { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+.case-hero:not([data-player-mode="playback"]) [id$="pauseOverlayText"] { opacity: 0 !important; visibility: hidden !important; }
+.case-hero .case-hero-content .case-title { font-size: clamp(40px, 4.5vw, 72px) !important; }
+.case-hero .case-hero-content { gap: 2rem !important; }
+.case-hero .case-hero-content > div:nth-child(2) { gap: 2.4rem !important; }
+.case-hero .case-hero-content > div:nth-child(2) span { font-size: .85rem !important; }
+.case-hero .case-hero-content [data-i18n="text_241"], .case-hero .case-hero-content [data-i18n="text_243"], .case-hero .case-hero-content [data-i18n="text_245"] { font-size: .68rem !important; }
+
+/* Center pause messages independently of the reading direction. */
+.case-hero [id$="pauseOverlayText"] {
+    width: min(1000px, calc(100% - 40px));
+    text-align: center !important;
+    transform: translate(-50%, -50%) !important;
+}
+.case-hero [id$="pauseOverlayText"] :is(h2,p) { text-align: center !important; margin-inline: auto; }
+.case-hero [id$="pauseMessageTitle"] { font-size: clamp(26px, 4vw, 48px) !important; line-height: 1.25; }
