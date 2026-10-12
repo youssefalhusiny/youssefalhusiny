@@ -1,5 +1,8 @@
-/* Preserve the film frame instead of cropping it to a portrait viewport. */
-.case-hero[data-player-mode="playback"] [id$="heroInlineVideo"] { object-fit: contain !important; transform: none !important; }
+/* Desktop playback fills the player; small screens preserve the full film frame. */
+.case-hero[data-player-mode="playback"] [id$="heroInlineVideo"] { object-fit: cover !important; transform: none !important; }
+@media (max-width:900px) {
+ .case-hero[data-player-mode="playback"] [id$="heroInlineVideo"] { object-fit: contain !important; }
+}
 .case-hero:fullscreen { width: 100% !important; height: 100% !important; min-height: 0 !important; }
 .case-hero:-webkit-full-screen { width: 100% !important; height: 100% !important; min-height: 0 !important; }
 .case-reflections .case-reflections-copy p { text-align: center !important; }
