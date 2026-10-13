@@ -432,6 +432,12 @@ gsap.from(".contact-form-wrapper", {
     function applyLang(lang) {
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.querySelectorAll('title[data-meta-en], meta[data-meta-en]').forEach(el => {
+            const value=el.getAttribute('data-meta-'+lang);
+            if(value===null)return;
+            if(el.tagName==='TITLE')el.textContent=value;
+            else el.setAttribute('content',value);
+        });
         if (langBtn) langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
         if (typeof translations !== 'undefined' && translations[lang]) {
             document.querySelectorAll('[data-i18n]').forEach(function(el) {
