@@ -515,3 +515,23 @@ gsap.from(".contact-form-wrapper", {
 })();
 
 
+
+// Offer webmail compose links alongside the normal device email handler.
+document.querySelectorAll('a[href="mailto:contact@youssefalhusiny.com"]').forEach(link => {
+    let options;
+    link.addEventListener('click', () => {
+        document.querySelectorAll('.email-compose-options').forEach(el => {if(el!==options)el.hidden=true;});
+        if(!options){
+            options=document.createElement('span');options.className='email-compose-options';options.setAttribute('role','group');
+            const label=document.createElement('span');label.className='email-compose-label';options.appendChild(label);
+            const to=encodeURIComponent('contact@youssefalhusiny.com');
+            [['Gmail','https://mail.google.com/mail/?view=cm&fs=1&to='+to],['Outlook','https://outlook.live.com/mail/0/deeplink/compose?to='+to]].forEach(([name,url])=>{
+                const choice=document.createElement('a');choice.textContent=name;choice.href=url;choice.target='_blank';choice.rel='noopener noreferrer';options.appendChild(choice);
+            });
+            link.insertAdjacentElement('afterend',options);
+            const updateLabel=()=>{label.textContent=document.documentElement.lang==='ar'?'أو راسلني من بريد الويب:':'Or compose in webmail:';options.setAttribute('aria-label',label.textContent);};
+            updateLabel();new MutationObserver(updateLabel).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+        }
+        options.hidden=false;
+    });
+});

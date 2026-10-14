@@ -3669,3 +3669,11 @@ html[lang="en"] .coming-soon-wrapper .case-overlay::after {
 }
 .case-hero [id$="pauseOverlayText"] :is(h2,p) { text-align: center !important; margin-inline: auto; }
 .case-hero [id$="pauseMessageTitle"] { font-size: clamp(26px, 4vw, 48px) !important; line-height: 1.25; }
+
+.email-compose-options { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px; font-size:.75rem; animation:email-options-arrive .2s ease-out; }
+.email-compose-options[hidden] { display:none; }
+.email-compose-label { flex-basis:100%; color:#999; line-height:1.6; }
+.email-compose-options a { border:1px solid #333; padding:6px 12px; color:#ddd; text-decoration:none; border-radius:3px; transition:background .2s,border-color .2s; }
+.email-compose-options a:hover,.email-compose-options a:focus-visible { background:#1c1c1c; border-color:#777; }
+@keyframes email-options-arrive { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+@media(prefers-reduced-motion:reduce) { .email-compose-options { animation:none; } }
