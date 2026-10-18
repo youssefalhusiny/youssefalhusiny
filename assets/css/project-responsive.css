@@ -80,7 +80,7 @@
 .case-hero.native-player #pauseOverlayText,
 .case-hero.native-player #heroBottomFade { display: none !important; }
 
-/* Center project facts alongside the full overview on desktop. */
+/* Give the complete desktop overview more space below the hero. */
 @media (min-width: 901px) {
- .case-overview-grid > .overview-meta { justify-content: center; }
+ .case-overview { padding-top: 72px; }
 }
