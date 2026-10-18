@@ -79,3 +79,8 @@
 .case-hero.native-player #customVideoControls,
 .case-hero.native-player #pauseOverlayText,
 .case-hero.native-player #heroBottomFade { display: none !important; }
+
+/* Center project facts alongside the full overview on desktop. */
+@media (min-width: 901px) {
+ .case-overview-grid > .overview-meta { justify-content: center; }
+}
