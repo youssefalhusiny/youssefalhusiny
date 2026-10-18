@@ -13,7 +13,7 @@
 <meta name="twitter:description" content="A motion design case study introducing Eidos through a cohesive product promo and visual narrative." data-meta-en="A motion design case study introducing Eidos through a cohesive product promo and visual narrative." data-meta-ar="دراسة حالة للتصميم الحركي تقدّم إيدوس عبر برومو للمنصة وسرد بصري متماسك."/>
 <meta property="og:locale" content="en_US" data-meta-en="en_US" data-meta-ar="ar_AR"/>
 <script>window.location.replace("eidos.html");</script>
-<link href="assets/css/style.css?v=email25" rel="stylesheet"/>
+<link href="assets/css/style.css?v=media26" rel="stylesheet"/>
 <!-- Google Fonts: IBM Plex Sans Arabic -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -50,7 +50,8 @@
 <link rel="stylesheet" href="assets/css/project-reflections.css?v=2">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"/>
 <link rel="stylesheet" href="assets/css/english-typography.css?v=2"/>
-<link rel="stylesheet" href="assets/css/project-responsive.css?v=desktop20"/>
+<link rel="stylesheet" href="assets/css/project-responsive.css?v=media26"/>
+<script src="assets/js/project-media.js?v=1"></script>
 </head>
 <body>
 <!-- الهيدر / النافبار -->
@@ -76,7 +77,7 @@
 <!-- Hero Section -->
 <section class="case-hero" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Vids/Porty.webp'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
 <!-- Inline Video that will fade in -->
-<video autoplay id="heroInlineVideo" loop muted playsinline preload="auto" poster="Vids/Porty.webp" onplaying="this.style.opacity='1'" src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Edios_1.mp4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: transparent; z-index: 0; opacity: 0; pointer-events: none; filter: blur(10px) brightness(0.45); transform: scale(1.06) translateZ(0); will-change: filter, transform; transition: opacity 0.8s ease, filter 1.2s ease;"></video>
+<video id="heroInlineVideo" loop muted playsinline preload="metadata" poster="Vids/Porty.webp" onplaying="this.style.opacity='1'" src="https://pub-fbd0a778561c41d6aee107804f17aef1.r2.dev/Edios_1.mp4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: transparent; z-index: 0; opacity: 0; pointer-events: none; filter: blur(10px) brightness(0.45); transform: scale(1.06) translateZ(0); will-change: filter, transform; transition: opacity 0.8s ease, filter 1.2s ease;"></video>
 <!-- Bottom Velvety Melt Overlay -->
 <div id="heroBottomFade" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 45%; background: linear-gradient(to top, var(--bg-color, #050505) 0%, rgba(5,5,5,0.6) 50%, transparent 100%); z-index: 1; pointer-events: none; transition: opacity 0.8s ease;"></div>
 <!-- Pause Overlay Text -->
@@ -147,14 +148,15 @@
 <!-- Play button -->
 <a class="hero-initial-hide" href="#" id="playHeroVideo" onclick="triggerStaggeredHeroFade(); return false;" onmouseout="this.style.color='rgba(255,255,255,0.7)'" onmouseover="this.style.color='rgba(255,255,255,1)'" style="display: inline-flex; align-items: center; gap: 0.8rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s ease; margin-top: 1rem;">
 <span data-i18n="text_246" style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; letter-spacing: 3px; font-weight: 300;">تشغيل الفيديو</span>
-<span class="play-line" style="display: block; width: 30px; height: 1px; background: currentColor; transition: width 0.4s ease;"></span>
+
 </a>
 <script>
                     function triggerStaggeredHeroFade() {
+                        if (window.useNativeProjectPlayer) { window.startNativeProjectVideo(); return; }
                         document.querySelector('.case-hero').setAttribute('data-player-mode', 'playback');
                         const vid = document.getElementById('heroInlineVideo');
                         if (vid) vid.style.transition = 'opacity .2s ease';
-                        if (vid) vid.currentTime = 0; // Rewind to start immediately
+                        if (vid) { vid.currentTime = 0; vid.muted = false; vid.loop = false; vid.play().catch(() => {}); }
 
                         const nav = null;
                         const heroElements = Array.from(document.getElementById('heroContentBlock').children).filter(el => el && el.tagName !== 'SCRIPT');
@@ -182,7 +184,7 @@
                                 
                                 // Video smoothly becomes crisp, bright and unmuted
                                 if (vid) {
-                                    vid.currentTime = 0;
+
                                     vid.muted = false;
                                     vid.loop = false;
                                     vid.style.pointerEvents = 'auto';
@@ -195,13 +197,14 @@
                                 customControls.style.pointerEvents = 'auto';
                                 gsap.to(customControls, { opacity: 1, duration: 0.6 });
                                 
-                                document.body.style.overflow = 'hidden';
+                                // Inline playback must leave the page scrollable.
                             }
                         });
                     }
 
                     // Custom Video Controls & Smooth GSAP Hero Logic
                     document.addEventListener('DOMContentLoaded', () => {
+                        if (window.useNativeProjectPlayer) return;
                         const heroContent = document.getElementById('heroContentBlock');
                         const heroElements = heroContent ? Array.from(heroContent.children).filter(el => el && el.tagName !== 'SCRIPT') : [];
                         
@@ -695,33 +698,33 @@
 </div>
 <div class="study-case-grid">
 <div class="gallery-item">
-<video autoplay loop muted playsinline preload="auto" poster="Vids/1.jpg">
-  <source src="Vids/1.mp4" type="video/mp4"/>
+<video data-lazy-video loop muted playsinline preload="none" poster="Vids/1.jpg">
+  <source data-src="Vids/1.mp4" type="video/mp4"/>
 </video>
 </div>
 <div class="gallery-item">
-<video autoplay loop muted playsinline preload="auto" poster="Vids/4.jpg">
-  <source src="Vids/4.mp4" type="video/mp4"/>
+<video data-lazy-video loop muted playsinline preload="none" poster="Vids/4.jpg">
+  <source data-src="Vids/4.mp4" type="video/mp4"/>
 </video>
 </div>
 <div class="gallery-item">
-<video autoplay loop muted playsinline preload="auto" poster="Vids/6.jpg">
-  <source src="Vids/6.mp4" type="video/mp4"/>
+<video data-lazy-video loop muted playsinline preload="none" poster="Vids/6.jpg">
+  <source data-src="Vids/6.mp4" type="video/mp4"/>
 </video>
 </div>
 <div class="gallery-item">
-<video autoplay loop muted playsinline preload="auto" poster="Vids/3.jpg">
-  <source src="Vids/3.mp4" type="video/mp4"/>
+<video data-lazy-video loop muted playsinline preload="none" poster="Vids/3.jpg">
+  <source data-src="Vids/3.mp4" type="video/mp4"/>
 </video>
 </div>
 <div class="gallery-item">
-<video autoplay loop muted playsinline preload="auto" poster="Vids/2.jpg">
-  <source src="Vids/2.mp4" type="video/mp4"/>
+<video data-lazy-video loop muted playsinline preload="none" poster="Vids/2.jpg">
+  <source data-src="Vids/2.mp4" type="video/mp4"/>
 </video>
 </div>
 <div class="gallery-item">
-<video autoplay loop muted playsinline preload="auto" poster="Vids/5.jpg">
-  <source src="Vids/5.mp4" type="video/mp4"/>
+<video data-lazy-video loop muted playsinline preload="none" poster="Vids/5.jpg">
+  <source data-src="Vids/5.mp4" type="video/mp4"/>
 </video>
 </div>
 </div>
@@ -990,8 +993,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </footer>
 <!-- GSAP for animations -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+
 <!-- Lenis Smooth Scroll -->
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
 <!-- Video Modal -->
@@ -1007,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <!-- Main Script -->
 <script src="assets/js/translations.js?v=mobile9"></script>
-    <script src="assets/js/script.js?v=email25"></script>
+    <script src="assets/js/script.js?v=media26"></script>
 
 </body>
 </html>

@@ -480,6 +480,7 @@ gsap.from(".contact-form-wrapper", {
 // Gallery Cards: Hover to Play Video
 (function() {
     function initHoverVideos() {
+        if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
         var hoverCards = document.querySelectorAll('.gallery-item');
         hoverCards.forEach(function(card) {
             var video = card.querySelector('.gallery-hover-video');
@@ -487,6 +488,7 @@ gsap.from(".contact-form-wrapper", {
 
             var playPromise;
             card.addEventListener('mouseenter', function() {
+                if (getComputedStyle(card).display === 'none') return;
                 playPromise = video.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(function() {});

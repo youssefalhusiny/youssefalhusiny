@@ -3677,3 +3677,7 @@ html[lang="en"] .coming-soon-wrapper .case-overlay::after {
 .email-compose-options a:hover,.email-compose-options a:focus-visible { background:#1c1c1c; border-color:#777; }
 @keyframes email-options-arrive { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
 @media(prefers-reduced-motion:reduce) { .email-compose-options { animation:none; } }
+
+/* Touch taps follow gallery links immediately without emulated hover playback. */
+.gallery-item { touch-action: manipulation; }
+@media (hover: none) { .gallery-item .gallery-hover-video { display: none; } }

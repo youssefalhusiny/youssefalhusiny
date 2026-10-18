@@ -73,3 +73,9 @@
  .case-hero[data-player-orientation="landscape"]:fullscreen .seek-feedback-layer { width:100dvh; height:100dvw; transform:translate(-50%,-50%) rotate(90deg); }
 }
 @media(prefers-reduced-motion:reduce) { .seek-motion { background:#aaa; } }
+
+/* Native mobile controls handle pause, seeking and iPhone fullscreen. */
+.case-hero.native-player { touch-action: auto; }
+.case-hero.native-player #customVideoControls,
+.case-hero.native-player #pauseOverlayText,
+.case-hero.native-player #heroBottomFade { display: none !important; }
